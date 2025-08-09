@@ -1,0 +1,370 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{times}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{natbib}\bibpunct{(}{)}{,}{}{}{,}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{comment}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[title,titletoc]{appendix}
+\usepackage{enumitem}
+\usepackage{subcaption}  % For subfigures
+\usepackage{lscape}      % For landscape orientation if needed
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+
+% commands
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\figpath}{fig/}
+\newcommand{\tablepath}{table/}
+\newcommand{\rmdi}{\mathrm{d}}
+
+% table and figure formatting
+%\input{formats}
+
+% page size
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.7in}
+\setlength{\oddsidemargin}{.85in}
+\addtolength{\oddsidemargin}{-.85in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-1.75in}
+\setlength{\topmargin}{1in}
+\addtolength{\topmargin}{-1in}
+
+\begin{document}
+
+\title{\textbf{Ricardian Trade with Multiple Goods}}
+\author{\large%
+\setcounter{footnote}{0}%
+Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
+}
+\maketitle
+
+\paragraph{Production} Consider a world with 2 countries $i \in \{ H, F\}$ and multiple goods (in fact, infinitely many goods) indexed by $g \in [0,1]$. In country $i$, there are $L_i$ units of labor (worker-hours) available, which we call the labor endowment. An inherent technological characteristic of country $i$ are \textbf{unit labor requirements}, i.e. to produce one unit of good $g$ firms in country $i$ use $a_{i,g}$ units of labor. In country $i$, firms producing good $g$ maximize profits under perfect competition:
+        \begin{equation}\label{eq: production}
+            \max_{Y_{i,g}} \pi_{i,g} = \max_{Y_{i,g}} P_{g}Y_{i,g} - w_i a_{i,g} Y_{i,g} 
+        \end{equation}
+
+Labor is mobile. This means that labor can be distributed for the production of either good, such that and the same pool of workers can be allocated to either good. Since labor only one type of labor (mobile across sectors), there is a single wage $w_i$.
+
+Production will only take place at home if it is cheaper to produce domestically than to import goods from abroad, i.e.: 
+
+    \begin{equation*}
+        w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}} \equiv A_g
+    \end{equation*}
+
+We will make another final (but important) assumption. We order goods $g \in [0,1]$ according to the home country's comparative advantage. In other words, $A_0= \frac{a_{F,0}}{a_{H,0}}$ will be the product with the largest relative labor requirement cost (home is the most productive) and $A_1= \frac{a_{F,1}}{a_{H,1}}$ will be the product with the smallest relative labor requirement cost (home is the least productive). This decreasing function looks like the curve in Figure \ref{fig: Ap}.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1.05,
+                ymin=0, ymax=1.05,
+                xlabel={$g$},
+                ylabel={$A_g$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+            ]
+                       
+            % Horizontal line for world relative wage omega
+            \addplot[red, thick, domain=0.02:1] {x^(-1/6) -0.975 };
+           
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
+        \label{fig: Ap}
+    \end{figure}
+
+
+
+
+In general, the price of good $g$ will be the lowest of unit costs at home or abroad:
+
+        \begin{equation}
+            P_{g} = \min\{w_H a_{H,g}, w_F a_{F,g}\}  \qquad \text{ for } g \in [0,1]
+        \end{equation}
+
+\paragraph{Demand} Workers in each country $i$ inelastically time for wage $w_i$ and earn labor income $w_i L_i$. They have preferences over goods. They purchase quantities $q_{i}$ for prices $P_{g}$ and exhaust their labor income, maximizing:
+
+\begin{equation*}
+    \max_{\{q_{i,g}\}_{g \in [0,]}} \int_0^1  \log q_{i,g} dp \qquad s.t. \qquad \int_0^1 P_{g}  q_{i,g} dp = w_i L_i
+\end{equation*}
+
+You might be scared of how this problem looks like, since we are using integrals. However, for all intents and purposes, for reasons that we will not get into, you should treat that integral as a summation over all products $g$. Whenever you are taking derivatives you should treat the integral as a sum.
+
+To solve this problem, you use the standard way that you would any other constrained maximization problem: set up a Lagrangian and take first order conditions. The Lagrangian looks like:
+
+\begin{eqnarray*}
+    \mathcal{L} = \int_0^1 \log q_{i,g} dp + \lambda [w_i L_i - \int_0^1 P_{g}  q_{i,g} dp ]
+\end{eqnarray*}
+
+\noindent with FOCS:
+
+\begin{eqnarray*}
+    \frac{1}{q_{i,g}} - \lambda P_{g} = 0 \iff \frac{1}{\lambda}} = P_{g} q_{i,g} , \qquad \text{ for each } g 
+\end{eqnarray*}
+
+Replacing this result in the budget constraint:
+
+\begin{equation*}
+    \int_0^1 \frac{1}{\lambda} dp = w_iL_i, \qquad 
+    \frac{1}{\lambda} \underbrace{\int_0^1 1 dp}_{=1} = w_iL_i, \qquad \frac{1}{\lambda} =  w_iL_i
+\end{equation*}
+
+Therefore, demand for each good $g$ satisfies:
+
+\begin{equation}
+    q_{i,g} = \frac{w_iL_i}{P_{g}}
+\end{equation}
+
+This is the usual result under which each consumer purchases quantities inversely proportional to the price of that good.
+
+\paragraph{Free trade prices and equilibrium} We say home has a \textbf{comparative advantage} in the production of good $g$ if $w_H a_{H,g} < w_Fa_{F,g}$. This is directly related to the condition we stated above:
+
+    \begin{equation*}
+        \frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}} \equiv A_g
+    \end{equation*}
+
+Suppose there is some good $G$ for which $\frac{w_H}{w_F} = \frac{a_{F,G}}{a_{H,G}}$. Since we know that goods are ordered such that $A_g$ is decreasing we know that home will then produce every good $[0,G]$ while foreign will produce all goods $(G,1)$. Income in the home country would then be:
+{\scriptsize
+\begin{eqnarray*}
+   w_H L_H &=& \int_0^G P_g q_{H,g} dg + \int_0^G P_g q_{F,g} dg    \\
+   w_H L_H &=& \int_0^G P_g \frac{w_H L_H}{ P_g} dg + \int_0^G\frac{w_F L_F}{ P_g} dg    \\
+   w_H L_H &=& w_H L_H \underbrace{\int_0^G 1 dg}_{=G} +w_F L_F \underbrace{\int_0^G 1 dg}_{=G}    \\
+   (1-G) w_H L_H &=&  G \times w_F L_F    
+\end{eqnarray*}
+}
+\normalsize
+\noindent Rearranging results in a function that is increasing in $G$ (the threshold good):\\
+\begin{equation*}
+    A_G= \frac{w_H}{w_F} =  \frac{G}{1-G} \times \frac{ L_F }{L_H}
+\end{equation*}
+
+The equality above implicitly defines the cut off point $G$. In order to explicitly solve for it, we would need to specific a functional form for $A_g$. For instance, if $A_g = c / g$ for some constant $c$, then we would be able to solve for:
+
+\begin{eqnarray*}
+    \frac{c}{G} = \frac{G}{1-G} \times \frac{ L_F }{L_H} \iff \frac{ L_F }{L_H} \times G^2  + c \times G -c =0 
+\end{eqnarray*}
+
+Using the quadratic formula, you would be able to find that:
+
+\begin{equation*}
+    G = \frac{-c + \sqrt{c^2 + 4 c L_F / L_H}}{2  L_F / L_H }
+\end{equation*}
+
+But even without explicitly defining a functional form for $A_g$, we can plot some charts and understand the patterns of specialization. Note that $A_g$ is decreasing in $g$ while equilibrium wages will be increasing in the cut-off good $G$. Where the two functions meet, we will know $A_g$ and, as a consequence, equilibrium wages $w_H/w_F$. We plot the equilibrium wages and cut-off in Figure \ref{fig: Ag}.
+
+The line segment between $[0,G]$ comprises of goods produced at home, while the line segment between $(G,1]$ comprises of goods produced at foreign. Since there are no trade costs, there will be full specialization. Only home will produce goods up to $G$ and it will sell them both to the domestic and the foreign market. Similarly, only $F$ will produce the goods between $(G,1]$.
+
+What happens if there is an increase in foreign population? This would mimick what happened in the late 1900s, with the great Doubling of the global workforce (Freeman 2006). In 1980 the workforce in open economies roughly 1 billion. In 2000, it was 1.5 billion. What happened? The Soviet Union collapsed, Russia now in WTO. China shifted to state-run capitalism, now in WTO. India adopted open-market policies.
+
+In this model, the prediction is that, with an increase in the foreign population to $L'_F >L_F$, more goods will be produced at the foreign country and the cut-off point will move to some $G' < G$. This is intuitive, and indeed happened during that time period. However, another prediction is that the relative wage of the \textbf{home} country will increase to $(w_H/w_F)'>w_H/w_F$.
+
+Why? Because now the foreign country will be selling goods for which they have a relatively worse comparative advantage. By contrast, narrower specialization in the home country increases welfare. We plot these changes in Figure \ref{fig: Ag-change}.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+            
+            \addplot[dashed] coordinates {(0,\y) (\x,\y)};
+            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
+            \node at (axis cs:\x,-0.125) {$G$};
+            \addplot[gray] coordinates {(0,-0.1) (\x,-0.1)};
+            \node at (axis cs:\x/2,-0.05) {produced at $H$};
+            \addplot[gray] coordinates {(\x,-0.1) (1,-0.1)};
+            \node at (axis cs:( {\x + (1-\x)/2},-0.05) {produced at $F$};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
+        \label{fig: Ag}
+    \end{figure}
+
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \node[gray] at (axis cs:-0.125,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
+            \node[gray] at (axis cs:\x,-0.15) {$G$};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+            \addplot[dashed] coordinates {(0,\yn) (\xn,\yn)};
+            \node at (axis cs:-0.15,\yn) {$(w_H/w_F)'=A'_G$};
+            \addplot[dashed] coordinates {(\xn,-.1) (\xn,\yn)};
+            \node at (axis cs:\xn,-0.15) {$G'$};
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
+            
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+
+\paragraph{Equilibrium with costly trade} Finally, let us relax the assumption of costless trade. Instead, there will be a positive cost to shipping goods between countries. This is intuitive. For instance, sellers have to pay for shipping and insurance. Likewise, part of the goods may get lost or perish along the way (think of avocados being shipped internationally).
+
+A simple way to model these trade costs is to assume that for one unit of a good to arrive at a destination, $\tau>1$ units need to be shipped from the origin country. This assumption, introduced by the famous economist Paul Samuelson, are known as ``iceberg'' trade costs. We call them iceberg trade costs because it is as if some of the goods melt away between origin and destination.
+
+In that case, we have to slightly change the production structure of the economy. As before, production will only take place at home if it is cheaper to produce domestically than to import goods from abroad, i.e.: 
+
+    \begin{equation*}
+        w_H a_{H,g} \le \tau w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \tau  \frac{a_{F,g}}{a_{H,g}} = \tau A_g
+    \end{equation*}
+
+However, not every good produced at home will be exported, due to the trade cost. Goods produced at home will only be exported to the foreign country if:
+
+\begin{equation*}
+        \tau w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{1}{\tau} \frac{a_{F,g}}{a_{H,g}} \equiv \frac{1}{\tau} A_g
+\end{equation*}
+
+Now there will be two cut-offs. The foreign country will export to the home country goods satisfying $\frac{w_H}{w_F} >  \tau A_{G_H}$, comprising all goods $[G_H,1]$; and the home country will export all goods satisfying $\frac{w_H}{w_F} \le  A_{G_F} / \tau$, comprising all goods $[0,G_F]$. However, note that goods $(G_F, G_H)$ will be produced and consumed in each country but not exported. The presence of positive trade costs decreases trade and the scope for specialization.
+
+How can we pin down the equilibrium wages? That is much harder to do with pen and paper. However, note that we can still write down an implicit function\footnote{Let $A(\cdot)$} satisfying:
+
+\begin{equation*}
+    \frac{w_H}{w_F} =  \frac{G_H}{1-G_F} \times \frac{ L_F }{L_H}
+\end{equation*}
+
+Graphically, we can understand all of these relationships rather easily. We plot the trade equilibrium with costly trade on Figure \ref{fig: Ag-tariffs}.
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$\tau A_g$}, \textcolor{blue}{$A_g / \tau$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+            ]
+                       
+            \pgfmathsetmacro{\t}{1.25}       
+            \pgfmathsetmacro{\z}{0.075}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{(-(\z/\t) + sqrt((\z/\t)^2 + 4*\c*\z/\t)) / (2*\c)}
+            \pgfmathsetmacro{\y}{(\z / \x) / \t}
+            \pgfmathsetmacro{\xf}{\z*\t/\y}
+            \addplot[red, thick, domain=0.15:1] {( \z / x ) * \t}; %home
+            \addplot[blue, thick, domain=0.15:1] {\z / (x * \t )}; %foreign
+            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+            
+            \addplot[gray] coordinates {(0,-0.1) (1,-0.1)};
+            \addplot[dashed] coordinates {(0,\y) (\xf,\y)};
+            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
+            \node at (axis cs:\x,-0.135) {$G_F$};
+            \node at (axis cs:\x/2,-0.05) {$H$ exports};
+            \addplot[dashed] coordinates {(\xf,-.1) (\xf,\y)};
+            \node at (axis cs:( {\x + (\xf-\x)/2},-0.05) {not traded};
+            \node at (axis cs:\xf,-0.135) {$G_H$};
+            \node at (axis cs:( {\xf + (1-\xf)/2},-0.05) {$F$ exports};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xf, \y)};
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Trade equilibrium with positive trade costs $\tau$}
+        \label{fig: Ag-tariffs}
+    \end{figure}
+
+
+
+\end{document}
+
+
+

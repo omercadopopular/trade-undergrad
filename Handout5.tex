@@ -1,0 +1,632 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{times}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{natbib}\bibpunct{(}{)}{,}{}{}{,}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{comment}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[title,titletoc]{appendix}
+\usepackage{enumitem}
+\usepackage{subcaption}  % For subfigures
+\usepackage{lscape}      % For landscape orientation if needed
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+
+% commands
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\figpath}{fig/}
+\newcommand{\tablepath}{table/}
+\newcommand{\rmdi}{\mathrm{d}}
+
+% table and figure formatting
+%\input{formats}
+
+% page size
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.7in}
+\setlength{\oddsidemargin}{.85in}
+\addtolength{\oddsidemargin}{-.85in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-1.75in}
+\setlength{\topmargin}{1in}
+\addtolength{\topmargin}{-1in}
+
+\begin{document}
+
+\title{\textbf{Firms and Trade: the New Trade Theory}}
+\author{\large%
+\setcounter{footnote}{0}%
+Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
+}
+\maketitle
+
+\paragraph{Preliminaries} Consider a world with two countries $i \in \{H,F \}$. The countries are identical in their populations $L_H=L_F$, preferences and production technologies. We will first describe these components of the economy and characterize the autarky equilibrium. We will then explore what happens if a country opens up to trade. 
+
+\paragraph{Demand} Consumers in country $i$ supply their labor inelastically and earn labor income $w_i L_i$. They have preferences over many goods $\varphi \in \Phi_i$ where $\Phi_i := \{1,2,\cdots, N\}$ is the set of all goods available in the domestic economy.
+
+Economists use a constant elasticity-of-substitution (CES) utility function to capture preferences in a flexible way. The key parameter,  $\sigma > 1$ is the elasticity of substitution: the larger $\sigma$ is, the more readily consumers switch between varieties when their relative prices change (think “Coke vs. Pepsi” with a high $\sigma$). When $\sigma$ is close to 1, varieties are harder to substitute --each feels almost like a distinct necessity -- so consumers tolerate bigger price gaps before adjusting their baskets.
+
+\begin{equation*}
+    \max_{\{q_i(\
+\varphi)\}_{\
+\varphi \in \Phi_i}} Q_i \equiv \left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } \qquad s.t. \qquad  P_i Q_i =\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \le I_i = w_i L_i 
+\end{equation*}
+
+First, a note on notation. $q_i(\varphi)$ and $p_i(\varphi)$ are the quantity demanded and price in country $i$ of the good $\varphi \in \{1, 2, \cdots, N\}$. The summation notation simply iterates over the elements of set $\Phi_i:=\{1, 2, \cdots, N\}$. For instance,  total expenditure of consumers in country $i$ is  $\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) = p_i(1) q_i(1) + p_i(2) q_i(2) + \cdots + p_i(N) q_i(N)$. Finally, a word on aggregation. We define $ Q_i$ to be the \textit{composite consumption basket}
+defined as an aggregate of all goods. Implicitly defined is the ``price index'' $P_i$ which can be seen as the ``price'' of the composite consumption basket. Intuitively, total expenditure across all goods must equal the cost of the consumption basket $P_i Q_i =\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi)$.
+
+How do we solve this problem? This is a constrained maximization problem. The easiest way to approach it is to set up a Lagrangian and take first order conditions:
+
+\begin{equation*}
+    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
+\end{equation*}
+
+\noindent where $\lambda$ is our Lagrange multiplier. And what is $\lambda$? Lambda is a job is to keep track of how valuable the last dollar in the consumer’s pocket is. Imagine slipping one more dollar into the consumer’s wallet. Because the budget set expands by exactly \$1, utility rises by:
+
+\begin{equation*}
+    \frac{\partial \mathcal{L}}{\partial I_i} = \lambda
+\end{equation*}
+
+
+\noindent so $\lambda$ literally measures ``extra utils per extra dollar.'' A high 
+$\lambda$ says the consumer is desperate for another dollar (the budget is tight); a low 
+$\lambda$ says an extra dollar hardly moves
+the needle.
+
+There are $N$ first order conditions in this maximization problem, one for each $q_{i}(\varphi)$ satisfying:
+
+\begin{equation*}
+    \frac{\partial Q_i}{\partial q_{i}(\varphi)} - \lambda p_i(\varphi) =0 \iff \underbrace{\frac{\partial Q_i}{\partial q_{i}(\varphi)}}_{\substack{\text{marginal benefit} \\ \text{in utils}}} = \underbrace{\lambda p_i(\varphi)}_{\substack{\text{marginal cost} \\ \text{in utils}}} \qquad \text{for each } \varphi \in \Phi_i
+\end{equation*}
+
+Note that the result of maximizing utility makes clear the ``utils per extra dollar'' interpretation of $\lambda$. The left hand side states shows the marginal utility from one more unit of good $\varphi$. The right hand side shows the utility cost of the dollars needed to buy it ($\lambda$ utils per dollar $\times$ price). Setting them equal forces every good to deliver the same utility per dollar spent.
+
+Now let us work out $\frac{\partial Q_i}{\partial q_{i}(\varphi)}$ using the chain rule:
+
+\begin{eqnarray*}
+    \frac{\partial Q_i}{\partial q_{i}(\varphi)} = \underbrace{\frac{\sigma}{\sigma-1} \ \left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} -1}}_{\text{derivative of the outer function}} \times \underbrace{\frac{\sigma-1}{\sigma}   q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}-1}}_{\text{derivative of the inner}} &=& \lambda p_i(\varphi) \\
+\underbrace{\left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{1}{\sigma-1}}}_{=Q_i^{1/\sigma}} \times  q_i(
+\varphi)^{-\tfrac{1}{\sigma}} &=& \lambda p_i(\varphi) 
+\end{eqnarray*}
+
+Solving for $q_i(\varphi)$ we find that:
+
+\begin{equation*}
+\boxed{
+    q_i(
+\varphi) = \lambda^{-\sigma} p_i(\varphi)^{-\sigma} Q_i \iff p_i(\varphi) q_i(
+\varphi) = \lambda^{-\sigma} p_i(\varphi)^{1-\sigma} Q_i
+}
+\end{equation*}
+
+Using the the definition of $Q_i$ allows us to solve for $\lambda^{-\sigma}$:
+
+\begin{eqnarray*}
+     Q_i &\equiv& \left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }  = \left[ \sum_{\varphi \in \Phi_i } \left( \lambda^{-\sigma} p_i(\varphi)^{-\sigma} Q_i \right)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = \lambda^{-\sigma}  Q_i \left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma} } \\
+\iff \lambda^{-\sigma} &=& \frac{1}{\left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma}} } 
+\end{eqnarray*}
+
+Using the budget constraint allows us to solve for the price level $P_i$:
+
+\begin{eqnarray*}
+    P_i Q_i &=& \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) = \sum_{\varphi \in \Phi_i } \lambda^{-\sigma} p_i(\varphi)^{1-\sigma} Q_i = Q_i  \lambda^{-\sigma} \sum_{\varphi \in \Phi_i }  p_i(\varphi)^{1-\sigma} \\
+    \iff P_i &=& \frac{1}{\left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma} }} \times  \sum_{\varphi \in \Phi_i }  p_i(\varphi)^{1-\sigma} = \left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{\sigma-1} \right]^{\tfrac{1}{1-\sigma}} 
+\end{eqnarray*}
+
+So $\lambda^{-\sigma} = P_i^{\sigma}$. Finally, using the fact that $Q_i = w_i L_i / P_i$, we can write the demand functions as:
+
+\begin{equation*}
+\boxed{
+    q_i(\varphi) = \underbrace{\left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}}_{\text{relative price}} \times \underbrace{\frac{w_iL_i}{P_i}}_{\text{real income}}}
+\end{equation*}
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+        \pgfmathsetmacro{\sigmaa}{1.5}
+        \pgfmathsetmacro{\sigmab}{3}
+        \pgfmathsetmacro{\sigmac}{10000000}
+        \pgfmathsetmacro{\P}{0.25}
+        \pgfmathsetmacro{\I}{1}
+        
+        \centering
+        \begin{axis}[
+            ylabel={Price of good $\varphi$: $p_i(\varphi)$},
+            xlabel={Quantity demanded of good $\varphi$: $q_i(\varphi)$},
+            ymin=0, ymax=2,
+            xmin=0, xmax=2,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    
+        
+          \addplot[thick,red,  domain=0.2:2]
+            {\P * ((x*\P)/\I)^(-1/\sigmaa)};
+          \addplot[thick,blue, domain=0.1:2]
+            {\P * ((x*\P)/\I)^(-1/\sigmab)};
+          \addplot[thick,brown,domain=0.1:2]
+            {\P};  % σ → ∞  ⇒  horizontal line at p = P
+            
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Demand curve with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
+        \label{fig: ces-demand}
+    \end{figure}
+
+We plot demand curve for different elasticities in Figure \ref{fig: ces-demand}. The red curve ($\sigma=1.5$) is steep: quantity must fall a lot to raise price because substitution is hard. The blue curve ($\sigma=3$) is flatter: with easy substitution, a small price hike loses many buyers. As  $\sigma \to \infty$ the curve becomes horizontal -- market power goes to zero and  any small deviation from competitive prices would drive quantity to zero.
+
+
+
+\paragraph{Production} To produce a given quantity $q_i(\varphi)$, firms use the following amount of labor:
+
+\begin{equation*}
+     \ell = \bar{f} + a^*q_i(\varphi) \iff q_i(\varphi) = \frac{1}{a^*} (\ell - \bar{f})
+\end{equation*}
+
+where $a^*$ denotes how many workers are necessary to produce a single unit of good $\varphi$. These are the \textbf{unit labor requirements}, as we have seen in the Ricardian model. By analyzing the right hand side of the equation above, we see that labor only contributes to output if they hire more than $\bar{f}$ workers. To produce $q_i(\varphi)$ units, then, the firm needs to hire $\bar{f}$ workers just to set up shop and $\ell$ workers to attain that level of production.
+
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+
+        \pgfmathsetmacro{\fbar}{1.5}
+        \pgfmathsetmacro{\a}{1}
+        \pgfmathsetmacro{\w}{1}
+        
+        \centering
+        \begin{axis}[
+            ylabel={\textcolor{red}{Average Cost}; Marginal Cost},
+            xlabel={Quantity produced: $q_i(\varphi)$},
+            ymin=0, ymax=5,
+            xmin=0, xmax=15,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        
+          \addplot[thick,red,  domain=0.5:15]
+            {\fbar/x + \a * \w};
+          \addplot[thick,black,  domain=0:15]
+            {\a * \w};
+
+            \node[anchor=east] at (axis cs: 0, \a * \w) {$a^* w_i$};
+            
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Average cost as a function of output}
+        \label{fig: ac}
+    \end{figure}
+
+
+Another way of thinking of $\bar{f}$ is the ``cost of entering the market''. Every new  firm must pay the same up-front cost  for product design, advertising, setting up a factory, etc. Once that hurdle is cleared, producing an extra unit only costs labor at a constant marginal cost.
+
+Firms have a monopoly over the production of their goods. This means that they have market power. \textbf{Instead of taking prices as given, they take demand as given and choose prices that will maximize profits}. If a firm enters the market, they maximize:
+\begin{eqnarray*}
+    &\max_{p_i(\varphi)}& \pi_i(\varphi) \equiv p_i(\varphi) q_i(\varphi) - w_i a^*q_i(\varphi) - w_i \bar{f} \qquad s.t. \qquad   q_i(\varphi) = \left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}  \times \frac{w_iL_i}{P_i} \\
+\iff &\max_{p_i(\varphi)}&  \pi_i(\varphi) \equiv p_i(\varphi)^{1-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} - w_i a^* p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} - w_i \bar{f} 
+\end{eqnarray*}
+
+This is a simple concave maximization problem that you know how to solve\footnote{Note $d \pi / dp > 0, d^2 \pi / dp^2 < 0$}. Optimal prices satisfy:
+\begin{eqnarray*}
+    0 &=& (1-\sigma)\times p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} + \sigma \times w_i a^* p_i(\varphi)^{-\sigma-1} P_i^{\sigma} \times \frac{w_iL_i}{P_i}  \\
+    0 &=& (1-\sigma) + \sigma \times w_i a^* p_i(\varphi)^{-1}  = -p_i(\varphi)(\sigma-1) + \sigma \times w_i a^*
+\end{eqnarray*}
+
+Solving for prices:
+
+\begin{equation*}
+    \boxed{
+    p_i(\varphi) = \frac{\sigma}{\sigma-1} \times w_i a^* 
+    }
+\end{equation*}
+
+Three important things emerge from this price. First, $w_i a^*$ is the \textbf{marginal cost} to produce one additional unit. Second, since $\sigma > 1$, then  $\frac{\sigma}{\sigma-1} > 1$ is a \textbf{mark-up} that producers charge on top of marginal cost. Third, since we assumed that $a^*$ is the same for every firm in the economy, the price \textbf{does not depend on the particular good $\varphi$}. So we can summarize pricing under monopolistic competition as:
+
+\begin{equation*}
+    \boxed{
+    p_i(\varphi) = p^* = \text{mark up} \times \text{marginal cost} \qquad \text{for all goods } \varphi \in \Phi_i
+    }
+\end{equation*}
+
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+
+        
+        \centering
+        \begin{axis}[
+            ylabel={Markup},
+            xlabel={Elasticity of substitution: $\sigma$},
+            ymin=0, ymax=3,
+            xmin=0, xmax=15,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        
+          \addplot[thick,red,  domain=1.5:15]
+            {x/(x-1)};
+          \addplot[thick,black,  domain=0:15]
+            {1};
+            
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Markup as a function of the elasticity of substitution}
+        \label{fig: ces-markup}
+    \end{figure}
+
+\newpage
+
+
+\paragraph{Autarky Equilibrium} We still have some questions unanswered. What is the quantity demanded from each firm? How many firms $N$ will actually enter the market in equilibrium? What are the wages $w_i$ and the price levels $P_i$?
+
+Firms will only enter the market if they expect their profit $\pi_i(\varphi) \ge0$ to be nonnegative (at least zero). If not, they would make a loss, so it would be rational to exit the market. But if profits are (strictly) positive ($\pi_i(\varphi) >0$), then new entrants would have an incentive to pay the fixed cost $w_i \bar{f}$, set up a new shop for a new product, charge the markup over marginal cost, and make a profit. Entry continues until the last comer finds that her expected profit is exactly zero.
+
+In other words, firms will enter the market up to the point in which there is no additional expected profit to be made and $\pi_i(\varphi) =0$.
+\begin{equation*}
+    \pi_i(\varphi) = (p^* - MC) q^* - w_i \bar{f} = \left(\frac{\sigma}{\sigma -1}a^*w_i - a^* w_i\right) q^* - w_i \bar{f} =0 \iff q^* = (\sigma-1) \times \frac{\bar{f}}{a^*}  
+\end{equation*}
+
+In equilibrium, the quantity produced by each firm depends on the elasticity of substitution (if $\sigma$ is high, markups will be smaller, and quantity sold per firm will be higher) and on the fixed cost $\bar{f}$, which controls the returns to scale in this model. 
+
+A surprising result is that, since all firms are identical, none of them will make positive profits in equilibrium! Consumer spending $w_iL_i$ is fixed in the short run. Each additional good gives shoppers another option, so demand for every incumbent variety falls. Because the markup is unchanged, the contribution margin per unit stays the same, but the number of units sold per firm shrinks.
+
+Knowing the optimal size of firms $q^*$, we can now calculate total utility:
+
+\begin{equation*}
+    Q_i = \left[ \sum_{\varphi \in \Phi_i } q_i(
+\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }  = \left[ N^* ( q^*
+)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = (N^*)^{\tfrac{\sigma}{\sigma-1} } q^* 
+\end{equation*}
+
+\noindent where $N^*$ is the total number of goods offered in equilibrium.
+
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+        \pgfmathsetmacro{\sigmaa}{1.5}
+        \pgfmathsetmacro{\sigmab}{3}
+        \pgfmathsetmacro{\sigmac}{10000000}
+        
+        \centering
+        \begin{axis}[
+            ylabel={Total utility $Q_i$},
+            xlabel={Number of goods in the economy $N$},
+            ymin=0, ymax=20,
+            xmin=1, xmax=5,
+            yticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    
+        
+          \addplot[thick,red,  domain=1:2.75]
+            {x^(\sigmaa / (\sigmaa -1))};
+          \addplot[thick,blue, domain=1:5]
+            {x^(\sigmab / (\sigmab -1)};
+          \addplot[thick,brown,domain=1:5]
+            {x};  % σ → ∞  ⇒  horizontal line at p = P
+            
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Love of variety with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
+        \label{fig: ces-love}
+    \end{figure}
+
+\newpage
+
+The factor $\tfrac{\sigma}{\sigma-1}>1$ captures the “love-of-variety” effect: when the elasticity of substitution is finite, adding new goods raises aggregate utility more than proportionally to their count because the composite good rewards diversity. We can also calculate the price level:
+
+
+\begin{equation*}
+    P_i = \left[ \sum_{\varphi \in \Phi_i } p_i(
+\varphi)^{1-\sigma} \right]^{\tfrac{1}{1-\sigma} }  = \left[ N^* (p^*)^{1-\sigma} \right]^{\tfrac{1}{1-\sigma} }  = \frac{p^*}{(N^*)^{\tfrac{1}{\sigma-1} } } 
+\end{equation*}
+
+so price levels are decreasing in the number of goods available in the economy.
+
+Finally, we can use the labor market clearing condition to pin down the number of firms. In equilibrium labor demand must equal labor supply $L_i$:
+
+\begin{equation*}
+    L_i = \sum_{\varphi \in \Phi_i} \left(\bar{f} + a^* q_i(\varphi) \right) = N\left(\bar{f} + a^* q^* \right) = N\sigma\bar{f} \iff N^* = \frac{L_i}{\sigma \bar{f}}
+\end{equation*}
+
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+        \pgfmathsetmacro{\sigmaa}{2}
+        \pgfmathsetmacro{\L}{2.5}
+        \pgfmathsetmacro{\f}{1}
+        \pgfmathsetmacro{\N}{\L / (\sigmaa * \f)}
+        
+        \centering
+        \begin{axis}[
+            xlabel={Labor demand, Labor Supply},
+            ylabel={Number of goods in the economy $N$},
+            ymin=0, ymax=4,
+            xmin=0, xmax=5,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    
+        
+          \addplot[thick,blue] coordinates
+            {(\L,0) (\L,4)};
+          \addplot[thick,red, domain=0:5]
+            {1/(\f * \sigmaa) * x};
+          \addplot[gray, dashed] coordinates
+            {(0,\N) (\L,\N)};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\L, \N)};      \node[anchor = east] at (axis cs:0,\N) {$N^*$};
+            \node[anchor = north] at (axis cs:\L,0) {$L_i$};
+
+            \pgfmathsetmacro{\xs}{\L + 1}
+            \pgfmathsetmacro{\Ns}{1/(\f * \sigmaa) * \xs}
+            \pgfmathsetmacro{\xsx}{\xs + 1}
+            \pgfmathsetmacro{\Nsx}{1/(\f * \sigmaa) * \xsx}
+
+            \addplot[gray, dashed] coordinates
+            {(\xs,\Ns) (\xsx,\Ns) (\xsx,\Nsx)};
+            \node[anchor = north] at (axis cs:{\xs + (\xsx - \xs)/2},\Ns) {$1$};
+            \node[anchor = west] at (axis cs:\xsx,{\Ns + (\Nsx - \Ns)/2}) {$\frac{1}{\bar{f} \sigma}$};
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Labor market and number of firms equilibrium}
+        \label{fig: labor-market}
+    \end{figure}
+
+\newpage
+
+\begin{comment}
+
+This allows us to derive a relationship between quantity demanded and the total number of firms in the economy:
+
+\begin{equation*}
+    q_i(\varphi) = \left( \frac{p^*}{P_i} \right)^{-\sigma} \times Q_i = \left( \frac{p^*}{ (N^*)^{\tfrac{1}{1-\sigma} } p^*} \right)^{-\sigma} \times Q_i = \frac{Q_i}{(N^*)^{\tfrac{\sigma}{\sigma-1}}}    \qquad \text{for all } \varphi \in \Phi_i
+\end{equation*}
+
+\nointend which means that average costs are increasing in the number of goods available in the economy:
+
+\begin{equation*}
+    AC(q^*) = a^* w_i + \frac{w_i \bar{f}}{q^*} = a^* w_i + \frac{w_i \bar{f}}{Q_i} \times     (N^*)^{\tfrac{\sigma}{\sigma-1}} \qquad (CC)
+\end{equation*}
+
+New firms have an incentive to enter the market because, due to consumer preferences, they know they can capture some of the market -- making the consumer better off and decreasing overall price levels. But as new firms enter the market, they capture some of the market from incumbents, and increase average cost. Put together, schedules (CC) and (PP) pin down the equilibrium number of varieties.
+
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+
+        \pgfmathsetmacro{\fbar}{0.5}
+        \pgfmathsetmacro{\a}{1}
+        \pgfmathsetmacro{\w}{1}
+        \pgfmathsetmacro{\sigma}{2}
+        \pgfmathsetmacro{\p}{\sigma / (\sigma-1) * \w * \a}
+        \pgfmathsetmacro{\ns}{1.18}
+        \pgfmathsetmacro{\ps}{\sigma / (\sigma-1) / \ps^(1/(\sigma-1))}
+        
+        
+        \centering
+        \begin{axis}[
+            ylabel={Average Cost, Price Level},
+            xlabel={Number of goods: $N$},
+            ymin=0, ymax=3,
+            xmin=0, xmax=3,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        
+          \addplot[thick,red,  domain=0:2]
+            {(\fbar) * x^(\sigma/(\sigma-1)) + 1};
+
+          \addplot[thick,blue,  domain=0.6:3]
+            {\sigma / (\sigma-1) / x^(1/(\sigma-1)) };
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Markup as a function of the elasticity of substitution}
+        \label{fig: ces-markup}
+    \end{figure}
+
+\end{comment}
+
+\begin{center}
+Krugman model in autarky:
+\[
+\boxed{
+\begin{aligned}
+p^{\*} &= \frac{\sigma}{\sigma-1}\,a^{\*}w, &
+q^{\*} &= (\sigma-1)\,\frac{\bar f}{a^{\*}}, \\
+N^{\*} &= \frac{L}{\sigma\,\bar f}, &
+P &= \frac{p^{\*}}{(N^{\*})^{1/(\sigma-1)}}, \\
+\text{Real income} &= \dfrac{wL}{P}. && w=1
+\end{aligned}
+}
+\]
+\small\emph{Notes:} $a^{\*}$ is the unit labor requirement; $\bar f$ fixed labor cost; $\sigma>1$ CES elasticity.
+\end{center}
+
+\paragraph{Trade Equilibrium}
+
+Assume the two symmetric countries ($H$ and $F$) remove all trade barriers
+and shipping costs.  Because preferences, technologies, labor forces,
+and fixed costs are identical, integration changes only the \emph{size of
+the market}.  Total world expenditure is now $I^{W}=wL_{H}+wL_{F}=2wL$,
+while every firm still faces the same CES demand curve.
+
+\subparagraph{(i)  Free entry with a doubled market}
+
+The zero-profit condition derived earlier continues to fix each firm’s
+output at
+\[
+q^{\ast}=(\sigma-1)\,\frac{\bar f}{a^{\ast}}
+\qquad\text{(unchanged).}
+\]
+With twice as many consumers, entry continues until labour demand again
+exhausts supply:
+\[
+2L
+   \;=\;
+   N^{W}\bigl(\bar f + a^{\ast}q^{\ast}\bigr)
+   \;=\;
+   N^{W}\sigma\bar f
+   \;\;\Longrightarrow\;\;
+   N^{W}=\frac{2L}{\sigma\bar f}=2N^{A}.
+\]
+\emph{Total} varieties double, yet each variety is still produced at the
+same scale and price as in autarky.
+
+\subparagraph{(ii)  Location of production}
+
+Because the two countries are mirrors of each other, half of the new
+entrants locate in $H$ and half in $F$.  Hence each country \emph{hosts}
+the same number of firms as before ($N^{A}=L/(\sigma\bar f)$), but
+consumers in both countries can now purchase \emph{all} $N^{W}$ varieties.
+
+\subparagraph{(iii)  Trade flows and “horizontal” exchange}
+
+Every firm sells one identical good to \emph{both} markets.  Country $H$
+exports the set of varieties it produces and imports the set produced in
+$F$, and vice-versa.  Because the two sets have equal value, bilateral
+trade is balanced:
+\[
+\text{Exports}_{H\to F} = \text{Imports}_{F\to H}.
+\]
+This two-way or \emph{horizontal} intra-industry trade arises \underline{even
+though the countries are identical}.  In Ricardian or
+Heckscher–Ohlin (HO) models, identical countries would have \emph{no}
+reason to trade—gains there hinge on cross-country differences.  Here,
+gains come purely from the \textbf{love-of-variety} under CES preferences
+and the ability of increasing-returns firms to cover fixed costs in a
+larger market.
+
+\subparagraph{(iv)  Welfare comparison}
+
+Let $P^{A}$ and $P^{W}$ denote the autarky and world price indices.  From
+the price-index formula
+$P\propto N^{-1/(\sigma-1)}$ we obtain
+\[
+P^{W}= \bigl(2N^{A}\bigr)^{-1/(\sigma-1)} p^{\ast}
+     = 2^{-1/(\sigma-1)} P^{A}.
+\]
+Real income in either country therefore rises by
+\[
+\frac{wL/P^{W}}{wL/P^{A}}
+  = 2^{1/(\sigma-1)} > 1,
+\]
+with the proportional gain increasing as $\sigma$ falls (the harder it
+is to substitute varieties, the more valuable each extra variety
+becomes).
+
+Trade in the Krugman model is fundamentally different from comparative
+advantage trade: \emph{it is horizontal and survives even when countries
+look exactly alike}.  Integration doubles the menu of goods, lowers the
+price index, and raises welfare without changing firm size, wages, or the
+markup.
+
+\end{tcolorbox}
+
+% -------------------------------------------------
+% Optional illustrative figure
+% -------------------------------------------------
+% \begin{figure}[h!]
+%   \centering
+%   \begin{tikzpicture}[scale=0.85]
+%     \draw[->] (0,0) -- (4,0) node[right] {$N$};
+%     \draw[->] (0,0) -- (0,3) node[above] {$E/P$};
+%     \draw[thick] (0.5,2.4) -- (3.5,0.8);
+%     \node at (1,2.5) {Autarky};
+%     \node at (3.2,0.8) {Trade};
+%     \coordinate (A) at (1.2,2.1);
+%     \coordinate (B) at (2.8,1.1);
+%     \fill (A) circle (2pt);
+%     \fill (B) circle (2pt);
+%   \end{tikzpicture}
+%   \caption{Real income rises when varieties double ($N\!\to\!2N$).}
+% \end{figure}
+
+
+\end{document}
+
+
+
+
