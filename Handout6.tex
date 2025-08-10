@@ -51,7 +51,7 @@
 
 \begin{document}
 
-\title{\textbf{Firms and Trade: the New Trade Theory}}
+\title{\textbf{Diverse Firms and Trade: the Melitz Model}}
 \author{\large%
 \setcounter{footnote}{0}%
 Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
@@ -74,203 +74,53 @@ Economists use a constant elasticity-of-substitution (CES) utility function to c
 First, a note on notation. $q_i(\varphi)$ and $p_i(\varphi)$ are the quantity demanded and price in country $i$ of the good $\varphi \in \{1, 2, \cdots, N\}$. The summation notation simply iterates over the elements of set $\Phi_i:=\{1, 2, \cdots, N\}$. For instance,  total expenditure of consumers in country $i$ is  $\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) = p_i(1) q_i(1) + p_i(2) q_i(2) + \cdots + p_i(N) q_i(N)$. Finally, a word on aggregation. We define $ Q_i$ to be the \textit{composite consumption basket}
 defined as an aggregate of all goods. Implicitly defined is the ``price index'' $P_i$ which can be seen as the ``price'' of the composite consumption basket. Intuitively, total expenditure across all goods must equal the cost of the consumption basket $P_i Q_i =\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi)$.
 
-How do we solve this problem? This is a constrained maximization problem. The easiest way to approach it is to set up a Lagrangian and take first order conditions:
-
-\begin{equation*}
-    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
-\end{equation*}
-
-\noindent where $\lambda$ is our Lagrange multiplier. And what is $\lambda$? Lambda is a job is to keep track of how valuable the last dollar in the consumer’s pocket is. Imagine slipping one more dollar into the consumer’s wallet. Because the budget set expands by exactly \$1, utility rises by:
-
-\begin{equation*}
-    \frac{\partial \mathcal{L}}{\partial I_i} = \lambda
-\end{equation*}
-
-
-\noindent so $\lambda$ literally measures ``extra utils per extra dollar.'' A high 
-$\lambda$ says the consumer is desperate for another dollar (the budget is tight); a low 
-$\lambda$ says an extra dollar hardly moves
-the needle.
-
-There are $N$ first order conditions in this maximization problem, one for each $q_{i}(\varphi)$ satisfying:
-
-\begin{equation*}
-    \frac{\partial Q_i}{\partial q_{i}(\varphi)} - \lambda p_i(\varphi) =0 \iff \underbrace{\frac{\partial Q_i}{\partial q_{i}(\varphi)}}_{\substack{\text{marginal benefit} \\ \text{in utils}}} = \underbrace{\lambda p_i(\varphi)}_{\substack{\text{marginal cost} \\ \text{in utils}}} \qquad \text{for each } \varphi \in \Phi_i
-\end{equation*}
-
-Note that the result of maximizing utility makes clear the ``utils per extra dollar'' interpretation of $\lambda$. The left hand side states shows the marginal utility from one more unit of good $\varphi$. The right hand side shows the utility cost of the dollars needed to buy it ($\lambda$ utils per dollar $\times$ price). Setting them equal forces every good to deliver the same utility per dollar spent.
-
-Now let us work out $\frac{\partial Q_i}{\partial q_{i}(\varphi)}$ using the chain rule:
-
-\begin{eqnarray*}
-    \frac{\partial Q_i}{\partial q_{i}(\varphi)} = \underbrace{\frac{\sigma}{\sigma-1} \ \left[ \sum_{\varphi \in \Phi_i } q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} -1}}_{\text{derivative of the outer function}} \times \underbrace{\frac{\sigma-1}{\sigma}   q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}-1}}_{\text{derivative of the inner}} &=& \lambda p_i(\varphi) \\
-\underbrace{\left[ \sum_{\varphi \in \Phi_i } q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{1}{\sigma-1}}}_{=Q_i^{1/\sigma}} \times  q_i(
-\varphi)^{-\tfrac{1}{\sigma}} &=& \lambda p_i(\varphi) 
-\end{eqnarray*}
-
-Solving for $q_i(\varphi)$ we find that:
+As we have seen in the last handout, these preferences give rise to the following demand functions (check Handout 5 for more details on the derivation):
 
 \begin{equation*}
 \boxed{
-    q_i(
-\varphi) = \lambda^{-\sigma} p_i(\varphi)^{-\sigma} Q_i \iff p_i(\varphi) q_i(
-\varphi) = \lambda^{-\sigma} p_i(\varphi)^{1-\sigma} Q_i
-}
+    q_i(\varphi) = \underbrace{\left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}}_{\text{relative price}} \times \underbrace{\frac{I_i}{P_i}}_{\text{real income}}}
 \end{equation*}
-
-Using the the definition of $Q_i$ allows us to solve for $\lambda^{-\sigma}$:
-
-\begin{eqnarray*}
-     Q_i &\equiv& \left[ \sum_{\varphi \in \Phi_i } q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }  = \left[ \sum_{\varphi \in \Phi_i } \left( \lambda^{-\sigma} p_i(\varphi)^{-\sigma} Q_i \right)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = \lambda^{-\sigma}  Q_i \left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma} } \\
-\iff \lambda^{-\sigma} &=& \frac{1}{\left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma}} } 
-\end{eqnarray*}
-
-Using the budget constraint allows us to solve for the price level $P_i$:
-
-\begin{eqnarray*}
-    P_i Q_i &=& \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) = \sum_{\varphi \in \Phi_i } \lambda^{-\sigma} p_i(\varphi)^{1-\sigma} Q_i = Q_i  \lambda^{-\sigma} \sum_{\varphi \in \Phi_i }  p_i(\varphi)^{1-\sigma} \\
-    \iff P_i &=& \frac{1}{\left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{-\tfrac{\sigma}{1-\sigma} }} \times  \sum_{\varphi \in \Phi_i }  p_i(\varphi)^{1-\sigma} = \left[ \sum_{\varphi \in \Phi_i }  p_i(\varphi) ^{1-\sigma} \right]^{\tfrac{1}{1-\sigma}} 
-\end{eqnarray*}
-
-So $\lambda^{-\sigma} = P_i^{\sigma}$. Finally, using the fact that $Q_i = w_i L_i / P_i$, we can write the demand functions as:
-
-\begin{equation*}
-\boxed{
-    q_i(\varphi) = \underbrace{\left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}}_{\text{relative price}} \times \underbrace{\frac{w_iL_i}{P_i}}_{\text{real income}}}
-\end{equation*}
-
-    \begin{figure}[htp]
-        \centering
-        \begin{tikzpicture}
-        \pgfmathsetmacro{\sigmaa}{1.5}
-        \pgfmathsetmacro{\sigmab}{3}
-        \pgfmathsetmacro{\sigmac}{10000000}
-        \pgfmathsetmacro{\P}{0.25}
-        \pgfmathsetmacro{\I}{1}
-        
-        \centering
-        \begin{axis}[
-            ylabel={Price of good $\varphi$: $p_i(\varphi)$},
-            xlabel={Quantity demanded of good $\varphi$: $q_i(\varphi)$},
-            ymin=0, ymax=2,
-            xmin=0, xmax=2,
-            yticklabel=\empty,
-            xticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=9cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    
-        
-          \addplot[thick,red,  domain=0.2:2]
-            {\P * ((x*\P)/\I)^(-1/\sigmaa)};
-          \addplot[thick,blue, domain=0.1:2]
-            {\P * ((x*\P)/\I)^(-1/\sigmab)};
-          \addplot[thick,brown,domain=0.1:2]
-            {\P};  % σ → ∞  ⇒  horizontal line at p = P
-            
-        \end{axis}
-    
-    \end{tikzpicture}
-            \caption{Demand curve with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
-        \label{fig: ces-demand}
-    \end{figure}
-
-We plot demand curve for different elasticities in Figure \ref{fig: ces-demand}. The red curve ($\sigma=1.5$) is steep: quantity must fall a lot to raise price because substitution is hard. The blue curve ($\sigma=3$) is flatter: with easy substitution, a small price hike loses many buyers. As  $\sigma \to \infty$ the curve becomes horizontal -- market power goes to zero and  any small deviation from competitive prices would drive quantity to zero.
-
-
 
 \paragraph{Production} To produce a given quantity $q_i(\varphi)$, firms use the following amount of labor:
 
 \begin{equation*}
-     \ell = \bar{f} + a^*q_i(\varphi) \iff q_i(\varphi) = \frac{1}{a^*} (\ell - \bar{f})
+     \ell = \bar{f} + a(\varphi)q_i(\varphi) \iff q_i(\varphi) = \frac{1}{a(\varphi)} (\ell - \bar{f})
 \end{equation*}
 
-where $a^*$ denotes how many workers are necessary to produce a single unit of good $\varphi$. These are the \textbf{unit labor requirements}, as we have seen in the Ricardian model. By analyzing the right hand side of the equation above, we see that labor only contributes to output if they hire more than $\bar{f}$ workers. To produce $q_i(\varphi)$ units, then, the firm needs to hire $\bar{f}$ workers just to set up shop and $\ell$ workers to attain that level of production.
+where $a(\varphi)$ denotes how many workers are necessary to produce a single unit of good $\varphi$. The difference between this specification and what we had seen in the Krugman model is that now productivity $1/a(\varphi)$ depends on the good being produced $\varphi$. This means that the number of workers to produce one unit of good $1$ might be different from the unit labor requirement of good $2$. A corollary of this is that the marginal cost $w_i a(\varphi)$ will be different for each good.
 
+We will assume that $a(\varphi)$ is decreasing in the order of the good $\varphi$. Specifically, we will assume:
 
-    \begin{figure}[htp]
-        \centering
-        \begin{tikzpicture}
+\begin{equation*}
+    a(\varphi) = \frac{a^*}{\varphi}
+\end{equation*}
 
-        \pgfmathsetmacro{\fbar}{1.5}
-        \pgfmathsetmacro{\a}{1}
-        \pgfmathsetmacro{\w}{1}
-        
-        \centering
-        \begin{axis}[
-            ylabel={\textcolor{red}{Average Cost}; Marginal Cost},
-            xlabel={Quantity produced: $q_i(\varphi)$},
-            ymin=0, ymax=5,
-            xmin=0, xmax=15,
-            yticklabel=\empty,
-            xticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=9cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        
-          \addplot[thick,red,  domain=0.5:15]
-            {\fbar/x + \a * \w};
-          \addplot[thick,black,  domain=0:15]
-            {\a * \w};
-
-            \node[anchor=east] at (axis cs: 0, \a * \w) {$a^* w_i$};
-            
-        \end{axis}
-    
-    \end{tikzpicture}
-            \caption{Average cost as a function of output}
-        \label{fig: ac}
-    \end{figure}
-
-
-Another way of thinking of $\bar{f}$ is the ``cost of entering the market''. Every new  firm must pay the same up-front cost  for product design, advertising, setting up a factory, etc. Once that hurdle is cleared, producing an extra unit only costs labor at a constant marginal cost.
+\noindent such that producing good $1$ requires more workers than producing good $2$; producing good $2$ requires more workers than producing good $3$; and so forth. In other words, we assume that productivity is increasing in the good $\varphi$. 
 
 Firms have a monopoly over the production of their goods. This means that they have market power. \textbf{Instead of taking prices as given, they take demand as given and choose prices that will maximize profits}. If a firm enters the market, they maximize:
+
 \begin{eqnarray*}
-    &\max_{p_i(\varphi)}& \pi_i(\varphi) \equiv p_i(\varphi) q_i(\varphi) - w_i a^*q_i(\varphi) - w_i \bar{f} \qquad s.t. \qquad   q_i(\varphi) = \left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}  \times \frac{w_iL_i}{P_i} \\
-\iff &\max_{p_i(\varphi)}&  \pi_i(\varphi) \equiv p_i(\varphi)^{1-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} - w_i a^* p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} - w_i \bar{f} 
+    &\max_{p_i(\varphi)}& \pi_i(\varphi) \equiv p_i(\varphi) q_i(\varphi) - w_i \frac{a^*}{\varphi} q_i(\varphi) - w_i \bar{f} \qquad s.t. \qquad   q_i(\varphi) = \left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}  \times \frac{I_i}{P_i} \\
+\iff &\max_{p_i(\varphi)}&  \pi_i(\varphi) \equiv p_i(\varphi)^{1-\sigma} P_i^{\sigma}  \times \frac{I_i}{P_i} - w_i \frac{a^*}{\varphi} p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{I_i}{P_i} - w_i \bar{f} 
 \end{eqnarray*}
 
 This is a simple concave maximization problem that you know how to solve\footnote{Note $d \pi / dp > 0, d^2 \pi / dp^2 < 0$}. Optimal prices satisfy:
 \begin{eqnarray*}
-    0 &=& (1-\sigma)\times p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{w_iL_i}{P_i} + \sigma \times w_i a^* p_i(\varphi)^{-\sigma-1} P_i^{\sigma} \times \frac{w_iL_i}{P_i}  \\
-    0 &=& (1-\sigma) + \sigma \times w_i a^* p_i(\varphi)^{-1}  = -p_i(\varphi)(\sigma-1) + \sigma \times w_i a^*
+    0 &=& (1-\sigma)\times p_i(\varphi)^{-\sigma} P_i^{\sigma}  \times \frac{I_i}{P_i} + \sigma \times w_i \frac{a^*}{\varphi} p_i(\varphi)^{-\sigma-1} P_i^{\sigma} \times \frac{I_i}{P_i}  \\
+    0 &=& (1-\sigma) + \sigma \times w_i \frac{a^*}{\varphi} p_i(\varphi)^{-1}  = -p_i(\varphi)(\sigma-1) + \sigma \times w_i \frac{a^*}{\varphi}
 \end{eqnarray*}
 
 Solving for prices:
 
 \begin{equation*}
     \boxed{
-    p_i(\varphi) = \frac{\sigma}{\sigma-1} \times w_i a^* 
+    p_i(\varphi) = \frac{\sigma}{\sigma-1} \times  \frac{w_ia^*}{\varphi} 
     }
 \end{equation*}
 
-Three important things emerge from this price. First, $w_i a^*$ is the \textbf{marginal cost} to produce one additional unit. Second, since $\sigma > 1$, then  $\frac{\sigma}{\sigma-1} > 1$ is a \textbf{mark-up} that producers charge on top of marginal cost. Third, since we assumed that $a^*$ is the same for every firm in the economy, the price \textbf{does not depend on the particular good $\varphi$}. So we can summarize pricing under monopolistic competition as:
+In this model, it is still true that optimal prices are equal to a markup over marginal cost. However, marginal costs are no longer uniform across all firms. Rather, marginal costs depend on the good produced.
 
-\begin{equation*}
-    \boxed{
-    p_i(\varphi) = p^* = \text{mark up} \times \text{marginal cost} \qquad \text{for all goods } \varphi \in \Phi_i
-    }
-\end{equation*}
-
+As a consequence, prices will also differ across goods! There is no longer a $p^*$ that all firms charge. Prices will be dependent on good $\varphi$. More productive firms will be able to charge lower prices \textemdash and therefore sell more units.
 
     \begin{figure}[htp]
         \centering
@@ -279,10 +129,11 @@ Three important things emerge from this price. First, $w_i a^*$ is the \textbf{m
         
         \centering
         \begin{axis}[
-            ylabel={Markup},
-            xlabel={Elasticity of substitution: $\sigma$},
+            ylabel={Price of good $\varphi$, $p_i(\varphi)$},
+            xlabel={Good type, $\varphi$},
             ymin=0, ymax=3,
             xmin=0, xmax=15,
+            yticklabel=\empty,
             axis lines=left,
             enlargelimits=false,
             clip=false,
@@ -292,12 +143,13 @@ Three important things emerge from this price. First, $w_i a^*$ is the \textbf{m
             title style={font=\bfseries}
         ]
         
+        \pgfmathsetmacro{\sigmaa}{1.5}
+        \pgfmathsetmacro{\a}{1}
+        \pgfmathsetmacro{\w}{1}
         
-          \addplot[thick,red,  domain=1.5:15]
-            {x/(x-1)};
-          \addplot[thick,black,  domain=0:15]
-            {1};
-            
+          \addplot[thick,red,  domain=1:15]
+            {\sigmaa/(\sigmaa-1)*(\a*\w / x ) 
+            };            
         \end{axis}
     
     \end{tikzpicture}
@@ -305,13 +157,115 @@ Three important things emerge from this price. First, $w_i a^*$ is the \textbf{m
         \label{fig: ces-markup}
     \end{figure}
 
-\paragraph{Autarky Equilibrium} We still have some questions unanswered. What is the quantity demanded from each firm? How many firms $N$ will actually enter the market in equilibrium? What are the wages $w_i$ and the price levels $P_i$?
+\paragraph{Autarky Equilibrium} Firms will only enter the market if they expect their profit $\pi_i(\varphi) \ge0$ to be nonnegative (at least zero). If not, they would make a loss, so it would be rational to exit the market. But if profits are (strictly) positive ($\pi_i(\varphi) >0$), then new entrants would have an incentive to pay the fixed cost $w_i \bar{f}$, set up a new shop for a new product, charge the markup over marginal cost, and make a profit. Entry continues until the last comer finds that her expected profit is exactly zero.
 
-Firms will only enter the market if they expect their profit $\pi_i(\varphi) \ge0$ to be nonnegative (at least zero). If not, they would make a loss, so it would be rational to exit the market. But if profits are (strictly) positive ($\pi_i(\varphi) >0$), then new entrants would have an incentive to pay the fixed cost $w_i \bar{f}$, set up a new shop for a new product, charge the markup over marginal cost, and make a profit. Entry continues until the last comer finds that her expected profit is exactly zero.
+In other words, firms will enter the market up to the point in which there is no additional expected profit to be made and $\pi_i(\varphi) =0$. First, it will be convenient to show that revenues and profits are increasing in the good type $\varphi$. Starting with revenues, define:
+\begin{eqnarray*}
+    r_i(\varphi) &=& p_i(\varphi)q_i(\varphi) = p_i(\varphi)\times \left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma} \times \frac{I_i}{P_i}  \\
+    &=&  p_i(\varphi)^{-(\sigma-1)} \times P_i^{\sigma-1}\times I_i \\
+    &=&  \left( \frac{\sigma}{\sigma-1} \times  \frac{w_ia^*}{\varphi}  \right)^{-(\sigma-1)} \times P_i^{\sigma-1}\times I_i \\
+    &=&  \varphi^{\sigma-1} \times r^*
+\end{eqnarray*}
 
-In other words, firms will enter the market up to the point in which there is no additional expected profit to be made and $\pi_i(\varphi) =0$.
+\noindent where $r^* \equiv \left( \frac{\sigma}{\sigma-1} \times  w_ia^*  \right)^{-(\sigma-1)} \times P_i^{\sigma-1}\times I_i$ is the part of revenues that is common to every good, scaled by productivity $\varphi^{\sigma-1}$. Since $\sigma-1>0$, revenues are increasing in $\varphi$. We can also see this geometrically in Figure \ref{fig:revenues}.
+
+The Figure shows the revenues for firms producing two goods. Since $\varphi^*>\varphi$, then $MC(\varphi^*) <MC(\varphi)$. It is also true that $p_i(\varphi^*) <p_i(\varphi)$, as observed by where the quantity produced by each firm intersects with the demand curve. While prices of the more productive firm are smaller, they sell many more units. As a result, total revenue $r_i(\varphi^*)>r_i(\varphi)$, which is represented in the Figure by the blue rectangle being much larger than the purple rectangle. 
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\K}{7}
+    \pgfmathsetmacro{\sigmaa}{1.5}
+
+    \pgfmathsetmacro{\A}{7}
+    \pgfmathsetmacro{\b}{0.75}
+    \pgfmathsetmacro{\m}{0.35}
+    \pgfmathsetmacro{\s}{2.25}
+    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
+    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
+        
+    
+    
+    \begin{axis}[
+        ymin=0, ymax=10,
+        xmin=0, xmax=5,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+        
+        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
+        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
+        % revenue
+        \addplot[fill=purple, draw=none, opacity=.25] coordinates
+            {(0,0) (0,\ps) (\qs,\ps) (\qs,0)} -- cycle;
+        \addplot[black, thick, domain=0:5] {1/\m * \s};
+        
+        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
+        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
+        % revenue
+        \addplot[fill=blue, draw=none, opacity=.25] coordinates
+            {(0,0) (0,\p) (\q,\p) (\q,0)} -- cycle;
+        \addplot[black, thick, domain=0:5] {1/\m};
+
+
+        \node[anchor = south east] at (axis cs: \q,0) {\textcolor{blue}{$r_i(\varphi^*)$}};
+    
+        \node[anchor = south west] at (axis cs: 0,{\s/(\m)}) {\textcolor{purple}{$r_i(\varphi)$}};
+
+
+
+            %demand, rev
+        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
+        \addplot[teal, thick, domain=0:3] {(\A / \b) - 2/\b * x};
+            
+
+        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
+        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
+
+        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
+        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
+
+
+        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
+        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
+        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{teal}{\scriptsize Marginal Revenue}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{teal}{\scriptsize slope $= - 1/(1+\sigma)$}};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi^*)$};
+        \node[anchor=north] at (axis cs: \q,0) {$\ln q(\varphi^*)$};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {$\ln  MC(\varphi)$};
+        \node[anchor=north] at (axis cs: \qs,0) {$\ln q(\varphi)$};
+    \end{axis}
+
+    \end{tikzpicture}
+    \caption{Revenue for two different firms, with marginal cost $MC(\varphi)$ and $MC(\varphi^*)$ }
+    \label{fig:revenues}
+\end{figure}
+
+We will now show that profits are a constant fraction of revenues, minus the fixed cost, so it will also be increasing in $\varphi$:
+
+\begin{eqnarray*}
+    \pi_i(\varphi) &=& \left(p(\varphi) - MC(\varphi) \right) q(\varphi) - w_i \bar{f}  \\
+    &=& p(\varphi)q(\varphi) - \frac{w_ia^*}{\varphi} q(\varphi) - w_i \bar{f}  \\
+    &=& p(\varphi)q(\varphi) - \frac{\sigma-1}{\sigma} p(\varphi) q(\varphi) - w_i \bar{f}  \\
+    &=& \frac{1}{\sigma} p(\varphi)q(\varphi) - w_i \bar{f}  \\
+    &=& \frac{1}{\sigma} r_i(\varphi) - w_i \bar{f} 
+\end{eqnarray*}
+
+
+
 \begin{equation*}
-    \pi_i(\varphi) = (p^* - MC) q^* - w_i \bar{f} = \left(\frac{\sigma}{\sigma -1}a^*w_i - a^* w_i\right) q^* - w_i \bar{f} =0 \iff q^* = (\sigma-1) \times \frac{\bar{f}}{a^*}  
+    \pi_i(\varphi) = (p(\varphi) - MC(\p) q(\varphi) - w_i \bar{f} 
 \end{equation*}
 
 In equilibrium, the quantity produced by each firm depends on the elasticity of substitution (if $\sigma$ is high, markups will be smaller, and quantity sold per firm will be higher) and on the fixed cost $\bar{f}$, which controls the returns to scale in this model. 

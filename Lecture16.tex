@@ -221,7 +221,7 @@
 
 \section{Intro and recap}
 
-\begin{frame}{Takeaways from last}
+\begin{frame}{Takeaways from last class}
 \begin{wideitemize}
     \item Demand for differentiated goods
     \item Elasticity of substitution ($\sigma$)
@@ -460,6 +460,8 @@
     }
     \end{equation*}
 
+    (note: quantity sold by firm is identical) 
+
     \end{wideitemize}
     
 \end{frame}
@@ -503,37 +505,146 @@
 \begin{frame}{Love of variety}
 
 \begin{wideitemize}
-    \item Knowing the optimal size of firms $q^*$, we can now calculate total utility:
-
+    \item What about the total basket $Q_i$? We can explicitly calculate it:
 \begin{equation*}
-    Q_i = \left[ \sum_{\varphi \in \Phi_i } q_i(
-\varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }  = \left[ N^* ( q^*
-)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = (N^*)^{\tfrac{\sigma}{\sigma-1} } q^* 
-\end{equation*}
+        {\scriptsize 
+        Q_i = \left[ \sum_{\varphi \in \Phi_i } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }  = \left[ ( \underbrace{q^*+ \cdots + q^*}_{N^*\text{ times}}
+    )^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = \left[ N^* ( q^*
+    )^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } = (N^*)^{\tfrac{\sigma}{\sigma-1} } q^* }
+    \end{equation*}
 
-\noindent where $N^*$ is the total number of goods.
+    \item<2-> Intuitively, total basket is quantity purchased from each firm $\times$ number of goods
 
-\item The factor $\tfrac{\sigma}{\sigma-1}>1$ captures the “love-of-variety” effect: when the elasticity of substitution is finite, adding new goods raises aggregate utility more than proportionally to their count because the composite good rewards diversity. We can also calculate the price level.
+    \item<3-> Note: $\tfrac{\sigma}{\sigma-1}>1$ for finite $\sigma$! \\ \qquad consumption/utility grows more than proportionately in $N$
+
+    \item<4-> We call this \blue{``love-of-variety''} \\
+    \qquad small $\sigma$, hard for people to substitute across products $\rightarrow$ higher love-of-variety
+
+    \item<5-> People like having variety of options when purchase
 
 \end{wideitemize}
 
 \end{frame}
 
-\begin{frame}{Frame Title}
+\begin{frame}{Love-of-variety: graphical representation}
         \begin{figure}[htp]
         \centering
         \begin{tikzpicture}
         \pgfmathsetmacro{\sigmaa}{1.5}
         \pgfmathsetmacro{\sigmab}{3}
-        \pgfmathsetmacro{\sigmac}{10000000}
+        \pgfmathsetmacro{\sigmac}{5}
         
         \centering
         \begin{axis}[
             ylabel={Total utility $Q_i$},
             xlabel={Number of goods in the economy $N$},
             ymin=0, ymax=20,
-            xmin=1, xmax=5,
+            xmin=1, xmax=20,
+            xticklabel=\empty,
             yticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=7cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    
+        
+          \addplot[thick,red,  domain=1:2.7]
+            {x^(\sigmaa / (\sigmaa -1))};
+          \addplot[thick,blue, domain=1:7]
+            {x^(\sigmab / (\sigmab -1)};
+          \addplot[thick,purple, domain=1:10]
+            {x^(\sigmac / (\sigmac -1)};
+          \addplot[thick,brown,domain=1:15]
+            {x};  
+
+            \addplot[gray, dashed] coordinates
+            {(10,10) (11,10) (11,11)};
+            \node[anchor = north] at (axis cs: 10.5,10) {$1$};
+            \node[anchor = west] at (axis cs: 11,10.5) {$1$};
+            
+
+        \end{axis}
+    
+    \end{tikzpicture}
+            \caption{Love of variety with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
+        \label{fig: ces-love}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Love-of-variety: photographical representation}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figs/yeltsin-variety.jpg}
+    \caption{Boris Yeltsin, then president of the Russian Soviet Socialist Republic, visits America, 1989}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Rationing and lack of variety}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/Libreta-Store.jpg}
+    \caption{Rationing store in Cuba, 2012}
+\end{figure}
+\end{frame}
+
+\section{Equilibrium}
+
+\begin{frame}{Number of products $N^*$ in equilibrium}
+
+\begin{wideitemize}
+    \item How can we solve for the equilibrium number of firms $N^*$?
+
+    \item<2-> By now, you probably now: we use some condition that makes supply = demand \\
+    \qquad \textcolor{gray}{(``market clearing condition'')}
+
+    \item<3-> In this case, we will use the labor market equilibrium
+
+    \item<4-> Labor demand per firm: $\ell = \bar{f} +a^* q^*$; labor supply: $L_i$. In equilibrium:
+    \onslide<5->{
+    \begin{equation*}
+        N^* (\bar{f} +a^* q^*) = N^* \left(\bar{f} +a^* (\sigma-1) \frac{\bar{f}}{a^*} \right) = L_i \iff N^* = \frac{L_i}{\sigma \bar{f}}
+    \end{equation*} }
+      \onslide<6->{ \blue{Intution}:
+
+    \begin{itemize}
+        \item large $L_i \rightarrow$ large market $\rightarrow$ the more goods/firms in equilibrium;
+        \item large  $\bar{f} \rightarrow$ larger IRS $\rightarrow$ firms larger $\rightarrow$fewer firms in equilibrium.
+        \item large $\sigma \rightarrow$ more substitutable goods $\rightarrow$ markups smaller $\rightarrow$ surviving firms have to sell more units to be able to pay for fixed costs $\rightarrow$ fewer firms in equilibrium.
+    \end{itemize}
+    }
+    
+
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Labor market clearing}
+
+    \begin{figure}[htp]
+        \centering
+        \begin{tikzpicture}
+        \pgfmathsetmacro{\sigmaa}{2}
+        \pgfmathsetmacro{\L}{2.5}
+        \pgfmathsetmacro{\f}{1}
+        \pgfmathsetmacro{\N}{\L / (\sigmaa * \f)}
+        
+        \centering
+        \begin{axis}[
+            xlabel={Labor demand, Labor Supply},
+            ylabel={Number of goods in the economy $N$},
+            ymin=0, ymax=4,
+            xmin=0, xmax=5,
+            yticklabel=\empty,
+            xticklabel=\empty,
             axis lines=left,
             enlargelimits=false,
             clip=false,
@@ -546,37 +657,189 @@
         % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
     
         
-          \addplot[thick,red,  domain=1:2.75]
-            {x^(\sigmaa / (\sigmaa -1))};
-          \addplot[thick,blue, domain=1:5]
-            {x^(\sigmab / (\sigmab -1)};
-          \addplot[thick,brown,domain=1:5]
-            {x};  % σ → ∞  ⇒  horizontal line at p = P
+          \addplot[thick,blue] coordinates
+            {(\L,0) (\L,4)};
+          \addplot[thick,red, domain=0:5]
+            {1/(\f * \sigmaa) * x};
+          \addplot[gray, dashed] coordinates
+            {(0,\N) (\L,\N)};
             
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\L, \N)};      \node[anchor = east] at (axis cs:0,\N) {$N^*$};
+            \node[anchor = north] at (axis cs:\L,0) {$L_i$};
+
+            \pgfmathsetmacro{\xs}{\L + 1}
+            \pgfmathsetmacro{\Ns}{1/(\f * \sigmaa) * \xs}
+            \pgfmathsetmacro{\xsx}{\xs + 1}
+            \pgfmathsetmacro{\Nsx}{1/(\f * \sigmaa) * \xsx}
+
+            \addplot[gray, dashed] coordinates
+            {(\xs,\Ns) (\xsx,\Ns) (\xsx,\Nsx)};
+            \node[anchor = north] at (axis cs:{\xs + (\xsx - \xs)/2},\Ns) {$1$};
+            \node[anchor = west] at (axis cs:\xsx,{\Ns + (\Nsx - \Ns)/2}) {$\frac{1}{\bar{f} \sigma}$};
         \end{axis}
     
     \end{tikzpicture}
-            \caption{Love of variety with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
-        \label{fig: ces-love}
+            \caption{Labor market and number of firms equilibrium}
+        \label{fig: labor-market}
     \end{figure}
 \end{frame}
 
-\begin{frame}{Utility and real income}
+\begin{frame}{General Equilibrium}
+\begin{wideitemize}
+    \item What does it mean to find ``an equilibrium''?
+
+    \item<2-> We solved for:
+    \begin{itemize}
+        \item prices: $\{p_i(\varphi),w_i\}$ \textcolor{gray}{{\scriptsize (wages $w_i=1$ are the num\'eraire of this economy)}}
+        \item consumer demand choices: $\{p_i(\varphi)\}$
+        \item firms production choices: $\{\ell\}$
+        \item equilibrium number of firms: $\{N\}$
+    \end{itemize}
+
+    \item<3-> Such that:
+    \begin{itemize}
+        \item consumers maximize utility (behave optimally)
+        \item firms maximize profits (behave optimally)
+        \item factor markets clear: $L_i = N \times \ell^*$ 
+        \item goods markets clear: $I_i = P_iQ_i = N\times p^* q^*$ \textcolor{gray}{{\scriptsize (check handout)}}
+    \end{itemize}    
+    
+\end{wideitemize}
+\end{frame}
+
+\section{Opening up to trade}
+
+\begin{frame}{Opening up to trade}
+\begin{wideitemize}
+    \item Two symmetric countries ($H$ and $F$)
+    \item No trade barriers and shipping costs.
+    \item<2-> Consumers now have preferences over domestic and foreign goods:
+    \begin{itemize}
+        \item $\Phi_H := \{ H_1, H_2, \cdots,H_{N_H} \}$: set of domestic goods.
+        \item $\Phi_F := \{ F_1, F_2, \cdots,F_{N_F} \}$: set of foreign goods.
+        \item $\Phi_i := \Phi_H \cup \Phi_F = \{ H_1, H_2, \cdots,H_{N_H}, F_1, F_2, \cdots,F_{N_F} \}$: all goods available in country $i$.
+    \end{itemize}
+
+    \item<3-> Preferences:
+    \begin{eqnarray*}
+        \max_{\{q_i(
+    \varphi)\}_{\
+    \varphi \in \Phi_i}} Q_i &\equiv& \left[ \underbrace{\sum_{\varphi \in \Phi_H } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}}}_{\text{home goods}} + \underbrace{\sum_{\varphi \in \Phi_F } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}}}_{\text{foreign goods }} \right]^{\tfrac{\sigma}{\sigma-1} } \\
+    s.t. \qquad  P_i Q_i &=&\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \le I_i = w_i L_i 
+\end{eqnarray*}
+ 
+
+\end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Opening up to trade}
+\begin{wideitemize}
+    \item Everything else stays the same. Labor forces, and fixed costs are identical.
+    
+    \item Preferences are identical in each country, each firms face the same demand curve.
+    
+    \item<2-> The optimal price they will choose will be the same:
+
+    \begin{equation*}
+        p^* = \text{markup} \times \text{MC} = \frac{\sigma}{\sigma-1} \times MC
+    \end{equation*}
+
+    \item<3-> Fixed and marginal costs as the same as before $\rightarrow$ free entry condition $\pi_i(\varphi) =0$ pins down the same optimal quantity per firm:
+    \begin{equation*}
+        q^* = (\sigma-1) \times \frac{\bar{f}}{a^*}
+    \end{equation*}
+
+    \item<4-> How many firms exist in each country? Use the labor market clearing condition to find that:
+    \begin{equation*}
+        N^* = \frac{L_i}{\sigma \bar{f}}
+    \end{equation*}
+    
+
+\end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Opening up to trade}
+\begin{wideitemize}
+    \item But wait... the same number of firms $N^*$ is active in each country as in autarky.
+    
+    \item<2-> So nothing changes? Not quite.
+
+    \item<3-> With symmetric countries, integration the \emph{size of the market} in terms of available goods.
+    
+    \item<4-> That becomes clear once we evaluate what happens with welfare/utility:
+
+\begin{eqnarray*}
+         Q_i &\equiv& \left[ \sum_{\varphi \in \Phi_H } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}} +\sum_{\varphi \in \Phi_F } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } \\
+    &=& \left[ N^* (q^*)^{\tfrac{\sigma-1}{\sigma}} +N^* (q^*)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} }\\
+    &=& (2 N^*)^{\frac{\sigma}{\sigma-1}} q^*
+\end{eqnarray*}
+
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Welfare after trade}
+\begin{wideitemize}
+    \item Consumers are better off after trade openness:
+
+\begin{eqnarray*}
+         Q_i^{\text{Trade}} = (2 N^*)^{\frac{\sigma}{\sigma-1}} q^* > (N^*)^{\frac{\sigma}{\sigma-1}} q^* =Q_i^{\text{Autarky}}
+\end{eqnarray*}
+
+\item With identical countries, half of the new entrants locate in $H$ and half in $F$
+
+\item Wach country \emph{hosts} the same number of firms as before ($N^{*}=L/(\sigma\bar f)$)...
+
+\item ...but consumers in both countries can now purchase \emph{all} $2N^*$ varieties.
+
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Trade equilibrium}
 
 \begin{wideitemize}
-    \item and the overall price level:
+    \item Every firm sells one identical good to \emph{both} markets.
+    
+    \item<2-> Country $H$ exports the set of varieties it produces and imports the set produced in $F$, and vice-versa.
+    
+    \item<3-> Because the two sets have equal value, bilateral trade is balanced:
 
-\begin{equation*}
-    P_i = \left[ \sum_{\varphi \in \Phi_i } p_i(
-\varphi)^{1-\sigma} \right]^{\tfrac{1}{1-\sigma} }  = \left[ N^* (p^*)^{1-\sigma} \right]^{\tfrac{1}{1-\sigma} }  = \frac{p^*}{(N^*)^{\tfrac{1}{\sigma-1} } } 
-\end{equation*}
+    \begin{equation*}
+        \text{Exports}_{H\to F} = \text{Imports}_{F\to H}
+    \end{equation*}
 
+    \item<4-> But why does trade even happen in this world?
+    
 \end{wideitemize}
     
 \end{frame}
 
-\newpage
+\begin{frame}{Interindustry trade}
 
+\begin{wideitemize}
+    \item In the other models we saw (Ricardian, SFM or HO) identical identical countries would have \blue{no} reason to trade
+
+    \item Gains from trade hing on cross-country differences and differences in relative prices
+
+    \item The Krugman model showcases \blue{horizontal intra-industry trade} that arises \blue{even though the countries are identical}
+    
+    \item Gains from trade come from the \blue{love-of-variety} and the ability of increasing-returns firms to cover fixed costs in a larger market.
+    
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Takeaway}
+
+Trade in the Krugman model is fundamentally different from comparative advantage trade: \blue{it is horizontal and survives even when countries look exactly alike}.  Integration doubles the menu of goods, lowers the price index, and raises welfare without changing firm size, wages, or the markup.
+
+    
+\end{frame}
 
 
 
