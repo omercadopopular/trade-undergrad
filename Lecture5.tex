@@ -8,14 +8,14 @@
 %\setbeameroption{show only notes} % Only notes
 %\setbeameroption{show notes on second screen=right} % Both
 
-\usepackage{helvet}
-\usepackage[default]{lato}
-\usepackage{array}
 
 \newtheorem{proposition}{Proposition}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
 \newcommand{\white}[1]{\textcolor{white}{#1}}
 
+\usepackage{helvet}
+\usepackage[default]{lato}
+\usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 \usepackage{pgfplots}
@@ -40,6 +40,7 @@
 \usepackage{graphicx}
 \usepackage{dcolumn}
 \usepackage{bbm}
+\usepackage{emoji}
 \usepackage[style=authoryear,sorting=nyt,uniquename=false]{biblatex}
 
 \addbibresource{references.bib} 
@@ -165,7 +166,7 @@
 }
 
 \title[]{International Trade: Lecture 5}
-\subtitle[]{Classical Ricardian Trade in General Equilibrium - Part II}
+\subtitle[]{Ricardian Trade with Multiple Goods}
 \author[Góes]
 {Carlos Góes\inst{1}}
 \date{Fall 2025}
@@ -224,954 +225,823 @@
 %----------------------------------------------------------------------%
 %----------------------------------------------------------------------%
 
-
-
-\begin{frame}{Last Class: Autarky Equilibrium}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcc}
-\toprule
-\textbf{Variable} & \textbf{United States (US)} & \textbf{Colombia (COL)} \\
-\midrule
-Labor endowment $L_i$ & $300$ million & $54$ million \\
-Preference parameter $\alpha_i$ & $1/2$ & $3/4$ \\
-Unit labor requirement for computers $a_{i,C}$ & $3{,}000$ & $5{,}400$ \\
-Unit labor requirement for roses $a_{i,R}$ & $30$ & $6$ \\
-\midrule
-Max computers: $L_i / a_{i,C}$ & $300\text{m}/3{,}000 = 100{,}000$ & $54\text{m}/5{,}400 = 10{,}000$ \\
-Max roses: $L_i / a_{i,R}$ & $300\text{m}/30 = 10\text{m}$ & $54\text{m}/6 = 9\text{m}$ \\
-\midrule
-Opportunity cost $a_{i,C}/a_{i,R}$ & $3{,}000/30 = 100$ & $5{,}400/6 = 900$ \\
-Demand for computers: $\alpha_i L_i / a_{i,C}$ & $0.5 \times 300\text{m}/3{,}000 = 50{,}000$ & $0.75 \times 54\text{m}/5{,}400 = 7{,}500$ \\
-Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 5\text{m}$ & $0.25 \times 54\text{m}/6 = 2.25\text{m}$ \\
-\bottomrule
-\end{tabular}
-}
-\end{frame}
-
-\begin{frame}{Last Class: Autarky Equilibrium}
-
-\begin{figure}[htbp!]
-
-% California
-\begin{subfigure}{}
-\resizebox{0.48\textwidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
-\pgfmathsetmacro{\Lendow}{10}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
-
-% Indifference curve through optimal bundle
-\addplot[thick, brown, domain=2.5:10, samples=100] {\A * x^(-\expo)};
-
-% Labels
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
-\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
-
-
-
-\end{axis}
-
-\end{tikzpicture}
-}
-\end{subfigure}
-%
-% Colombia
-\begin{subfigure}{}
-\resizebox{0.48\textwidth}{!}{%
-
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
-\pgfmathsetmacro{\Lendow}{9}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
-
-% Indifference curve through optimal bundle
-\addplot[brown, domain=0.1:9, samples=100] {\A * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{COL}}{a_{COL,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{COL}}{a_{COL,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
-\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
-
-
-\end{axis}
-
-\end{tikzpicture}
-}
-
-\end{subfigure}
-
-\caption{Autarky equilibrium}\label{fig: autarky-num}
-
-\end{figure}
-\end{frame}
-
-\section{Trade Definitions}
-
-\begin{frame}{Absolute and Comparative Advantage}
-
+\begin{frame}{The intellectual history of Ricardian Trade}
 \begin{wideitemize}
-    \item We say Colombia has an \textcolor{blue}{absolute advantage} in the production of good $p$ if $a_{COL,p} < a_{US,p}$
-
-    \item English: absolute advantage in production = uses less labor to produce one unit \\
-    \qquad \textcolor{gray}{(i.e., it is more productive)}
-
-    \item \textcolor{blue}{Opportunity cost}: cost of producing a good, measured in foregone output of all others.
-
-    \item \blue{Comparative advantage}: An economy has a comparative advantage in producing a good if its opportunity cost of the good is lower than in the rest of the world.
-
-\end{wideitemize}
-
+        \item<1-> Ricardo (1817 On the Principles of Political Economy and Taxation): 2 × 2 trade with two industries and two countries
+        \item<2-> Dornbusch, Fischer and Samuelson (1977): 2 x many Ricardian trade either with many industries or with many countries, but not both
+        \item<3-> Eaton and Kortum (2002): many x many Ricardian trade with many industries and many countries
+        \end{wideitemize}
 \end{frame}
 
 
-\begin{frame}{Absolute and Comparative Advantage}
-
+\begin{frame}{Ricardian Model with Multiple Goods: Preliminaries}
 \begin{wideitemize}
-
-    \item We say Colombia has an \textcolor{blue}{comparative advantage} in the production of roses, since:
-    
-    \begin{equation*}
-        1/900 = a_{COL,R}/a_{COL,C} < a_{US,R}/a_{US,C} = 1/100
-    \end{equation*}
-
-    \item We say the US has an \textcolor{blue}{comparative advantage} in the production of computers, since:
-    
-    \begin{equation*}
-        900 = a_{COL,C}/a_{COL,R
-        } > a_{US,C}/a_{US,R} = 100
-    \end{equation*}
-
-\end{wideitemize}
-
+        \item 2 countries $i \in \{ H, F\}$
+        \item Many goods indexed (labeled) $g \in [0,1]$
+        \item One factor of production: labor $L_i$ mobile between sectors
+        \item In country $i$, to produce one unit of good $g$, firms use $a_{i,g}$ units of labor
+        \item Key force: differences in local technology (labor productivity)
+        \item Trade balances (value of exports = value of imports)
+        \end{wideitemize}
 \end{frame}
 
-\section{Supply}
-
-\begin{frame}{Prices under Autarky}
-
+\begin{frame}{Ricardian Model with Multiple Goods: Preliminaries}
 \begin{wideitemize}
+        \item<1-> What does it mean to have a continuum of goods $g \in [0,1]$?
+        \item What is exactly between good $0$ and good $1$? \\
+        \qquad \textcolor{gray}{good $1/2$}
+        \item<2-> But what is exactly between good $0$ and good $1/2$? \\
+        \qquad \textcolor{gray}{good $1/4$}
+        
+        \item<3-> Do you see where this is going? Each one of the lines below indexes a ``different good'':
+        
+        \begin{center}
+        \begin{tikzpicture}
+            % draw horizontal line   
+        
+            \draw[blue] (0,.95) -- (10,.95);
+        
+            % draw vertical lines
+            \foreach \x in {0,10}
+              \draw[blue] (\x cm,{.95+(.205)}) -- (\x cm,{.95-(.205)});
+            \foreach \x in {2.5,4.375,5.78125,6.8359375,7.626953125,8.22021484375,8.6651611328125,8.99887084960937,9.24915313720703,9.43686485290527,9.57764863967896,9.68323647975922,9.76242735981941,9.82182051986456,9.86636538989842,9.89977404242381,9.92483053181786,9.9436228988634,9.95771717414755,9.96828788061066,9.976215910458,9.9821619328435,9.98662144963262,9.98996608722447,9.99247456541835,9.99435592406376,9.99576694304782,9.99682520728587,9.9976189054644,9.9982141790983,9.99866063432372}
+              \draw (\x cm,{.95+(.205)}) -- (\x cm,{.95-(.205)});
+        
+            % draw nodes
+            \draw (0,0.95) node[below=.105] {\textcolor{blue}{$0$}};
+            \draw (10,0.95) node[below=.105] {\textcolor{blue}{$1$}};
+          \end{tikzpicture}
 
-    \item Without trade, prices reflect opportunity cost:
-    \begin{itemize}
-        \item In the US: $a_{US,R}/a_{US,C} = P_{US,R}/P_{US,C}$
-        \item In Colombia: $a_{COL,R}/a_{COL,C} = P_{COL,R}/P_{COL,C}$
-    \end{itemize}
+    Can find a real number between two different real numbers \\ \qquad $\implies$ infinitely many goods $g \in [0,1]$!
 
-    \item Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. 
-
-    \item If $P_R/P_C = a_{COL,R}/a_{COL,C}$, Colombia indifferent b/w computers and roses
-    \begin{itemize}
-        \item Production of computers $Y_{COL,C}$ can range from 0 to 10,000 
-        \item Production of roses $Y_{COL,R}$ can range from 0 to 9mi 
-    \end{itemize}
-
-    \item If $P_R/P_C = a_{US,R}/a_{US,C}$, US indifferent b/w computers and roses
-    \begin{itemize}
-        \item Production of computers $Y_{US,C}$ can range from 0 to 100,000 
-        \item Production of roses $Y_{US,R}$ can range from 0 to 10mi 
-    \end{itemize}
-
+\end{center}
 \end{wideitemize}
-
 \end{frame}
 
-
-\begin{frame}{Prices consistent with trade}
-
+\begin{frame}{Perfect Competition, Prices and Unit Costs}
 \begin{wideitemize}
+        \item<1-> No trade barriers (for now), i.e. domestic prices are equal to prices abroad
+        \item In country $i$, firms producing good $g$ maximize profits under perfect competition:
+        \begin{equation*}
+            \max_{y_{i,g}} \pi_{i,g} = \max_{y_{i,g}} p_{g} y_{i,g} - w_i a_{i,g} y_{i,g} 
+        \end{equation*}
 
-    \item In this model, \blue{countries specialize in goods in which they have a comparative advantage}:
-    
-    \begin{itemize}
-        \item \blue{Colombia} specializes in \blue{roses} if $a_{COL,R}/a_{COL,C} < P_R/P_C$
-        \item The \blue{US} specializes in \blue{computers} if $a_{US,R}/a_{US,C} > P_R/P_C$
-    \end{itemize}
+        \item<2-> Labor is mobile $\implies$ single wage $w_i$ for workers producing every good in each country 
 
-    \item Why? \\
-        \qquad \textcolor{gray}{(relative marginal revenue is greater than its relative marginal cost)}
-
-    \item Each country specializes in the good in which they have a comparative advantage in if:
-
-    \begin{equation*}\label{eq: price-trade}
-        \frac{a_{US,C}}{a_{US,R}} < \frac{P_C}{P_R} < \frac{a_{COL,C}}{a_{COL,R}}
-    \end{equation*}
-    
-
-\end{wideitemize}
-
+        \item<3-> Under perfect competition, goods prices reflect unit cost:
+        \begin{itemize}
+            \item If home makes $i$, its factory-gate price is $P_g = a_{i,H} w_{H}$
+            \item If foreign makes $i$, its factory-gate price is $P_g = a_{i,F} w_{F}$
+        \end{itemize}
+        \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Global Supply Curve}
-    \begin{figure}[htpd!]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    ylabel={Relative price of computers $\frac{P_C}{P_R}$},
-    xlabel={Relative quantity of computers $\textcolor{blue}{\frac{Y_{C}}{Y_{R}} = \frac{Y_{COL,C}+Y_{US,C}}{Y_{COL,R}+Y_{US,R}} }$},
-    ymin=0, ymax=3,
-    xmin=0, xmax=2,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}]
-
-% Relative Supply RS
-\addplot[thick, blue] coordinates {(0,1) (0.8,1.0)};
-\addplot[thick, blue] coordinates {(0.8,1.0) (0.8,2.0)};
-\addplot[thick, blue] coordinates {(0.8,2.0) (1.6,2.0)};
-%\node at (axis cs:1.65,2.7) {\small $RS$};
-
-% Dashed lines for autarky prices
-\addplot[dashed] coordinates {(0,2.0) (0.8,2.0)};
-\node at (axis cs:-0.15,2) {$\frac{a_{COL,C}}{a_{COL,R}}$};
-
-\addplot[dashed] coordinates {(0.8,1.0) (1.6,1.0)};
-\node at (axis cs:-0.15,1) {$\frac{a_{US,C}}{a_{US,R}}$};
-
-
-% Vertical dashed lines for quantities
-\addplot[dashed] coordinates {(0.8,0) (0.8,1.0)};
-\node at (axis cs:0.8,-0.3) {$\frac{L_{US}/a_{US,C}}{L_{COL}/a_{COL,R}}$};
-
-\end{axis}
-\end{tikzpicture}
-\caption{Relative Supply of Computers as a function of Relative Prices}\label{fig: relative-supply}
-\end{figure}
-
-\end{frame}
-
-\section{Price determination}
-
-\begin{frame}{Price Determination (i)}
+\begin{frame}{Where will production be located?}
 \begin{wideitemize}
-   
+    \item<1-> \blue{Question}: which country has a comparative advantage in good $g$ if $\frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}$?
 
-\item How are prices determined in a free trade equilibrium? \\
-\qquad \textcolor{gray}{(relative prices will adjust to make sure that the global supply = global demand)}
-
-\item \blue{Global supply}:
-
-\begin{itemize}
-    \item US fully specializes in computers: $Y^T_{C} = L_{US}/a_{US,C} = 100{,}000$
-    \item Colombia fully specializes in roses? $Y^T_R = L_{COL}/a_{COL,R} = 9{,}000{,}000$. 
-\end{itemize}
-    
-\item \blue{Global demand}:
-\begin{eqnarray*}
-    Q_{C} &\equiv& Q^T_{US,C} +  Q^T_{COL,C} = \alpha_{US} \frac{w_{US} L_{US} }{P_C} + \alpha_{COL} \frac{w_{COL} L_{COL} }{P_C}  \\
-    Q_{R} &\equiv& Q^T_{US,R} +  Q^T_{COL,R}  = (1-\alpha_{US}) \frac{w_{US} L_{US} }{P_R} + (1-\alpha_{COL}) \frac{w_{COL} L_{COL} }{P_R}    
-\end{eqnarray*}
-
-\item Note that global demand \textcolor{red}{$Q_C/Q_R$} is decreasing in relative prices $P_C / P_R$ 
-\end{wideitemize}
-    
-\end{frame}
-
-
-\begin{frame}{Global Supply and Demand}
-
-\begin{figure}[htpd!]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    ylabel={Relative price of computers $\frac{P_C}{P_R}$},
-    xlabel={Relative quantity of computers $\textcolor{red}{\frac{Q_{C}}{Q_{R}} } , \textcolor{blue}{\frac{Y_{C}}{Y_{R}} }$},
-    ymin=0, ymax=3,
-    xmin=0, xmax=2,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}]
-
-% Relative Demand RD
-\addplot[
-    red, thick,
-    domain=0.45:1.8,
-    samples=100
-] {1.2/(x)};
-%\node[red] at (axis cs:1.4,1.25) {\small $RD$};
-
-% Relative Supply RS
-\addplot[thick, blue] coordinates {(0,1) (0.8,1.0)};
-\addplot[thick, blue] coordinates {(0.8,1.0) (0.8,2.0)};
-\addplot[thick, blue] coordinates {(0.8,2.0) (1.6,2.0)};
-%\node at (axis cs:1.65,2.7) {\small $RS$};
-
-% Dashed lines for autarky prices
-\addplot[dashed] coordinates {(0,2.0) (0.8,2.0)};
-\node at (axis cs:-0.15,2) {$\frac{a_{COL,C}}{a_{COL,R}}$};
-
-\addplot[dashed] coordinates {(0.8,1.0) (1.6,1.0)};
-\node at (axis cs:-0.15,1) {$\frac{a_{US,C}}{a_{US,R}}$};
-
-\addplot[dashed, red] coordinates {(0,1.5) (0.8,1.5)};
-
-% Vertical dashed lines for quantities
-\addplot[dashed] coordinates {(0.8,0) (0.8,1.0)};
-\node at (axis cs:0.8,-0.3) {$\frac{L_{US}/a_{US,C}}{L_{COL}/a_{COL,R}}$};
-
-\end{axis}
-\end{tikzpicture}
-\caption{Relative Supply and Demand of Computers as a Function of Relative Prices}
-\end{figure}
-
-\end{frame}
-
-
-\begin{frame}{Price determination (ii)}
-    \begin{wideitemize}
-    \item What is $w_{US}$, $w_{COL}$?
-    
-    \item Countries fully specialize: only one sector operating in each country
-    
-    \item Wages = marginal product of each worker in the sector they are working
+    \item<2-> Production only if cheaper to produce domestically than to import goods, i.e.:
 
     \begin{equation*}
-        w_{US} = P_{C} / a_{US,C}, \qquad w_{COL} = P_{R} / a_{COL,R}
+        w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}
     \end{equation*}
+
+    \item<3-> \blue{Prices}: price of good $g$ will be the lowest of unit costs at home or abroad:
+
+
+        \begin{equation*}
+            P_{g} = \min\{w_H a_{H,g}, w_F a_{F,g}\}  \qquad \text{ for } g \in [0,1]
+        \end{equation*}
+        
+        \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Where will production be located?}
+\begin{wideitemize}
+    \item<1-> \blue{Assumption}: order goods $g \in [0,1]$ according to the home country's comparative advantage.
+
+     \item<2-> \blue{Define}: $A_g \equiv  a_{F,g}/ a_{H,g}$. $\implies$ $A_g$ strictly decreasing in $g$.
+
+     \begin{itemize}
+         \item $A_0= \frac{a_{F,0}}{a_{H,0}}$: home is the \blue{most productive}
+         \item $A_1= \frac{a_{F,1}}{a_{H,1}}$: home is the \blue{least productive} 
+     \end{itemize}
+
+            
+        \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Relative cost schedule}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=left,
+            xmin=0, xmax=1.05,
+            ymin=0, ymax=1.05,
+            ylabel={$A_g$},
+            xtick={0,1},
+            ytick={0,1},
+            xticklabels={0, 1},
+            yticklabels={0, 1},
+            tick style={draw=none},
+            xticklabel style={anchor=north west, yshift=0pt},
+            yticklabel style={anchor=south east, xshift=0pt},
+            enlargelimits=false,
+            clip=false,
+            grid=major,
+            width=0.7\textwidth,
+            height=0.45\textwidth,
+            label style={font=\small},
+            tick label style={font=\small},
+        ]
+        
+
+            % Relative cost schedule
+            \addplot[red, thick, domain=0.02:1] {x^(-1/6) - 0.975};
+           
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
+        \label{fig:Ap}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Demand}
+\begin{wideitemize}
+    \item<1-> \blue{Assumption}: consumers in both countries value each good equally
+
+    \item<2-> Demand for $g$ thus depends on national income $w_iL_i$ and the price of good $g$:
+
+    \begin{equation*}
+        q_{i,g} = \frac{w_iL_i}{P_{g}}
+    \end{equation*}
+
+    \qquad \textcolor{gray}{(if you want to understand where this comes from, check handout)}
+
+    \item<3-> Note that expenditure on each good does not depend on the specific $g$:
+
+    \begin{equation*}
+        P_g q_{i,g} = w_iL_i \qquad \text{ for all goods } g
+    \end{equation*}
+
+    \item<4-> Consumers spend the same amount on each good! \textcolor{gray}{(why?)}
+
+    \item<5-> \blue{Question}: how does this relate to Cobb-Douglas preferences we saw before?
+
     
     \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Price determination (iii)}
-    \begin{wideitemize}
-    \item How to get $P_C/P_R$? Trade balances, so value of exports = value of imports:
-    {\scriptsize
-    \begin{eqnarray*}
-        P_C ( Y_{US,C} - Q^T_{US,C}) &=& P_R (Y_{COL,C} - Q^T_{COL,R}) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{w_{US} L_{US}}{P_C} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{w_{COL} L_{COL}}{P_R} \right) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{L_{US}}{a_{US,C}} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{L_{COL}}{a_{COL,R}} \right) \\ 
-    \end{eqnarray*}
-    }
-    \normalsize
-    \item Solving for $P_C/P_R$:
-    \begin{center}
-        \boxed{
-        \frac{P_C}{P_R} = \frac{\alpha_{COL}}{1-\alpha_{US}} \times \frac{L_{COL}/a_{COL,R}}{L_{US}/a_{US,C}} = \frac{3/4}{1/2} \times \frac{54m / 9}{300m / 3{,}000} = 135 
-        }    
-    \end{center}
-        
-    \end{wideitemize}
-\end{frame}
 
-\begin{frame}{Production Possibilities Frontier + Trade Prices}
-\begin{center}
-
-\begin{figure}[htbp]
-
-% California
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
-\pgfmathsetmacro{\Lendow}{10}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
-
-\addplot[thick, red, domain=0:10] {\Lendow/\aC - (1/135)*x};
-
-
-% Indifference curve through optimal bundle
-%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
-\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
-
-\end{axis}
-
-\end{tikzpicture}
-}
-\end{subfigure}
-%
-% Colombia
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
-\pgfmathsetmacro{\Lendow}{9}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
-
-\addplot[thick, red, domain=0:9] {1/15 - (1/135)*x};
-
-
-% Indifference curve through optimal bundle
-%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{COL}}{a_{COL,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{COL}}{a_{COL,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
-\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
-
-\end{axis}
-
-\end{tikzpicture}
-}
-
-\end{subfigure}
-
-\caption{Autarky Equilibrium + Trade Prices}
-\end{figure}
-\end{center}
-\end{frame}
-
-
-\begin{frame}{Production Possibilities Frontier + Trade Prices + Specialization}
-\begin{center}
-
-\begin{figure}[htbp]
-
-% California
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
-\pgfmathsetmacro{\Lendow}{10}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
-
-\addplot[thick, red, domain=0:10] {\Lendow/\aC - (1/135)*x};
-
-
-% Indifference curve through optimal bundle
-%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
-\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
-
-\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(0, \Lendow/\aC)};
-\node at (axis cs:0 + 1.5,\Lendow/\aC + 0.0025) {\scriptsize $\textcolor{red}{(Y^T_{US,R},Y^T_{US,C})}$};
-
-\end{axis}
-
-\end{tikzpicture}
-}
-\end{subfigure}
-%
-% Colombia
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
-\pgfmathsetmacro{\Lendow}{9}    % labor endowment
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
-
-\addplot[thick, red, domain=0:9] {1/15 - (1/135)*x};
-
-
-% Indifference curve through optimal bundle
-%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{COL}}{a_{COL,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{COL}}{a_{COL,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
-\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
-
-\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(\Lendow/\aR, 0)};
-\node at (axis cs:\Lendow/\aR + 1.25,0 + 0.005) {\scriptsize $\textcolor{red}{(Y^T_{COL,R},Y^T_{COL,C})}$};
-
-\end{axis}
-
-\end{tikzpicture}
-}
-
-\end{subfigure}
-
-\caption{Production under Free Trade induces Specialization}
-
-\end{figure}
-\end{center}
-\end{frame}
-
-\section{Demand and trade balance}
-
-\begin{frame}{Optimal demands under free trade}
+\begin{frame}{Equilibrium}
 \begin{wideitemize}
-    \item Demand functions:    
-  \begin{eqnarray*}
-    Q^T_{US,C} &=& \alpha_{US} \frac{L_{US} }{a_{US,C}} = 1/2 \times \frac{300 \text{m}}{100{,}000} = 50,000 \\
-    Q^T_{COL,C} &=& \alpha_{COL} \frac{L_{COL} }{a_{COL,R} \times P_C/P_R} = 3/4 \times \frac{54 \text{m}}{6 \times 135} = 50,000 \\
-    Q^T_{US,R} &=& (1- \alpha_{US}) \times \frac{P_C}{P_R} \times \frac{L_{US} }{a_{US,C}} = 1/2 \times 135 \times \frac{300 \text{m}}{100{,}000} = 6,750,000 \\
-    \qquad Q^T_{COL,R} &=& (1-\alpha_{COL}) \frac{L_{COL} }{a_{COL,R} } = 1/4 \times \frac{54 \text{m}}{6} = 2,250,000
-\end{wideitemize}
-    \item Exports/imports of computers: $Y_{US,C} - Q^T_{US,C} = 100{,}000 - 50{,}000 = 50{,}000 = Q^T_{COL,C}$
-    \item Exports/imports of roses: $Y_{US,R} - Q^T_{US,R} = 9m - 2.25m = 6.75m = Q^T_{US,R}$
-\end{eqnarray*}
+    \item<1-> In equilibrium there will be some cut-off good $G$ for which:
 
+    \begin{equation*}
+        \frac{w_H}{w_F} = A_G
+    \end{equation*}
 
-\end{frame}
+     \item<2-> Since $A_g$ is decreasing in $g$, then:
 
-\begin{frame}{Trade Equilibrium}
-\begin{center}
-
-
-\begin{figure}[htbp]
-
-% California
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
-\pgfmathsetmacro{\Lendow}{10}    % labor endowment
-\pgfmathsetmacro{\p}{135}    % trade price
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-\pgfmathsetmacro{\QcT}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\QrT}{((1 - \alpha)*\p*\Lendow)/\aC}
-
-% Compute utility level
-\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
-\pgfmathsetmacro{\UT}{(\QcT^(\alpha))*(\QrT^(1 - \alpha))}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\U^(1/\alpha)}
-\pgfmathsetmacro{\AT}{\UT^(1/\alpha)}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
-    ymin=0, ymax=\Lendow/\aC * 1.1,
-    xmin=0, xmax=\Lendow/\aR * 1.1,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
-\addplot[thick, red, domain=0:9] {\Lendow/\aC  - (1/\p)*x};
-
-% Indifference curve through optimal bundle
-\addplot[brown, domain=3:9, samples=100] {\A * x^(-\expo)};
-\addplot[brown, domain=3:9, samples=100] {\AT * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
-\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
-
-\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\QrT, \QcT)};
-\node at (axis cs:\QrT + 1.25,\QcT + 0.005) {\scriptsize $\textcolor{red}{(Q^T_{US,R},Q^T_{US,C})}$};
-
-\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(0, \Lendow/\aC)};
-\node at (axis cs:0 + 1.5,\Lendow/\aC + 0.0075) {\scriptsize $\textcolor{red}{(Y^T_{US,R},Y^T_{US,C})}$};
-
-% Arrows for exports (horizontal)
-\draw[-, dashed, thick, gray] 
-    (axis cs:\QrT,\Lendow/\aC) -- 
-    (axis cs:0,\Lendow/\aC);
-\node[gray] at (axis cs:\QrT*0.85,\Lendow/\aC*1.05) {\scriptsize Imports};
-
-% Arrows for imports (vertical)
-\draw[-, dashed, thick, gray] 
-    (axis cs:\QrT,\Lendow/\aC) -- 
-    (axis cs:\QrT, \QcT);
-\node[gray, rotate=90] at (axis cs:\QrT*1.05,\Lendow/\aC*0.85) {\scriptsize Exports};
-
-
-
-\end{axis}
-
-\end{tikzpicture}
-}
-\end{subfigure}
-%
-% Colombia
-\begin{subfigure}{}
-\resizebox{0.48\linewidth}{!}{%
-
-\begin{tikzpicture}
-\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
-\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
-\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
-\pgfmathsetmacro{\Lendow}{9}    % labor endowment
-\pgfmathsetmacro{\p}{135}    % trade price
-
-
-% Compute equilibrium quantities
-\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
-\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
-\pgfmathsetmacro{\QcT}{(\alpha*\Lendow)/(\aR*\p)}
-\pgfmathsetmacro{\QrT}{((1 - \alpha)*\Lendow)/\aR}
-
-% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
-\pgfmathsetmacro{\A}{\Qc * \Qr^((1 - \alpha)/\alpha))}
-\pgfmathsetmacro{\AT}{\QcT * \QrT^((1 - \alpha)/\alpha))}
-
-\centering
-\begin{axis}[
-    ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
-    xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
-    ymin=0, ymax=0.11,
-    xmin=0, xmax=11,
-    yticklabel=\empty,
-    xticklabel=\empty,
-    axis lines=left,
-    enlargelimits=false,
-    clip=false,
-    axis on top,
-    scaled x ticks=false,
-    width=9cm, height=7cm,
-    title style={font=\bfseries}
-]
-
-% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
-\addplot[thick, red, domain=0:9] {\Lendow/\aR * 1/ \p - (1/\p)*x};
-
-
-% Indifference curve through optimal bundle
-\addplot[brown, domain=0.5:9, samples=100] {\A * x^(-\expo)};
-\addplot[brown, domain=0.5:9, samples=100] {\AT * x^(-\expo)};
-
-% Labels
-
-%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{COL}}{a_{COL,R}}$};
-\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{COL}}{a_{COL,C}}$};
-
-
-% Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
-\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
-
-
-\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\QrT, \QcT)};
-\node at (axis cs:\QrT + 1.25,\QcT + 0.005) {\scriptsize $\textcolor{red}{(Q^T_{COL,R},Q^T_{COL,C})}$};
-
-\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(\Lendow/\aR, 0)};
-\node at (axis cs:\Lendow/\aR + 1.25,0 + 0.005) {\scriptsize $\textcolor{red}{(Y^T_{COL,R},Y^T_{COL,C})}$};
-
-% Arrows for exports (horizontal)
-\draw[-, dashed, thick, gray] 
-    (axis cs:\QrT,\QcT) -- 
-    (axis cs:\Lendow/\aR,\QcT);
-\node[gray] at (axis cs:{ \Lendow/\aR *0.8}, \QcT*1.05) {\scriptsize Exports};
-
-% Arrows for imports (vertical)
-\draw[-, dashed, thick, gray] 
-    (axis cs:{\Lendow/\aR},0) -- 
-    (axis cs:{\Lendow/\aR}, \QcT);
-\node[gray, rotate=90] at (axis cs:{\Lendow/\aR + 0.4}, {\QcT/2}) {\scriptsize Imports};
-
-\end{axis}
-
-\end{tikzpicture}
-}
-
-\end{subfigure}
-
-\caption{Specialization + Trade Equilibrium}
-
-\end{figure}
-
-\end{center}
-\end{frame}
-
-\section{Epilogue}
-
-\begin{frame}{Some misconceptions about comparative advantage}
-\begin{wideitemize}
-    \item ``Free trade is only beneficial if a country is productive enough to compete.'' \\
-    \qquad No. Trade is beneficial if there is a comparative advantage. Absolute disadvantage does not matter.
-
-        \item ``Free trade lowers income in low-wage countries.'' \\
-    \qquad No. Trade is beneficial if there is a comparative advantage. Absolute wages do not matter.
-
-    \item ``Free trade makes us poorer because we spend money on other countries goods.'' \\
-    \qquad No. Having access to more affordable goods makes us better off by specializing and trading.
-
-    \item ``Free trade closes the income gap between poor and rich countries.'' \\
-    \qquad No. Trade raises every country’s welfare beyond autarky welfare. Per capita
-income differences remain, and depend on a country’s production possibilities.
-
-\end{wideitemize}
-    
-\end{frame}
-
-\begin{frame}{Is free trade always ideal?}
-\begin{wideitemize}
-    \item This model is quite simple. Some things it does not consider:
-
-    \begin{itemize}
-        \item \blue{Increasing returns to scale}: a country may be competitive in an industry but it requires large initial investment (R\&D, ships, planes, etc) -- temporary protection?
-
-        \item \blue{Distributional effects}: even if a country benefits in the aggregate, it could be the case that vulnerable groups are very exposed, increasing inequality
-
-        \item \blue{Price manipulation}: if a country is very large relative to the world, it may be able to manipulate the purchase price in its favor using tariffs
-        
-        \item \blue{Environmental externalities}: trade policy can be an instrument to internalize some ``bads'' to the price of ``goods''
+     \begin{itemize}
+         \item Goods $[0,G]$ will be produced at home (for them, $w_H / w_F \le A_g$)
+         \item Goods $(G,1]$ will be produced at abroad (for them, $w_H / w_F > A_g$)
         \end{itemize}
 
-\end{wideitemize}
+        \item<3-> Recall: trade pattern and specialization depends on Home-to-Foreign wage ratio (gap) $w_H/w_F$ 
+
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Specialization}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            
+            \addplot[dashed] coordinates {(0,\y) (\x,\y)};
+            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
+            \node at (axis cs:\x,-0.175) {$G$};
+            \addplot[gray] coordinates {(0,-0.1) (\x,-0.1)};
+            \node at (axis cs:\x/2,-0.075) {produced at $H$};
+            \addplot[gray] coordinates {(\x,-0.1) (1,-0.1)};
+            \node at (axis cs:( {\x + (1-\x)/2},-0.075) {produced at $F$};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
+        \label{fig: Ag}
+    \end{figure}
+
     
 \end{frame}
 
+\begin{frame}{Equilibrium determination}
+\begin{wideitemize}
+    \item<1-> Recall:
+    \begin{itemize}
+        \item Home produces $G$ share of goods
+        \item Foreign produces $1-G$ share of goods
+        \item Consumers spend the same amount on each good
+    \end{itemize}
+
+    \item<1-> $\implies$ consumers in each country spend $G$ share of their income on goods from $H$
+
+    \item<2-> How to find $G?$ 
+
+    \begin{eqnarray*}
+        \underbrace{w_HL_H}_{\text{income}} = \underbrace{G\times w_HL_H + G\times w_FL_F}_{\text{expenditure}} \iff w_HL_H = \frac{G}{1-G}w_FL_F
+    \end{eqnarray*}
+
+    \item<3-> Or, solving for $w_H / w_F$:
+
+    \begin{equation*}
+        \frac{w_H}{w_F} =  \frac{G}{1-G} \frac{L_F}{L_H}
+    \end{equation*}
+    
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Equilibrium determination}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, $\frac{g}{1-g} \frac{L_F}{L_H}$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+            
+            \addplot[dashed] coordinates {(0,\y) (\x,\y)};
+            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
+            \node at (axis cs:\x,-0.175) {$G$};
+            \addplot[gray] coordinates {(0,-0.1) (\x,-0.1)};
+            \node at (axis cs:\x/2,-0.075) {produced at $H$};
+            \addplot[gray] coordinates {(\x,-0.1) (1,-0.1)};
+            \node at (axis cs:( {\x + (1-\x)/2},-0.075) {produced at $F$};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
+        \label{fig: Ag}
+    \end{figure}
+    \end{frame}
+
+ 
+\begin{frame}{The Great Doubling}
+\begin{wideitemize}
+    \item<1-> Great Doubling of the global workforce (Freeman 2006):
+    \begin{itemize}
+        \item in 1980: workforce in open economies roughly 1 billion
+        \item in 2000: workforce in open economies roughly 1.5 billion
+    \end{itemize}
+
+    \item<2-> Soviet Union collapsed, Russia now in WTO. China shifted to a market economy, now in WTO. India adopted open-market policies.
+
+    \item<3-> How does global specialization change?
+
+    \item<4-> If foreign population increases to $L_F'>L_F$ then:
+
+    \begin{equation*}
+        \frac{g}{1-g} \times \frac{L_F'}{L_H} > \frac{g}{1-g} \times \frac{L_F}{L_H} \qquad \text{ for every } g > 0
+    \end{equation*}
+
+    
+        
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Increase in Foreign Labor Supply}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
+            \node[gray] at (axis cs:\x,-0.175) {$G$};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Increase in Foreign Labor Supply}
+\addtocounter{framenumber}{-1}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
+            \node[gray] at (axis cs:\x,-0.175) {$G$};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Increase in Foreign Labor Supply}
+\addtocounter{framenumber}{-1}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
+            \node[gray] at (axis cs:\x,-0.175) {$G$};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+            \addplot[dashed] coordinates {(0,\yn) (\xn,\yn)};
+            \node at (axis cs:-0.175,\yn) {$(w_H/w_F)'=A'_G$};
+            \addplot[dashed] coordinates {(\xn,-.1) (\xn,\yn)};
+            \node at (axis cs:\xn,-0.175) {$G'$};
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
+            
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+
+\end{frame}
+   
+
+
+\begin{frame}{Home gains from population growth}
+\begin{wideitemize}
+    \item<1-> Foreign labor supply causes industry shutdowns at Home... \\
+    \qquad ...but raises the relative Home wage $(w_H/w_F)'>(w_H/w_F)$
+
+    \item<2-> Does welfare go up? Need to check real income $w_H / p_g$ for each product $g \in [0,1]$
+    \begin{wideitemize}
+        \item<3-> Goods $g \in [0,G']$, sourced domestically, no change: \\ $(w_H / p_g)'= w'_H / (w_H' a_{H,g}) = 1/a_{H,g} = w_H / (w_H a_{H,g}) = w_H / p_g$ 
+        \item<4-> Goods $g \in [G,1]$, sourced abroad, gains: \\ $(w_H / p_g)'= w'_H / (w_F' a_{F,g}) > w_H / (w_F a_{F,g}) = w_H / p_g$
+        \item<5-> Goods $g \in [G',G]$, pivotal (change sources), gains:
+        \begin{eqnarray*}
+            (w_H / p_g)' &\ge& (w_H / p_g) \\
+            \iff w_H' / (w_F' a_{F,g}) &\ge& w_H / (w_H a_{H,g}) \\
+            \iff w_H' / w_F'  &\ge& a_{F,g} / a_{H,g} = A_g
+        \end{eqnarray*}
+        \end{wideitemize}
+    
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Welfare effects}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \addplot[dashed] coordinates {(\x,\y) (1,\y)};
+            \node[gray] at (axis cs:\x,-0.175) {$G$};
+            \node[gray] at (axis cs:-0.125,\y) {$(w_H/w_F)$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\yn)};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+            \addplot[dashed] coordinates {(0,\yn) (1,\yn)};
+            \node at (axis cs:-0.1,\yn) {$(w_H/w_F)'$};
+            \addplot[dashed, gray] coordinates {(\xn,-.1) (\xn,\yn)};
+            \node at (axis cs:\xn,-0.175) {$G'$};
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
+
+            %fill area            
+            \path[name path=C] (axis cs:\x,\yn) -- (axis cs:1,\yn);
+            \path[name path=D] (axis cs:\x,\y) -- (axis cs:1,\y);
+
+            \addplot [
+                fill=red!20,
+                draw=none
+            ] fill between [of=C and D];
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+
+\end{frame}
+
+   
+\begin{frame}{Welfare effects}
+\addtocounter{framenumber}{-1}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\z}{0.05}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
+            \pgfmathsetmacro{\y}{ \z / \x  }         
+            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
+            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+
+            \pgfmathsetmacro{\zn}{0.05}       
+            \pgfmathsetmacro{\cn}{0.4}         
+            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
+            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
+            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
+
+            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
+            \addplot[dashed] coordinates {(\x,\y) (1,\y)};
+            \node[gray] at (axis cs:\x,-0.175) {$G$};
+            \node[gray] at (axis cs:-0.125,\y) {$(w_H/w_F)$};
+            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\yn)};
+            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
+
+
+            \addplot[dashed] coordinates {(0,\yn) (1,\yn)};
+            \node at (axis cs:-0.1,\yn) {$(w_H/w_F)'$};
+            \addplot[dashed, gray] coordinates {(\xn,-.1) (\xn,\yn)};
+            \node at (axis cs:\xn,-0.175) {$G'$};
+            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
+            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
+
+            %fill area            
+            \path[name path=A] (axis cs:\x,\yn) -- (axis cs:\xn,\yn);
+            \addplot [
+                name path=B,
+                domain=\x:\xn,
+                draw=none
+            ] {\z / x};
+            
+            \addplot [
+                fill=cyan!20,
+                draw=none
+            ] fill between [of=A and B];
+            
+            \path[name path=C] (axis cs:\x,\yn) -- (axis cs:1,\yn);
+            \path[name path=D] (axis cs:\x,\y) -- (axis cs:1,\y);
+
+            \addplot [
+                fill=red!20,
+                draw=none
+            ] fill between [of=C and D];
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Change in relative wages curve}
+        \label{fig: Ag-change}
+    \end{figure}
+
+\end{frame}
+   
+
+\begin{frame}{Trade Barriers and Prices}
+\begin{wideitemize}
+    \item<1-> Relax the assumption of costless trade...
+    \begin{itemize}
+        \item sellers have to pay for shipping and insurance
+        \item goods may get lost or perish along the way (e.g., avocados being shipped internationally)
+    \end{itemize}
+    \item<2-> \blue{Iceberg trade costs}: for each unit of a good to arrive at a destination, $\tau>1$ units need to be shipped from the origin country. \\
+    \qquad \textcolor{gray}{(as if goods melt away between origin and destination)}
+
+    \item<3-> Production at home only if cheaper to produce domestically than import, i.e.: 
+
+    \begin{equation*}
+        w_H a_{H,g} \le \tau w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \tau  \frac{a_{F,g}}{a_{H,g}} = \tau A_g
+    \end{equation*}
+
+    \item<4-> Not every good produced at home will be exported; only if:
+
+\begin{equation*}
+        \tau w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{1}{\tau} \frac{a_{F,g}}{a_{H,g}} \equiv \frac{1}{\tau} A_g
+\end{equation*}
+
+    
+
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Specialization with Trade Barriers}
+\begin{wideitemize}
+    \item<1-> Now, cut-offs:
+
+    \begin{itemize}
+        \item Foreign will export all goods satisfying $\frac{w_H}{w_F} >  \tau A_{G_H}$, comprising  $[G_H,1]$
+        \item Home will export all goods satisfying $\frac{w_H}{w_F} \le  A_{G_F} / \tau$, comprising   $[0,G_F]$
+        \item Goods $(G_F, G_H)$ will be produced and consumed in each country but not exported
+    \end{itemize}
+    
+    
+    \item<2-> Again, these cut-offs are implicitly defined through a function:
+
+
+\begin{equation*}
+    \frac{w_H}{w_F} =  \frac{G_H}{1-G_F} \times \frac{ L_F }{L_H}
+\end{equation*}
+
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Equilibrium with Trade Costs}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$\tau A_g$}, \textcolor{blue}{$A_g / \tau$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\t}{1.25}       
+            \pgfmathsetmacro{\z}{0.075}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{(-(\z/\t) + sqrt((\z/\t)^2 + 4*\c*\z/\t)) / (2*\c)}
+            \pgfmathsetmacro{\y}{(\z / \x) / \t}
+            \pgfmathsetmacro{\xf}{\z*\t/\y}
+            \addplot[red, thick, domain=0.15:1] {( \z / x ) * \t}; %home
+            \addplot[blue, thick, domain=0.15:1] {\z / (x * \t )}; %foreign
+            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+            
+            \addplot[gray] coordinates {(0,-0.1) (1,-0.1)};
+            \addplot[dashed] coordinates {(0,\y) (\xf,\y)};
+            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
+            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
+            \node at (axis cs:\x,-0.175) {$G_F$};
+            \node at (axis cs:\x/2,-0.075) {$H$ exports};
+            \addplot[dashed] coordinates {(\xf,-.1) (\xf,\y)};
+            \node at (axis cs:( {\x + (\xf-\x)/2},-0.075) {not traded};
+            \node at (axis cs:\xf,-0.175) {$G_H$};
+            \node at (axis cs:( {\xf + (1-\xf)/2},-0.075) {$F$ exports};
+            
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xf, \y)};
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Trade equilibrium with positive trade costs $\tau$}
+        \label{fig: Ag-tariffs}
+    \end{figure}
+
+    
+\end{frame}
 
 \end{document}

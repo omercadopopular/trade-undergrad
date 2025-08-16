@@ -300,7 +300,7 @@ Total factor productivity  & 2\%   & 3\%   & 5\% \\
             \item Research shows how only the most productive firms export and trade liberalization reallocates market shares
             \item Fellow of the Econometric Society; influential in policy and academic debates on globalization
             \item Future Nobel laureate
-            \item Nice and generous guy
+            \item Generous guy (answers my emails)
         \end{wideitemize}
     \end{column}
     
@@ -376,9 +376,9 @@ Total factor productivity  & 2\%   & 3\%   & 5\% \\
     \end{equation*}
 
     \item $a(\varphi)$: denotes how many workers are necessary to produce a single unit of good $\varphi$. \\
-    \qquad (\blue{unit labor requirements}, as we have seen in the Ricardian model) 
+    \qquad (\blue{unit labor requirements} -- up to here, same as Krugman) 
 
-    \item Assume that $a(\varphi)$ is \textbf{decreasing} in the order of the good $\varphi$. Specifically, we will assume:
+    \item<2-> Assume that $a(\varphi)$ is \textbf{decreasing} in the order of the good $\varphi$. Specifically, we will assume:
     \begin{equation*}
         a(\varphi) = \frac{a^*}{\varphi}
     \end{equation*}
@@ -396,29 +396,27 @@ Total factor productivity  & 2\%   & 3\%   & 5\% \\
     \item \blue{Total cost} for producing output up to level $q$ is:
 
     \begin{equation*}
-        C(q,\varphi) = \underbrace{\bar{f}w_i}
+        C(q,\blue{\varphi}) = \underbrace{\bar{f}w_i}
         _{\text{fixed cost}} + \underbrace{\frac{a^*w_i}{\varphi} \times q}_{\text{variable cost}}
     \end{equation*}
 
     \item<2-> \blue{Marginal costs} are still independent of level $q$ but depend on the good $\varphi$:
 
     \begin{equation*}
-        MC(\varphi) = C'(q,\varphi) = \frac{a^* w_i}{\varphi}
+        MC(\blue{\varphi}) = C'(q,\varphi) = \frac{a^* w_i}{\varphi}
     \end{equation*}
 
     \item<3-> \blue{Average costs} are decreasing in $q$:
 
     \begin{equation*}
-        AC(q,\varphi) = \frac{C(q,\varphi)}{q} = \frac{\bar{f}w_i}{q} + \frac{a^*w_i}{\varphi}
+        AC(q,\blue{\varphi}) = \frac{C(q,\varphi)}{q} = \frac{\bar{f}w_i}{q} + \frac{a^*w_i}{\varphi}
     \end{equation*}    
 
-    \item<4-> $\implies$ increasing returns to scale, potential profits, monopoly power
+    \item<4-> New firm must pay the same up-front cost for product design, setting up a factory, etc.
+    
+    \item<5-> After that, producing an extra unit only costs labor at a constant marginal cost...
 
-    \item<5-> \blue{Intuition}: $\bar{f}$: ``cost of entering the market''
-    
-    \item<6-> New firm must pay the same up-front cost for product design, setting up a factory, etc.
-    
-    \item<7-> After that, producing an extra unit only costs labor at a constant marginal cost.
+    \item<6-> ...but marginal costs depend on tech available for good $\varphi$
 
     
 \end{itemize}
@@ -507,15 +505,15 @@ Total factor productivity  & 2\%   & 3\%   & 5\% \\
 
         \item Is this identical as the Krugman model?
 
-        \item Almost... Set of goods: $\varphi \in \Phi_i:=\{\varphi_{\min}, \varphi_{\min}+1, \varphi_{\min}+2, \cdots, \varphi_{\max}\}$.
+        \item<2-> Almost... Set of goods: $\varphi \in \Phi_i:=\{\varphi_{\min}, \varphi_{\min}+1, \varphi_{\min}+2, \cdots, \varphi_{\max}\}$.
         
-        \item Numbering of the goods to not necessarily start at one.
+        \item<2-> Numbering of the goods to not necessarily start at one.
         
-        \item First good offered $\varphi_{\min}$, will be one of the outcomes of the equilibrium. 
+        \item<3-> First good offered $\varphi_{\min}$, will be one of the outcomes of the equilibrium. 
         
-        \item $\varphi_{\max}$ is exogenous -- the maximum possible number of goods in this economy.
+        \item<4-> $\varphi_{\max}$ is exogenous -- the maximum possible number of goods in this economy.
         
-        \item Total of $N^*=\varphi_{\max}-\varphi_{\min}+1$ goods in this economy. 
+        \item<5-> Total of $N^*=\varphi_{\max}-\varphi_{\min}+1$ goods in this economy, also endogenous. 
 
     \end{wideitemize}    
 \end{frame}
@@ -618,10 +616,247 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
     \item<3-> \blue{Optimal price still = mark-up $\times$ marginal cost.}
 
-    \item<4-> But now marginal cost is firm-specific!
+    \item<4-> But now marginal cost is firm-specific $\implies$ prices are firm-specific!
 
     \end{wideitemize}
 \end{frame}
+
+\begin{frame}{Diverse firms and monopolistic competition}
+Firms producing different goods have different marginal costs...
+\centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\K}{7}
+    \pgfmathsetmacro{\sigmaa}{1.5}
+
+    \pgfmathsetmacro{\A}{7}
+    \pgfmathsetmacro{\b}{0.75}
+    \pgfmathsetmacro{\m}{0.35}
+    \pgfmathsetmacro{\s}{2.25}
+    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
+    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
+        
+    
+    
+    \begin{axis}[
+        ymin=0, ymax=10,
+        xmin=0, xmax=5,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+        
+        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
+        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
+        % revenue
+        
+        \addplot[gray, domain=0:5] {1/\m +.3};
+        \addplot[gray, domain=0:5] {1/\m +.6};
+        \addplot[gray, domain=0:5] {1/\m +.9};
+        \addplot[gray, domain=0:5] {1/\m +1.2};
+
+        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
+            (axis cs:5,1/\m +1.2) -- (axis cs:5,1/\m)
+            node[midway,right=6pt]{$MC > MC(\varphi_{\min})$};
+
+        
+        
+        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
+        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
+        % revenue
+        \addplot[black, thick, domain=0:5] {1/\m};
+
+            %demand, rev
+        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
+        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
+            
+
+        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
+        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
+
+        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
+        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
+
+
+        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
+        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
+        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
+
+    \end{axis}
+
+
+    \end{tikzpicture}
+
+ \end{frame}
+ 
+\begin{frame}{Diverse firms and monopolistic competition}
+... this is a result of the production tech for good $\varphi$...
+\centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\K}{7}
+    \pgfmathsetmacro{\sigmaa}{1.5}
+
+    \pgfmathsetmacro{\A}{7}
+    \pgfmathsetmacro{\b}{0.75}
+    \pgfmathsetmacro{\m}{0.35}
+    \pgfmathsetmacro{\s}{2.25}
+    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
+    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
+        
+    
+    
+    \begin{axis}[
+        ymin=0, ymax=10,
+        xmin=0, xmax=5,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+        
+        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
+        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
+        % revenue
+        
+        \addplot[gray, domain=0:5] {1/\m -.3};
+        \addplot[gray, domain=0:5] {1/\m -.6};
+        \addplot[gray, domain=0:5] {1/\m -.9};
+        \addplot[gray, domain=0:5] {1/\m -1.2};
+
+        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
+            (axis cs:5,1/\m) -- (axis cs:5,1/\m -1.2)
+            node[midway,right=6pt]{$MC < MC(\varphi_{\min})$};
+
+        
+        
+        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
+        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
+        % revenue
+        \addplot[black, thick, domain=0:5] {1/\m};
+
+            %demand, rev
+        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
+        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
+            
+
+        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
+        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
+
+        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
+        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
+
+
+        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
+        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
+        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
+
+    \end{axis}
+
+
+    \end{tikzpicture}
+
+ \end{frame}
+
+
+\begin{frame}{Diverse firms and monopolistic competition}
+Conditional on entry, each firm of a different marginal cost solves its own profit maximization problem, and chooses its own prices...
+\centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\K}{7}
+    \pgfmathsetmacro{\sigmaa}{1.5}
+
+    \pgfmathsetmacro{\A}{7}
+    \pgfmathsetmacro{\b}{0.75}
+    \pgfmathsetmacro{\m}{0.35}
+    \pgfmathsetmacro{\s}{2.25}
+    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
+    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
+        
+    
+    
+    \begin{axis}[
+        ymin=0, ymax=10,
+        xmin=0, xmax=5,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+        
+        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
+        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
+        % revenue
+        \addplot[gray, dashed] coordinates
+            {(0,0) (0,\ps) (\qs,\ps) (\qs,0)} -- cycle;
+        \addplot[black, thick, domain=0:5] {1/\m * \s};
+        
+        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
+        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
+        % revenue
+        \addplot[gray, dashed] coordinates
+            {(0,0) (0,\p) (\q,\p) (\q,0)} -- cycle;
+        \addplot[black, thick, domain=0:5] {1/\m};
+    
+
+
+            %demand, rev
+        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
+        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
+            
+
+        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
+        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
+
+        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
+        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
+
+
+        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
+        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
+        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
+        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m) {\scriptsize $\ln  MC(\varphi_{\min})$};
+        \node[anchor=north] at (axis cs: \q,0) {\scriptsize $\ln q(\varphi_{\min})$};
+        \node[anchor=east] at (axis cs: 0,\p) {\scriptsize $\ln  p(\varphi_{\min})$};
+
+        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {\scriptsize $\ln  MC(\varphi)$};
+        \node[anchor=north] at (axis cs: \qs,0) {\scriptsize $\ln q(\varphi)$};
+        \node[anchor=east] at (axis cs: 0,\ps) {\scriptsize $\ln  p(\varphi)$};
+    \end{axis}
+
+    \end{tikzpicture}
+
+ \end{frame}
+
+
 
 \begin{frame}{Firm size and productivity}
 
@@ -632,7 +867,7 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
         \qquad if $\varphi_{\min}>\varphi$, $p(\varphi_{\min})<p(\varphi)$
 
         \begin{equation*}
-            p(\varphi) = \frac{\sigma}{\sigma -1}\times \frac{a^* w_i}{\varphi} \iff \frac{p(\varphi_{\min})}{p(\varphi)} = \frac{\varphi}{\varphi_{\min})} < 1
+            p(\varphi) = \frac{\sigma}{\sigma -1}\times \frac{a^* w_i}{\varphi} \iff \frac{p(\varphi_{\min})}{p(\varphi)} = \frac{\varphi}{\varphi_{\min}} < 1
         \end{equation*}
 
     \end{wideitemize}
@@ -785,6 +1020,7 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
 
 \begin{frame}{Revenues}
+\addtocounter{framenumber}{-1}
 
 \centering
     \begin{tikzpicture}
@@ -855,8 +1091,8 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
  \end{frame}
 
+
 \begin{frame}{Revenues}
-\addtocounter{framenumber}{-1}
 \centering
     \begin{tikzpicture}
     \pgfmathsetmacro{\K}{7}
@@ -936,6 +1172,8 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
  \end{frame}
 
+
+
 \begin{frame}{Firm size and productivity}
 
     \begin{wideitemize}
@@ -946,25 +1184,25 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
         \begin{eqnarray*}
             \pi_i(\varphi) &=& \left(p(\varphi) - MC(\varphi) \right) q(\varphi) - w_i \bar{f}  \\
+        \onslide<2->{
             &=& p(\varphi)q(\varphi) - \frac{\sigma-1}{\sigma} p(\varphi) q(\varphi) - w_i \bar{f}  \\
+            }
+        \onslide<3->{
             &=& \frac{1}{\sigma} p(\varphi)q(\varphi) - w_i \bar{f}  \\
+        }
+        \onslide<4->{
             &=& \frac{1}{\sigma} r_i(\varphi) - w_i \bar{f} 
+        }
         \end{eqnarray*}
 
-        \item So:        
+        \item<5-> So:        
             \begin{equation*}
                 \pi_i(\varphi_{\min}) - \pi_i(\varphi) =  \frac{1}{\sigma} \left( r_i(\varphi_{\min}) - r_i(\varphi) \right) > 0
             \end{equation*}
     \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Many potential firms}
-    
-\end{frame}
-
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
+\begin{frame}{Profits}
 \centering
     \begin{tikzpicture}
     \pgfmathsetmacro{\K}{7}
@@ -1043,255 +1281,26 @@ p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma
 
  \end{frame}
 
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
+\begin{frame}{Takeaways (so far)}
 
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
+    \begin{wideitemize}
+        \item We extended the Krugman framework to one with diverse firms
+        \item Firms differ in their productivities, which means their marginal and average costs will be different
+        \item With identical fixed costs, firms with different productivities optimize to different values
+        \item More productive firms charge lower prices, sell higher quantities, have higher revenues and profits
+    \end{wideitemize}
     
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
+\end{frame}
 
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        \addplot[fill=purple, draw=none, opacity=.25] coordinates
-            {(0,1/\m*\s) (0,\ps) (\qs,\ps) (\qs,1/\m*\s)} -- cycle;
-        \addplot[black, think, domain=0:5] {1/\m * \s};
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, think, domain=0:5] {1/\m};
-
-        \node[anchor = south west] at (axis cs: 0,{1/(\m)}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-    
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)*1.05}) {\textcolor{purple}{$\pi_i(\varphi)$}};
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)*.95}) {\textcolor{purple}{$<\bar{f}w_i$}};
-
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {$\ln  MC(\varphi)$};
-
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        
-        \addplot[gray, domain=0:5] {1/\m -.3};
-        \addplot[gray, domain=0:5] {1/\m -.6};
-        \addplot[gray, domain=0:5] {1/\m -.9};
-        \addplot[gray, domain=0:5] {1/\m -1.2};
-
-        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
-            (axis cs:5,1/\m) -- (axis cs:5,1/\m -1.2)
-            node[midway,right=6pt]{$MC < MC(\varphi_{\min})$};
-
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-        \node[anchor = north west] at (axis cs: 0,{\p}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        
-        \addplot[gray, domain=0:5] {1/\m +.3};
-        \addplot[gray, domain=0:5] {1/\m +.6};
-        \addplot[gray, domain=0:5] {1/\m +.9};
-        \addplot[gray, domain=0:5] {1/\m +1.2};
-
-        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
-            (axis cs:5,1/\m +1.2) -- (axis cs:5,1/\m)
-            node[midway,right=6pt]{$MC > MC(\varphi_{\min})$};
-
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-        \node[anchor = north west] at (axis cs: 0,{\p}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-
-
+\begin{frame}{Next class}
+    \begin{wideitemize}
+    \item This is all consistent with the broad facts we saw about exporters
+    \item We will learn how to solve for the equilibrium of this model (with charts, mostly)
+    \item Minimum productivity threshold $\varphi_{\min}$ will emerge in equilibrium
+    \item Equilibrium number of goods available $N^*$ will also emerge in equilibrium
+    \item We will also see what happens when countries open up to trade
+    \end{wideitemize}
+\end{frame}
 %----------------------------------------------------------------------%
 %----------------------------------------------------------------------%
 
