@@ -14,7 +14,6 @@
 
 \newtheorem{proposition}{Proposition}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
-\newcommand{\white}[1]{\textcolor{white}{#1}}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
@@ -164,8 +163,8 @@
   \end{frame}
 }
 
-\title[]{International Trade: Lecture 4}
-\subtitle[]{Classical Ricardian Trade in General Equilibrium - Part II}
+\title[]{International Trade: Lecture 2}
+\subtitle[]{Intro to Classical Ricardian Trade}
 \author[Góes]
 {Carlos Góes\inst{1}}
 \date{Fall 2025}
@@ -225,38 +224,312 @@
 %----------------------------------------------------------------------%
 
 
-
-\begin{frame}{Last Class: Autarky Equilibrium}
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lcc}
-\toprule
-\textbf{Variable} & \textbf{United States (US)} & \textbf{Colombia (COL)} \\
-\midrule
-Labor endowment $L_i$ & $300$ million & $54$ million \\
-Preference parameter $\alpha_i$ & $1/2$ & $3/4$ \\
-Unit labor requirement for computers $a_{i,C}$ & $3{,}000$ & $5{,}400$ \\
-Unit labor requirement for roses $a_{i,R}$ & $30$ & $6$ \\
-\midrule
-Max computers: $L_i / a_{i,C}$ & $300\text{m}/3{,}000 = 100{,}000$ & $54\text{m}/5{,}400 = 10{,}000$ \\
-Max roses: $L_i / a_{i,R}$ & $300\text{m}/30 = 10\text{m}$ & $54\text{m}/6 = 9\text{m}$ \\
-\midrule
-Opportunity cost $a_{i,C}/a_{i,R}$ & $3{,}000/30 = 100$ & $5{,}400/6 = 900$ \\
-Demand for computers: $\alpha_i L_i / a_{i,C}$ & $0.5 \times 300\text{m}/3{,}000 = 50{,}000$ & $0.75 \times 54\text{m}/5{,}400 = 7{,}500$ \\
-Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 5\text{m}$ & $0.25 \times 54\text{m}/6 = 2.25\text{m}$ \\
-\bottomrule
-\end{tabular}
-}
+\begin{frame}{David Ricardo (1772–1823)}
+\begin{columns}
+    \begin{column}{0.65\textwidth}
+        \begin{wideitemize}
+            \item Born: April 18, 1772, London (third of 17 children)
+            \item Career: Achieved wealth through disciplined financial trading in government consols and loans
+            \item Major Work: \textit{On the Principles of Political Economy and Taxation} (1817) – foundational text on comparative advantage, value, rent, etc.
+            \item Public Life: MP for Portarlington (1819–1823), promoting free trade, currency reform, and abolition
+            \item Health & Death: Died Sept. 11, 1823, age 51, from septic ear infection
+        \end{wideitemize}
+    \end{column}
+    
+    \begin{column}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figs/ricardo.jpg} % Replace with your image filename
+        \vspace{0.2cm}
+        \scriptsize\textit{David Ricardo (public domain image)}
+    \end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Last Class: Autarky Equilibrium}
 
-\begin{figure}[htbp!]
 
-% California
-\begin{subfigure}{}
-\resizebox{0.48\textwidth}{!}{%
+\begin{frame}{Ricardian Model: Preliminaries}
+\begin{wideitemize}
+        \item Consider a world with 2 countries (US, Colombia) and 2 products (Computers, Roses)
+        \item Set of countries $i \in \{ US, COL\}$; set of products $p \in \{ C, R\}$
+        \item In country $i$, there are $L_i$ units of labor (worker-hours) available 
+        \item In country $i$, to produce one unit of good $p$, firms use $a_{i,p}$ units of labor
+        \item $Y_{i,p}$ is total production of good $p$ in $i$
+        \item To produce $Y_{i,C}$ units of computers in $i$, firms use $a_{i,C} \times Y_{i,C}$ units of labor 
+        \item We call $a_{i,p}$ the \textbf{unit labor requirements}
+        \begin{itemize}
+            \item The higher $a_{i,p}$, the \textbf{less productive} country $i$ is in producing $p$. Why?
+        \end{itemize}
+        \item Trade is balanced
+    \end{wideitemize}
+\end{frame}
+
+\section{Production}
+
+\begin{frame}{Production Possibilities Frontier}
+\begin{wideitemize}
+        \item Total labor can be distributed for the production of either good, such that:
+
+        \begin{equation*}
+            \underbrace{a_{i,C} \times Y_{i,C}}_{\substack{\text{labor used in} \\ \text{production of } C}} + \underbrace{a_{i,R} \times Y_{i,R}}_{\substack{\text{labor used in} \\ \text{production of } R}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
+        \end{equation*}
+
+        \item Inequality above defines set of feasible production choices, formally:
+
+        \begin{equation*}
+            \mathcal{Y}_{i} = \{ (Y_{i,C}, Y_{i,R}) : a_{i,C} \times Y_{i,C} + a_{i,R} \times Y_{i,R} \le L_i \}
+        \end{equation*}
+        
+        \item English: if labor used to produce $(Y_{i,C}, Y_{i,R})$ is not larger than $L_i$, production is feasible
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Production Possibilities Frontier, Example}
+\begin{wideitemize}
+        \item There are 300 million units of labor in the US ($L_{US} = 300$ million)
+        \item To produce one rose in the US, firms use $30$ units of labor ($a_{US,R} = 30$)
+        \item To produce one computer in the US, firms use $3,000$ units of labor ($a_{US,C} = 3,000$)
+        \item How many units of either good can the US make?
+        \begin{itemize}
+            \item If it fully specializes in $R$, it can produce $Y_{US,R}=L_{US}/a_{US,R} = 300 \text{ million}/30 = 10 \text{ million}$ roses.
+            \item If it fully specializes in $C$, it can produce $Y_{US,C}=L_{US}/a_{US,C} = 300 \text{ million}/3,000 = 100,000$ computers.
+        \end{itemize}
+
+        \item In general, it can produce any combination $(Y_{US,R}, Y_{US,C})$ that satisfies:
+
+        \begin{equation*}
+            3,000 \times Y_{US,C} + 30 \times Y_{US,R} \le 300 \text{ million}
+        \end{equation*}
+    \item Opportunity cost: $a_{US,R}/a_{US,C} = 30/3000 = 1/100$ computers per rose \\
+    \qquad \textcolor{gray}{(or $a_{US,C}/a_{US,R} = 100$ roses per computer)}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Production Possibilities Frontier, Graphical Example}
+
+\begin{center}
+
+\begin{figure}[htbp]
+
 \begin{tikzpicture}
+\begin{axis}[
+    xlabel={Quantity of roses, $Y_{US,R}$},
+    ylabel={Quantity of computers, $Y_{US,C}$},
+    xmin=0, xmax=11,
+    ymin=0, ymax=0.11,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title={US},
+    title style={font=\bfseries}
+]
+
+% Filled triangle under the PPF
+\addplot [
+    name path=A,
+    domain=0:0.1,
+    draw=none
+] {.1 - 1/100*x};
+
+\path[name path=B] (axis cs:0,0) -- (axis cs:10,0);
+
+\addplot [
+    fill=cyan!20,
+    draw=none
+] fill between [of=A and B];
+
+% PPF line
+\addplot[thick, blue, domain=0:10] {.1 - 1/100*x};
+
+% Labels
+\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:10,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+\node at (axis cs:-.75,.1) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+\node at (axis cs:10,0.05) { $\textcolor{blue}{Y_{US,C} = \frac{L_{US}}{a_{US,C}} - \frac{a_{US,R}}{a_{US,C}} \times Y_{US,R}}$};
+\node at (axis cs:7,0.07) {\scriptsize \textcolor{blue}{Slope = - 1/100: opportunity cost} };
+
+\end{axis}
+
+\end{tikzpicture}
+
+\end{figure}
+\end{center}
+
+
+\end{frame}
+
+
+\begin{frame}{Production Technology}
+\begin{wideitemize}
+        \item In country $i$, firms producing good $p$ maximize profits under perfect competition:
+        \begin{equation*}
+            \max_{Y_{i,p}} \pi_{i,p} = \max_{Y_{i,p}} P_{i,p}Y_{i,p} - w_i a_{i,p} Y_{i,p} 
+        \end{equation*}
+        \item Since labor only one type of labor (mobile across sectors), there is a single wage $w_i$
+        \item In equilibrium, \textbf{prices equal marginal cost} in each productive sector:
+        \begin{eqnarray*}
+            P_{i,p} = w_i a_{i,p} \iff \frac{P_{i,p}}{a_{i,p}} = w_i  \qquad \text{ for } p \in\{C,R\}
+        \end{eqnarray*}
+        \item In autarky equilibrium, there demand and production in both sectors
+        \item We can pin down the relative price $P_{i,C} / P_{i,R}$:
+        \begin{equation*}
+            \frac{P_{i,C}}{a_{i,C}} = w_i = \frac{P_{i,R}}{a_{i,R}} \iff \frac{P_{i,C}}{P_{i,R}} = \frac{a_{i,C}}{a_{i,R}}  
+        \end{equation*}
+    \item In autarky, relative prices will reflect the \textbf{opportunity cost} within country $i$
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Production Possibilities Frontier, Graphical Example}
+
+\begin{center}
+
+\begin{figure}[htbp]
+
+\begin{tikzpicture}
+
+\begin{axis}[
+    xlabel={Quantity of roses, $Y_{US,R}$},
+    ylabel={Quantity of computers, $Y_{US,C}$},
+    xmin=0, xmax=11,
+    ymin=0, ymax=0.11,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title={US},
+    title style={font=\bfseries}
+]
+
+% Filled triangle under the PPF
+\addplot [
+    name path=A,
+    domain=0:0.1,
+    draw=none
+] {.1 - 1/100*x};
+
+\path[name path=B] (axis cs:0,0) -- (axis cs:10,0);
+
+\addplot [
+    fill=cyan!20,
+    draw=none
+] fill between [of=A and B];
+
+% PPF line
+\addplot[thick, blue, domain=0:10] {.1 - 1/100*x};
+
+% Labels
+\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:10,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+\node at (axis cs:-.75,.1) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+\node at (axis cs:10,0.05) { $\textcolor{blue}{Y_{US,C} = \frac{L_{US}}{a_{US,C}} -} \textcolor{red}{ \frac{P_{US,R}}{P_{US,C}} } \textcolor{blue}{ \times Y_{US,R}}$};
+\node at (axis cs:10,0.07) {\scriptsize \textcolor{red}{Slope = - 1/100: opportunity cost = relative prices} };
+
+
+
+\end{axis}
+
+\end{tikzpicture}
+
+\end{figure}
+\end{center}
+
+
+\end{frame}
+
+\section{Preferences}
+
+\begin{frame}{Preferences}
+\begin{wideitemize}
+        \item In country $i$, consumers preferences over products $p$, represented by a utility function:
+        \begin{equation*}
+            U_i(Q_C,Q_R) \equiv Q_C^{\alpha_i} Q_R^{1-\alpha_i}, \qquad \text{for } 0 < \alpha_i < 1   
+        \end{equation*}
+        \item How to derive indifference curves?
+        \begin{eqnarray*}
+            U_i = Q_C^{\alpha_i} Q_R^{1-\alpha_i} \iff Q_C^{\alpha_i} = U_i \times Q_R^{-(1-\alpha_i)} \iff Q_C = U_i^{\frac{1}{\alpha_i}} \times Q_R^{-\frac{1-\alpha_i}{\alpha_i}} 
+        \end{eqnarray*}
+        \item Example: Suppose $\alpha_i=1/2$. Then:
+        \begin{equation*}
+            Q_C = U_i^{\frac{1}{1/2}} \times Q_R^{-\frac{1-1/2}{1/2}} = U_i^{2} \times Q_R^{-1} = \frac{U_i^{2}}{Q_R} 
+        \end{equation*}
+        \item English: for fixed utility $U_i$, if consumption $Q_R$ goes up, consumption $Q_C$ must go down
+    \end{wideitemize}
+\end{frame}
+
+
+
+\begin{frame}{Preferences, Graphically}
+
+\begin{figure}[htbp]
+
+\begin{tikzpicture}
+
+
+\begin{axis}[
+    xlabel={Quantity of computers, $Q_{C}$},
+    ylabel={Quantity of roses, $Q_{R}$},
+    xmin=0, xmax=0.11,
+    ymin=0, ymax=21,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}
+]
+
+% PPF line
+\addplot[black, domain=0.01:0.1] {0.1 / x};
+\addplot[blue, domain=0.0125:0.1] {0.2 / x};
+\addplot[red, domain=0.015:0.1] {0.3 / x};
+
+
+\end{axis}
+
+\end{tikzpicture}
+
+\end{figure}
+
+\end{frame}
+
+\section{Autarky Equilibrium}
+
+\begin{frame}{Ricardian Model: Autarky Equilibrium}
+
+
+\begin{wideitemize}
+    \item In equilibrium, relative prices = marginal rate of substitution
+
+    \item Relative prices = marginal rate of substitution. Why?
+
+    \item \textcolor{blue}{Relative prices} $P_{i,R}/P_{i,C}$: marginal cost of replacing roses for computers
+
+    \item \textcolor{blue}{Marginal rate of substitution} $MU_{i,R}/MU_{i,C}$: marginal benefit of of replacing roses for computers
+
+    \begin{equation*}
+        MRS_{i,R,C} = \frac{MU_{i,R}}{MU_{i,C}} = \frac{ \partial U_i / \partial Q_R }{\partial U_i / \partial Q_C  } = \frac{ (1-\alpha_i ) Q_C^{\alpha_i} Q_R^{1-\alpha_i} Q_{R}^{-1} }{ \alpha_i  Q_C^{\alpha_i} Q_R^{1-\alpha_i} Q_{C}^{-1} } = \frac{1-\alpha_i}{\alpha_i} \times \frac{Q_C}{Q_R}
+    \end{equation*}
+
+
+    \item English (sort of): marginal cost = marginal benefit 
+    \end{wideitemize}
+
+\end{frame}
+
+\begin{frame}{Autarky Equilibrium, Graphical Example}
+
 \pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
 \pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
 \pgfmathsetmacro{\alpha}{0.5}    % preference for computers
@@ -273,7 +546,10 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
 \pgfmathsetmacro{\A}{\U^(1/\alpha)}
 
+\begin{center}
+\begin{figure}[htbp]
 \centering
+\begin{tikzpicture}
 \begin{axis}[
     ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
     xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
@@ -294,32 +570,69 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
 
 % Indifference curve through optimal bundle
-\addplot[thick, brown, domain=2.5:10, samples=100] {\A * x^(-\expo)};
+\addplot[red, domain=2.5:10, samples=100] {\A * x^(-\expo)};
+
+% Fill under the PPF
+\addplot [
+    name path=ppfcurve,
+    domain=0:10,
+    draw=nonC
+] {\Lendow/\aC - (\aR/\aC)*x};
+
+\addplot [
+    name path=xaxis,
+    domain=0:0.1,
+    draw=none
+] {0};
+
+\addplot [
+    fill=cyan!20,
+    draw=none
+] fill between [of=ppfcurve and xaxis];
 
 % Labels
+
 %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
 \node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
 \node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
 
 
 % Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
-\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
-
-
+\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr - 1,\Qc - 0.01) {\scriptsize $\frac{P_{US,R}}{P_{US,C}} = MRS_{i,R,C}$};
+\node at (axis cs:\Qr + 1.25,\Qc + 0.005) {\scriptsize $\textcolor{red}{(Q_{US,R},Q_{US,C})}$};
 
 \end{axis}
-
 \end{tikzpicture}
-}
-\end{subfigure}
-%
-% Colombia
-\begin{subfigure}{}
-\resizebox{0.48\textwidth}{!}{%
+\end{figure}
+\end{center}
 
-\begin{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{What about Colombia?}
+\begin{wideitemize}
+        \item There are 54 million units of labor in Colombia ($L_{COL} = 54$ million)
+        \item To produce one rose in Colombia, firms use $6$ units of labor ($a_{COL,R} = 6$)
+        \item To produce one computer in Colombia, firms use $5,400$ units of labor ($a_{COL,C} = 5,400$)
+        \item How many units of either good can Colombia make?
+        \begin{itemize}
+            \item If it fully specializes in $R$, it can produce $Y_{COL,R}=L_{COL}/a_{COL,R} = 54 \text{ million}/6 = 9 \text{ million}$ roses.
+            \item If it fully specializes in $C$, it can produce $Y_{COL,C}=L_{COL}/a_{COL,C} = 54 \text{ million}/5,400 = 10,000$ computers.
+        \end{itemize}
+
+        \item In general, it can produce any combination $(Y_{COL,R}, Y_{COL,C})$ that satisfies:
+
+        \begin{equation*}
+            5,400 \times Y_{COL,C} + 6 \times Y_{COL,R} \le 54 \text{ million}
+        \end{equation*}
+        \item Opportunity cost: $a_{COL,R} / a_{COL,C} = 6 / 5,400 = 1/900$.
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Autarky Equilibrium, Colombia}
+
 \pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
 \pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
 \pgfmathsetmacro{\alpha}{0.75}    % preference for computers
@@ -336,7 +649,10 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
 \pgfmathsetmacro{\A}{\U^(1/\alpha)}
 
+\begin{center}
+\begin{figure}[htbp]
 \centering
+\begin{tikzpicture}
 \begin{axis}[
     ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
     xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
@@ -357,7 +673,25 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
 
 % Indifference curve through optimal bundle
-\addplot[brown, domain=0.1:9, samples=100] {\A * x^(-\expo)};
+\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
+
+% Fill under the PPF
+\addplot [
+    name path=ppfcurve,
+    domain=0:9,
+    draw=nonC
+] {\Lendow/\aC - (\aR/\aC)*x};
+
+\addplot [
+    name path=xaxis,
+    domain=0:0.1,
+    draw=none
+] {0};
+
+\addplot [
+    fill=cyan!20,
+    draw=none
+] fill between [of=ppfcurve and xaxis];
 
 % Labels
 
@@ -367,24 +701,18 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 
 
 % Equilibrium point
-\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
-\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
-
+\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr + 1.25,\Qc + 0.005) {\scriptsize $\textcolor{red}{(Q_{COL,R},Q_{COL,C})}$};
 
 \end{axis}
-
 \end{tikzpicture}
-}
-
-\end{subfigure}
-
-\caption{Autarky equilibrium}\label{fig: autarky-num}
-
 \end{figure}
+\end{center}
+
 \end{frame}
 
-\section{Trade Definitions}
+
+\section{Absolute and Comparative Advantage}
 
 \begin{frame}{Absolute and Comparative Advantage}
 
@@ -424,40 +752,19 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 
 \end{frame}
 
-\section{Supply}
 
-\begin{frame}{Prices under Autarky}
+\begin{frame}{Comparative Advantage}
 
 \begin{wideitemize}
 
     \item Without trade, prices reflect opportunity cost:
     \begin{itemize}
-        \item In the US: $a_{US,R}/a_{US,C} = P_{US,R}/P_{US,C}$
         \item In Colombia: $a_{COL,R}/a_{COL,C} = P_{COL,R}/P_{COL,C}$
+        \item In the US: $a_{US,R}/a_{US,C} = P_{US,R}/P_{US,C}$
     \end{itemize}
 
-    \item Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. 
-
-    \item If $P_R/P_C = a_{COL,R}/a_{COL,C}$, Colombia indifferent b/w computers and roses
-    \begin{itemize}
-        \item Production of computers $Y_{COL,C}$ can range from 0 to 10,000 
-        \item Production of roses $Y_{COL,R}$ can range from 0 to 9mi 
-    \end{itemize}
-
-    \item If $P_R/P_C = a_{US,R}/a_{US,C}$, US indifferent b/w computers and roses
-    \begin{itemize}
-        \item Production of computers $Y_{US,C}$ can range from 0 to 100,000 
-        \item Production of roses $Y_{US,R}$ can range from 0 to 10mi 
-    \end{itemize}
-
-\end{wideitemize}
-
-\end{frame}
-
-
-\begin{frame}{Prices consistent with trade}
-
-\begin{wideitemize}
+    \item Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. Why? \\
+        \qquad \textcolor{gray}{(goods are assumed to be identical)}
 
     \item In this model, \blue{countries specialize in goods in which they have a comparative advantage}:
     
@@ -466,29 +773,42 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
         \item The \blue{US} specializes in \blue{computers} if $a_{US,R}/a_{US,C} > P_R/P_C$
     \end{itemize}
 
-    \item Why? \\
-        \qquad \textcolor{gray}{(relative marginal revenue is greater than its relative marginal cost)}
-
-    \item Each country specializes in the good in which they have a comparative advantage in if:
-
-    \begin{equation*}\label{eq: price-trade}
-        \frac{a_{US,C}}{a_{US,R}} < \frac{P_C}{P_R} < \frac{a_{COL,C}}{a_{COL,R}}
-    \end{equation*}
-    
-
 \end{wideitemize}
 
 \end{frame}
 
-\begin{frame}{Global Supply Curve}
-    \begin{figure}[htpd!]
-\centering
+
+\begin{frame}{Production Possibilities Frontier in Autarky}
+\begin{center}
+
+\begin{figure}[htbp]
+
+% California
+\begin{subfigure}{}
+\resizebox{0.48\linewidth}{!}{%
 \begin{tikzpicture}
+\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
+\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
+\pgfmathsetmacro{\Lendow}{10}    % labor endowment
+
+% Compute equilibrium quantities
+\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
+\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
+
+% Compute utility level
+\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
+
+% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+\pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+\centering
 \begin{axis}[
-    ylabel={Relative price of computers $\frac{P_C}{P_R}$},
-    xlabel={Relative quantity of computers $\textcolor{blue}{\frac{Y_{C}}{Y_{R}} = \frac{Y_{COL,C}+Y_{US,C}}{Y_{COL,R}+Y_{US,R}} }$},
-    ymin=0, ymax=3,
-    xmin=0, xmax=2,
+    ylabel={Quantity of computers, $\textcolor{red}{Q_{US,C}}, \textcolor{blue}{Y_{US,C}}$},
+    xlabel={Quantity of roses, $\textcolor{red}{Q_{US,R}}, \textcolor{blue}{Y_{US,R}}$},
+    ymin=0, ymax=0.11,
+    xmin=0, xmax=11,
     yticklabel=\empty,
     xticklabel=\empty,
     axis lines=left,
@@ -497,71 +817,61 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
     axis on top,
     scaled x ticks=false,
     width=9cm, height=7cm,
-    title style={font=\bfseries}]
+    title style={font=\bfseries}
+]
 
-% Relative Supply RS
-\addplot[thick, blue] coordinates {(0,1) (0.8,1.0)};
-\addplot[thick, blue] coordinates {(0.8,1.0) (0.8,2.0)};
-\addplot[thick, blue] coordinates {(0.8,2.0) (1.6,2.0)};
-%\node at (axis cs:1.65,2.7) {\small $RS$};
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
 
-% Dashed lines for autarky prices
-\addplot[dashed] coordinates {(0,2.0) (0.8,2.0)};
-\node at (axis cs:-0.15,2) {$\frac{a_{COL,C}}{a_{COL,R}}$};
+% Indifference curve through optimal bundle
+%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
 
-\addplot[dashed] coordinates {(0.8,1.0) (1.6,1.0)};
-\node at (axis cs:-0.15,1) {$\frac{a_{US,C}}{a_{US,R}}$};
+% Labels
+
+%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
 
 
-% Vertical dashed lines for quantities
-\addplot[dashed] coordinates {(0.8,0) (0.8,1.0)};
-\node at (axis cs:0.8,-0.3) {$\frac{L_{US}/a_{US,C}}{L_{COL}/a_{COL,R}}$};
+% Equilibrium point
+\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{US,R},Q_{US,C})}$};
+\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+
+
 
 \end{axis}
+
 \end{tikzpicture}
-\caption{Relative Supply of Computers as a function of Relative Prices}\label{fig: relative-supply}
-\end{figure}
-
-\end{frame}
-
-\section{Price determination}
-
-\begin{frame}{Price Determination (i)}
-\begin{wideitemize}
-   
-
-\item How are prices determined in a free trade equilibrium? \\
-\qquad \textcolor{gray}{(relative prices will adjust to make sure that the global supply = global demand)}
-
-\item \blue{Global supply}:
-
-\begin{itemize}
-    \item US fully specializes in computers: $Y^T_{C} = L_{US}/a_{US,C} = 100{,}000$
-    \item Colombia fully specializes in roses? $Y^T_R = L_{COL}/a_{COL,R} = 9{,}000{,}000$. 
-\end{itemize}
-    
-\item \blue{Global demand}:
-\begin{eqnarray*}
-    Q_{C} &\equiv& Q^T_{US,C} +  Q^T_{COL,C} = \alpha_{US} \frac{w_{US} L_{US} }{P_C} + \alpha_{COL} \frac{w_{COL} L_{COL} }{P_C}  \\
-    Q_{R} &\equiv& Q^T_{US,R} +  Q^T_{COL,R}  = (1-\alpha_{US}) \frac{w_{US} L_{US} }{P_R} + (1-\alpha_{COL}) \frac{w_{COL} L_{COL} }{P_R}    
-\end{eqnarray*}
-
-\item Note that global demand \textcolor{red}{$Q_C/Q_R$} is decreasing in relative prices $P_C / P_R$ 
-\end{wideitemize}
-    
-\end{frame}
-
-
-\begin{frame}{Global Supply and Demand}
-
-\begin{figure}[htpd!]
-\centering
+}
+\end{subfigure}
+%
+% Colombia
+\begin{subfigure}{}
+\resizebox{0.48\linewidth}{!}{%
 \begin{tikzpicture}
+\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
+\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
+\pgfmathsetmacro{\Lendow}{9}    % labor endowment
+
+% Compute equilibrium quantities
+\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
+\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
+
+% Compute utility level
+\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
+
+% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+\pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+\centering
 \begin{axis}[
-    ylabel={Relative price of computers $\frac{P_C}{P_R}$},
-    xlabel={Relative quantity of computers $\textcolor{red}{\frac{Q_{C}}{Q_{R}} } , \textcolor{blue}{\frac{Y_{C}}{Y_{R}} }$},
-    ymin=0, ymax=3,
-    xmin=0, xmax=2,
+    ylabel={Quantity of computers, $\textcolor{red}{Q_{COL,C}}, \textcolor{blue}{Y_{COL,C}}$},
+    xlabel={Quantity of roses, $\textcolor{red}{Q_{COL,R}}, \textcolor{blue}{Y_{COL,R}}$},
+    ymin=0, ymax=0.11,
+    xmin=0, xmax=11,
     yticklabel=\empty,
     xticklabel=\empty,
     axis lines=left,
@@ -570,78 +880,40 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
     axis on top,
     scaled x ticks=false,
     width=9cm, height=7cm,
-    title style={font=\bfseries}]
+    title style={font=\bfseries}
+]
 
-% Relative Demand RD
-\addplot[
-    red, thick,
-    domain=0.45:1.8,
-    samples=100
-] {1.2/(x)};
-%\node[red] at (axis cs:1.4,1.25) {\small $RD$};
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
 
-% Relative Supply RS
-\addplot[thick, blue] coordinates {(0,1) (0.8,1.0)};
-\addplot[thick, blue] coordinates {(0.8,1.0) (0.8,2.0)};
-\addplot[thick, blue] coordinates {(0.8,2.0) (1.6,2.0)};
-%\node at (axis cs:1.65,2.7) {\small $RS$};
+% Indifference curve through optimal bundle
+%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
 
-% Dashed lines for autarky prices
-\addplot[dashed] coordinates {(0,2.0) (0.8,2.0)};
-\node at (axis cs:-0.15,2) {$\frac{a_{COL,C}}{a_{COL,R}}$};
+% Labels
 
-\addplot[dashed] coordinates {(0.8,1.0) (1.6,1.0)};
-\node at (axis cs:-0.15,1) {$\frac{a_{US,C}}{a_{US,R}}$};
+%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{COL}}{a_{COL,R}}$};
+\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{COL}}{a_{COL,C}}$};
 
-\addplot[dashed, red] coordinates {(0,1.5) (0.8,1.5)};
 
-% Vertical dashed lines for quantities
-\addplot[dashed] coordinates {(0.8,0) (0.8,1.0)};
-\node at (axis cs:0.8,-0.3) {$\frac{L_{US}/a_{US,C}}{L_{COL}/a_{COL,R}}$};
+% Equilibrium point
+\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{COL,R},Q_{COL,C})}$};
+\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{COL,R},Y_{COL,C})}$};
+
 
 \end{axis}
+
 \end{tikzpicture}
-\caption{Relative Supply and Demand of Computers as a Function of Relative Prices}
+}
+
+\end{subfigure}
+
+\caption{Autarky Equilibriun}
 \end{figure}
-
+\end{center}
 \end{frame}
 
-
-\begin{frame}{Price determination (ii)}
-    \begin{wideitemize}
-    \item What is $w_{US}$, $w_{COL}$?
-    
-    \item Countries fully specialize: only one sector operating in each country
-    
-    \item Wages = marginal product of each worker in the sector they are working
-
-    \begin{equation*}
-        w_{US} = P_{C} / a_{US,C}, \qquad w_{COL} = P_{R} / a_{COL,R}
-    \end{equation*}
-    
-    \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Price determination (iii)}
-    \begin{wideitemize}
-    \item How to get $P_C/P_R$? Trade balances, so value of exports = value of imports:
-    {\scriptsize
-    \begin{eqnarray*}
-        P_C ( Y_{US,C} - Q^T_{US,C}) &=& P_R (Y_{COL,C} - Q^T_{COL,R}) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{w_{US} L_{US}}{P_C} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{w_{COL} L_{COL}}{P_R} \right) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{L_{US}}{a_{US,C}} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{L_{COL}}{a_{COL,R}} \right) \\ 
-    \end{eqnarray*}
-    }
-    \normalsize
-    \item Solving for $P_C/P_R$:
-    \begin{center}
-        \boxed{
-        \frac{P_C}{P_R} = \frac{\alpha_{COL}}{1-\alpha_{US}} \times \frac{L_{COL}/a_{COL,R}}{L_{US}/a_{US,C}} = \frac{3/4}{1/2} \times \frac{54m / 9}{300m / 3{,}000} = 135 
-        }    
-    \end{center}
-        
-    \end{wideitemize}
-\end{frame}
 
 \begin{frame}{Production Possibilities Frontier + Trade Prices}
 \begin{center}
@@ -929,23 +1201,6 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \end{center}
 \end{frame}
 
-\section{Demand and trade balance}
-
-\begin{frame}{Optimal demands under free trade}
-\begin{wideitemize}
-    \item Demand functions:    
-  \begin{eqnarray*}
-    Q^T_{US,C} &=& \alpha_{US} \frac{L_{US} }{a_{US,C}} = 1/2 \times \frac{300 \text{m}}{100{,}000} = 50,000 \\
-    Q^T_{COL,C} &=& \alpha_{COL} \frac{L_{COL} }{a_{COL,R} \times P_C/P_R} = 3/4 \times \frac{54 \text{m}}{6 \times 135} = 50,000 \\
-    Q^T_{US,R} &=& (1- \alpha_{US}) \times \frac{P_C}{P_R} \times \frac{L_{US} }{a_{US,C}} = 1/2 \times 135 \times \frac{300 \text{m}}{100{,}000} = 6,750,000 \\
-    \qquad Q^T_{COL,R} &=& (1-\alpha_{COL}) \frac{L_{COL} }{a_{COL,R} } = 1/4 \times \frac{54 \text{m}}{6} = 2,250,000
-\end{wideitemize}
-    \item Exports/imports of computers: $Y_{US,C} - Q^T_{US,C} = 100{,}000 - 50{,}000 = 50{,}000 = Q^T_{COL,C}$
-    \item Exports/imports of roses: $Y_{US,R} - Q^T_{US,R} = 9m - 2.25m = 6.75m = Q^T_{US,R}$
-\end{eqnarray*}
-
-
-\end{frame}
 
 \begin{frame}{Trade Equilibrium}
 \begin{center}
@@ -1134,44 +1389,26 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \end{center}
 \end{frame}
 
-\section{Epilogue}
-
-\begin{frame}{Some misconceptions about comparative advantage}
-\begin{wideitemize}
-    \item ``Free trade is only beneficial if a country is productive enough to compete.'' \\
-    \qquad No. Trade is beneficial if there is a comparative advantage. Absolute disadvantage does not matter.
-
-        \item ``Free trade lowers income in low-wage countries.'' \\
-    \qquad No. Trade is beneficial if there is a comparative advantage. Absolute wages do not matter.
-
-    \item ``Free trade makes us poorer because we spend money on other countries goods.'' \\
-    \qquad No. Having access to more affordable goods makes us better off by specializing and trading.
-
-    \item ``Free trade closes the income gap between poor and rich countries.'' \\
-    \qquad No. Trade raises every country’s welfare beyond autarky welfare. Per capita
-income differences remain, and depend on a country’s production possibilities.
-
-\end{wideitemize}
+\begin{frame}{Summary table}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Variable} & \textbf{United States (US)} & \textbf{Colombia (COL)} \\
+\midrule
+Labor endowment $L$ & 300 million & 54 million \\
+Unit labor requirement for computers $a_C$ & 3{,}000 & 5{,}400 \\
+Unit labor requirement for roses $a_R$ & 30 & 6 \\
+\midrule
+Opportunity cost of 1 rose: $\frac{a_R}{a_C}$ & $\frac{30}{3{,}000} = \frac{1}{100}$ & $\frac{6}{5{,}400} = \frac{1}{900}$ \\
+Opportunity cost of 1 computer: $\frac{a_C}{a_R}$ & $\frac{3{,}000}{30} = 100$ & $\frac{5{,}400}{6} = 900$ \\
+\bottomrule
+\end{tabular}
+\caption{Labor, unit requirements, and opportunity costs}
+\end{table}
     
 \end{frame}
 
-\begin{frame}{Is free trade always ideal?}
-\begin{wideitemize}
-    \item This model is quite simple. Some things it does not consider:
-
-    \begin{itemize}
-        \item \blue{Increasing returns to scale}: a country may be competitive in an industry but it requires large initial investment (R\&D, ships, planes, etc) -- temporary protection?
-
-        \item \blue{Distributional effects}: even if a country benefits in the aggregate, it could be the case that vulnerable groups are very exposed, increasing inequality
-
-        \item \blue{Price manipulation}: if a country is very large relative to the world, it may be able to manipulate the purchase price in its favor using tariffs
-        
-        \item \blue{Environmental externalities}: trade policy can be an instrument to internalize some ``bads'' to the price of ``goods''
-        \end{itemize}
-
-\end{wideitemize}
-    
-\end{frame}
 
 
 \end{document}

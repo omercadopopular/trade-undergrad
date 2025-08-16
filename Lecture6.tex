@@ -165,8 +165,8 @@
   \end{frame}
 }
 
-\title[]{International Trade: Lecture 5}
-\subtitle[]{Ricardian Trade with Multiple Goods}
+\title[]{International Trade: Lecture 6}
+\subtitle[]{Empirics of Comparative Advantage}
 \author[Góes]
 {Carlos Góes\inst{1}}
 \date{Fall 2025}
@@ -225,78 +225,99 @@
 %----------------------------------------------------------------------%
 %----------------------------------------------------------------------%
 
-\begin{frame}{The intellectual history of Ricardian Trade}
-\begin{wideitemize}
-        \item<1-> Ricardo (1817 On the Principles of Political Economy and Taxation): 2 × 2 trade with two industries and two countries
-        \item<2-> Dornbusch, Fischer and Samuelson (1977): 2 x many Ricardian trade either with many industries or with many countries, but not both
-        \item<3-> Eaton and Kortum (2002): many x many Ricardian trade with many industries and many countries
-        \end{wideitemize}
+
+\begin{frame}{Testing the Ricardian Model}
+    \begin{wideitemize}
+        \item Ricardo provides a central model that underpins our intutions about international trade
+
+        \item But very little has been done to confront its predictions with the data
+
+        \item \blue{Challenge (i):} autarky productivities and prices are unobserved
+
+        \item If we assume productivities are fixed, we can ``infer'' autarky prices as function of technology and tastes
+
+        \item Is that trivial?
+
+        \item \blue{Challenge (ii):} for a long time, the Ricardian model was purely bilateral \\ 
+        \qquad (changes with Eaton-Kortum, but that we do not cover it)
+
+    \end{wideitemize}
 \end{frame}
 
+\begin{frame}{Some problems}
+    \begin{wideitemize}
+        \item Complete specialization
 
-\begin{frame}{Ricardian Model with Multiple Goods: Preliminaries}
-\begin{wideitemize}
-        \item 2 countries $i \in \{ H, F\}$
-        \item Many goods indexed (labeled) $g \in [0,1]$
-        \item One factor of production: labor $L_i$ mobile between sectors
-        \item In country $i$, to produce one unit of good $g$, firms use $a_{i,g}$ units of labor
-        \item Key force: differences in local technology (labor productivity)
-        \item Trade balances (value of exports = value of imports)
-        \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Ricardian Model with Multiple Goods: Preliminaries}
-\begin{wideitemize}
-        \item<1-> What does it mean to have a continuum of goods $g \in [0,1]$?
-        \item What is exactly between good $0$ and good $1$? \\
-        \qquad \textcolor{gray}{good $1/2$}
-        \item<2-> But what is exactly between good $0$ and good $1/2$? \\
-        \qquad \textcolor{gray}{good $1/4$}
-        
-        \item<3-> Do you see where this is going? Each one of the lines below indexes a ``different good'':
-        
-        \begin{center}
-        \begin{tikzpicture}
-            % draw horizontal line   
-        
-            \draw[blue] (0,.95) -- (10,.95);
-        
-            % draw vertical lines
-            \foreach \x in {0,10}
-              \draw[blue] (\x cm,{.95+(.205)}) -- (\x cm,{.95-(.205)});
-            \foreach \x in {2.5,4.375,5.78125,6.8359375,7.626953125,8.22021484375,8.6651611328125,8.99887084960937,9.24915313720703,9.43686485290527,9.57764863967896,9.68323647975922,9.76242735981941,9.82182051986456,9.86636538989842,9.89977404242381,9.92483053181786,9.9436228988634,9.95771717414755,9.96828788061066,9.976215910458,9.9821619328435,9.98662144963262,9.98996608722447,9.99247456541835,9.99435592406376,9.99576694304782,9.99682520728587,9.9976189054644,9.9982141790983,9.99866063432372}
-              \draw (\x cm,{.95+(.205)}) -- (\x cm,{.95-(.205)});
-        
-            % draw nodes
-            \draw (0,0.95) node[below=.105] {\textcolor{blue}{$0$}};
-            \draw (10,0.95) node[below=.105] {\textcolor{blue}{$1$}};
-          \end{tikzpicture}
-
-    Can find a real number between two different real numbers \\ \qquad $\implies$ infinitely many goods $g \in [0,1]$!
-
-\end{center}
-\end{wideitemize}
-\end{frame}
-
-\begin{frame}{Perfect Competition, Prices and Unit Costs}
-\begin{wideitemize}
-        \item<1-> No trade barriers (for now), i.e. domestic prices are equal to prices abroad
-        \item In country $i$, firms producing good $g$ maximize profits under perfect competition:
-        \begin{equation*}
-            \max_{y_{i,g}} \pi_{i,g} = \max_{y_{i,g}} p_{g} y_{i,g} - w_i a_{i,g} y_{i,g} 
-        \end{equation*}
-
-        \item<2-> Labor is mobile $\implies$ single wage $w_i$ for workers producing every good in each country 
-
-        \item<3-> Under perfect competition, goods prices reflect unit cost:
         \begin{itemize}
-            \item If home makes $i$, its factory-gate price is $P_g = a_{i,H} w_{H}$
-            \item If foreign makes $i$, its factory-gate price is $P_g = a_{i,F} w_{F}$
+            \item Model predicts only one country ($H$ or $F$) supplies a given market
+
+            \item But that does seem to agree with the data in the level of aggregate we have
+
+            \item Even if we find non-produced goods, how can we measure productivity autarky prices?
         \end{itemize}
-        \end{wideitemize}
+
+        \item It is really hard to compare sectoral productivity across countries
+
+        \begin{itemize}
+            \item If we go by value, a Norwegian barber is 50x more productive than an Indian barbe
+            \item Is that really true?
+            \item Labor markets reflect opportunity costs
+        \end{itemize}
+
+        \item Model is very simple to begin with:
+        \begin{itemize}
+            \item In practice there multiple factors
+            \item Intermediate goods, supply chain linkages
+            \item Of course that model will not encompass all of the data
+        \end{itemize}
+
+        \item Question: can the most important mechanism be right?
+
+    \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Where will production be located?}
+
+
+\begin{frame}{Early tests}
+    \begin{wideitemize}
+        \item MacDougall (1951) used relative productivity measures to ``test'' Ricardian
+
+        \item With 2 countries in the world (UK an USA) then each country will:
+
+        \begin{blockquote}
+            “export those goods for which the ratio of its output per worker to that of the other country exceeds the ratio of its money wage rate to that of the other country.”
+        \end{blockquote}
+
+        \item lots relative labor productivities (US:UK) against relative exports to the entire world (US:UK)
+
+        \begin{itemize}
+            \item 2 × 2 Ricardian intuition suggests that this should be upward-sloping.
+            \item Nothing about how much a country will export. 
+        \end{itemize}
+        
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{MacDougall's chart}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\linewidth]{figs/MacDougall1.jpg}
+        \caption{Source: \href{https://www.jstor.org/stable/pdf/2226976.pdf}{MacDougall (1951)} }
+        \label{fig:macdouall}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{...then replicated other times}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{figs/stern1962.jpg}
+        \caption{Source: \href{https://www.jstor.org/stable/2661740?seq=1}{Stern (1962)} }
+        \label{fig:stern}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Tying the model to the data}
+
 \begin{wideitemize}
     \item<1-> \blue{Question}: which country has a comparative advantage in good $g$ if $\frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}$?
 
@@ -306,742 +327,217 @@
         w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}
     \end{equation*}
 
-    \item<3-> \blue{Prices}: price of good $g$ will be the lowest of unit costs at home or abroad:
-
-
-        \begin{equation*}
-            P_{g} = \min\{w_H a_{H,g}, w_F a_{F,g}\}  \qquad \text{ for } g \in [0,1]
-        \end{equation*}
-        
-        \end{wideitemize}
-\end{frame}
-
-
-\begin{frame}{Where will production be located?}
-\begin{wideitemize}
-    \item<1-> \blue{Assumption}: order goods $g \in [0,1]$ according to the home country's comparative advantage.
-
-     \item<2-> \blue{Define}: $A_g \equiv  a_{F,g}/ a_{H,g}$. $\implies$ $A_g$ strictly decreasing in $g$.
-
-     \begin{itemize}
-         \item $A_0= \frac{a_{F,0}}{a_{H,0}}$: home is the \blue{most productive}
-         \item $A_1= \frac{a_{F,1}}{a_{H,1}}$: home is the \blue{least productive} 
-     \end{itemize}
-
-            
-        \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Relative cost schedule}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-        \begin{axis}[
-            axis lines=left,
-            xmin=0, xmax=1.05,
-            ymin=0, ymax=1.05,
-            ylabel={$A_g$},
-            xtick={0,1},
-            ytick={0,1},
-            xticklabels={0, 1},
-            yticklabels={0, 1},
-            tick style={draw=none},
-            xticklabel style={anchor=north west, yshift=0pt},
-            yticklabel style={anchor=south east, xshift=0pt},
-            enlargelimits=false,
-            clip=false,
-            grid=major,
-            width=0.7\textwidth,
-            height=0.45\textwidth,
-            label style={font=\small},
-            tick label style={font=\small},
-        ]
-        
-
-            % Relative cost schedule
-            \addplot[red, thick, domain=0.02:1] {x^(-1/6) - 0.975};
-           
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
-        \label{fig:Ap}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Demand}
-\begin{wideitemize}
-    \item<1-> \blue{Assumption}: consumers in both countries value each good equally
-
-    \item<2-> Demand for $g$ thus depends on national income $w_iL_i$ and the price of good $g$:
-
-    \begin{equation*}
-        q_{i,g} = \frac{w_iL_i}{P_{g}}
-    \end{equation*}
-
-    \qquad \textcolor{gray}{(if you want to understand where this comes from, check handout)}
-
-    \item<3-> Note that expenditure on each good does not depend on the specific $g$:
-
-    \begin{equation*}
-        P_g q_{i,g} = w_iL_i \qquad \text{ for all goods } g
-    \end{equation*}
-
-    \item<4-> Consumers spend the same amount on each good! \textcolor{gray}{(why?)}
-
-    \item<5-> \blue{Question}: how does this relate to Cobb-Douglas preferences we saw before?
-
-    
-    \end{wideitemize}
-\end{frame}
-
-
-\begin{frame}{Equilibrium}
-\begin{wideitemize}
-    \item<1-> In equilibrium there will be some cut-off good $G$ for which:
-
-    \begin{equation*}
-        \frac{w_H}{w_F} = A_G
-    \end{equation*}
-
-     \item<2-> Since $A_g$ is decreasing in $g$, then:
-
-     \begin{itemize}
-         \item Goods $[0,G]$ will be produced at home (for them, $w_H / w_F \le A_g$)
-         \item Goods $(G,1]$ will be produced at abroad (for them, $w_H / w_F > A_g$)
-        \end{itemize}
-
-        \item<3-> Recall: trade pattern and specialization depends on Home-to-Foreign wage ratio (gap) $w_H/w_F$ 
-
-    \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Specialization}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, $w_H/w_F$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            
-            \addplot[dashed] coordinates {(0,\y) (\x,\y)};
-            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
-            \node at (axis cs:\x,-0.175) {$G$};
-            \addplot[gray] coordinates {(0,-0.1) (\x,-0.1)};
-            \node at (axis cs:\x/2,-0.075) {produced at $H$};
-            \addplot[gray] coordinates {(\x,-0.1) (1,-0.1)};
-            \node at (axis cs:( {\x + (1-\x)/2},-0.075) {produced at $F$};
-            
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
-        \label{fig: Ag}
-    \end{figure}
+    \item<3-> Countries are expected to export goods in which they have high productivity (low unit labor requirements)
+\end{wideitemize}
 
     
 \end{frame}
 
-\begin{frame}{Equilibrium determination}
+\begin{frame}{Tying the model to the data}
+
 \begin{wideitemize}
-    \item<1-> Recall:
-    \begin{itemize}
-        \item Home produces $G$ share of goods
-        \item Foreign produces $1-G$ share of goods
-        \item Consumers spend the same amount on each good
-    \end{itemize}
+    \item<1-> Golub and Hsieh (2000) take this approach to test the Ricardian theory
 
-    \item<1-> $\implies$ consumers in each country spend $G$ share of their income on goods from $H$
+    \item<2-> Recall we are expanding from the bilateral Ricardian model, so we are comparing two countries: $i$ and $j$.
 
-    \item<2-> How to find $G?$ 
+    \item<3-> Then we could run the following regressions to test predictions:
 
     \begin{eqnarray*}
-        \underbrace{w_HL_H}_{\text{income}} = \underbrace{G\times w_HL_H + G\times w_FL_F}_{\text{expenditure}} \iff w_HL_H = \frac{G}{1-G}w_FL_F
+        \ln \left( \frac{X_{i}^k}{X_{j}^k} \right) &=& \alpha_1 + \beta_1 \ln \left(\frac{a_{j}^k}{a_{i}^k} \right) + \varepsilon_1^k \\
+        \ln \left( \frac{X_{i\to j}^k}{X_{j \to i}^k} \right) &=& \alpha_2 + \beta_2 \ln \left(\frac{a_{j}^k}{a_{i}^k} \right) + \varepsilon_2^k 
     \end{eqnarray*}
-
-    \item<3-> Or, solving for $w_H / w_F$:
-
-    \begin{equation*}
-        \frac{w_H}{w_F} =  \frac{G}{1-G} \frac{L_F}{L_H}
-    \end{equation*}
+    where $X_{i}^k$ are total exports of good $k$ in country $i$; and $X_{i\to j}^k$ are bilateral exports from $i$ to $j$.
     
-    \end{wideitemize}
-\end{frame}
-
-
-\begin{frame}{Equilibrium determination}
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, $\frac{g}{1-g} \frac{L_F}{L_H}$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-            
-            \addplot[dashed] coordinates {(0,\y) (\x,\y)};
-            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
-            \node at (axis cs:\x,-0.175) {$G$};
-            \addplot[gray] coordinates {(0,-0.1) (\x,-0.1)};
-            \node at (axis cs:\x/2,-0.075) {produced at $H$};
-            \addplot[gray] coordinates {(\x,-0.1) (1,-0.1)};
-            \node at (axis cs:( {\x + (1-\x)/2},-0.075) {produced at $F$};
-            
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Relative unit labor costs $A_g = a_{H,g} / a_{F,g}$}
-        \label{fig: Ag}
-    \end{figure}
-    \end{frame}
-
- 
-\begin{frame}{The Great Doubling}
-\begin{wideitemize}
-    \item<1-> Great Doubling of the global workforce (Freeman 2006):
-    \begin{itemize}
-        \item in 1980: workforce in open economies roughly 1 billion
-        \item in 2000: workforce in open economies roughly 1.5 billion
-    \end{itemize}
-
-    \item<2-> Soviet Union collapsed, Russia now in WTO. China shifted to a market economy, now in WTO. India adopted open-market policies.
-
-    \item<3-> How does global specialization change?
-
-    \item<4-> If foreign population increases to $L_F'>L_F$ then:
-
-    \begin{equation*}
-        \frac{g}{1-g} \times \frac{L_F'}{L_H} > \frac{g}{1-g} \times \frac{L_F}{L_H} \qquad \text{ for every } g > 0
-    \end{equation*}
+    
+\end{wideitemize}
 
     
-        
-    \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Increase in Foreign Labor Supply}
+\begin{frame}{Golub and Hsieh (2000)}
 
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-
-            \pgfmathsetmacro{\zn}{0.05}       
-            \pgfmathsetmacro{\cn}{0.4}         
-            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
-            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
-
-            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
-            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
-            \node[gray] at (axis cs:\x,-0.175) {$G$};
-            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
-
-
-
-            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
-            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
-            
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Change in relative wages curve}
-        \label{fig: Ag-change}
-    \end{figure}
-\end{frame}
-
-
-\begin{frame}{Increase in Foreign Labor Supply}
-\addtocounter{framenumber}{-1}
-
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-
-            \pgfmathsetmacro{\zn}{0.05}       
-            \pgfmathsetmacro{\cn}{0.4}         
-            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
-            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
-            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
-
-            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
-            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
-            \node[gray] at (axis cs:\x,-0.175) {$G$};
-            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
-
-
-
-            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
-            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
-            
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Change in relative wages curve}
-        \label{fig: Ag-change}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Increase in Foreign Labor Supply}
-\addtocounter{framenumber}{-1}
-
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-
-            \pgfmathsetmacro{\zn}{0.05}       
-            \pgfmathsetmacro{\cn}{0.4}         
-            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
-            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
-            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
-
-            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
-            \node[gray] at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\y)};
-            \node[gray] at (axis cs:\x,-0.175) {$G$};
-            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
-
-
-            \addplot[dashed] coordinates {(0,\yn) (\xn,\yn)};
-            \node at (axis cs:-0.175,\yn) {$(w_H/w_F)'=A'_G$};
-            \addplot[dashed] coordinates {(\xn,-.1) (\xn,\yn)};
-            \node at (axis cs:\xn,-0.175) {$G'$};
-            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
-            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
-            
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Change in relative wages curve}
-        \label{fig: Ag-change}
-    \end{figure}
-
-\end{frame}
-   
-
-
-\begin{frame}{Home gains from population growth}
-\begin{wideitemize}
-    \item<1-> Foreign labor supply causes industry shutdowns at Home... \\
-    \qquad ...but raises the relative Home wage $(w_H/w_F)'>(w_H/w_F)$
-
-    \item<2-> Does welfare go up? Need to check real income $w_H / p_g$ for each product $g \in [0,1]$
+    \begin{eqnarray*}
+        \ln \left( \frac{X_{i}^k}{X_{j}^k} \right) &=& \alpha_1 + \beta_1 \ln \left(\frac{a_{j}^k}{a_{i}^k} \right) + \varepsilon_1^k \\
+        \ln \left( \frac{X_{i\to j}^k}{X_{j \to i}^k} \right) &=& \alpha_2 + \beta_2 \ln \left(\frac{a_{j}^k}{a_{i}^k} \right) + \varepsilon_2^k 
+    \end{eqnarray*}
+    
     \begin{wideitemize}
-        \item<3-> Goods $g \in [0,G']$, sourced domestically, no change: \\ $(w_H / p_g)'= w'_H / (w_H' a_{H,g}) = 1/a_{H,g} = w_H / (w_H a_{H,g}) = w_H / p_g$ 
-        \item<4-> Goods $g \in [G,1]$, sourced abroad, gains: \\ $(w_H / p_g)'= w'_H / (w_F' a_{F,g}) > w_H / (w_F a_{F,g}) = w_H / p_g$
-        \item<5-> Goods $g \in [G',G]$, pivotal (change sources), gains:
-        \begin{eqnarray*}
-            (w_H / p_g)' &\ge& (w_H / p_g) \\
-            \iff w_H' / (w_F' a_{F,g}) &\ge& w_H / (w_H a_{H,g}) \\
-            \iff w_H' / w_F'  &\ge& a_{F,g} / a_{H,g} = A_g
-        \end{eqnarray*}
-        \end{wideitemize}
+
+    \item<1-> How is this related to Ricardian theory?
+
+    \item<2-> In which does it differ importantly from the theory?
+
+    \item<3-> The intuition of the Ricardian model suggests that $\beta_1 > 0$ and $\beta_2 > 0$.
     
-    \end{wideitemize}
+    \item<4-> But we are extrapolating from a 2x2 model to multicountry data; no obvious way to interpret the results.
+
+\end{wideitemize}
+
 \end{frame}
 
-\begin{frame}{Welfare effects}
 
+\begin{frame}{Results are consistent with the Ricardian intuition}
     \begin{figure}
         \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-
-            \pgfmathsetmacro{\zn}{0.05}       
-            \pgfmathsetmacro{\cn}{0.4}         
-            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
-            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
-            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
-
-            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
-            \addplot[dashed] coordinates {(\x,\y) (1,\y)};
-            \node[gray] at (axis cs:\x,-0.175) {$G$};
-            \node[gray] at (axis cs:-0.125,\y) {$(w_H/w_F)$};
-            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\yn)};
-            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
-
-
-            \addplot[dashed] coordinates {(0,\yn) (1,\yn)};
-            \node at (axis cs:-0.1,\yn) {$(w_H/w_F)'$};
-            \addplot[dashed, gray] coordinates {(\xn,-.1) (\xn,\yn)};
-            \node at (axis cs:\xn,-0.175) {$G'$};
-            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
-            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
-
-            %fill area            
-            \path[name path=C] (axis cs:\x,\yn) -- (axis cs:1,\yn);
-            \path[name path=D] (axis cs:\x,\y) -- (axis cs:1,\y);
-
-            \addplot [
-                fill=red!20,
-                draw=none
-            ] fill between [of=C and D];
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Change in relative wages curve}
-        \label{fig: Ag-change}
+        \includegraphics[width=0.6\linewidth]{figs/golub-hsieh.jpg}
+        \caption{Source: \href{https://onlinelibrary.wiley.com/doi/epdf/10.1111/1467-9396.00217}{Golub and Hsieh (2000)} }
+        \label{fig:golub}
     \end{figure}
-
 \end{frame}
 
-   
-\begin{frame}{Welfare effects}
-\addtocounter{framenumber}{-1}
-
+\begin{frame}{Results are consistent with the Ricardian intuition}
     \begin{figure}
         \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$A_g$}, \textcolor{gray}{$\frac{g}{1-g} \frac{L_F}{L_H}$}, $\frac{g}{1-g} \frac{L_F'}{L_H}$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\z}{0.05}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{ (-\z + sqrt(\z^2 + 4*\c*\z)) / (2*\c) }
-            \pgfmathsetmacro{\y}{ \z / \x  }         
-            \addplot[red, thick, domain=0.05:1] {\z / x}; % A_g
-            \addplot[gray, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-
-            \pgfmathsetmacro{\zn}{0.05}       
-            \pgfmathsetmacro{\cn}{0.4}         
-            \pgfmathsetmacro{\xn}{ (-\zn + sqrt(\zn^2 + 4*\cn*\zn)) / (2*\cn) }
-            \pgfmathsetmacro{\yn}{ \zn / \xn  }         
-            \addplot[black, thick, domain=0.01:0.7] {x / (1 - x) * \cn}; % omega(g)
-
-            \addplot[dashed, gray] coordinates {(0,\y) (\x,\y)};
-            \addplot[dashed] coordinates {(\x,\y) (1,\y)};
-            \node[gray] at (axis cs:\x,-0.175) {$G$};
-            \node[gray] at (axis cs:-0.125,\y) {$(w_H/w_F)$};
-            \addplot[dashed, gray] coordinates {(\x,-.1) (\x,\yn)};
-            \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\x, \y)};
-
-
-            \addplot[dashed] coordinates {(0,\yn) (1,\yn)};
-            \node at (axis cs:-0.1,\yn) {$(w_H/w_F)'$};
-            \addplot[dashed, gray] coordinates {(\xn,-.1) (\xn,\yn)};
-            \node at (axis cs:\xn,-0.175) {$G'$};
-            \addplot[gray] coordinates {(0,-0.1) (\xn,-0.1)};
-            \addplot[gray] coordinates {(\xn,-0.1) (1,-0.1)};
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xn, \yn)};
-
-            %fill area            
-            \path[name path=A] (axis cs:\x,\yn) -- (axis cs:\xn,\yn);
-            \addplot [
-                name path=B,
-                domain=\x:\xn,
-                draw=none
-            ] {\z / x};
-            
-            \addplot [
-                fill=cyan!20,
-                draw=none
-            ] fill between [of=A and B];
-            
-            \path[name path=C] (axis cs:\x,\yn) -- (axis cs:1,\yn);
-            \path[name path=D] (axis cs:\x,\y) -- (axis cs:1,\y);
-
-            \addplot [
-                fill=red!20,
-                draw=none
-            ] fill between [of=C and D];
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Change in relative wages curve}
-        \label{fig: Ag-change}
+        \includegraphics[width=0.5\linewidth]{figs/golub-hsieh3.jpg}
+        \caption{Source: \href{https://onlinelibrary.wiley.com/doi/epdf/10.1111/1467-9396.00217}{Golub and Hsieh (2000)} }
+        \label{fig:golub2}
     \end{figure}
-
 \end{frame}
-   
 
-\begin{frame}{Trade Barriers and Prices}
+\begin{frame}{Caveats...}
 \begin{wideitemize}
-    \item<1-> Relax the assumption of costless trade...
-    \begin{itemize}
-        \item sellers have to pay for shipping and insurance
-        \item goods may get lost or perish along the way (e.g., avocados being shipped internationally)
-    \end{itemize}
-    \item<2-> \blue{Iceberg trade costs}: for each unit of a good to arrive at a destination, $\tau>1$ units need to be shipped from the origin country. \\
-    \qquad \textcolor{gray}{(as if goods melt away between origin and destination)}
+    \item Results are consistent with the Ricardian intuition...
 
-    \item<3-> Production at home only if cheaper to produce domestically than import, i.e.: 
+    \item ...but there are some caveats.
+
+    \item The main issue is that it takes a leap of faith to go from a 2x2 model to cross-country evidence
+
+    \item Empirically, measuring $a_i^k$ is not easy.
+
+    \begin{itemize}
+        \item Comparing different currencies.
+        \item Market exchange rates are likely to be misleading
+        \item PPP exchange rates  used instead
+        \item Think of this as ``Big Mac index''
+    \end{itemize}
+\end{wideitemize}
+
+\end{frame}
+
+\begin{frame}{A modern take...}
+\begin{wideitemize}
+    \item There are two main problems with all of the papers we have seen so far
+
+    \item First, none of them rely on a true multi-country model to know what to test
+    \begin{itemize}
+        \item Only modern papers that came out after Eaton Kortum (2002) were able to do that 
+    \end{itemize}
+
+    \item Second, they do not deal with the selection effect:
+    \begin{itemize}
+        \item Don't observe the productivity of goods that a country does not produce
+        \item Only observe productivity of goods productive enough to be produced
+    \end{itemize}
+    
+\end{wideitemize}
+
+\end{frame}
+
+
+\begin{frame}{Latent productivities}
+\begin{wideitemize}
+    \item Let $a_i^k(g)$ be the unit labor requirement of good $g$ of industry $k$ in country $i$
+
+    \item Average unit labor requirements of a country would be: 
 
     \begin{equation*}
-        w_H a_{H,g} \le \tau w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \tau  \frac{a_{F,g}}{a_{H,g}} = \tau A_g
+        \bar{a}_i^k \equiv \frac{1}{N} \sum_g  a_i^k(g)
     \end{equation*}
 
-    \item<4-> Not every good produced at home will be exported; only if:
+    \item But if country $i$ only produces goods up to $G < 1$ (as in the DFS model we saw) average \blue{observed} unit labor requirements would be:
 
-\begin{equation*}
-        \tau w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{1}{\tau} \frac{a_{F,g}}{a_{H,g}} \equiv \frac{1}{\tau} A_g
-\end{equation*}
+        \begin{equation*}
+        \tilde{a}_i^k \equiv \frac{1}{N_G} \sum_g  a_i^k(g) \qquad \text{for } g \le G  
+    \end{equation*}
+
+    \item In general $\tilde{a}_i^k \le \bar{a}_i^k$, since these are by definition the most productive products
 
     
+\end{wideitemize}
 
-    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Costinot, Donaldson and Komunjer (2012)}
+\begin{wideitemize}
+    \item Costinot, Donaldson and Komunjer (CDK, 2012) extend the multi-country Ricardian model to multiple industries
+
+    \item They show, under some assumptions, we can map unobserved productivities to observed productivities
+
+    \item Specifically, they show:
+
+    \begin{equation*}
+        \underbrace{\frac{\tilde{a}_i^k}{\tilde{a}_j^k}}_{\text{observed}} = \underbrace{\frac{\bar{a}_i^k}{\bar{a}_j^k}}_{\text{unobserved}} \times \underbrace{\left(\frac{1-\text{Import Share}_i^k}{1-\text{Import Share}_j^k}\right)^\theta}_{\text{observed}} 
+    \end{equation*}
+
+    \blue{Intuition}: more open economies (higher import shares) are able to avoid using their low productivity for some goods by importing these varieties.
+    
+\end{wideitemize}
+
 \end{frame}
 
 
-\begin{frame}{Specialization with Trade Barriers}
+
+
+\begin{frame}{Estimating equation}
 \begin{wideitemize}
-    \item<1-> Now, cut-offs:
+    \item Now they have solved both issues:
+    \begin{itemize}
+        \item They have written a multi-country multi-sector Ricardian model and derived predictions; 
+        \item They found a way to overcome the selection issue of non-observed productivities
+    \end{itemize}
+    \item They estimate the following equation:
+
+    \begin{equation*}
+    \ln \left( \frac{X_{i \to j}^k}{ 1-\text{Import Share}_i^k} \right) = \delta_{ij} + \delta^k_{i} - \theta \ln \tilde{a}_i^k + \varepsilon^k_{ij}
+    \end{equation*}
+
+    \noindent where:
 
     \begin{itemize}
-        \item Foreign will export all goods satisfying $\frac{w_H}{w_F} >  \tau A_{G_H}$, comprising  $[G_H,1]$
-        \item Home will export all goods satisfying $\frac{w_H}{w_F} \le  A_{G_F} / \tau$, comprising   $[0,G_F]$
-        \item Goods $(G_F, G_H)$ will be produced and consumed in each country but not exported
+        \item $X_{i \to j}^k$ are exports from $i$ to $j$ in industry $k$
+        \item $\tilde{a}_i^k$ is the observed unit labor requirement
+        \item $\delta_{ij}, \delta^k_{i}$ are bilateral and industry-source specific coefficients, that adjust for differences in pair-relationship (say, former colony) and industry characteristics (say, manufacturing vs services)
     \end{itemize}
+
+    \item We expect $\theta > 0$
     
-    
-    \item<2-> Again, these cut-offs are implicitly defined through a function:
+\end{wideitemize}
 
-
-\begin{equation*}
-    \frac{w_H}{w_F} =  \frac{G_H}{1-G_F} \times \frac{ L_F }{L_H}
-\end{equation*}
-
-    \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Equilibrium with Trade Costs}
+
+\begin{frame}{Results are consistent with the Ricardian predictions}
     \begin{figure}
         \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                axis lines=left,
-                xmin=0, xmax=1,
-                ymin=0, ymax=1,
-                ylabel={\textcolor{red}{$\tau A_g$}, \textcolor{blue}{$A_g / \tau$}, $w_H/w_F$},
-                xtick={0,1},
-                ytick={0,1},
-                xticklabels={0, 1},
-                xticklabel style={anchor=north west, yshift=0pt},
-                yticklabel style={anchor=south east, xshift=0pt},
-                enlargelimits=false,
-                clip=false,
-                grid=major,
-                width=12cm,
-                height=8cm,
-                every axis plot/.style={thick},
-                width=0.7\textwidth,
-                height=0.45\textwidth,
-                label style={font=\small},
-                tick label style={font=\small},
-            ]
-                       
-            \pgfmathsetmacro{\t}{1.25}       
-            \pgfmathsetmacro{\z}{0.075}       
-            \pgfmathsetmacro{\c}{0.125}         
-            \pgfmathsetmacro{\x}{(-(\z/\t) + sqrt((\z/\t)^2 + 4*\c*\z/\t)) / (2*\c)}
-            \pgfmathsetmacro{\y}{(\z / \x) / \t}
-            \pgfmathsetmacro{\xf}{\z*\t/\y}
-            \addplot[red, thick, domain=0.15:1] {( \z / x ) * \t}; %home
-            \addplot[blue, thick, domain=0.15:1] {\z / (x * \t )}; %foreign
-            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
-            
-            \addplot[gray] coordinates {(0,-0.1) (1,-0.1)};
-            \addplot[dashed] coordinates {(0,\y) (\xf,\y)};
-            \node at (axis cs:-0.15,\y) {$w_H/w_F=A_G$};
-            \addplot[dashed] coordinates {(\x,-.1) (\x,\y)};
-            \node at (axis cs:\x,-0.175) {$G_F$};
-            \node at (axis cs:\x/2,-0.075) {$H$ exports};
-            \addplot[dashed] coordinates {(\xf,-.1) (\xf,\y)};
-            \node at (axis cs:( {\x + (\xf-\x)/2},-0.075) {not traded};
-            \node at (axis cs:\xf,-0.175) {$G_H$};
-            \node at (axis cs:( {\xf + (1-\xf)/2},-0.075) {$F$ exports};
-            
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\x, \y)};
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\xf, \y)};
-
-            \end{axis}
-            \end{tikzpicture}
-        \caption{Trade equilibrium with positive trade costs $\tau$}
-        \label{fig: Ag-tariffs}
+        \includegraphics[width=0.6\linewidth]{figs/cdk1.jpg}
+        \caption{Source: \href{https://academic.oup.com/restud/article/79/2/581/1532037}{Costinot, Donaldson and Komunjer (2012)} }
+        \label{fig:cdk1}
     \end{figure}
-
-    
 \end{frame}
+
+\begin{frame}{Results are consistent with the Ricardian predictions}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\linewidth]{figs/cdk2.jpg}
+        \caption{Source: \href{https://academic.oup.com/restud/article/79/2/581/1532037}{Costinot, Donaldson and Komunjer (2012)} }
+        \label{fig:cdk2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Takeaways}
+\begin{wideitemize}
+    \item We walked through the empirics of comparative advantage
+
+    \item For the last 75 years, early and recent tests have confirmed important Ricardian intuitions
+
+    \item More rigorous tests only happened surprisingly late
+
+    \item Good example of theory + empirics being interdependent
+
+    \item It was hard to reliably test the theory while it was underdeveloped
+\end{wideitemize}
+\end{frame}
+
+
 
 \end{document}

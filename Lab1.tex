@@ -162,8 +162,8 @@
   \end{frame}
 }
 
-\title[]{International Trade: Lecture 2}
-\subtitle[]{Trade with Data}
+\title[]{International Trade: Data Lab 1}
+\subtitle[]{Intro to Python}
 \author[Góes]
 {Carlos Góes\inst{1}}
 \date{Fall 2025}
@@ -251,7 +251,7 @@
             {
                 public static void main(String args[])
                 {
-                    System.out.println("Oi!");
+                    System.out.println("Hi!");
                 }
             }
                     \end{minted}
@@ -259,7 +259,7 @@
     
     \begin{alertblock}{Python}
         \begin{minted}{python}
-            print("Oi!")
+            print("Hi!")
         \end{minted}
     \end{alertblock}
 
@@ -274,7 +274,7 @@
                     \includegraphics[scale=0.2]{figs/spyder.PNG} 
                 }
             \end{center}
-            \caption[Diagrama de Conway]{\textbf{Spyder.} Componentes do IDE. \label{fig:spyder}}
+            \caption[Diagrama de Conway]{\textbf{Spyder.} Elements of Spyder's Integrated Development Environment (IDE). \label{fig:spyder}}
         \end{figure}  
 
     
@@ -337,7 +337,7 @@
 
         \begin{minted}{python}
         
-            var = "Esse é um string"
+            var = "This is a string of characters"
             print(type(var))
         \end{minted}    
    
@@ -364,12 +364,15 @@
     \begin{frame}[fragile=singleslide]{Integers, floats, strings and booleans}
     \framesubtitle{Variable types and theoretical categorizations}
 
-        \begin{itemize}
-            \item Discrete quantitative variables: \mintinline{python}{integers}.
-            \item Continuous quantitative variables: \mintinline{python}{floats}.
-            \item Categorical qualitative variables: \mintinline{python}{booleans} or \mintinline{python}{strings}.
+        \begin{wide}
+            \item Discrete quantitative variables: \mintinline{python}{integers}. \\
+            \qquad (e.g., completed years of schooling)
+            \item Continuous quantitative variables: \mintinline{python}{floats}. \\
+            \qquad (e.g., weight in lbs)
+            \item Categorical qualitative variables: \mintinline{python}{booleans} or \mintinline{python}{strings}. \\
+            \qquad (e.g., race)
             \item Ordinal qualitative variables: \mintinline{python}{strings} or \mintinline{python}{integers}.
-        \end{itemize}
+        \end{wide}
     \end{frame}    
     
 
@@ -410,13 +413,13 @@
     \framesubtitle{String operations}
 
         \begin{itemize}
-            \item Addition:
+            \item Addition equals concatenation:
                 \begin{minted}{python}
                 str1 = "Carlos"
                 str2 = "Góes"
                 print(str1 + " " + str2)
                 \end{minted}    
-            \item Multiplication:
+            \item Multiplication equals repetition:
                 \begin{minted}{python}
                 str1 = "a"
                 print(str1 * 10)
@@ -488,15 +491,15 @@
             \item \mintinline{python}{Lists} are collections of variables defined with \mintinline{python}{[square brackets]} and elements separated by commas:
 
                 \begin{minted}{python}
-                lista1 = [2, 20.5, "Oi!", 10 < 100] 
-                print(lista1)
+                list1 = [2, 20.5, "Hi!", 10 < 100] 
+                print(list1)
                 \end{minted}    
 
             \item \mintinline{python}{Lists} are indexed from $0$ to the last element; access an element with the syntax \mintinline{python}{list_name[index]}.
             
-            \item For example, \mintinline{python}{print(lista1[0])} returns \mintinline{python}{2}.
+            \item For example, \mintinline{python}{print(list1[0])} returns \mintinline{python}{2}.
             
-            \item Meanwhile, \mintinline{python}{print(lista1[3])} returns \mintinline{python}{True}.
+            \item Meanwhile, \mintinline{python}{print(list1[3])} returns \mintinline{python}{True}.
 
         \end{itemize}       
 
@@ -509,21 +512,21 @@
             \item You can change a list element by assigning a value to a specific index:
 
                 \begin{minted}{python}
-                lista1[0]= 20 
-                print(lista1)
+                list1[0]= 20 
+                print(list1)
                 \end{minted}    
 
             \item Add an element to the list:
 
                 \begin{minted}{python}
-                lista1.append(79.2) 
-                print(lista1)
+                list1.append(79.2) 
+                print(list1)
                 \end{minted}    
 
             \item Use multiplication to repeat the contents of a list:
 
                 \begin{minted}{python}
-                lista2 = lista1 * 2 
+                lista2 = list1 * 2 
                 print(lista2)
                 \end{minted}    
 
@@ -548,8 +551,8 @@
 
                 \begin{minted}{python}
                 pessoa1 = {
-                        'nome': 'Milton Friedman',
-                        'nascimento': '31/07/1912'
+                        'name': 'Milton Friedman',
+                        'dob': '07/31/1912'
                         }
                 print(pessoa1)
                 print(pessoa1['nome'])
@@ -558,7 +561,7 @@
             \item Add an element to the dictionary:
 
                 \begin{minted}{python}
-                pessoa1.update({'nacionalidade': 'EUA'})
+                pessoa1.update({'nationality': 'USA'})
                 print(pessoa1)
                 \end{minted}    
 
@@ -601,8 +604,8 @@
     
                     \begin{minted}[fontsize=\footnotesize]{python}
                      x = np.linspace(1,10, 5)
-                     rotulo = ["a","b","c","d","e"]
-                     serie1 = pd.Series(x, name="Série1", index=rotulo)
+                     label = ["a","b","c","d","e"]
+                     serie1 = pd.Series(x, name="Series1", index=label)
                      print(serie1)
                     \end{minted}
                     
@@ -626,7 +629,7 @@
                 \item If you build your \mintinline{python}{Series} from \mintinline{python}{dictionaries}, they already come with indexes:
     
                     \begin{minted}[fontsize=\footnotesize]{python}
-                    matricula  = {
+                    gwuid  = {
                         'Carlos Goes': '06/99209',
                         "Nicolas Powidayko": '10/22290',
                         "Alexander Rabbat": '08/21346',
@@ -636,7 +639,7 @@
                         "Tom Rundal": "98/20145"
                     }
                     
-                    serie2 = pd.Series(matricula)
+                    serie2 = pd.Series(gwuid)
                     print(serie2)
 
                     \end{minted}
@@ -656,9 +659,9 @@
                     \begin{minted}[fontsize=\footnotesize]{python}
                      x = np.linspace(1,10, 5)
                      y = np.linspace(1,20, 5)
-                     rotulo = ["a","b","c","d","e"]
-                     serie1 = pd.Series(x, name="Série1", index=rotulo)
-                     serie2 = pd.Series(y, name="Série2", index=rotulo)
+                     label = ["a","b","c","d","e"]
+                     serie1 = pd.Series(x, name="Series1", index=label)
+                     serie2 = pd.Series(y, name="Series2", index=label)
                      
                      df = pd.DataFrame(data=[serie1, serie2])
                     \end{minted}
@@ -667,7 +670,7 @@
                 
                 \begin{minted}[fontsize=\footnotesize]{python}
                     print(df["a"])
-                    print(df.loc["Série1"])
+                    print(df.loc["Series1"])
                 \end{minted}
 
                 \item And transpose (flip) the data:
@@ -701,30 +704,30 @@
                 \item Let’s create a \mintinline{python}{DataFrame} with several attributes:
 
                     \begin{minted}[fontsize=\tiny]{python}
-                    matricula = pd.Series(matricula)
+                    gwuid = pd.Series(gwuid)
                     
-                    curso = pd.Series({
-                            'Carlos Goes': 'Economia',
-                            "Nicolas Powidayko": 'Economia',
-                            "Alexander Rabbat": 'Ciência da Computação',
-                            "Dani Alaino": 'Ciência da Computação',
-                            "Lya Nikate": 'Ciência da Computação',
-                            "Niz Borroz": 'Estatística',
-                            "Tom Rundal": "Ciência da Computação"
+                    major = pd.Series({
+                            'Carlos Goes': 'Economics',
+                            "Nicolas Powidayko": 'Economics',
+                            "Alexander Rabbat": 'Computer Science',
+                            "Dani Alaino": 'Computer Science',
+                            "Lya Nikate": 'Computer Science',
+                            "Niz Borroz": 'Statistics',
+                            "Tom Rundal": "Computer Science"
                             })
 
-                    ira = pd.Series({
-                            'Carlos Goes': 5.0,
-                            "Nicolas Powidayko": 4.8,
+                    gpa = pd.Series({
+                            'Carlos Goes': 4.0,
+                            "Nicolas Powidayko": 3.8,
                             "Alexander Rabbat": 3.8,
-                            "Dani Alaino": 4.4,
-                            "Lya Nikate": 4.3,
-                            "Niz Borroz": 4.0,
-                            "Tom Rundal": 4.0
+                            "Dani Alaino": 3.4,
+                            "Lya Nikate": 3.3,
+                            "Niz Borroz": 3.0,
+                            "Tom Rundal": 3.0
                             })
 
-                    lista = [matricula, curso, ira]
-                    df = pd.DataFrame(lista, index=['matricula', 'curso', 'ira']).T
+                    list = [gwuid, major, gpa]
+                    df = pd.DataFrame(list, index=['matricula', 'major', 'ira']).T
                     \end{minted}
         
             \end{itemize}             
@@ -738,148 +741,19 @@
     
                 \item How to extract the attributes of Carlos Goes? \mintinline{python}{df.loc["Carlos Goes"]}
 
-                \item How to extract all registration numbers? \mintinline{python}{df["matricula"]}
+                \item How to extract all registration numbers? \mintinline{python}{df["gwuid"]}
                 
                 \item How to extract the data for all Computer Science students?
                 
                 \begin{itemize}
                     \item \textit{Boolean masking}!
-                    \item Try: \mintinline{python}{print(df["curso"] == "Ciência da Computação")}
-                    \item And now like this: \mintinline{python}{print(df[ df["curso"] == "Ciência da Computação" ])}
+                    \item Try: \mintinline{python}{print(df["major"] == "Computer Science")}
+                    \item And now like this: \mintinline{python}{print(df[ df["major"] == "Computer Science" ])}
                     \item What happened?
                 \end{itemize}
         
             \end{itemize}             
 
         \end{frame}    
-            
-        \subsection{How to import a file?}
-
-        \begin{frame}[fragile=singleslide]{Introdução ao Pandas}
-        \framesubtitle{How to import a file?}
-            
-             \begin{itemize}
-    
-                \item Answer: it depends on the type of file you are importing.
-                
-                \item File types:
-                
-                    \begin{itemize}
-                        \item \textbf{Spreadsheet}: .xls, .xlsx, etc.
-                        \item \textbf{Text}: .txt, .csv, .tsv, etc.
-                        \item \textbf{JSON} or \textbf{SQL}: .json, .sql
-                        \item Others...
-                    \end{itemize}
-                    
-            \end{itemize}             
-    
-        \end{frame}        
-
-        \begin{frame}[fragile=singleslide]{Introdução ao Pandas}
-        \framesubtitle{How to import a file?}
-            
-             \begin{itemize}
-    
-                \item Here we will work with a text file, which is very common in data analysis.
-
-                \item Visit this website and see how the data are organized: \url{https://raw.githubusercontent.com/omercadopopular/cgoes/master/piketty/fdatabasetax.csv}
-
-                \item Now let’s import it:
-                
-                \begin{minted}[fontsize=\footnotesize]{python}
-                url = "https://raw.githubusercontent.com/      \
-                       omercadopopular/cgoes/master/piketty/   \
-                       fdatabasetax.csv"
-                
-                piketty = pd.read_csv(url)
-                print(piketty.head())
-                \end{minted}
-                
-                    
-            \end{itemize}             
-    
-        \end{frame}        
-        \subsection{How to extract descriptive statistics?}
-
-        \begin{frame}[fragile=singleslide]{Introdução ao Pandas}
-        \framesubtitle{How to extract descriptive statistics?}
-            
-             \begin{itemize}
-    
-                \item Mean, median and quartiles
-                
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                     estd = pd.DataFrame([piketty.mean(),
-                                         piketty.min(),
-                                         piketty.quantile(0.25),
-                                         piketty.median(),
-                                         piketty.quantile(0.75)
-                                         piketty.max()],
-                                         
-                                         index=['média', 'min',
-                                                'Q1', 'mediana,
-                                                'Q3', 'max'])
-                     
-                     print(estd)
-                    \end{minted}
-                
-                \item Or:
-                
-                
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                     piketty.describe()
-                    \end{minted}
-                
-                    
-            \end{itemize}             
-
-    \end{frame}        
-
-        \subsection{How to limit the sample?}
-        
-        \begin{frame}[fragile=singleslide]{Introdução ao Pandas}
-        \framesubtitle{How to limit the sample?}
-            
-             \begin{itemize}
-    
-                \item Country
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                     australia = piketty[
-                        piketty['country'] == "Australia"
-                     ]
-                    \end{minted}
-
-                \item Year
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                     y2000 = piketty[ piketty['year'] == 2000 ]
-                    \end{minted}
-                    
-            \end{itemize}             
-
-    \end{frame}        
-
-        \subsection{How to limit the sample?}
-        
-        \begin{frame}[fragile=singleslide]{Introdução ao Pandas}
-        \framesubtitle{How to limit the sample?}
-            
-             \begin{itemize}
-    
-                \item Grouping (aggregating) by categories
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                    mean = (piketty
-                            .groupby('country')
-                            .mean())
-                    \end{minted}
-                    \begin{minted}[fontsize=\footnotesize]{python}
-                    sum = (piketty
-                            .groupby('country')
-                            .sum())
-                    \end{minted}
-                    
-            \end{itemize}             
-
-    \end{frame}           
-    
     
 \end{document}

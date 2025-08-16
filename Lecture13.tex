@@ -40,7 +40,6 @@
 \usepackage{graphicx}
 \usepackage{dcolumn}
 \usepackage{bbm}
-\usepackage{emoji}
 \usepackage[style=authoryear,sorting=nyt,uniquename=false]{biblatex}
 
 \addbibresource{references.bib} 
@@ -227,6 +226,300 @@
 
 \section{Intro and recap}
 
+\begin{frame}{So far\ldots}
+\begin{wideitemize}
+  \item \textbf{Ricardian:} technology (unit requirements) $\Rightarrow$ comparative advantage, straight-line PPF
+  \item \textbf{Specific-Factors (SFM):} short run, mobile labor, sector-specific capital $\Rightarrow$ distributional effects
+  \item \textbf{Heckscher–Ohlin (HO):} factor endowments $\Rightarrow$ pattern of trade; Stolper–Samuelson, Rybczynski
+  \item \textbf{STM lens:} preferences + PPF + world prices $\Rightarrow$ production, consumption, welfare
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{This class}
+\begin{wideitemize}
+  \item Wrap-up: Ricardian, SFM, and Heckscher–Ohlin $\rightarrow$ unified \emph{Standard Trade Model} (STM)
+  \item Domestic \& world \textbf{relative supply} (RS) and \textbf{relative demand} (RD)
+  \item Terms of Trade (ToT), growth bias, and trade policies (intuition)
+  \item \textbf{Intro to empirical gravity} (structural form + practical spec). Data Lab will go hands-on later.
+\end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Key STM objects and notation}
+\begin{wideitemize}
+  \item Two goods: $C$ (cloth) and $T$ (tech/food). Relative price: $p \equiv P_C/P_T$
+  \item Domestic \textbf{relative supply:} $RS(p) \equiv \frac{Q_C(p)}{Q_T(p)}$
+  \item Domestic \textbf{relative demand:} $RD(p) \equiv \frac{D_C(p,Y)}{D_T(p,Y)}$
+  \item World equilibrium: $p^{w}$ s.t. $RS^{\text{world}}(p^{w})=RD^{\text{world}}(p^{w})$
+  \item Terms of Trade (Home): $\text{ToT}_H = \frac{P_{\text{exports}}}{P_{\text{imports}}}$
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{From PPF to RS}
+\begin{columns}[T]
+\begin{column}{0.58\textwidth}
+\begin{wideitemize}
+  \item Producer chooses $(Q_C,Q_T)$ to maximize $P_C Q_C + P_T Q_T$ over the PPF
+  \item Slope at optimum: $MRT_{C,T} = \frac{dQ_T}{dQ_C} = -\frac{P_C}{P_T}=-p$
+  \item As $p$ rises, production tilts to $C$ $\Rightarrow$ \textbf{RS is upward sloping}
+  \item With kinks (specialization), RS has flat segments/jumps
+\end{wideitemize}
+\end{column}
+\begin{column}{0.38\textwidth}
+\centering
+%\includegraphics[width=\linewidth]{figs/ppf_tangency_to_isorevenue.pdf}\\[2mm]
+%\includegraphics[width=\linewidth]{figs/domestic_RS_from_ppf.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{From preferences to RD}
+\begin{columns}[T]
+\begin{column}{0.58\textwidth}
+\begin{wideitemize}
+  \item Consumer chooses $(D_C,D_T)$ to maximize $U(C,T)$ s.t. $P_C D_C + P_T D_T = Y$
+  \item As $p$ rises, $C$ becomes relatively expensive $\Rightarrow$ \textbf{RD falls} in $p$
+  \item With homothetic preferences, $RD(p)$ does not shift with $Y$ (only with tastes)
+  \item Example (CES with elasticity $\sigma$):
+  \[
+    RD(p)=\frac{D_C}{D_T}
+      =\frac{\alpha}{1-\alpha}\,p^{-\sigma}
+  \]
+\end{wideitemize}
+\end{column}
+\begin{column}{0.38\textwidth}
+\centering
+%\includegraphics[width=\linewidth]{figs/domestic_RD_curve.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Domestic equilibrium and gains from trade}
+\begin{columns}[T]
+\begin{column}{0.58\textwidth}
+\begin{wideitemize}
+  \item \textbf{Autarky:} $p^A$ at $RS(p)=RD(p)$
+  \item \textbf{With trade:} price $p^w$ pins production at RS and consumption on budget line with slope $-p^w$
+  \item \textbf{Gains:} trade moves consumption to higher indifference curve if $p^w \neq p^A$
+\end{wideitemize}
+\end{column}
+\begin{column}{0.38\textwidth}
+\centering
+%\includegraphics[width=\linewidth]{figs/autarky_RS_RD.pdf}\\[2mm]
+%\includegraphics[width=\linewidth]{figs/trade_budget_and_IC.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{World RS and RD}
+\begin{wideitemize}
+  \item \textbf{World RS:} (roughly) horizontal aggregation of country supplies $\Rightarrow RS^{W}(p)$ is upward sloping with plateaus at specialization ranges
+  \item \textbf{World RD:} aggregation of demands; with homothetic preferences, same shape as domestic RD
+  \item \textbf{World price $p^w$:} intersection $RS^{W}(p)$ and $RD^{W}(p)$
+\end{wideitemize}
+\vspace{2mm}
+\centering
+%\includegraphics[width=0.7\textwidth]{figs/world_RS_RD_equilibrium.pdf}
+\end{frame}
+
+\begin{frame}{Shocks in the STM: what moves what?}
+\begin{wideitemize}
+  \item \textbf{Biased growth in Home}
+    \begin{itemize}
+      \item Export-biased (toward $C$) $\Rightarrow$ shifts $RS_H$ out in $C$ direction $\Rightarrow$ tends to \emph{lower} $p^w$ (worsen Home ToT)
+      \item Import-biased $\Rightarrow$ tends to \emph{raise} $p^w$ (improve Home ToT)
+    \end{itemize}
+  \item \textbf{Foreign shocks} (growth, policy, preference) shift $RS^W$/$RD^W$ and thus $p^w$
+  \item \textbf{Rare case:} Immiserizing growth if ToT deterioration outweighs production gains (needs very steep RD and big growth)
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Trade policies in the STM (large country intuition)}
+\begin{wideitemize}
+  \item \textbf{Tariff on imports:} raises domestic relative price of import good $\Rightarrow$ moves along RS/RD; for a \emph{large} country, can improve ToT but creates deadweight loss
+  \item \textbf{Export subsidy:} reduces ToT (foreign price falls for our export good); always welfare-reducing under standard assumptions
+  \item \textbf{Quantifying effects} needs elasticities $\Rightarrow$ gravity (next)
+\end{wideitemize}
+\end{frame}
+
+% ---------------------------
+% Gravity — Concepts
+% ---------------------------
+
+\begin{frame}{Gravity: Physics vs. Economics}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Newton's Law of Gravitation}
+\[
+F_{ij} \;=\; G\,\frac{m_i\,m_j}{r_{ij}^{\,2}}
+\]
+\begin{wideitemize}
+  \item $m_i, m_j$: physical masses
+  \item $r_{ij}$: distance between objects
+  \item $G$: universal gravitational constant
+\end{wideitemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Trade Gravity (reduced form)}
+\[
+X_{ij} \;=\; K \,\frac{Y_i\,Y_j}{d_{ij}^{\,\theta}}
+\]
+\begin{wideitemize}
+  \item $Y_i, Y_j$: \emph{economic masses} (GDP/total expenditure)
+  \item $d_{ij}$: bilateral distance (proxy for trade costs)
+  \item $\theta>0$: trade‐cost elasticity (empirical)
+  \item $K$: scaling constant / fixed effects
+\end{wideitemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{From DFS with trade costs to a gravity equation (setup)}
+\small
+\textbf{Environment (DFS):}
+\begin{wideitemize}
+  \item Two countries $i,j$; unit interval of goods $g\in[0,1]$ ordered by comparative advantage. Technology summarized by $A_g \equiv a_{j,g}/a_{i,g}$, strictly decreasing in $g$. {\footnotesize (sorting \& unit costs) } \,\,\textit{Pg = min\{$w_i a_{i,g},\, w_j a_{j,g}$\}}.  \,\,{\scriptsize \textcolor{gray}}
+  \item Iceberg trade costs $\tau_{ij}>1$: one unit delivered requires $\tau_{ij}$ shipped. {\scriptsize  }
+  \item Identical, homothetic (equal-weight) preferences $\Rightarrow$ constant spending density over the unit interval of goods. {\scriptsize \textcolor{gray}}
+\end{wideitemize}
+
+\textbf{Export condition:} $i$ is the cheapest \emph{at destination $j$} iff
+\[
+\tau_{ij}\,w_i a_{i,g} \;\le\; w_j a_{j,g}
+\quad\Longleftrightarrow\quad
+A_g \;\equiv\; \frac{a_{j,g}}{a_{i,g}} \;\ge\; \tau_{ij}\,\frac{w_i}{w_j}.
+\]
+Thus $i$ sells to $j$ all goods with $A_g$ above a cutoff; equivalently, $j$ buys from $i$ a share of goods
+\[
+s_{ij} \;=\; \Pr\!\left[A_g \ge \tau_{ij}\frac{w_i}{w_j}\right].
+\]
+{\scriptsize \textcolor{gray}{(Trade-cost inequalities and export cutoffs) }}
+
+\textbf{Value of imports by $j$ from $i$:}
+\[
+X_{ij} \;=\; s_{ij}\,E_j,\qquad \text{with }E_j=w_j L_j \text{ (national expenditure/income).}
+\]
+{\scriptsize \textcolor{gray}{(balanced spending across goods; income/expenditure identity)}}
+
+\end{frame}
+
+\begin{frame}{A one-line gravity from DFS (Pareto trick)}
+\small
+\textbf{Assumption on technology dispersion (for tractability):}
+Let the relative productivity $A_g$ have a Pareto tail with shape $\theta>0$:
+\[
+\Pr[A_g \ge a] = a^{-\theta}\quad \text{for } a\ge 1.
+\]
+Then the export \emph{share} of goods that $i$ sells to $j$ is
+\[
+s_{ij}=\Pr\!\left[A_g \ge \tau_{ij}\frac{w_i}{w_j}\right]
+= \big(\tau_{ij}\tfrac{w_i}{w_j}\big)^{-\theta}.
+\]
+\textbf{Trade flow:}
+\[
+\boxed{\,X_{ij} \;=\; E_j\;\tau_{ij}^{-\theta}\;\Big(\frac{w_i}{w_j}\Big)^{-\theta}\,}
+\quad\text{with } E_j=w_j L_j.
+\]
+
+\textbf{From structure to empirical gravity:}
+\begin{wideitemize}
+  \item Set $\tau_{ij}=d_{ij}^{\kappa}\times\text{(other frictions)} \;\Rightarrow\; X_{ij}\propto d_{ij}^{-\kappa\theta}$. 
+  \item Relative wages $w_i/w_j$ (which in DFS adjust to clear trade and depend on global cutoffs) are absorbed by exporter/importer fixed effects; with many partners this is the “multilateral resistance” idea. So in practice:
+  \[
+  X_{ij} \;=\; \underbrace{\phi_i}_{\text{exp.\ FE}} \;\underbrace{\psi_j}_{\text{imp.\ FE}}\; d_{ij}^{-\kappa\theta}\;\times\;(\text{observable cost shifters}) .
+  \]
+  \item Normalizing $\phi_i\propto Y_i$ and $\psi_j\propto Y_j$ yields the classroom gravity form 
+  $X_{ij}=K\,\dfrac{Y_i Y_j}{d_{ij}^{\,\theta^\prime}}$ with $\theta^\prime=\kappa\theta$.
+\end{wideitemize}
+
+\end{frame}
+
+\begin{frame}{Why gravity?}
+\begin{wideitemize}
+  \item Connects trade flows to economic size and trade costs
+  \item \textbf{Workhorse} for counterfactuals (tariffs, borders, infrastructure) and for mapping STM shocks to data
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Structural gravity (Anderson–van Wincoop)}
+\begin{wideitemize}
+  \item \textbf{Theory-consistent form:}
+  \[
+   X_{ij}=\frac{Y_i\,E_j}{Y_W}\left(\frac{\tau_{ij}}{\Pi_i P_j}\right)^{1-\sigma}
+  \]
+  where $Y_i$ is production, $E_j$ expenditure, $\tau_{ij}$ bilateral costs, $\sigma$ elasticity of substitution,
+  $\Pi_i$ outward MR, $P_j$ inward MR.
+  \item \textbf{Empirical implementation (PPML):}
+  \[
+   X_{ij}=\exp\!\left[\beta_1\ln \text{dist}_{ij}+\beta_2\text{border}_{ij}+\cdots
+   + \delta^{S}_{i} + \delta^{D}_{j}\right]+\varepsilon_{ij}
+  \]
+  with exporter and importer (often exporter-year/importer-year) fixed effects absorbing $Y_i, E_j$ and MR terms.
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Gravity: estimation notes (for Data Lab)}
+\begin{wideitemize}
+  \item \textbf{Use PPML}, not OLS on $\ln X_{ij}$: handles zeros and heteroskedasticity
+  \item Include \textbf{high-dimensional FEs}: exporter-year and importer-year (or 3-way when panel)
+  \item Standard cost proxies: $\ln$ distance, contiguity, common language, colonial ties, RTA, WTO, tariffs, NTMs
+  \item \textbf{Elasticity of trade costs:} $1-\sigma$ scales coefficients; to back out $\sigma$ use separate price/markups or literature priors
+\end{wideitemize}
+\end{frame}
+
+% ---------------------------
+% Applications (intuition)
+% ---------------------------
+\begin{frame}{Putting STM $\rightarrow$ gravity together}
+\begin{wideitemize}
+  \item A \textbf{Home export-biased productivity shock} shifts $RS_H$ right
+  \item World $p^w$ falls for export good (ToT $\downarrow$ for Home)
+  \item In gravity, $\tau_{ij}$ proxies (infrastructure, RTAs, tariffs) shift bilateral $X_{ij}$
+  \item Combine: use gravity to \textbf{measure elasticities}, then map STM shocks to quantitative changes in $X_{ij}$ and welfare
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{In-class exercise (short)}
+\begin{wideitemize}
+  \item Sketch $RS$/$RD$ for a country with:
+  \begin{itemize}
+    \item (i) HO endowments that favor $C$; (ii) preferences CES with $\sigma>1$
+  \end{itemize}
+  \item Identify autarky $p^A$. Suppose world $p^w>p^A$. Mark production, consumption, and trade bundle.
+  \item Now apply a small import tariff on $T$. Show production and consumption wedges and discuss ToT vs. DWL.
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{What to remember}
+\begin{wideitemize}
+  \item STM unifies technology/endowments + preferences via $RS$–$RD$
+  \item ToT is the critical link from world prices to welfare
+  \item Gravity is the empirical bridge: it maps frictions to flows (and elasticities) for policy counterfactuals
+\end{wideitemize}
+\end{frame}
+
+% ---------------------------
+% (Optional) Appendix slides
+% ---------------------------
+\begin{frame}{Appendix: quick algebra (CES demand)}
+\small
+With CES utility $U=\left[\alpha C^{\frac{\sigma-1}{\sigma}}+(1-\alpha)T^{\frac{\sigma-1}{\sigma}}\right]^{\frac{\sigma}{\sigma-1}}$ and income $Y$:
+\[
+  D_C=\alpha \left(\frac{P_C}{P}\right)^{-\sigma}\frac{Y}{P_C},\quad
+  D_T=(1-\alpha)\left(\frac{P_T}{P}\right)^{-\sigma}\frac{Y}{P_T}
+\]
+\[
+  RD(p)=\frac{D_C}{D_T}=\frac{\alpha}{1-\alpha}\,p^{-\sigma}
+\]
+\end{frame}
+
+\begin{frame}{Appendix: welfare and ToT (Home)}
+\small
+\begin{wideitemize}
+  \item Welfare increases if a shock raises the budget line at the chosen consumption (higher $p^w$ for export good, holding PPF)
+  \item Large-country tariff: first-order ToT gain vs. second-order efficiency loss $\Rightarrow$ optimal tariff $\propto 1/\varepsilon^{*}$ (foreign export supply elasticity)
+\end{wideitemize}
+\end{frame}
 
 
 \end{document}
