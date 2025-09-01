@@ -771,12 +771,10 @@ We have now solved for all endogenous objects in terms of parameters.
 %==================================================================
 
 
-Our goal is to solve for allocations $\{L_{i,C}, K_{i,C}, L_{i,T}, K_{i,T}\}_{i\in\{H,F\}}$ and prices $\{P_{C}/P_T, w_i /r_i\}$, which are all endogenous objects. The difference now is that we \textbf{cannot} find a closed form solution with pen and paper. Instead, we will use a computer algorithm to find the solution. For notational convenience, let us call $p \equiv P_{C}/P_T$ and $\omega = w_i /r_i$
+Our goal is to solve for allocations $\{L_{i,C}, K_{i,C}, L_{i,T}, K_{i,T}\}_{i\in\{H,F\}}$ and prices $\{P_{C}/P_T, w_i /r_i\}$, which are all endogenous objects. The difference now is that we \textbf{cannot} find a closed form solution with pen and paper. Instead, we will use a computer algorithm to find the solution. For notational convenience, let us call $p \equiv P_{C}/P_T$ (this is the same as setting $P_T=1$ to be the numeraire of this economy) and $\omega = w_i /r_i$
 
+First, note that the following conditions still hold under free trade:
 
-%----------------------------------------------------------
-\paragraph{1.  Factor–price ratios within every country}
-%----------------------------------------------------------
 \[
 \frac{K_{i,C}}{L_{i,C}} = 
       \underbrace{\frac{\beta_C}{1-\beta_C}}_{a_C}\;
@@ -785,118 +783,73 @@ Our goal is to solve for allocations $\{L_{i,C}, K_{i,C}, L_{i,T}, K_{i,T}\}_{i\
 \frac{K_{i,T}}{L_{i,T}} = 
       \underbrace{\frac{\beta_T}{1-\beta_T}}_{a_T}\;
       \omega,
-\qquad a_T<a_C.
-\tag{FP}
+\qquad a_T>a_C.
 \]
 
-%----------------------------------------------------------
-\paragraph{2.  Relative good price and \(\omega\)}
-%----------------------------------------------------------
-Using the two MPL conditions in each country,
-\[
-p
+\begin{equation*}
+    P_C/P_T \equiv p
    =\underbrace{\frac{(1-\beta_T)^{1-\beta_T}\beta_T^{\beta_T}}
                       {(1-\beta_C)^{1-\beta_C}\beta_C^{\beta_C}}}_{\Phi}
       \;\omega^{\,\beta_T-\beta_C},
-\qquad
-\omega
-   =\Bigl(\tfrac{p}{\Phi}\Bigr)^{1/(\beta_T-\beta_C)}.
-\tag{GP}
-\]
+\iff
+\omega(p) \equiv \Bigl(\tfrac{p}{\Phi}\Bigr)^{1/(\beta_T-\beta_C)}
+\end{equation*}
 
-%----------------------------------------------------------
-\paragraph{3.  Introduce one \emph{world} labour share}
-%----------------------------------------------------------
-Let
-\[
-\ell
- \equiv\frac{L_{C}^W}{\bar L^W},
-\qquad
-\bar L^W\equiv\bar L_H+\bar L_F,
-\qquad
-\bar K^W\equiv\bar K_H+\bar K_F.
-\]
-Then \(L_{C}^W=\ell\bar L^W\) and
-\(L_{T}^W=(1-\ell)\bar L^W\).
+Using equation \eqref{eq: constrants-ratio} and replacing from \eqref{eq: capital-labor}:
 
-%----------------------------------------------------------
-\paragraph{4.  World capital constraint pins down \(\omega\)}
-%----------------------------------------------------------
-Aggregating the FP ratios:
-\[
-\frac{\bar K^W}{\bar L^W}
-   =\omega\Bigl[a_C\,\ell + a_T(1-\ell)\Bigr]
-   \quad\Longrightarrow\quad
-\boxed{\;
-\omega
-  =\frac{\bar K^W/\bar L^W}{a_C\,\ell+a_T(1-\ell)}.
-}
-\tag{FR}
-\]
+\begin{equation*}
+   \bar{K}_i = \frac{K_{i,C}}{L_{i,C}} \times L_{i,C} + \frac{K_{i,T}}{L_{i,T}} \times (\bar{L}_i-L_{i,C}) \iff  \bar{K}_i  = a_C\times \omega  \times L_{i,C} + a_T \times \omega \times (\bar{L}_i-L_{i,C})
+\end{equation*}
 
-%----------------------------------------------------------
-\paragraph{5.  World relative \emph{supply}}
-%----------------------------------------------------------
-\[
-RS(\ell)
-  \;=\;
-  \frac{Y_C^W}{Y_T^W}
-  =\frac{(a_C\omega)^{\beta_C}(\ell\bar L^W)^{1-\beta_C}}
-         {(a_T\omega)^{\beta_T}[(1-\ell)\bar L^W]^{1-\beta_T}}
-  =\frac{a_C^{\beta_C}}{a_T^{\beta_T}}
-     \bigl[\omega(\ell)\bigr]^{\beta_C-\beta_T}
-     \frac{\ell}{1-\ell}.
-\tag{RS}
-\]
+\noindent solving for $L_{i,C}$, we can write labor shares as a function of $\omega$ and, therefore, relative prices $p$:
 
-%----------------------------------------------------------
-\paragraph{6.  World relative \emph{demand}}
-%----------------------------------------------------------
-Country incomes are
-\(Y_i=w\bar L_i+r\bar K_i\).
-Cobb–Douglas demand implies
-\[
-RD(p)=\frac{\alpha_HY_H+\alpha_FY_F}
-            {(1-\alpha_H)Y_H+(1-\alpha_F)Y_F}\;
-      \frac{1}{p}
-      =\Gamma\;p^{-1},
-\]
-where \(\Gamma>0\) is \emph{constant} for a given \(\omega\).
+\begin{equation*}\label{eq: lc}
+    L_{i,C}(p) = \frac{\bar{K}_i - a_T \times \omega(p) \times \bar{L}_i}{(a_C- a_T) \times \omega(p)}, \qquad L_{i,T}(p) = \bar{L}_i - L_{i,C}(p)
+\end{equation*}
 
-%----------------------------------------------------------
-\paragraph{7.  Market clearing \(RS(\ell)=RD(p)\)}
-%----------------------------------------------------------
-Insert \(\omega(\ell)\) from (FR) into \(RS(\ell)\),
-then substitute \(p=\Phi\,\omega^{\beta_T-\beta_C}\) from (GP).
-After cancellation of the common factor
-\(\bigl[a_C\ell+a_T(1-\ell)\bigr]^{\beta_T-\beta_C}\) we get
-\[
-\boxed{%
-\frac{\ell}{1-\ell}
-  \;=\;\frac{\Gamma}{\Phi}\;
-       \frac{a_T^{\beta_T}}{a_C^{\beta_C}} }.
-\tag{WC}
-\]
-Because the right-hand side is a \emph{number}, 
-\[
-\ell^\ast
-  =\frac{ \Gamma a_T^{\beta_T}/( \Phi a_C^{\beta_C}) }
-         { 1 + \Gamma a_T^{\beta_T}/( \Phi a_C^{\beta_C}) }.
-\]
+Now note that we can write the production function in sector $g$ as:
 
-%----------------------------------------------------------
-\paragraph{8.  Equilibrium prices}
-%----------------------------------------------------------
-\[
-\omega^\ast
-  =\frac{\bar K^W/\bar L^W}
-         {a_C\ell^\ast+a_T(1-\ell^\ast)},
-\qquad
-p^\ast
-  =\Phi\,[\omega^\ast]^{\beta_T-\beta_C}.
-\]
-All sectoral inputs and outputs in each country then follow from
-\((\ell^\ast,\omega^\ast)\) and the FP relations.
+\begin{equation*}
+    Y_{i,g} = K_{i,g}^{\beta_g} L_{i,g}^{1-\beta_g} = \left(\frac{K_{i,g}}{L_{i,g}}\right)^{\beta_g} L_{i,g} =  \left(a_g \times \omega\right)^{\beta_g} L_{i,g} 
+\end{equation*}
+
+So output in each country-sector is a function of relative prices:
+
+\begin{equation*}
+    Y_{i,g}(p) =  \left(a_g \times \omega(p) \right)^{\beta_g} L_{i,g}(p) 
+\end{equation*}
+
+So we can then characterize the relative supply function as a function of relative prices:
+
+\begin{equation*}
+    RS(p) = \frac{Y_{H,C}\left(p\right) + Y_{F,C}\left(p\right)}{Y_{H,T}\left(p\right) + Y_{F,T}\left(p\right)}
+\end{equation*}
+
+From demand functions:
+
+\begin{equation*}
+    Q_{i,C} = \alpha  \frac{I_i}{P_{C}}, \qquad Q_{i,T} = (1-\alpha) \frac{I_i}{P_{T}}
+\end{equation*}
+
+Therefore:
+
+\begin{equation*}
+    \frac{Q_{H,C} + Q_{F,C} }{Q_{H,T}  + Q_{F,T} } = \frac{\alpha I_H/P_C + \alpha I_F/P_C}{(1-\alpha) I_H/P_T + (1-\alpha) I_F/P_T} = \frac{\alpha}{1-\alpha} \frac{I_H + I_F}{I_H + I_F} \frac{1}{P_C/P_T}
+\end{equation*}
+
+So we can express relative demand as a function of prices:
+
+\begin{equation*}
+    RD(p) = \frac{\alpha}{1-\alpha} \frac{1}{p}
+\end{equation*}
+
+Defining the excess demand function:
+
+\begin{equation*}
+    ED(p) =  RS(p) - RD(p)
+\end{equation*}
+
+we can then write a numerical solver that searches for the equilibrium price $p^*$ that sets $ED(p^*)=0$ and pins down relative factor prices $\omega(p^*)$. 
 
 \end{document}
 

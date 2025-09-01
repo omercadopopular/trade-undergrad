@@ -228,21 +228,881 @@
 
 \begin{frame}{So far\ldots}
 \begin{wideitemize}
-  \item \textbf{Ricardian:} technology (unit requirements) $\Rightarrow$ comparative advantage, straight-line PPF
-  \item \textbf{Specific-Factors (SFM):} short run, mobile labor, sector-specific capital $\Rightarrow$ distributional effects
-  \item \textbf{Heckscher–Ohlin (HO):} factor endowments $\Rightarrow$ pattern of trade; Stolper–Samuelson, Rybczynski
-  \item \textbf{STM lens:} preferences + PPF + world prices $\Rightarrow$ production, consumption, welfare
+  \item \blue{Ricardian:} differences in technology induce comparative advantage; constant returns
+  \item<2-> \blue{Specific-Factors:} specific factors $\rightarrow$ decreasing returns $\rightarrow$ distributional effects
+  \item<3-> \blue{Heckscher–Ohlin:} same tech, different endowments $\rightarrow$ patterns of specialization
+  \item<4-> \blue{Standard Trade Model:} trade happens due to differences $\rightarrow$ changes in terms of trade 
 \end{wideitemize}
 \end{frame}
 
 \begin{frame}{This class}
 \begin{wideitemize}
-  \item Wrap-up: Ricardian, SFM, and Heckscher–Ohlin $\rightarrow$ unified \emph{Standard Trade Model} (STM)
-  \item Domestic \& world \textbf{relative supply} (RS) and \textbf{relative demand} (RD)
-  \item Terms of Trade (ToT), growth bias, and trade policies (intuition)
-  \item \textbf{Intro to empirical gravity} (structural form + practical spec). Data Lab will go hands-on later.
+    \item Welfare gains from trade across models
+    \item Changes in Terms of Trade (ToT) + growth bias 
+    \item The Gravity Equation
+    \item Empirical estimates of welfare gains
+    \item Data Lab will go hands-on later.
 \end{wideitemize}
 \end{frame}
+
+\section{The Standard Trade Model}
+
+
+\begin{frame}{Graphical representation}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\K}{2.25}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    
+
+        
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\K}{1}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    
+
+
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Graphical representation}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\K}{3}
+    \pgfmathsetmacro{\Kk}{2}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+    \pgfmathsetmacro{\Pa}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wra)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    \pgfmathsetmacro{\Lca}{ (\K - \aT*\wra*\L)/(\d * \wra) }
+    \pgfmathsetmacro{\Kca}{\aC * \wra * \Lca}
+    \pgfmathsetmacro{\Lta}{\L - \Lca}
+    \pgfmathsetmacro{\Kta}{\K - \Kca}
+   
+    \pgfmathsetmacro{\Yca}{ \Kca^(\betac) * \Lca^(1-\betac) }
+    \pgfmathsetmacro{\Yta}{ \Kta^(\betat) * \Lta^(1-\betat) }
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \K^(\betac) * (\L-x)^(1-\betac)}, { \K^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+
+    %\pgfmathsetmacro{\ck}{ \Ytk + \Pk * \Yck }
+    %\addplot[thick, brown, domain=0.2:1] { \ck - \Pk*x};
+
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    %\node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    %\node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yca, \Yta)};
+%    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+%    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
+
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\K}{1}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wra)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+        
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}{Graphical representation}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\K}{2.25}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
+        
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\K}{1}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+        
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Graphical representation}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\K}{2.25}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    
+    \addplot[thick, red, domain=0.4:1.2, samples=100] {\A * x^(-\expo)};
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
+        
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
+    \node[anchor = north east] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
+    \node[anchor = east] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{H,C},Q_{H,T})$};
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\K}{1}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    
+    \addplot[thick, red, domain=0.5:1.4, samples=100] {\A * x^(-\expo)};
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+        
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
+    \node[anchor = south west] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{F,C},Q_{F,T})$};
+
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Graphical representation}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\K}{2.25}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    
+    \addplot[thick, red, domain=0.4:1.2, samples=100] {\A * x^(-\expo)};
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
+        
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
+    \node[anchor = north east] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
+    \node[anchor = east] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{H,C},Q_{H,T})$};
+
+    \addplot[dashed, gray] coordinates {(\Yc, \Yt) (\Qc, \Yt)  (\Qc, \Qt)};
+    \node[anchor = south] at (axis cs:{\Yc + (\Qc-\Yc)/2}, \Yt) {\scriptsize Imports};
+    \node[anchor = west] at (axis cs:\Qc, {\Yt + (\Qt-\Yt)/2}) {\scriptsize Exports};
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\betat}{2/3}
+    \pgfmathsetmacro{\betac}{1/3}
+
+    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
+             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
+    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
+    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
+    \pgfmathsetmacro{\d}{\aC-\aT}
+
+    
+    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\K}{1}
+    \pgfmathsetmacro{\Kk}{1.5}
+
+   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
+    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+
+    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
+
+       
+    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
+    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
+    \pgfmathsetmacro{\Lt}{\L - \Lc}
+    \pgfmathsetmacro{\Kt}{\K - \Kc}
+   
+    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
+    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
+
+    
+
+    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
+    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
+    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+
+    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+
+    
+    
+    \centering
+    \begin{axis}[
+        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
+        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
+        ymin=0, ymax=2,
+        xmin=0, xmax=2,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
+    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    
+    \addplot[thick, red, domain=0.5:1.4, samples=100] {\A * x^(-\expo)};
+
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
+    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+        
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
+    \node[anchor = south west] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{F,C},Q_{F,T})$};
+
+    \addplot[dashed, gray] coordinates {(\Yc, \Yt) (\Qc, \Yt)  (\Qc, \Qt)};
+    \node[anchor = north] at (axis cs:{\Yc + (\Qc-\Yc)/2}, \Yt) {\scriptsize Exports};
+    \node[anchor = east] at (axis cs:\Qc, {\Yt + (\Qt-\Yt)/2}) {\scriptsize Imports};
+    
+    \end{axis}
+
+\end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\section{STM: Different Preferences}
+
+\section{STM: Different Technologies}
 
 
 \begin{frame}{Key STM objects and notation}
