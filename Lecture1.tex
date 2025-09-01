@@ -38,6 +38,8 @@
 \usepackage{dcolumn}
 \usepackage{bbm}
 \usepackage[style=authoryear,sorting=nyt,uniquename=false]{biblatex}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
 
 \addbibresource{references.bib} 
 
@@ -221,6 +223,50 @@
 %----------------------------------------------------------------------%
 %----------------------------------------------------------------------%
 
+\begin{frame}{Motivation}
+
+\begin{wideitemize}
+    \item Economists (and scientists in general) work with \blue{models}
+    \item<2-> Why?
+    \item<2-> What do you think the purpose of models is?
+    \item<3-> Sometimes people criticize models for being ``unrealistic''
+    \item<4-> When this a reasonable criticism?
+    \item<5-> \blue{My claim}: a good model \textit{must} simplify reality
+\end{wideitemize}
+    
+\end{frame}
+
+
+
+ \begin{frame}{What science truly means}
+  \makebox[\linewidth][c]{
+    \resizebox{0.8\linewidth}{!}{
+    \includegraphics{figs/borges.PNG}
+      }
+    }
+\end{frame}
+
+ \begin{frame}{Most beautiful intro in all of economics}
+  \makebox[\linewidth][c]{
+    \resizebox{0.8\linewidth}{!}{
+    \includegraphics{figs/solow-all-theory.PNG}
+      }
+    }
+    
+    \end{frame}
+
+\begin{frame}{Initial takeaway}
+
+\begin{wideitemize}
+    \item \blue{My claim}: a good model \textit{must} simplify reality
+    \item<2-> A theory that tries to model everything is a bad theory
+    \item<3-> Why? It obfuscates rather than illuminates.
+    \item<4-> The point of science is to explain some causal relationship.
+    \item<5-> Solow: crucial assumptions to explain that causal relationship must be  realistic.
+\end{wideitemize}
+    
+\end{frame}
+
 
 \section{How to think like an economist}
 
@@ -257,22 +303,42 @@
       }
     }\end{frame}
 
-\begin{frame}{Can the model explain reality?}
+
+\begin{frame}{Questions: can the model explain reality?}
  \begin{wideitemize}
     \item If so, in what circumstances?
     \item If not why? 
-    \item In the real world, neither model fully generalizes.
-    \item It depends on the particular context: friction, air resistance, temperature; pressure... economic frictions, market power, government policy, migration, international trade, etc...
-    \item But they both can   explain the world \textit{under certain assumptions}...
+    \item<2-> In the real world, neither model fully generalizes.
+    \item<3-> It depends on the particular context: friction, air resistance, temperature; pressure... economic frictions, market power, government policy, migration, international trade, etc...
+    \item<4-> But they both can   explain the world \textit{under certain assumptions}...
  \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Counterfactual experiment}
+ \begin{frame}{Two models in Econ 201}
+ \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figs/mw-competitive-monopsony.png}
+\end{figure}
+ \end{frame}
+
+  \begin{frame}{The Minimum Wage and Labor Market Structure}
+
+  \begin{wideitemize}
+  \item Under perfectly competitive labor market, the minimum wage results in
+lower labor demand, and unemployment
+    \item  Under monopsony, the minimum wages results in higher labor supply, and lower unemployment
+    \item \textbf{Bottom Line}: the stylized labor market we have studied should be used with extra care when thinking about labor market policies!
+    \item \textbf{But context matters}: \textcolor{blue}{even under monopsony, there are limits to the minimum wage}!
+  \end{wideitemize}
+
+  \end{frame}
+
+\begin{frame}{What is a counterfactual experiment?}
  \begin{wideitemize}
     \item What happens if we change a parameter in the model?
-    \item Gravity, temperature, altitude...?
-    \item Taxes, government expenditure, inflation, elasticities, etc...?
-    \item How would our predictions change? How does that align with reality? Which of these parameters can we observe? Which of them do we have to calibrate indirectly?
+    \item<2-> Gravity, temperature, altitude...?
+    \item<3-> Taxes, government expenditure, inflation, elasticities, etc...?
+    \item<4-> How would our predictions change? How does that align with reality? Which of these parameters can we observe? Which of them do we have to calibrate indirectly?
  \end{wideitemize}
 \end{frame}
 
@@ -358,6 +424,8 @@
     
 \end{frame}
 
+\section{The principle of comparative advantage}
+
 \begin{frame}{The principle of comparative advantage}
     \begin{wideitemize} 
         \item What we described above is the \textcolor{blue}{principle of comparative advantage}
@@ -377,16 +445,16 @@
 \begin{frame}{The principle of comparative advantage}
     \begin{wideitemize} 
         \item Consider a world with 2 countries (US, Colombia) and 2 products (computers, roses)
-        \item Colombia can produce 9 million roses or 10,000 computers
+        \item<2-> Colombia can produce 9 million roses or 10,000 computers
         \begin{itemize}
             \item Opportunity cost: $1/900$ computers per rose
         \end{itemize}
-        \item US can produce 10 million roses or 100,000 computers
+        \item<3-> US can produce 10 million roses or 100,000 computers
         \begin{itemize}
             \item Opportunity cost: $1/100$ computers per rose
         \end{itemize}
-        \item Note the US can produce more computers and more roses!
-        \item Can trade make US workers (as an aggregate) better off?
+        \item<4-> Note the US can produce more computers and more roses!
+        \item<5-> Can trade make US workers (as an aggregate) better off?
     \end{wideitemize}
 \end{frame}
 
@@ -396,7 +464,7 @@
 \begin{center}
 \begin{tabular}{@{} l >{\centering\arraybackslash}m{0.35\linewidth} >{\centering\arraybackslash}m{0.35\linewidth} @{}}
 \toprule
-& \textbf{California} & \textbf{Colombia} \\
+& \textbf{US} & \textbf{Colombia} \\
 \midrule
 \textbf{Opportunity cost} 
 & $\dfrac{1}{100}$ \textbf{computers} \newline \textbf{per rose}
@@ -421,7 +489,7 @@
 
 \begin{figure}[htbp]
 
-% California
+% US
 \begin{subfigure}{}
 \resizebox{0.48\linewidth}{!}{%
 \begin{tikzpicture}
@@ -558,7 +626,7 @@
 \begin{center}
 \begin{tabular}{@{} l >{\centering\arraybackslash}m{0.35\linewidth} >{\centering\arraybackslash}m{0.35\linewidth} @{}}
 \toprule
-& \textbf{California} & \textbf{Colombia} \\
+& \textbf{US} & \textbf{Colombia} \\
 \midrule
 \textbf{Opportunity cost} 
 & $\dfrac{1}{100}$ \textbf{computers} \newline \textbf{per rose}
@@ -588,7 +656,7 @@
 
 \begin{figure}[htbp]
 
-% California
+% US
 \begin{subfigure}{}
 \resizebox{0.48\linewidth}{!}{%
 \begin{tikzpicture}
@@ -724,21 +792,46 @@
 
 \section{Epilogue}
 
+
+\begin{frame}{How is this a ``model''? (deep dive next class)}
+    \begin{wideitemize} 
+        \item \blue{Parameters and exogenous variables}:
+        \begin{itemize}
+            \item Endowments (as we will see, number of workers/labor hours)
+            \item Technology (as we will see, labor productivity -- i.e., how many hours necessary to produce each good)
+        \end{itemize}
+        \item<2-> \blue{Model}:
+        \begin{itemize}
+            \item Firms maximize profits
+            \item Consumers maximize utility
+            \item Supply = demand
+        \end{itemize}
+        \item<3-> \blue{Endogenous variables}:
+        \begin{itemize}
+            \item \textbf{Quantities produced} of each good in each country are optimal for producers
+            \item \textbf{Quantities consumed} of each good in each country are optimal for consumers
+            \item \textbf{Prices} adjust such that supply = demand
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+
+
 \begin{frame}{The limits to this model (and models in general)}
     \begin{wideitemize} 
-        \item Models are useful: they are transparent; leads logical conclusion follows
-        \item They are deliberately \textbf{not} reality: abstracts from the unimportant
+        \item Models are useful: they are transparent; conclusion follows logical derivation from premisses
+        \item<2-> They are deliberately \textbf{not} reality: abstracts from the unimportant
 to focus on a particular mechanism
-        \item But they might be wrong...
-        \item Economics in general requires careful thought about:
+        \item<3-> But they might be wrong...
+        \item<4-> Economics in general requires careful thought about:
         \begin{itemize}
             \item How the model assumptions affect the model outcomes
 (``thinking within the model'')
             \item What other aspects are missing from the model that may affect the outcomes in reality (``thinking outside the model'').
 \end{itemize}
-        \item E.g.: Americans who worked in industries more exposed to increased competition of imports from China were (relatively) worse off (\href{https://www.aeaweb.org/articles?id=10.1257/aer.103.6.2121}{Autor, Dorn, \& Hanson, 2013})
+        \item<5-> E.g.: Americans who worked in industries more exposed to increased competition of imports from China were (relatively) worse off (\href{https://www.aeaweb.org/articles?id=10.1257/aer.103.6.2121}{Autor, Dorn, \& Hanson, 2013})
 
-        \item Even though the US benefits in aggregate terms (\href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA13758}{Caliendo, Dvorkin, \& Parro, 2019}), there were distributional consequences
+        \item<6-> Even though the US benefits in aggregate terms (\href{https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA13758}{Caliendo, Dvorkin, \& Parro, 2019}), there were distributional consequences
     \end{wideitemize}
 \end{frame}
 

@@ -265,6 +265,18 @@
 
     \end{frame}
 
+    \begin{frame}{Downloading Anaconda Navigator}
+    \framesubtitle{Data science optimized environment}
+
+    
+    \begin{wideitemize}
+        \item Go on \url{https://www.anaconda.com/download}
+        \item Skip registration
+        \item Download your system's version
+    \end{wideitemize}
+
+    \end{frame}
+    
     \begin{frame}{Introduction to Spyder}
     \framesubtitle{How to use Spyder?}
         
@@ -434,18 +446,14 @@
         \begin{itemize}
             \item Equality:
                 \begin{minted}{python}
-                2 + 2 is 4
                 2 + 2 == 4
                 str = "a"
-                str is "a"
                 str == "a"
                 \end{minted}    
             \item Inequality:
                 \begin{minted}{python}
-                2 + 2 is not 4
                 2 + 2 != 4
                 str = "a"
-                str is not "a"
                 str != "a"
                 \end{minted}    
             \item Greater than or less than:
@@ -464,17 +472,17 @@
             \item In logical operations, \mintinline{python}{True} has the numeric value 1 and \mintinline{python}{False} has the numeric value 0; you can use this to perform arithmetic.
             \item Sum (how many are true?):
                 \begin{minted}{python}
-                a = 1 + 1 is 2
-                b = 2 * 2 is 4
-                c = 2 * 2 is 5
+                a = (1 + 1) == 2
+                b = (2 * 2) == 4
+                c = (2 * 2) == 5
                 d = a + b + c
                 print(d)
                 \end{minted}    
             \item Product (are all true?):
                 \begin{minted}{python}
-                a = 1 + 1 is 2
-                b = 2 * 2 is 4
-                c = 2 * 2 is 5
+                a = (1 + 1) == 2
+                b = (2 * 2) == 4
+                c = (2 * 2) == 5
                 d = a * b * c
                 print(d)
                 \end{minted}    
@@ -526,17 +534,17 @@
             \item Use multiplication to repeat the contents of a list:
 
                 \begin{minted}{python}
-                lista2 = list1 * 2 
-                print(lista2)
+                list2 = list1 * 2 
+                print(list2)
                 \end{minted}    
 
             \item Or use addition to concatenate two lists:
 
                 \begin{minted}{python}
-                lista3 = [1,2]
-                lista4 = [5,6]
-                lista5 = lista3 + lista4
-                print(lista5)
+                list3 = [1,2]
+                list4 = [5,6]
+                list5 = list3 + list4
+                print(list5)
                 \end{minted}    
 
         \end{itemize}       
@@ -550,19 +558,19 @@
             \item \mintinline{python}{Dictionaries} are, as the name suggests, collections of key–value pairs; unlike lists, dictionaries are indexed by keys (usually words):
 
                 \begin{minted}{python}
-                pessoa1 = {
+                person1 = {
                         'name': 'Milton Friedman',
                         'dob': '07/31/1912'
                         }
-                print(pessoa1)
-                print(pessoa1['nome'])
+                print(person1)
+                print(person1['name'])
                 \end{minted}    
 
             \item Add an element to the dictionary:
 
                 \begin{minted}{python}
-                pessoa1.update({'nationality': 'USA'})
-                print(pessoa1)
+                person1.update({'nationality': 'USA'})
+                print(person1)
                 \end{minted}    
 
         \end{itemize}             
@@ -605,15 +613,15 @@
                     \begin{minted}[fontsize=\footnotesize]{python}
                      x = np.linspace(1,10, 5)
                      label = ["a","b","c","d","e"]
-                     serie1 = pd.Series(x, name="Series1", index=label)
-                     print(serie1)
+                     series1 = pd.Series(x, name="Series1", index=label)
+                     print(series1)
                     \end{minted}
                     
                 \item Like \mintinline{python}{lists}, you can access an element of a \mintinline{python}{Series} using its index:
                 
                 \begin{minted}[fontsize=\footnotesize]{python}
-                    print(serie1["a"])
-                    print(serie1["d"])
+                    print(series1["a"])
+                    print(series1["d"])
                 \end{minted}
                 
                     
@@ -639,8 +647,8 @@
                         "Tom Rundal": "98/20145"
                     }
                     
-                    serie2 = pd.Series(gwuid)
-                    print(serie2)
+                    series2 = pd.Series(gwuid)
+                    print(series2)
 
                     \end{minted}
                 
@@ -660,10 +668,10 @@
                      x = np.linspace(1,10, 5)
                      y = np.linspace(1,20, 5)
                      label = ["a","b","c","d","e"]
-                     serie1 = pd.Series(x, name="Series1", index=label)
-                     serie2 = pd.Series(y, name="Series2", index=label)
+                     series1 = pd.Series(x, name="Series1", index=label)
+                     series2 = pd.Series(y, name="Series2", index=label)
                      
-                     df = pd.DataFrame(data=[serie1, serie2])
+                     df = pd.DataFrame(data=[series1, series2])
                     \end{minted}
                     
                 \item You can extract both columns and rows:
