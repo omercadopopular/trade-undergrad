@@ -242,11 +242,11 @@
 \begin{frame}{General equilibrium}
 \begin{wideitemize}
         \item Trade models are \blue{general equilibrium models}
-        \item This means that \blue{prices will adjust} to achieve an equilibrium
-        \item If supply exceeds demand for a given price, prices are ``too high''
-        \item If demand exceeds supply for a given price,  prices are ``too low''
-        \item It also means that we consider all markets together: the market for computers and roses affect each other...
-        \item ... as does the market for factors of production (e.g., labor)
+        \item<2-> This means that \blue{prices will adjust} to achieve an equilibrium
+        \item<3-> If supply exceeds demand for a given price, prices are ``too high''
+        \item<4-> If demand exceeds supply for a given price,  prices are ``too low''
+        \item<5-> It also means that we consider all markets together: the market for computers and roses affect each other...
+        \item<6-> ... as does the market for factors of production (e.g., labor)
         \end{wideitemize}
 \end{frame}
 
@@ -257,13 +257,13 @@
             \max_{Y_{i,p}} \pi_{i,p} = \max_{Y_{i,p}} P_{i,p}Y_{i,p} - w_i a_{i,p} Y_{i,p} 
         \end{equation*}
         \item Since labor only one type of labor (mobile across sectors), there is a single wage $w_i$
-        \item Total labor endowment satisfies the PPF across sectors:
+        \item<3-> Total labor endowment satisfies the PPF across sectors:
         
         \begin{equation*}
             \underbrace{a_{i,C} \times Y_{i,C}}_{\substack{\text{labor used in} \\ \text{production of } C}} + \underbrace{a_{i,R} \times Y_{i,R}}_{\substack{\text{labor used in} \\ \text{production of } R}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
         \end{equation*}
 
-        \item In equilibrium, \textbf{prices equal marginal cost}:
+        \item<4-> In equilibrium, \textbf{prices equal marginal cost}:
         \begin{eqnarray*}
             P_{i,p} = w_i a_{i,p} \iff \frac{P_{i,p}}{a_{i,p}} = w_i  \qquad \text{ for } p \in\{C,R\}
         \end{eqnarray*}
@@ -277,23 +277,23 @@
         \begin{equation*}
             U_i(Q_C,Q_R) \equiv Q_C^{\alpha_i} Q_R^{1-\alpha_i}, \qquad \text{for } 0 < \alpha_i < 1   
         \end{equation*}
-        \item Consumers take prices $P_{i,R},P_{i,C}$ as given and maximize: 
+        \item<2-> Consumers take prices $P_{i,R},P_{i,C}$ as given and maximize: 
         \begin{equation*}
             \max_{\{Q_{i,C}, Q_{i,R}\}} U_i(Q_{i,C}, Q_{i,R}) \equiv Q_{i,C}^{\alpha_i} Q_{i,R}^{1-\alpha_i} \qquad s.t. \qquad P_{i,C} Q_{i,C} + P_{i,R} Q_{i,R} = w_i L_i
         \end{equation*}
-        \item How to solve this?
+        \item<3-> How to solve this?
         \end{wideitemize}
 \end{frame}
 
 \begin{frame}{Preferences}
 \begin{wideitemize}
-        \item Rewrite budget constraint: $Q_{i,R} = \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}$
-        \item Replace in objective function and solve unconstrained max problem:
+        \item<4> Rewrite budget constraint: $Q_{i,R} = \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}$
+        \item<2-> Replace in objective function and solve unconstrained max problem:
 
         \begin{equation*}
             \max_{\{Q_{i,C} \}} Q_C^{\alpha_i} \left( \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \right)^{1-\alpha_i}
         \end{equation*}
-        \item FOC: 
+        \item<3-> First order condition: 
 \scriptsize{
 \begin{eqnarray*}
     & & \alpha_i Q_{i,C}^{\alpha_i-1} \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i} + Q_{i,C}^{\alpha_i} (1-\alpha_i) \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i-1} \left( - \frac{P_{i,C}}{P_{i,R}}\right) = 0 \\
@@ -329,7 +329,7 @@
 \end{center}
 
 
-\item Finally:
+\item<2-> Finally:
 {\scriptsize
 \begin{eqnarray*}
      Q_{i,R}  &=& \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C}  = \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) \alpha_i  \frac{w_i L_i}{P_{i,C}} \\
@@ -340,8 +340,8 @@
     \boxed{$Q_{i,R}  = (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}$}    
 \end{center}
 
-\item Cobb-Douglas preferences: demand is a fixed share of their income $(\alpha_i, 1-\alpha_i)$; demand inversely proportional to the price of that good.
-\item Holds regardless of whether consumers are in autarky or trade. 
+\item<3-> Cobb-Douglas preferences: demand is a fixed share of their income $(\alpha_i, 1-\alpha_i)$; demand inversely proportional to the price of that good.
+\item<4-> Holds regardless of whether consumers are in autarky or trade. 
 
 \end{wideitemize}
 \end{frame}
@@ -355,32 +355,32 @@
         \begin{eqnarray*}
             P_{i,p} = w_i a_{i,p} \iff \frac{P_{i,p}}{a_{i,p}} = w_i  \qquad \text{ for } p \in\{C,R\}
         \end{eqnarray*}
-        \item In autarky equilibrium, there demand and production in both sectors
+        \item<2-> In autarky equilibrium, there demand and production in both sectors
         \item We can pin down the relative price $P_{i,C} / P_{i,R}$:
         \begin{center}
         \boxed{
             \frac{P_{i,C}}{a_{i,C}} = w_i = \frac{P_{i,R}}{a_{i,R}} \iff \frac{P_{i,C}}{P_{i,R}} = \frac{a_{i,C}}{a_{i,R}}  
         }            
         \end{center}
-    \item In autarky, relative prices will reflect the \textbf{opportunity cost} within country $i$
+    \item<3-> In autarky, relative prices will reflect the \textbf{opportunity cost} within country $i$
 
 \end{wideitemize}
 \end{frame}
 
 \begin{frame}{Autarky Equilibrium}
 \begin{wideitemize}
-    \item Replacing $\frac{P_{i,C}}{a_{i,C}} = w_i$ in demand functions solves in terms of parameters:
+    \item Replacing $\frac{P_{i,p}}{a_{i,p}} = w_i \iff P_{i,C} = w_i a_{i,p}$ in demand functions solves in terms of parameters:
 \begin{center}
     \boxed{$Q_{i,C} = \alpha_i  \frac{w_i L_i}{P_{i,C}}=  \alpha_i  \frac{L_i}{a_{i,C}} ,\qquad Q_{i,R}  = (1-\alpha_i) \frac{w_i L_i}{P_{i,R}} = (1-\alpha_i) \frac{L_i}{a_{i,R}}$}    
 \end{center}
-    \item In equilibrium, \blue{supply equals demand}:
+    \item<2-> In equilibrium, \blue{supply equals demand}:
 
     \begin{center}
     \boxed{$Y_{i,C} = Q_{i,C},\qquad Y_{i,R} = Q_{i,R}$}    
 \end{center}
 
-    \item We have solved for optimal demands $( Q_{i,C}, Q_{i,R})$, get $(Y_{i,C}, Y_{i,R})$   ``for free''
-    \item Can check choices satisfy the PPF:
+    \item<4-> We have solved for optimal demands $( Q_{i,C}, Q_{i,R})$, get $(Y_{i,C}, Y_{i,R})$   ``for free''
+    \item<5->  Can check choices satisfy the PPF:
     {\scriptsize
         \begin{eqnarray*}
             a_{i,C} \times Y_{i,C} + a_{i,R} \times Y_{i,R} &=& L_i \\

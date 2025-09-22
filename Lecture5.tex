@@ -229,6 +229,7 @@
 \begin{wideitemize}
         \item<1-> Ricardo (1817 On the Principles of Political Economy and Taxation): 2 × 2 trade with two industries and two countries
         \item<2-> Dornbusch, Fischer and Samuelson (1977): 2 x many Ricardian trade either with many industries or with many countries, but not both
+        \item<2-> Dornbusch: German-American, Chicago PhD, MIT Prof; Fischer: Israeli-American, MIT PhD, Chief Econ IMF + WB, Fed VP; SamuelsonÇ first American to win Nobel, one of the greatest economists of all time.
         \item<3-> Eaton and Kortum (2002): many x many Ricardian trade with many industries and many countries
         \end{wideitemize}
 \end{frame}
@@ -290,23 +291,26 @@
 
         \item<3-> Under perfect competition, goods prices reflect unit cost:
         \begin{itemize}
-            \item If home makes $i$, its factory-gate price is $P_g = a_{i,H} w_{H}$
-            \item If foreign makes $i$, its factory-gate price is $P_g = a_{i,F} w_{F}$
+            \item If home makes $g$, its factory-gate price is $P_g = a_{H,g} w_{H}$
+            \item If foreign makes $g$, its factory-gate price is $P_g = a_{F,g} w_{F}$
         \end{itemize}
         \end{wideitemize}
 \end{frame}
 
 \begin{frame}{Where will production be located?}
 \begin{wideitemize}
-    \item<1-> \blue{Question}: which country has a comparative advantage in good $g$ if $\frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}$?
+    \item<1-> In the simple Ricardian model, we conclude that country $F$ has a comparative advantage if $\frac{a_{F,g}}{a_{H,g}} \le  \frac{a_{F,g'}}{a_{H,g'}}$. \\
+    \qquad \textcolor{gray}{(what to do with many goods?)}
 
-    \item<2-> Production only if cheaper to produce domestically than to import goods, i.e.:
+    \item<2-> \blue{Question}: which country has a comparative advantage in good $g$ if $\frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}$?
+
+    \item<3-> Production only if cheaper to produce domestically than to import goods, i.e.:
 
     \begin{equation*}
         w_H a_{H,g} \le w_F a_{F,g} \text{ or, equivalently, if } \frac{w_H}{w_F} \le  \frac{a_{F,g}}{a_{H,g}}
     \end{equation*}
 
-    \item<3-> \blue{Prices}: price of good $g$ will be the lowest of unit costs at home or abroad:
+    \item<4-> \blue{Prices}: price of good $g$ will be the lowest of unit costs at home or abroad:
 
 
         \begin{equation*}
@@ -984,6 +988,103 @@
 
     \end{wideitemize}
 \end{frame}
+
+
+\begin{frame}{Equilibrium with Trade Costs}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$\tau A_g$}, \textcolor{blue}{$A_g / \tau$}},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\t}{1.25}       
+            \pgfmathsetmacro{\z}{0.075}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{(-(\z/\t) + sqrt((\z/\t)^2 + 4*\c*\z/\t)) / (2*\c)}
+            \pgfmathsetmacro{\y}{(\z / \x) / \t}
+            \pgfmathsetmacro{\xf}{\z*\t/\y}
+            \addplot[red, thick, domain=0.15:1] {( \z / x ) * \t}; %home
+            \addplot[blue, thick, domain=0.15:1] {\z / (x * \t )}; %foreign
+            \addplot[dashed, gray, thick, domain=0.15:1] {\z / (x)}; %foreign
+            
+
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Trade equilibrium with positive trade costs $\tau$}
+        \label{fig: Ag-tariffs}
+    \end{figure}
+
+    
+\end{frame}
+
+
+\begin{frame}{Equilibrium with Trade Costs}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xmin=0, xmax=1,
+                ymin=0, ymax=1,
+                ylabel={\textcolor{red}{$\tau A_g$}, \textcolor{blue}{$A_g / \tau$}, $w_H/w_F$},
+                xtick={0,1},
+                ytick={0,1},
+                xticklabels={0, 1},
+                xticklabel style={anchor=north west, yshift=0pt},
+                yticklabel style={anchor=south east, xshift=0pt},
+                enlargelimits=false,
+                clip=false,
+                grid=major,
+                width=12cm,
+                height=8cm,
+                every axis plot/.style={thick},
+                width=0.7\textwidth,
+                height=0.45\textwidth,
+                label style={font=\small},
+                tick label style={font=\small},
+            ]
+                       
+            \pgfmathsetmacro{\t}{1.25}       
+            \pgfmathsetmacro{\z}{0.075}       
+            \pgfmathsetmacro{\c}{0.125}         
+            \pgfmathsetmacro{\x}{(-(\z/\t) + sqrt((\z/\t)^2 + 4*\c*\z/\t)) / (2*\c)}
+            \pgfmathsetmacro{\y}{(\z / \x) / \t}
+            \pgfmathsetmacro{\xf}{\z*\t/\y}
+            \addplot[red, thick, domain=0.15:1] {( \z / x ) * \t}; %home
+            \addplot[blue, thick, domain=0.15:1] {\z / (x * \t )}; %foreign
+            \addplot[black, thick, domain=0.01:0.85] {x / (1 - x) * \c}; % omega(g)
+            
+
+
+            \end{axis}
+            \end{tikzpicture}
+        \caption{Trade equilibrium with positive trade costs $\tau$}
+        \label{fig: Ag-tariffs}
+    \end{figure}
+
+    
+\end{frame}
+
 
 \begin{frame}{Equilibrium with Trade Costs}
     \begin{figure}

@@ -228,17 +228,17 @@
 
 \begin{frame}{Testing the Ricardian Model}
     \begin{wideitemize}
-        \item Ricardo provides a central model that underpins our intutions about international trade
+        \item Ricardo provides a central model that underpins our intuitions about international trade
 
-        \item But very little has been done to confront its predictions with the data
+        \item<2-> But very little has been done to confront its predictions with the data
 
-        \item \blue{Challenge (i):} autarky productivities and prices are unobserved
+        \item<3-> \blue{Challenge (i):} autarky productivities and prices are unobserved
 
-        \item If we assume productivities are fixed, we can ``infer'' autarky prices as function of technology and tastes
+        \item<4-> If we assume productivities are fixed, we can ``infer'' autarky prices as function of technology and tastes
 
-        \item Is that trivial?
+        \item<5-> Is that trivial?
 
-        \item \blue{Challenge (ii):} for a long time, the Ricardian model was purely bilateral \\ 
+        \item<5-> \blue{Challenge (ii):} for a long time, the Ricardian model was purely bilateral \\ 
         \qquad (changes with Eaton-Kortum, but that we do not cover it)
 
     \end{wideitemize}
@@ -251,27 +251,28 @@
         \begin{itemize}
             \item Model predicts only one country ($H$ or $F$) supplies a given market
 
-            \item But that does seem to agree with the data in the level of aggregate we have
+            \item<2-> But that does seem to agree with the data in the level of aggregate we have
+                \qquad \textcolor{gray}{(at the end of the semester, we will cover interindustry trade)}
 
-            \item Even if we find non-produced goods, how can we measure productivity autarky prices?
+            \item<3-> Even if we find non-produced goods, how can we measure productivity autarky prices?
         \end{itemize}
 
-        \item It is really hard to compare sectoral productivity across countries
+        \item<4-> It is really hard to compare sectoral productivity across countries
 
         \begin{itemize}
-            \item If we go by value, a Norwegian barber is 50x more productive than an Indian barbe
-            \item Is that really true?
-            \item Labor markets reflect opportunity costs
+            \item<4-> If we go by value, a Norwegian barber is 50x more productive than an Indian barbe
+            \item<5-> Is that really true?
+            \item<6-> Labor markets reflect opportunity costs
         \end{itemize}
 
-        \item Model is very simple to begin with:
+        \item<7-> Model is very simple to begin with:
         \begin{itemize}
-            \item In practice there multiple factors
-            \item Intermediate goods, supply chain linkages
-            \item Of course that model will not encompass all of the data
+            \item<7-> In practice there multiple factors
+            \item<8-> Intermediate goods, supply chain linkages
+            \item<9-> Of course that model will not encompass all of the data
         \end{itemize}
 
-        \item Question: can the most important mechanism be right?
+        \item<10-> Question: can the most important mechanism be right?
 
     \end{wideitemize}
 \end{frame}
@@ -282,13 +283,13 @@
     \begin{wideitemize}
         \item MacDougall (1951) used relative productivity measures to ``test'' Ricardian
 
-        \item With 2 countries in the world (UK an USA) then each country will:
+        \item<2-> With 2 countries in the world (UK an USA) then each country will:
 
         \begin{blockquote}
             “export those goods for which the ratio of its output per worker to that of the other country exceeds the ratio of its money wage rate to that of the other country.”
         \end{blockquote}
 
-        \item lots relative labor productivities (US:UK) against relative exports to the entire world (US:UK)
+        \item<3-> lots relative labor productivities (US:UK) against relative exports to the entire world (US:UK)
 
         \begin{itemize}
             \item 2 × 2 Ricardian intuition suggests that this should be upward-sloping.
@@ -367,9 +368,11 @@
 
     \item<2-> In which does it differ importantly from the theory?
 
-    \item<3-> The intuition of the Ricardian model suggests that $\beta_1 > 0$ and $\beta_2 > 0$.
+    \item<3-> The intuition of the Ricardian model suggests that $\beta_1 > 0$ and $\beta_2 > 0$. \\
+        \qquad (countries should export goods they are most productive in)
     
-    \item<4-> But we are extrapolating from a 2x2 model to multicountry data; no obvious way to interpret the results.
+    \item<4-> But we are extrapolating from a 2x2 model to multicountry data; no obvious way to interpret the results. \\
+        \qquad (model predicts \textit{full specialization})
 
 \end{wideitemize}
 
@@ -402,28 +405,96 @@
 
     \item The main issue is that it takes a leap of faith to go from a 2x2 model to cross-country evidence
 
-    \item Empirically, measuring $a_i^k$ is not easy.
+    \item<2-> Empirically, measuring $a_i^k$ is not easy.
 
     \begin{itemize}
-        \item Comparing different currencies.
-        \item Market exchange rates are likely to be misleading
-        \item PPP exchange rates  used instead
-        \item Think of this as ``Big Mac index''
+        \item<2-> Comparing different currencies.
+        \item<3-> Market exchange rates are likely to be misleading
+        \item<4-> PPP exchange rates  used instead
+        \item<5-> Think of this as ``Big Mac index''
     \end{itemize}
 \end{wideitemize}
 
 \end{frame}
 
+\begin{frame}{Big Mac Index}
+    \begin{wideitemize}
+        \item A Big Mac is identical all over the world... \vspace{10pt}
+        \begin{center}
+        \onslide<2->{\Large \textit{Two all beef patties, special sauce, lettuce, cheese, pickles, onions on a sesame seed bun} \scriptsize (\href{https://www.youtube.com/watch?v=yEBCV0ic6Tc}{original jingle})}
+        \end{center}
+
+        \item<3-> If a Big Macs could be teleported to the point of sale, they would be produced in the place where they are cheapest
+
+        \item<4-> Why do prices differ
+        \begin{itemize}
+            \item Labor is not mobile across countries
+            \item Other factors of production (rent) are immobile
+            \item You cannot ship a burger long distance
+        \end{itemize}
+
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Big Mac Index}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.65\linewidth]{figs/01_The-Price-of-McDonalds-Big-Mac_World-Map.png}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Balassa Samuelson Effect}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.65\linewidth]{figs/balassa-samuelson.jpg}
+        \caption{Balassa Samuelson Effect: Goods and Services are more expensive in richer countries \href{https://scholar.harvard.edu/files/rogoff/files/51_jel1996.pdf}{(Rogoff, 1996)}}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Purchasing Power Parity}
+    \begin{wideitemize}
+        \item Prices are sistematically higher in richer countries:
+        \begin{itemize}
+            \item Nontradables reflect domestic wages and technology
+            \item Service economy (largely nontradable) more important
+        \end{itemize}
+
+
+        \item \href{https://www.worldbank.org/en/programs/icp}{World Bank's International Comparison Program} collects data on prices for many goods across countries to create benchmarks 
+
+        \item \blue{Output:} How much is a dollar worth in each country (US is the benchmark)
+
+        \item When comparing productivities and incomes, economists often adjust for overall price levels
+
+        \item \blue{Intuition}:
+            \begin{itemize}
+                \item Inflation adjustment corrects for price differences across time (e.g., 1960 USD vs 2025 USD)
+                \item PPP adjustment corrects for price differences across space (same USD buys more goods and services in Brazil vs US)
+            \end{itemize}
+
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Differences in prices across the world}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\linewidth]{figs/PPP_world_map_quintiles.pdf}
+    \end{figure}
+\end{frame}
+
+
 \begin{frame}{A modern take...}
 \begin{wideitemize}
     \item There are two main problems with all of the papers we have seen so far
 
-    \item First, none of them rely on a true multi-country model to know what to test
+    \item <2->First, none of them rely on a true multi-country model to know what to test
     \begin{itemize}
         \item Only modern papers that came out after Eaton Kortum (2002) were able to do that 
     \end{itemize}
 
-    \item Second, they do not deal with the selection effect:
+    \item<3-> Second, they do not deal with the selection effect:
     \begin{itemize}
         \item Don't observe the productivity of goods that a country does not produce
         \item Only observe productivity of goods productive enough to be produced
@@ -438,19 +509,19 @@
 \begin{wideitemize}
     \item Let $a_i^k(g)$ be the unit labor requirement of good $g$ of industry $k$ in country $i$
 
-    \item Average unit labor requirements of a country would be: 
+    \item<2-> Average unit labor requirements of a country would be: 
 
     \begin{equation*}
         \bar{a}_i^k \equiv \frac{1}{N} \sum_g  a_i^k(g)
     \end{equation*}
 
-    \item But if country $i$ only produces goods up to $G < 1$ (as in the DFS model we saw) average \blue{observed} unit labor requirements would be:
+    \item<3-> But if country $i$ only produces goods up to $G < 1$ (as in the DFS model we saw) average \blue{observed} unit labor requirements would be:
 
         \begin{equation*}
         \tilde{a}_i^k \equiv \frac{1}{N_G} \sum_g  a_i^k(g) \qquad \text{for } g \le G  
     \end{equation*}
 
-    \item In general $\tilde{a}_i^k \le \bar{a}_i^k$, since these are by definition the most productive products
+    \item<4-> In general $\tilde{a}_i^k \le \bar{a}_i^k$, since these are by definition the most productive products
 
     
 \end{wideitemize}
@@ -461,9 +532,9 @@
 \begin{wideitemize}
     \item Costinot, Donaldson and Komunjer (CDK, 2012) extend the multi-country Ricardian model to multiple industries
 
-    \item They show, under some assumptions, we can map unobserved productivities to observed productivities
+    \item<2-> They show, under some assumptions, we can map unobserved productivities to observed productivities
 
-    \item Specifically, they show:
+    \item<3-> Specifically, they show:
 
     \begin{equation*}
         \underbrace{\frac{\tilde{a}_i^k}{\tilde{a}_j^k}}_{\text{observed}} = \underbrace{\frac{\bar{a}_i^k}{\bar{a}_j^k}}_{\text{unobserved}} \times \underbrace{\left(\frac{1-\text{Import Share}_i^k}{1-\text{Import Share}_j^k}\right)^\theta}_{\text{observed}} 
@@ -482,10 +553,10 @@
 \begin{wideitemize}
     \item Now they have solved both issues:
     \begin{itemize}
-        \item They have written a multi-country multi-sector Ricardian model and derived predictions; 
-        \item They found a way to overcome the selection issue of non-observed productivities
+        \item<2-> They have written a multi-country multi-sector Ricardian model and derived predictions; 
+        \item<3-> They found a way to overcome the selection issue of non-observed productivities
     \end{itemize}
-    \item They estimate the following equation:
+    \item<4-> They estimate the following equation:
 
     \begin{equation*}
     \ln \left( \frac{X_{i \to j}^k}{ 1-\text{Import Share}_i^k} \right) = \delta_{ij} + \delta^k_{i} - \theta \ln \tilde{a}_i^k + \varepsilon^k_{ij}
@@ -499,7 +570,7 @@
         \item $\delta_{ij}, \delta^k_{i}$ are bilateral and industry-source specific coefficients, that adjust for differences in pair-relationship (say, former colony) and industry characteristics (say, manufacturing vs services)
     \end{itemize}
 
-    \item We expect $\theta > 0$
+    \item<5-> We expect $\theta > 0$
     
 \end{wideitemize}
 

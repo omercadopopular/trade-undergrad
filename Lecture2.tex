@@ -246,21 +246,83 @@
 \end{columns}
 \end{frame}
 
+\begin{frame}{Mathematical Preliminaries}
+
+\begin{wideitemize}
+    \item A set is an unordered collection of distinct objects, also known as elements.
+    \item<2-> Suppose $\mathcal{N}$ is the set of neighborhoods in Washington, DC. We write:
+    \begin{equation*}
+        \mathcal{N} = \{ \text{Foggy Bottom}, \text{Navy Yard}, \text{Anacostia}, \text{Noma}, \text{Union Market}, \text{Capitol Hill}, \cdots \}
+    \end{equation*}
+
+    \item<3-> Let $\mathcal{N}^{NW}$ be the set of neighborhoods in Northwest DC:
+    \begin{equation*}
+        \mathcal{N}^{NW} = \{ \text{Foggy Bottom}, \text{West End}, \text{Dupont Circle}, \text{Logan Circle}, \text{Shaw}, \cdots \}  
+    \end{equation*}
+          
+
+    \item<4-> We say that \blue{$\mathcal{N}^{NW}$ is a subset of $\mathcal{N}$} and write $\mathcal{N}^{NW} \subset \mathcal{N}$
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Fixed costs and increasing returns}
+\normalsize
+
+\begin{columns}[T] % align columns
+\begin{column}{.45\textwidth}
+            \centering
+\begin{tikzpicture}[x=\textwidth/60, y=\textwidth/60] % 2:1 aspect
+  \draw[very thick] ( 0,0) ellipse (27 and 27);
+  \draw[very thick] (  0,0) ellipse (21 and 21);
+  \draw[very thick] ( 0,0) ellipse (15 and  15);
+  \draw[very thick] (0,0) ellipse ( 9 and  9);
+
+  \node[font=\bfseries\Large] at (0,0) {$\mathbb{N}$};
+  \node[font=\bfseries\Large] at ( 0,10) {$\mathbb{Z}$};
+  \node[font=\bfseries\Large] at (  0,16) {$\mathbb{Q}$};
+  \node[font=\bfseries\Large] at ( 0,22) {$\mathbb{R}$};
+\end{tikzpicture}
+    
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{wideitemize}
+        \item \blue{Another example}: natural numbers are a subset of integers, which is a subset of the rationals, which is a subset of the real numbers.
+        \item<2-> How can we denote the set of natural numbers (strictly) smaller than 10?
+
+        \item<3-> Like this:
+
+        \begin{equation*}
+            \left\{ x \in \mathbb{N} : 0 \le x < 10 \right\}
+        \end{equation*}
+    \end{wideitemize}
+
+
+
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
 
 
 \begin{frame}{Ricardian Model: Preliminaries}
 \begin{wideitemize}
         \item Consider a world with 2 countries (US, Colombia) and 2 products (Computers, Roses)
-        \item Set of countries $i \in \{ US, COL\}$; set of products $p \in \{ C, R\}$
-        \item In country $i$, there are $L_i$ units of labor (worker-hours) available 
-        \item In country $i$, to produce one unit of good $p$, firms use $a_{i,p}$ units of labor
-        \item $Y_{i,p}$ is total production of good $p$ in $i$
-        \item To produce $Y_{i,C}$ units of computers in $i$, firms use $a_{i,C} \times Y_{i,C}$ units of labor 
-        \item We call $a_{i,p}$ the \textbf{unit labor requirements}
+        \item<2-> Set of countries $i \in \{ US, COL\}$; set of products $p \in \{ C, R\}$
+        \item<3-> In country $i$, there are $L_i$ units of labor (worker-hours) available 
+        \item<4-> In country $i$, to produce one unit of good $p$, firms use $a_{i,p}$ units of labor
+        \item<5-> $Y_{i,p}$ is total production of good $p$ in $i$
+        \item<6-> To produce $Y_{i,C}$ units of computers in $i$, firms use $a_{i,C} \times Y_{i,C}$ units of labor 
+        \item<6-> We call $a_{i,p}$ the \textbf{unit labor requirements}
         \begin{itemize}
-            \item The higher $a_{i,p}$, the \textbf{less productive} country $i$ is in producing $p$. Why?
+            \item<6-> The higher $a_{i,p}$, the \textbf{less productive} country $i$ is in producing $p$. Why?
         \end{itemize}
-        \item Trade is balanced
+        \item<7-> Trade is balanced
     \end{wideitemize}
 \end{frame}
 
@@ -274,33 +336,33 @@
             \underbrace{a_{i,C} \times Y_{i,C}}_{\substack{\text{labor used in} \\ \text{production of } C}} + \underbrace{a_{i,R} \times Y_{i,R}}_{\substack{\text{labor used in} \\ \text{production of } R}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
         \end{equation*}
 
-        \item Inequality above defines set of feasible production choices, formally:
+        \item<2-> Inequality above defines set of feasible production choices, formally:
 
         \begin{equation*}
             \mathcal{Y}_{i} = \{ (Y_{i,C}, Y_{i,R}) : a_{i,C} \times Y_{i,C} + a_{i,R} \times Y_{i,R} \le L_i \}
         \end{equation*}
         
-        \item English: if labor used to produce $(Y_{i,C}, Y_{i,R})$ is not larger than $L_i$, production is feasible
+        \item<2-> English: if labor used to produce $(Y_{i,C}, Y_{i,R})$ is not larger than $L_i$, production is feasible
     \end{wideitemize}
 \end{frame}
 
 \begin{frame}{Production Possibilities Frontier, Example}
 \begin{wideitemize}
         \item There are 300 million units of labor in the US ($L_{US} = 300$ million)
-        \item To produce one rose in the US, firms use $30$ units of labor ($a_{US,R} = 30$)
-        \item To produce one computer in the US, firms use $3,000$ units of labor ($a_{US,C} = 3,000$)
-        \item How many units of either good can the US make?
+        \item<2-> To produce one rose in the US, firms use $30$ units of labor ($a_{US,R} = 30$)
+        \item<3-> To produce one computer in the US, firms use $3,000$ units of labor ($a_{US,C} = 3,000$)
+        \item<4-> How many units of either good can the US make?
         \begin{itemize}
-            \item If it fully specializes in $R$, it can produce $Y_{US,R}=L_{US}/a_{US,R} = 300 \text{ million}/30 = 10 \text{ million}$ roses.
-            \item If it fully specializes in $C$, it can produce $Y_{US,C}=L_{US}/a_{US,C} = 300 \text{ million}/3,000 = 100,000$ computers.
+            \item<4-> If it fully specializes in $R$, it can produce $Y_{US,R}=L_{US}/a_{US,R} = 300 \text{ million}/30 = 10 \text{ million}$ roses.
+            \item<4-> If it fully specializes in $C$, it can produce $Y_{US,C}=L_{US}/a_{US,C} = 300 \text{ million}/3,000 = 100,000$ computers.
         \end{itemize}
 
-        \item In general, it can produce any combination $(Y_{US,R}, Y_{US,C})$ that satisfies:
+        \item<5-> In general, it can produce any combination $(Y_{US,R}, Y_{US,C})$ that satisfies:
 
         \begin{equation*}
             3,000 \times Y_{US,C} + 30 \times Y_{US,R} \le 300 \text{ million}
         \end{equation*}
-    \item Opportunity cost: $a_{US,R}/a_{US,C} = 30/3000 = 1/100$ computers per rose \\
+    \item<6-> Opportunity cost: $a_{US,R}/a_{US,C} = 30/3000 = 1/100$ computers per rose \\
     \qquad \textcolor{gray}{(or $a_{US,C}/a_{US,R} = 100$ roses per computer)}
     \end{wideitemize}
 \end{frame}
@@ -370,17 +432,17 @@
         \begin{equation*}
             \max_{Y_{i,p}} \pi_{i,p} = \max_{Y_{i,p}} P_{i,p}Y_{i,p} - w_i a_{i,p} Y_{i,p} 
         \end{equation*}
-        \item Since labor only one type of labor (mobile across sectors), there is a single wage $w_i$
-        \item In equilibrium, \textbf{prices equal marginal cost} in each productive sector:
+        \item<2-> Since labor only one type of labor (mobile across sectors), there is a single wage $w_i$
+        \item<3-> In equilibrium, \textbf{prices equal marginal cost} in each productive sector:
         \begin{eqnarray*}
             P_{i,p} = w_i a_{i,p} \iff \frac{P_{i,p}}{a_{i,p}} = w_i  \qquad \text{ for } p \in\{C,R\}
         \end{eqnarray*}
-        \item In autarky equilibrium, there demand and production in both sectors
-        \item We can pin down the relative price $P_{i,C} / P_{i,R}$:
+        \item<4-> In autarky equilibrium, there demand and production in both sectors
+        \item<5-> We can pin down the relative price $P_{i,C} / P_{i,R}$:
         \begin{equation*}
             \frac{P_{i,C}}{a_{i,C}} = w_i = \frac{P_{i,R}}{a_{i,R}} \iff \frac{P_{i,C}}{P_{i,R}} = \frac{a_{i,C}}{a_{i,R}}  
         \end{equation*}
-    \item In autarky, relative prices will reflect the \textbf{opportunity cost} within country $i$
+    \item<6-> In autarky, relative prices will reflect the \textbf{opportunity cost} within country $i$
     \end{wideitemize}
 \end{frame}
 
@@ -454,15 +516,42 @@
         \begin{equation*}
             U_i(Q_C,Q_R) \equiv Q_C^{\alpha_i} Q_R^{1-\alpha_i}, \qquad \text{for } 0 < \alpha_i < 1   
         \end{equation*}
+        \item<2-> We call these \textbf{Cobb-Douglas Preferences}
+        \item<3-> Some characteristics:
+        \begin{itemize}
+            \item<3-> Increasing in both arguments \\
+            \qquad \qquad \textcolor{gray}{(happier if consume more $Q_C$ or $Q_R$)}
+
+            \begin{equation*}
+                \frac{\partial U_i(Q_C,Q_R)}{\partial Q_C} > 0, \qquad \frac{\partial U_i(Q_C,Q_R)}{\partial Q_R} > 0
+            \end{equation*}
+            \item<4-> Marginal decreasing utility \\
+            \qquad \qquad \textcolor{gray}{(lower increase for each additional $Q_C$, holding $Q_R$ fixed)}
+            \begin{eqnarray*}
+                \frac{\partial}{\partial Q_C} \left[ \frac{\partial U_i(Q_C,Q_R)}{\partial Q_C} \right] = \frac{\partial^2 U_i(Q_C,Q_R)}{\partial Q_C^2} &<& 0, \\
+                \qquad \frac{\partial}{\partial Q_R} \left[ \frac{\partial U_i(Q_C,Q_R)}{\partial Q_R} \right] = \frac{\partial^2 U_i(Q_C,Q_R)}{\partial Q_R^2} &<& 0
+            \end{eqnarray*}
+            
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Preferences}
+\begin{wideitemize}
+        \item In country $i$, consumers preferences over products $p$, represented by a utility function:
+        \begin{equation*}
+            U_i(Q_C,Q_R) \equiv Q_C^{\alpha_i} Q_R^{1-\alpha_i}, \qquad \text{for } 0 < \alpha_i < 1   
+        \end{equation*}
         \item How to derive indifference curves?
         \begin{eqnarray*}
             U_i = Q_C^{\alpha_i} Q_R^{1-\alpha_i} \iff Q_C^{\alpha_i} = U_i \times Q_R^{-(1-\alpha_i)} \iff Q_C = U_i^{\frac{1}{\alpha_i}} \times Q_R^{-\frac{1-\alpha_i}{\alpha_i}} 
         \end{eqnarray*}
-        \item Example: Suppose $\alpha_i=1/2$. Then:
+        \item<2-> Example: Suppose $\alpha_i=1/2$. Then:
         \begin{equation*}
             Q_C = U_i^{\frac{1}{1/2}} \times Q_R^{-\frac{1-1/2}{1/2}} = U_i^{2} \times Q_R^{-1} = \frac{U_i^{2}}{Q_R} 
         \end{equation*}
-        \item English: for fixed utility $U_i$, if consumption $Q_R$ goes up, consumption $Q_C$ must go down
+        \item<3-> English: for fixed utility $U_i$, if consumption $Q_R$ goes up, consumption $Q_C$ must go down
     \end{wideitemize}
 \end{frame}
 
@@ -511,20 +600,19 @@
 
 
 \begin{wideitemize}
-    \item In equilibrium, relative prices = marginal rate of substitution
+    \item In equilibrium, relative prices = marginal rate of substitution. Why? \\
+    \qquad \textcolor{gray}{(check handout for math; we will solve the full problem next lecture)}
 
-    \item Relative prices = marginal rate of substitution. Why?
+    \item<2-> \textcolor{blue}{Relative prices} $P_{i,R}/P_{i,C}$: marginal cost of replacing roses for computers
 
-    \item \textcolor{blue}{Relative prices} $P_{i,R}/P_{i,C}$: marginal cost of replacing roses for computers
-
-    \item \textcolor{blue}{Marginal rate of substitution} $MU_{i,R}/MU_{i,C}$: marginal benefit of of replacing roses for computers
+    \item<3-> \textcolor{blue}{Marginal rate of substitution} $MU_{i,R}/MU_{i,C}$: marginal benefit of of replacing roses for computers
 
     \begin{equation*}
         MRS_{i,R,C} = \frac{MU_{i,R}}{MU_{i,C}} = \frac{ \partial U_i / \partial Q_R }{\partial U_i / \partial Q_C  } = \frac{ (1-\alpha_i ) Q_C^{\alpha_i} Q_R^{1-\alpha_i} Q_{R}^{-1} }{ \alpha_i  Q_C^{\alpha_i} Q_R^{1-\alpha_i} Q_{C}^{-1} } = \frac{1-\alpha_i}{\alpha_i} \times \frac{Q_C}{Q_R}
     \end{equation*}
 
 
-    \item English (sort of): marginal cost = marginal benefit 
+    \item<4-> English (sort of): marginal cost = marginal benefit 
     \end{wideitemize}
 
 \end{frame}
@@ -600,7 +688,7 @@
 
 % Equilibrium point
 \addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\Qr, \Qc)};
-\node at (axis cs:\Qr - 1,\Qc - 0.01) {\scriptsize $\frac{P_{US,R}}{P_{US,C}} = MRS_{i,R,C}$};
+\node at (axis cs:\Qr - 1,\Qc - 0.01) {\scriptsize $\frac{P_{US,R}}{P_{US,C}} = MRS_{US,R,C}$};
 \node at (axis cs:\Qr + 1.25,\Qc + 0.005) {\scriptsize $\textcolor{red}{(Q_{US,R},Q_{US,C})}$};
 
 \end{axis}
@@ -614,20 +702,21 @@
 \begin{frame}{What about Colombia?}
 \begin{wideitemize}
         \item There are 54 million units of labor in Colombia ($L_{COL} = 54$ million)
-        \item To produce one rose in Colombia, firms use $6$ units of labor ($a_{COL,R} = 6$)
-        \item To produce one computer in Colombia, firms use $5,400$ units of labor ($a_{COL,C} = 5,400$)
-        \item How many units of either good can Colombia make?
+        \item<2-> To produce one rose in Colombia, firms use $6$ units of labor ($a_{COL,R} = 6$)
+        \item<3-> To produce one computer in Colombia, firms use $5,400$ units of labor ($a_{COL,C} = 5,400$)
+        \item<4-> How many units of either good can Colombia make?
         \begin{itemize}
-            \item If it fully specializes in $R$, it can produce $Y_{COL,R}=L_{COL}/a_{COL,R} = 54 \text{ million}/6 = 9 \text{ million}$ roses.
-            \item If it fully specializes in $C$, it can produce $Y_{COL,C}=L_{COL}/a_{COL,C} = 54 \text{ million}/5,400 = 10,000$ computers.
+            \item<4-> If it fully specializes in $R$, it can produce $Y_{COL,R}=L_{COL}/a_{COL,R} = 54 \text{ million}/6 = 9 \text{ million}$ roses.
+            \item<4-> If it fully specializes in $C$, it can produce $Y_{COL,C}=L_{COL}/a_{COL,C} = 54 \text{ million}/5,400 = 10,000$ computers.
         \end{itemize}
 
-        \item In general, it can produce any combination $(Y_{COL,R}, Y_{COL,C})$ that satisfies:
+        \item<5-> In general, it can produce any combination $(Y_{COL,R}, Y_{COL,C})$ that satisfies:
 
         \begin{equation*}
             5,400 \times Y_{COL,C} + 6 \times Y_{COL,R} \le 54 \text{ million}
         \end{equation*}
-        \item Opportunity cost: $a_{COL,R} / a_{COL,C} = 6 / 5,400 = 1/900$.
+        \item<6-> Opportunity cost: $a_{COL,R} / a_{COL,C} = 6 / 5,400 = 1/900$. \\
+        \qquad \textcolor{gray}{(this will also be the equal to relative prices!)}
     \end{wideitemize}
 \end{frame}
 
@@ -723,9 +812,9 @@
     \item English: absolute advantage in production = uses less labor to produce one unit \\
     \qquad \textcolor{gray}{(i.e., it is more productive)}
 
-    \item \textcolor{blue}{Opportunity cost}: cost of producing a good, measured in foregone output of all others.
+    \item<2-> \textcolor{blue}{Opportunity cost}: cost of producing a good, measured in foregone output of all others.
 
-    \item \blue{Comparative advantage}: An economy has a comparative advantage in producing a good if its opportunity cost of the good is lower than in the rest of the world.
+    \item<2-> \blue{Comparative advantage}: An economy has a comparative advantage in producing a good if its opportunity cost of the good is lower than in the rest of the world.
 
 \end{wideitemize}
 
@@ -742,7 +831,7 @@
         1/900 = a_{COL,R}/a_{COL,C} < a_{US,R}/a_{US,C} = 1/100
     \end{equation*}
 
-    \item We say the US has an \textcolor{blue}{comparative advantage} in the production of computers, since:
+    \item<2-> We say the US has an \textcolor{blue}{comparative advantage} in the production of computers, since:
     
     \begin{equation*}
         900 = a_{COL,C}/a_{COL,R
@@ -764,14 +853,14 @@
         \item In the US: $a_{US,R}/a_{US,C} = P_{US,R}/P_{US,C}$
     \end{itemize}
 
-    \item Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. Why? \\
+    \item<2-> Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. Why? \\
         \qquad \textcolor{gray}{(goods are assumed to be identical)}
 
-    \item In this model, \blue{countries specialize in goods in which they have a comparative advantage}:
+    \item<3->  In this model, \blue{countries specialize in goods in which they have a comparative advantage} after trade:
     
     \begin{itemize}
-        \item \blue{Colombia} specializes in \blue{roses} if $a_{COL,R}/a_{COL,C} < P_R/P_C$
-        \item The \blue{US} specializes in \blue{computers} if $a_{US,R}/a_{US,C} > P_R/P_C$
+        \item<3->  \blue{Colombia} specializes in \blue{roses} if $a_{COL,R}/a_{COL,C} < P_R/P_C$
+        \item<3-> The \blue{US} specializes in \blue{computers} if $a_{US,R}/a_{US,C} > P_R/P_C$
     \end{itemize}
 
 \end{wideitemize}

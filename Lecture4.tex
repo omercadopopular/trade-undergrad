@@ -436,15 +436,15 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
         \item In Colombia: $a_{COL,R}/a_{COL,C} = P_{COL,R}/P_{COL,C}$
     \end{itemize}
 
-    \item Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. 
+    \item<2-> Under free trade, there are world prices, i.e. $P_R,P_C$ that hold both in countries. 
 
-    \item If $P_R/P_C = a_{COL,R}/a_{COL,C}$, Colombia indifferent b/w computers and roses
+    \item<3-> If $P_R/P_C = a_{COL,R}/a_{COL,C}$, Colombian producers indifferent
     \begin{itemize}
         \item Production of computers $Y_{COL,C}$ can range from 0 to 10,000 
         \item Production of roses $Y_{COL,R}$ can range from 0 to 9mi 
     \end{itemize}
 
-    \item If $P_R/P_C = a_{US,R}/a_{US,C}$, US indifferent b/w computers and roses
+    \item<4-> If $P_R/P_C = a_{US,R}/a_{US,C}$, US producers indifferent
     \begin{itemize}
         \item Production of computers $Y_{US,C}$ can range from 0 to 100,000 
         \item Production of roses $Y_{US,R}$ can range from 0 to 10mi 
@@ -466,10 +466,10 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
         \item The \blue{US} specializes in \blue{computers} if $a_{US,R}/a_{US,C} > P_R/P_C$
     \end{itemize}
 
-    \item Why? \\
+    \item<2-> Why? \\
         \qquad \textcolor{gray}{(relative marginal revenue is greater than its relative marginal cost)}
 
-    \item Each country specializes in the good in which they have a comparative advantage in if:
+    \item<3-> Each country specializes in the good in which they have a comparative advantage in if:
 
     \begin{equation*}\label{eq: price-trade}
         \frac{a_{US,C}}{a_{US,R}} < \frac{P_C}{P_R} < \frac{a_{COL,C}}{a_{COL,R}}
@@ -533,20 +533,20 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 \item How are prices determined in a free trade equilibrium? \\
 \qquad \textcolor{gray}{(relative prices will adjust to make sure that the global supply = global demand)}
 
-\item \blue{Global supply}:
+\item<2-> \blue{Global supply}:
 
 \begin{itemize}
     \item US fully specializes in computers: $Y^T_{C} = L_{US}/a_{US,C} = 100{,}000$
     \item Colombia fully specializes in roses? $Y^T_R = L_{COL}/a_{COL,R} = 9{,}000{,}000$. 
 \end{itemize}
     
-\item \blue{Global demand}:
+\item<3-> \blue{Global demand}:
 \begin{eqnarray*}
     Q_{C} &\equiv& Q^T_{US,C} +  Q^T_{COL,C} = \alpha_{US} \frac{w_{US} L_{US} }{P_C} + \alpha_{COL} \frac{w_{COL} L_{COL} }{P_C}  \\
     Q_{R} &\equiv& Q^T_{US,R} +  Q^T_{COL,R}  = (1-\alpha_{US}) \frac{w_{US} L_{US} }{P_R} + (1-\alpha_{COL}) \frac{w_{COL} L_{COL} }{P_R}    
 \end{eqnarray*}
 
-\item Note that global demand \textcolor{red}{$Q_C/Q_R$} is decreasing in relative prices $P_C / P_R$ 
+\item<3-> Note that global demand \textcolor{red}{$Q_C/Q_R$} is decreasing in relative prices $P_C / P_R$ 
 \end{wideitemize}
     
 \end{frame}
@@ -626,17 +626,29 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
     \begin{wideitemize}
     \item How to get $P_C/P_R$? Trade balances, so value of exports = value of imports:
     {\scriptsize
-    \begin{eqnarray*}
-        P_C ( Y_{US,C} - Q^T_{US,C}) &=& P_R (Y_{COL,C} - Q^T_{COL,R}) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{w_{US} L_{US}}{P_C} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{w_{COL} L_{COL}}{P_R} \right) \\
-        P_C \left( \frac{L_{US,C}}{a_{US,C}} - \alpha_{US} \frac{L_{US}}{a_{US,C}} \right) &=& P_R \left( \frac{L_{COL,R}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{L_{COL}}{a_{COL,R}} \right) \\ 
-    \end{eqnarray*}
+    \begin{equation*}
+        P_C ( Y_{US,C} - Q^T_{US,C}) = P_R (Y_{COL,R} - Q^T_{COL,R})
+    \end{equation*}
+    }
+    \onslide<2->{
+    {\scriptsize
+    \begin{equation*}
+    P_C \left( \frac{L_{US}}{a_{US,C}} - \alpha_{US} \frac{w_{US} L_{US}}{P_C} \right) = P_R \left( \frac{L_{COL}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{w_{COL} L_{COL}}{P_R} \right)
+    \end{equation*}
+    }
+    \onslide<3->{
+    {\scriptsize
+    \begin{equation*}    
+        P_C \left( \frac{L_{US}}{a_{US,C}} - \alpha_{US} \frac{L_{US}}{a_{US,C}} \right) = P_R \left( \frac{L_{COL}}{a_{COL,R}} - (1-\alpha_{COL}) \frac{L_{COL}}{a_{COL,R}} \right)
+    \end{equation*}
+    }
+    }
     }
     \normalsize
-    \item Solving for $P_C/P_R$:
+    \item<4-> Solving for $P_C/P_R$:
     \begin{center}
         \boxed{
-        \frac{P_C}{P_R} = \frac{\alpha_{COL}}{1-\alpha_{US}} \times \frac{L_{COL}/a_{COL,R}}{L_{US}/a_{US,C}} = \frac{3/4}{1/2} \times \frac{54m / 9}{300m / 3{,}000} = 135 
+        \frac{P_C}{P_R} = \frac{\alpha_{COL}}{1-\alpha_{US}} \times \frac{L_{COL}/a_{COL,R}}{L_{US}/a_{US,C}} = \frac{3/4}{1/2} \times \frac{54m / 6}{300m / 3{,}000} = 135 
         }    
     \end{center}
         
@@ -933,16 +945,31 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & $0.5 \times 300\text{m}/30 = 
 
 \begin{frame}{Optimal demands under free trade}
 \begin{wideitemize}
-    \item Demand functions:    
-  \begin{eqnarray*}
-    Q^T_{US,C} &=& \alpha_{US} \frac{L_{US} }{a_{US,C}} = 1/2 \times \frac{300 \text{m}}{100{,}000} = 50,000 \\
-    Q^T_{COL,C} &=& \alpha_{COL} \frac{L_{COL} }{a_{COL,R} \times P_C/P_R} = 3/4 \times \frac{54 \text{m}}{6 \times 135} = 50,000 \\
-    Q^T_{US,R} &=& (1- \alpha_{US}) \times \frac{P_C}{P_R} \times \frac{L_{US} }{a_{US,C}} = 1/2 \times 135 \times \frac{300 \text{m}}{100{,}000} = 6,750,000 \\
-    \qquad Q^T_{COL,R} &=& (1-\alpha_{COL}) \frac{L_{COL} }{a_{COL,R} } = 1/4 \times \frac{54 \text{m}}{6} = 2,250,000
+    \item Recall $w_{US} = P_{C} / a_{US,C}, \quad w_{COL} = P_{R} / a_{COL,R}, \quad  P_C/P_R = 135$
+    \item<2-> Demand functions:    
+  \onslide<2->{ \scriptsize
+  \begin{equation*}
+    Q^T_{US,C} = \alpha_{US} \frac{w_{US }L_{US} }{P_{C}} = \alpha_{US} \frac{L_{US} }{a_{US,C}} = 1/2 \times \frac{300 \text{m}}{100{,}000} = 50,000
+    \end{equation*}
+    }
+    \onslide<3->{ \scriptsize
+     \begin{equation*}
+    Q^T_{COL,C} = \alpha_{COL} \frac{w_{COL }L_{COL} }{P_{C}} = \alpha_{COL} \frac{L_{COL} }{a_{COL,R} \times P_C/P_R} = 3/4 \times \frac{54 \text{m}}{6 \times 135} = 50,000
+    \end{equation*}
+    }
+    \onslide<4->{ \scriptsize
+    \begin{equation*}        
+    Q^T_{US,R} = (1- \alpha_{US})   \frac{W_{US} L_{US} }{P_R} = (1- \alpha_{US})   \frac{P_C}{P_R} \times \frac{L_{US} }{a_{US,C}} = 1/2 \times 135 \times \frac{300 \text{m}}{100{,}000} = 6,750,000
+    \end{equation*}
+    }
+    \onslide<5->{ \scriptsize
+    \begin{equation*}
+    \qquad Q^T_{COL,R} &=& (1-\alpha_{COL}) \frac{w_{COL} L_{COL} }{P_{R} } = (1-\alpha_{COL}) \frac{L_{COL} }{a_{COL,R} } = 1/4 \times \frac{54 \text{m}}{6} = 2,250,000
+    \end{equation*}
+    }
+    \item<6-> Exports/imports of computers: $Y_{US,C} - Q^T_{US,C} = 100{,}000 - 50{,}000 = 50{,}000 = Q^T_{COL,C}$
+    \item<7-> Exports/imports of roses: $Y_{US,R} - Q^T_{US,R} = 9m - 2.25m = 6.75m = Q^T_{US,R}$
 \end{wideitemize}
-    \item Exports/imports of computers: $Y_{US,C} - Q^T_{US,C} = 100{,}000 - 50{,}000 = 50{,}000 = Q^T_{COL,C}$
-    \item Exports/imports of roses: $Y_{US,R} - Q^T_{US,R} = 9m - 2.25m = 6.75m = Q^T_{US,R}$
-\end{eqnarray*}
 
 
 \end{frame}
