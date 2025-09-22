@@ -1,0 +1,198 @@
+\documentclass[11pt,letterpaper]{exam}
+%\usepackage[Lhdr={},Rhdr={}]{plain}
+
+\newtheorem{proposition}{Proposition}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{subfigure}
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage{comment}
+ \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[top=0.5in,
+  headsep=0pt% remove space between header and text body
+  ]{geometry}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\newcommand{\figpath}{figs/}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+\begin{document}
+\begin{center}
+\Large{\textsc{International Trade Theory and Policy}}\\[4pt]
+\Large{ECON 2181 \;--\; Fall 2025}\\[6pt]
+\large Carlos Góes, Ph.D. \\
+\textit{Professorial Lecturer}\\
+\href{mailto:c.bezerradegoes@gwu.edu}{c.bezerradegoes@gwu.edu} \\
+\end{center}
+
+\bigskip
+
+\begin{center}
+\Large{\textsc{Problem Set 1}}
+\end{center}
+
+
+\begin{questions}
+
+\question  Consider the Two-Country, Two-Goods Ricardian model that we have studied in class. There are two countries $i \in \{ US,COL \}$ and two products $p \in \{R,C \}$.
+
+\begin{parts}
+\part  In each country, there is a representative household with preferences over the consumption of each good $Q_{i,p}$ denoted by an utility function $U_{i}(Q_{i,R} , Q_{i,C})$, taking goods prices $P_{i,p}$ as given. They supply labor $L_i$ inelastically for wage $w_i$. Suppose that consumer preferences are Cobb-Douglas with weight $0 < \alpha_i < 1$ on the demand for computers. Write down the consumer utility maximization problem, including the budget constraint.
+
+
+\part Provide an economic interpretation for how the utility function represents preferences. (hint: think of how utility changes as consumption changes).
+
+
+\part Provide and economic interpretation for the Cobb Douglas weight $\alpha_i$.
+
+\part Provide an economic interpretation for the budget constraint. What does each side of the equation represents?
+
+\part Chart the indifference curves as a function of demand choices $Q_{i,R},Q_{i,C}$. Explain what these curves mean.
+
+\part Using the budget constraint, replace for $Q_{i,R}$ in the objective function and derive an expression for $Q_{i,R}$ as a function of $Q_{i,C}$ (or vice versa).
+
+
+\part Replace the expression you found in the budget constraint, and show that demand functions are (i) $Q_{i,C} = \alpha_{i}  \times w_i L_i / P_{i,C}$ and (ii) $Q_{i,R} = (1-\alpha_{i})  \times w_i L_i / P_{i,r}$ respectively.
+
+
+\part Give an intuitive explanation for this result.
+
+\part Markets for each product in each country are competitive and firms maximize profits by choosing optimal production $Y_{i,p}$ levels, taking goods $P_{i,p}$, unit labor requirements $a_{i,p}$ and factor $w_i$ prices as given.  Write down the profit maximization problem for a firm in country $i$ producing product $p$.
+
+\part In competitive markets, there is no economic profit, so prices equal marginal cost. State this condition from the problem above.
+
+
+\part Use the condition above for each sector $p \in \{ C,R\}$ to derive a relationship between relative prices and unit labor requirements. Give an economic interpretation of this relationship.
+
+\part Total domestic production is subject to a resource constraint, represented by an inequality where the maximum amount of labor available in the country is $L_i$. (i) Write down this expression, (ii) state its name whenever it holds with equality, and (iii) give an economic interpretation for it. 
+
+\newpage
+\part Using the results above, complete the following table:
+
+\resizebox{0.9\textwidth}{!}{%
+\begin{tabular}{lcc}
+\toprule
+\textbf{Variable} & \textbf{United States (US)} & \textbf{Colombia (COL)} \\
+\midrule
+Labor endowment $L_i$ & $300$ million & $54$ million \\
+Preference parameter $\alpha_i$ & $1/2$ & $3/4$ \\
+Unit labor requirement for computers $a_{i,C}$ & $3{,}000$ & $5{,}400$ \\
+Unit labor requirement for roses $a_{i,R}$ & $30$ & $6$ \\
+\midrule
+Max computers: $L_i / a_{i,C}$ & \white{$300\text{m}/3{,}000 = 100{,}000$} & \white{$54\text{m}/5{,}400 = 10{,}000$} \\
+Max roses: $L_i / a_{i,R}$ & \white{$300\text{m}/30 = 10\text{m}$} & \white{$54\text{m}/6 = 9\text{m}$} \\
+\midrule
+Opportunity cost $a_{i,C}/a_{i,R}$ & \white{$3{,}000/30 = 100$} & \white{$5{,}400/6 = 900$} \\
+Relative Prices $P_{i,C}/P_{i,R}$ & \white{$3{,}000/30 = 100$} & \white{$5{,}400/6 = 900$} \\
+Demand for computers: $\alpha_i L_i / a_{i,C}$ & \white{$0.5 \times 300\text{m}/3{,}000 = 50{,}000$} & \white{$0.75 \times 54\text{m}/5{,}400 = 7{,}500$} \\
+Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & \white{$0.5 \times 300\text{m}/30 = 5\text{m}$} & \white{$0.25 \times 54\text{m}/6 = 2.25\text{m}$} \\
+\bottomrule
+\end{tabular}
+}
+
+\part Assuming countries are in Autarky, draw the production possibilities frontier and the indifference curves of the consumer maximization problem. Mark in the chart relevant points and state the slope of each of them.
+
+
+\part Now suppose that countries open up to trade. How would you solve for equilibrium prices under free trade? You don't have to actually solve for them. Just explain your logic.
+
+
+\part What is the inequality condition for equilibrium prices that allow free trade with specialization to occur? Explain intuitively why that is the case.
+
+
+\part Draw the global equilibrium in which world relative demand meets world relative supply, assuming it lays on the trade region. Mark the equilibrium point and explain what happens with production in each country on that region.
+\part Draw a diagram that shows, for each country, the PPFs; production and consumption in autarky; the new price line (assuming in falls in the traded inducing region); production and consumption under free trade.
+
+
+\end{parts}
+
+
+\question Home has 1,200 units of labor available. It can produce two goods, apples and bananas. The unit labor requirement in apple production is 3, while in banana
+production it is 2.
+\begin{parts}
+\part Graph Home’s production possibility frontier.
+\part What is the opportunity cost of apples in terms of bananas?
+\part In the absence of trade, what would be the price of apples in terms of bananas? Why?
+\end{parts}
+\question Home is as described above. There is now also another country, Foreign,
+with a labor force of 800. Foreign’s unit labor requirement in apple production
+is 5, while in banana production it is 1.
+\begin{parts}
+    \item Graph Foreign’s production possibility frontier.
+    \item Construct the world relative supply curve.
+\end{parts}
+\question Now suppose world relative demand takes the following form: Demand for
+apples/demand for bananas = price of bananas/price of apples.
+\begin{parts}
+\part Graph the relative demand curve along with the relative supply curve.
+\part What is the equilibrium relative price of apples?
+\part Describe the pattern of trade.
+\part Show that both Home and Foreign gain from trade.
+\end{parts}
+\question  Suppose in an hour, 10 kg of rice and 5 meter of cloth is produced in India, and 5 kg and 2 meter in Thailand. Using opportunity costs, explain which country should export cloth and which should export rice.
+\question Suppose Mike and Johnson produce two products—hamburgers and T-shirts. Mike
+produces 10 hamburgers or 3 T-shirts a day and Johnson produces 7 hamburgers or
+4 T-shirts. Assuming they can devote time to making either hamburgers or T-shirts.
+
+
+\begin{parts}
+\part Draw the production possibility curve.
+\part  Who enjoys the absolute advantage of producing both?
+\part  Who has a higher opportunity cost of making T-shirts?
+\part  Who has a comparative advantage in producing hamburgers?
+    
+\end{parts}
+
+
+\question “It has been all downhill for the West since China entered the world market; we just can’t compete with hundreds of millions of people willing to work for almost
+nothing.” Discuss.
+
+\question In China, local governments are responsible for setting the minimum wages. In the United States, a network of federal laws, state laws, and local laws set the minimum wages. How can this be associated with productivity and transformed into a comparative advantage?
+
+\question Why do governments set the living standards of the people by setting the minimum wage? (Hint: Refer to your answer above.)
+
+
+\question International immobility of resources is compensated by the international flow of goods. Justify the statement.
+
+\question We have focused on the case of trade involving only two countries. Suppose that there are many countries capable of producing two goods, and that each country has only one factor of production, labor. What could we say about the pattern of production and trade in this case? (Hint: Try constructing the world relative supply curve.)
+
+
+
+
+\end{questions}
+
+
+
+
+\end{document}

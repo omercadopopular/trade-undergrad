@@ -114,15 +114,13 @@ In general, the price of good $g$ will be the lowest of unit costs at home or ab
 \paragraph{Demand} Workers in each country $i$ inelastically time for wage $w_i$ and earn labor income $w_i L_i$. They have preferences over goods. They purchase quantities $q_{i}$ for prices $P_{g}$ and exhaust their labor income, maximizing:
 
 \begin{equation*}
-    \max_{\{q_{i,g}\}_{g \in [0,]}} \int_0^1  \log q_{i,g} dp \qquad s.t. \qquad \int_0^1 P_{g}  q_{i,g} dp = w_i L_i
+    \max_{\{q_{i,g}\}_{g \in [0,1]}} \sum_{g \in [0,1]}  \log q_{i,g} \qquad s.t. \qquad \sum_{g \in [0,1]}  P_{g}  q_{i,g} = w_i L_i
 \end{equation*}
 
-You might be scared of how this problem looks like, since we are using integrals. However, for all intents and purposes, for reasons that we will not get into, you should treat that integral as a summation over all products $g$. Whenever you are taking derivatives you should treat the integral as a sum.
-
-To solve this problem, you use the standard way that you would any other constrained maximization problem: set up a Lagrangian and take first order conditions. The Lagrangian looks like:
+The preferences above are equivalent to Cobb-Douglas preferences with identical weights. To solve this problem, you use the standard way that you would any other constrained maximization problem: set up a Lagrangian and take first order conditions. The Lagrangian looks like:
 
 \begin{eqnarray*}
-    \mathcal{L} = \int_0^1 \log q_{i,g} dp + \lambda [w_i L_i - \int_0^1 P_{g}  q_{i,g} dp ]
+    \mathcal{L} = \sum_{g \in [0,1]}  \log q_{i,g} + \lambda [w_i L_i - \sum_{g \in [0,1]}  P_{g}  q_{i,g} ]
 \end{eqnarray*}
 
 \noindent with FOCS:
@@ -134,8 +132,8 @@ To solve this problem, you use the standard way that you would any other constra
 Replacing this result in the budget constraint:
 
 \begin{equation*}
-    \int_0^1 \frac{1}{\lambda} dp = w_iL_i, \qquad 
-    \frac{1}{\lambda} \underbrace{\int_0^1 1 dp}_{=1} = w_iL_i, \qquad \frac{1}{\lambda} =  w_iL_i
+    \underbrace{\sum_{g \in [0,1]}  \frac{1}{\lambda}}_{= 1\times 1/\lambda} = w_iL_i, \qquad 
+    \frac{1}{\lambda} = w_iL_i 
 \end{equation*}
 
 Therefore, demand for each good $g$ satisfies:
@@ -155,9 +153,9 @@ This is the usual result under which each consumer purchases quantities inversel
 Suppose there is some good $G$ for which $\frac{w_H}{w_F} = \frac{a_{F,G}}{a_{H,G}}$. Since we know that goods are ordered such that $A_g$ is decreasing we know that home will then produce every good $[0,G]$ while foreign will produce all goods $(G,1)$. Income in the home country would then be:
 {\scriptsize
 \begin{eqnarray*}
-   w_H L_H &=& \int_0^G P_g q_{H,g} dg + \int_0^G P_g q_{F,g} dg    \\
-   w_H L_H &=& \int_0^G P_g \frac{w_H L_H}{ P_g} dg + \int_0^G\frac{w_F L_F}{ P_g} dg    \\
-   w_H L_H &=& w_H L_H \underbrace{\int_0^G 1 dg}_{=G} +w_F L_F \underbrace{\int_0^G 1 dg}_{=G}    \\
+   w_H L_H &=& \sum_{g \in [0,G]}  P_g q_{H,g}  + \sum_{g \in [0,G]} P_g q_{F,g}     \\
+   w_H L_H &=& \sum_{g \in [0,G]} P_g \frac{w_H L_H}{ P_g}  + \sum_{g \in [0,G]} \frac{w_F L_F}{ P_g}     \\
+   w_H L_H &=& G\times w_H L_H  + G \times w_F L_F     \\
    (1-G) w_H L_H &=&  G \times w_F L_F    
 \end{eqnarray*}
 }
