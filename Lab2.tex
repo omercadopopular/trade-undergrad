@@ -1,59 +1,500 @@
-\documentclass{beamer}
+\documentclass[notes,11pt, aspectratio=169, xcolor=table]{beamer}
+
+\usepackage{pgfpages}
+% These slides also contain speaker notes. You can print just the slides,
+% just the notes, or both, depending on the setting below. Comment out the want
+% you want.
+\setbeameroption{hide notes} % Only slide
+%\setbeameroption{show only notes} % Only notes
+%\setbeameroption{show notes on second screen=right} % Both
+
+\usepackage{helvet}
+\usepackage[default]{lato}
+\usepackage{array}
+\usepackage{minted}
+
+\newtheorem{proposition}{Proposition}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage[style=authoryear,sorting=nyt,uniquename=false]{biblatex}
+
+\addbibresource{references.bib} 
+
+\newcolumntype{d}[0]{D{.}{.}{5}}
+
+\def\@@mybluebox[#1][#2]#3{
+    \sbox\mytempbox{#3}%
+    \mytemplen\ht\mytempbox
+    \advance\mytemplen #1\relax
+    \ht\mytempbox\mytemplen
+    \mytemplen\dp\mytempbox
+    \advance\mytemplen #2\relax
+    \dp\mytempbox\mytemplen
+    \colorbox{myblue}{\hspace{1em}\usebox{\mytempbox}\hspace{1em}}}
+
+
+\usepackage{changepage}
+\usepackage{appendixnumberbeamer}
+\newcommand{\beginbackup}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+   \setbeamertemplate{footline}
+   {
+     \leavevmode%
+     \hline
+     box{%
+       \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{footlinecolor}%
+%         \insertframenumber  \hspace*{2ex} 
+       \end{beamercolorbox}}%
+     \vskip0pt%
+   }
+ }
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}} 
+}
+
+
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{booktabs}
+
+% These are my colors -- there are many like them, but these ones are mine.
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+
+\hypersetup{
+  colorlinks=false,
+  linkbordercolor = {white},
+  linkcolor = {blue}
+}
+
+
+%% I use a beige off white for my background
+\definecolor{MyBackground}{RGB}{255,253,218}
+
+%% Uncomment this if you want to change the background color to something else
+%\setbeamercolor{background canvas}{bg=MyBackground}
+
+%% Change the bg color to adjust your transition slide background color!
+\newenvironment{transitionframe}{
+  \setbeamercolor{background canvas}{bg=yellow}
+  \begin{frame}}{
+    \end{frame}
+}
+
+\setbeamercolor{frametitle}{fg=blue}
+\setbeamercolor{title}{fg=blue}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{itemize items}{-}
+\setbeamercolor{itemize item}{fg=blue}
+\setbeamercolor{itemize subitem}{fg=blue}
+\setbeamercolor{enumerate item}{fg=blue}
+\setbeamercolor{enumerate subitem}{fg=blue}
+\setbeamercolor{button}{bg=MyBackground,fg=blue,}
+
+
+
+% If you like road maps, rather than having clutter at the top, have a roadmap show up at the end of each section 
+% (and after your introduction)
+% Uncomment this is if you want the roadmap!
+% \AtBeginSection[]
+% {
+%    \begin{frame}
+%        \frametitle{Roadmap of Talk}
+%        \tableofcontents[currentsection]
+%    \end{frame}
+% }
+\setbeamercolor{section in toc}{fg=blue}
+\setbeamercolor{subsection in toc}{fg=red}
+\setbeamersize{text margin left=1em,text margin right=1em} 
+
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+
+\usepackage{environ}
+\NewEnviron{videoframe}[1]{
+  \begin{frame}
+    \vspace{-8pt}
+    \begin{columns}[onlytextwidth, T] % align columns
+      \begin{column}{.58\textwidth}
+        \begin{minipage}[t][\textheight][t]
+          {\dimexpr\textwidth}
+          \vspace{8pt}
+          \hspace{4pt} {\Large \sc \textcolor{blue}{#1}}
+          \vspace{8pt}
+          
+          \BODY
+        \end{minipage}
+      \end{column}%
+      \hfill%
+      \begin{column}{.42\textwidth}
+        \colorbox{green!20}{\begin{minipage}[t][1.2\textheight][t]
+            {\dimexpr\textwidth}
+            Face goes here
+          \end{minipage}}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+}
+
+\title[]{International Trade: Data Lab 1}
+\subtitle[]{Intro to Python}
+\author[Góes]
+{Carlos Góes\inst{1}}
+\date{Fall 2025}
+\institute[GWU]{\inst{1} George Washington University }
+
+
+
 \begin{document}
 
-% Introductory Slide
-\begin{frame}
-\title{Lab Objectives and Main Steps}
+%%% TIKZ STUFF
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}
+\newcommand\markbottomright[2]{%
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+%%%% END TIKZ STUFF
+
+
+
+%----------------------------------------------------------------------%
+%-------------------       TITLE PAGE       ---------------------------%
+%----------------------------------------------------------------------%
+
+
+
+
+
+%----------------------------------------------------------------------%
+
+
+
+
+
+
+%----------------------------------------------------------------------%
+%----------------------------------------------------------------------%
+
+%----------------------------------------------------------------------%
+%----------------------------------------------------------------------%
+
+
+
+%----------------------------------------------------------------------%
+%----------------------------------------------------------------------%
+
+% --- [rest of your original preamble] ---
+\begin{document}
+
+\title[]{International Trade: Data Lab 2}
+\subtitle[]{Trade with Data}
+\author[Góes]
+{Carlos Góes\inst{1}}
+\date{Fall 2025}
+\institute[GWU]{\inst{1} George Washington University }
+
+
+\frame{\titlepage}
+\addtocounter{framenumber}{-1}
+
+
+% --- Lab Objective Slide ---
+\begin{frame}{Roadmap}
+\textbf{Question:} How is trade openness related to GDP per capita growth? using real-world data.
+\textbf{Method:} Using real-world data to explore this relationship.
 \begin{itemize}
-  \item Introduction to the lab objectives.
-  \item Key steps to follow:
-    \begin{itemize}
-      \item Step 1: Import Libraries
-      \item Step 2: Load Data
-      \item Step 3: Data Analysis
-      \item Step 4: Results Interpretation
-      \item Step 5: Reflection
-    \end{itemize}
+    \item Load and clean global trade and growth data.
+    \item Transform and merge datasets for analysis.
+    \item Visualize and interpret results using Python.
+    \item Reflect on analysis and results.
 \end{itemize}
 \end{frame}
 
-% Code Cell Example
-\begin{frame}
-\title{Step 1: Import Libraries}
-\begin{verbatim}
-# Code to import libraries
-import numpy as np
+% --- Step 1: Import Libraries ---
+\begin{frame}[fragile]{Step 1: Import Essential Libraries}
+\begin{minted}[fontsize=\scriptsize]{python}
+# Import dependencies
 import pandas as pd
-\end{verbatim}
-% Replace Teaching Pause
-\title{Actionable Prompt}
+import matplotlib.pyplot as plt
+\end{minted}
+\note{
 \begin{itemize}
-  \item Discuss: How do these libraries aid in data analysis? Provide examples from previous labs.
+\item Why do we use pandas for data analysis? What is matplotlib typically used for?
+\item Example: Try importing a library not installed and see the error.
 \end{itemize}
+}
 \end{frame}
 
-% Repeat for other code cells
-% Step 2: Load Data
-\begin{frame}
-\title{Step 2: Load Data}
+% --- Step 2: Declare Data Paths ---
+\begin{frame}[fragile]{Step 2: Declare Data Paths}
+\begin{minted}[fontsize=\scriptsize]{python}
+# Declare paths
+tradePath = 'https://github.com/omercadopopular/cgoes/raw/refs/heads/master/trade-undergrad/data/API_NE.TRD.GNFS.ZS_DS2_en_excel_v2_38352.xls'
+growthPath = 'https://github.com/omercadopopular/cgoes/raw/refs/heads/master/trade-undergrad/data/API_NY.GDP.PCAP.KD.ZG_DS2_en_excel_v2_122434.xls'
+\end{minted}
+\note{
+\begin{itemize}
+\item What would change if you set skiprows=0 when loading?
+\item Try loading another Excel file: what errors do you encounter?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 3: Load and Preview Data ---
+\begin{frame}[fragile]{Step 3: Load and Preview Data}
+\begin{minted}[fontsize=\scriptsize]{python}
+# read the trade and growth data from Excel files
+trade = pd.read_excel(tradePath, skiprows=3).drop(columns=['Indicator Name', 'Indicator Code'])
+growth = pd.read_excel(growthPath, skiprows=3).drop(columns=['Indicator Name', 'Indicator Code'])
+trade
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
 \begin{verbatim}
-# Code to load data
-data = pd.read_csv('data.csv')
+Country Name Country Code       1960       1961  ...
+...
+[266 rows x 67 columns]
 \end{verbatim}
-% Replace Teaching Pause
-\title{Contextual Discussion}
+\note{
 \begin{itemize}
-  \item Explore: What type of data are we working with? Discuss its relevance.
+\item Identify a row with missing values. What does NaN mean?
+\item How many countries are present in the trade dataset?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 4: Reshape Data to Long Format ---
+\begin{frame}[fragile]{Step 4: Reshape Data to Long Format}
+\begin{minted}[fontsize=\scriptsize]{python}
+# collapse from wide to long format for trade data
+trade = trade.melt(id_vars=['Country Name', 'Country Code'],
+                   var_name='Year', value_name='Trade')
+growth = growth.melt(id_vars=['Country Name', 'Country Code'],
+                   var_name='Year', value_name='Growth')
+trade
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+Country Name Country Code  Year       Trade
+...
+[17290 rows x 4 columns]
+\end{verbatim}
+\note{
+\begin{itemize}
+\item What is the difference between "wide" and "long" data formats?
+\item Why do we need to reshape the data before merging?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 5: Merge DataFrames ---
+\begin{frame}[fragile]{Step 5: Merge Trade and Growth Data}
+\begin{minted}[fontsize=\scriptsize]{python}
+# merge the two dataframes on Country Name, Country Code, and Year
+frame = pd.merge(trade, growth, on=['Country Name', 'Country Code', 'Year'])
+frame
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+Country Name Country Code  Year       Trade     Growth
+...
+[17290 rows x 5 columns]
+\end{verbatim}
+\note{
+\begin{itemize}
+\item What does an "inner join" mean in pandas?
+\item Find a country and year where either Trade or Growth is missing.
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 6: Remove Missing Data ---
+\begin{frame}[fragile]{Step 6: Remove Rows with Missing Values}
+\begin{minted}[fontsize=\scriptsize]{python}
+# drop missing values
+frame = frame.dropna(subset=['Trade','Growth'])
+frame
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+Country Name Country Code  Year       Trade     Growth
+...
+[10871 rows x 5 columns]
+\end{verbatim}
+\note{
+\begin{itemize}
+\item What happens if you drop rows with missing data in only one column?
+\item How many rows remain after this operation?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 7: Median Split ---
+\begin{frame}[fragile]{Step 7: Categorize Countries by Trade Openness}
+\begin{minted}[fontsize=\scriptsize]{python}
+# group by year and compute median trade share
+median_trade = (frame.groupby(['Year'])['Trade'].transform('median'))
+
+# create a group label (Above / Below median)
+frame['group'] = (frame['Trade'] > median_trade).map({True: 'Above Median', False: 'Below Median'})
+frame
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+Country Name Country Code  Year       Trade     Growth         group
+...
+[10871 rows x 6 columns]
+\end{verbatim}
+\note{
+\begin{itemize}
+\item For a given year, which country has the highest trade share?
+\item What are the implications of splitting the dataset at the median?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 8: Compute Growth Averages ---
+\begin{frame}[fragile]{Step 8: Calculate Average Growth by Group}
+\begin{minted}[fontsize=\scriptsize]{python}
+# take averages across groups
+result = frame.groupby(['Year', 'group'])['Growth'].mean().reset_index()
+result
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+Year         group    Growth
+...
+[128 rows x 3 columns]
+\end{verbatim}
+\note{
+\begin{itemize}
+\item Does "Above Median" group always have higher average growth?
+\item Plot one year’s growth rates for both groups.
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 9: Pivot Table ---
+\begin{frame}[fragile]{Step 9: Create Pivot Table for Visualization}
+\begin{minted}[fontsize=\scriptsize]{python}
+# pivot table (as in excel)
+pivot = result.pivot(index='Year',
+                     columns='group',
+                     values='Growth')
+pivot.index = pivot.index.astype(int)
+pivot['difference'] = pivot['Above Median'] - pivot['Below Median']
+pivot
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+group  Above Median  Below Median  difference
+Year
+1961   ...          ...           ...
+...
+2024   ...          ...           ...
+\end{verbatim}
+\note{
+\begin{itemize}
+\item For the year 2020, what is the difference in growth between groups?
+\item What does a positive difference mean?
+\end{itemize}
+}
+\end{frame}
+
+% --- Step 10: Visualize Results ---
+\begin{frame}[fragile]{Step 10: Visualize Growth Differences}
+\begin{minted}[fontsize=\scriptsize]{python}
+# chart difference
+plt.figure(figsize=(10, 6))
+plt.plot(pivot.index, pivot['difference'], marker='o')
+plt.axhline(pivot['difference'].mean(), color='red', linewidth=1)  # mean line
+plt.axhline(0, color='black', linewidth=1)  # zero line
+plt.title('Difference in GDP per Capita Growth by High and Low Trade Country', fontsize=14)
+plt.xlabel('Year')
+plt.ylabel('GDP per Capita Growth (%)')
+plt.xticks(rotation=90)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+\end{minted}
+\vspace{0.5ex}
+\textbf{Expected output (from notebook):}
+\begin{verbatim}
+<Figure size 1000x600 with 1 Axes>
+\end{verbatim}
+\note{
+\begin{itemize}
+\item What does the red line represent?
+\item In which years is the difference most pronounced?
+\end{itemize}
+}
+\end{frame}
+
+% --- Final Reflection Slide ---
+\begin{frame}{Reflect and Discuss}
+\textbf{Questions:}
+\begin{itemize}
+    \item What does the analysis suggest about the relationship between trade openness and growth?
+    \item What other factors might influence these results?
+    \item How would you improve this analysis?
 \end{itemize}
 \end{frame}
 
-% Final Reflection Slide
-\begin{frame}
-\title{Reflection and Discussion}
+% --- Assignment ---
+\begin{frame}{Assignment}
+\textbf{Questions:}
 \begin{itemize}
-  \item What challenges did you encounter during the lab?
-  \item How can the techniques learned today be applied in real-world scenarios?
+    \item Go to \url{https://data.worldbank.org/} or \url{https://fred.stlouisfed.org/}
+    \item Explore some data related to trade (it may be cross-sectional or time series)
+    \item Download it as a CSV or XLSX, import it to Python
+    \item Transform it
+    \item Plot a chart
+    \item Write a short paragraph submitting it
 \end{itemize}
 \end{frame}
+
 
 \end{document}
