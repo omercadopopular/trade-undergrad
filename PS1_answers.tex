@@ -3,6 +3,7 @@
 
 \newtheorem{proposition}{Proposition}
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\white}[1]{\textcolor{white}{#1}}
 
 \usepackage{tikz}
@@ -585,12 +586,19 @@ Demand for roses: $(1{-}\alpha_i) L_i / a_{i,R}$ & \textcolor{red}{$0.5 \times 3
 
 \end{parts}
 
-\begin{comment}
-
 \question Home has 1,200 units of labor available. It can produce two goods, apples and bananas. The unit labor requirement in apple production is 3, while in banana
 production it is 2.
 \begin{parts}
 \part Graph Home’s production possibility frontier.
+
+    \textcolor{red}{
+    \begin{align*}
+        a_{H,Apple} Y_{H,Apple} + a_{H,Banana} Y_{H,Banana} = L_{h} \\
+        3 Y_{H,Apple} + 2 Y_{H,Banana} = 1200 \\
+         Y_{H,Apple} = 1200/3  - 2/3 Y_{H,Banana} \\
+         Y_{H,Apple} = 400  - 2/3 Y_{H,Banana}
+   \end{align*}
+    }
 
 \begin{tikzpicture}
 \pgfmathsetmacro{\aC}{3}       % unit labor requirement for computers
@@ -628,53 +636,522 @@ production it is 2.
 
 \end{tikzpicture}
 
-\part What is the opportunity cost of apples in terms of bananas?
+\part What is the opportunity cost of apples in terms of bananas? 
+
+\begin{align*}
+\red{
+    a_{H,Banana}/a_{H,Apple} = 2/3  \text{ (or equivalently) } a_{H,Apple}/a_{H,Banana} = 3/2
+}
+\end{align*}
+
+
 \part In the absence of trade, what would be the price of apples in terms of bananas? Why?
+\red{ In the absence of trade, relative prices reflect opportunity costs:
+\begin{align*}
+    P_{Banana}/P_{Apple} = a_{H,Banana}/a_{H,Apple} = 2/3 \text{ (or equivalently) } \\ P_{Apple}/P_{Banana} = a_{H,Apple}/a_{H,Banana} = 3/2
+\end{align*}
+}
 \end{parts}
+
 \question Home is as described above. There is now also another country, Foreign,
 with a labor force of 800. Foreign’s unit labor requirement in apple production
 is 5, while in banana production it is 1.
 \begin{parts}
     \item Graph Foreign’s production possibility frontier.
+
+    \textcolor{red}{
+    \begin{align*}
+        a_{F,Apple} Y_{F,Apple} + a_{F,Banana} Y_{F,Banana} \leq L_{F} \\
+        5 Y_{F,Apple} + 1 Y_{F,Banana} \leq 800
+    \end{align*}
+    }
+    \textcolor{red}{
+    The PPF is a straight line connecting the intercepts:
+    \begin{itemize}
+        \item If all labor is in apples: $Y_{F,Apple} = 800/5 = 160$, $Y_{F,Banana} = 0$
+        \item If all labor is in bananas: $Y_{F,Banana} = 800/1 = 800$, $Y_{F,Apple} = 0$
+    \end{itemize}
+    The slope of the PPF (opportunity cost of apples): $-a_{F,Apple}/a_{F,Banana} = -5$ (or) $-a_{F,Banana}/a_{F,Apple} = -1/5$ depending on which variable you plot on the y axis.
+    }
+
+
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{5}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
+\pgfmathsetmacro{\Lendow}{800}    % labor endowment
+
+\centering
+\begin{axis}[
+    ylabel={Quantity of Apple, $\textcolor{blue}{Y_{F,Apple}}$},
+    xlabel={Quantity of Bananas, $\textcolor{blue}{Y_{F,Banana}}$},
+    ymin=0, ymax=\Lendow/\aC * 1.1,
+    xmin=0, xmax=\Lendow/\aR * 1.1,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+\addplot[thick, blue, domain=0:\Lendow/\aR] {\Lendow/\aC - (\aR/\aC)*x};
+
+%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:\Lendow/\aR,-15) {\scriptsize $\frac{L_{F}}{a_{F,Banana}}=800$};
+\node at (axis cs:-50,\Lendow/\aC) {\scriptsize $\frac{L_{F}}{a_{F,Apple}}$};
+\node at (axis cs:-50,\Lendow/\aC-15) {\scriptsize $=160$};
+
+
+
+\end{axis}
+
+\end{tikzpicture}
+
     \item Construct the world relative supply curve.
+
+    \textcolor{red}{
+    For both countries, calculate maximum output if specializing:
+    \begin{align*}
+        \text{Home:} &\quad Y_{H,Apple} = 400,\, Y_{H,Banana} = 600 \\
+        \text{Foreign:} &\quad Y_{F,Apple} = 160,\, Y_{F,Banana} = 800
+    \end{align*}
+    }
+    \textcolor{red}{
+    The world relative supply (RS) curve is stepwise:
+    \begin{itemize}
+        \item When $P_{Apple}/P_{Banana} < $ Home's opportunity cost ($a_{H,Apple}/a_{H,Banana}=3/2=1.5$), both countries specialize in bananas. RS is lowest.
+        \item When $1.5 < P_{Apple}/P_{Banana} < 5$ (Foreign's opportunity cost), Home specializes in apples, Foreign in bananas.
+        \item When $P_{Apple}/P_{Banana} > 5$, both specialize in apples. RS is highest.
+    \end{itemize}
+    }
+
+    \begin{figure}[htpd!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ylabel={Relative price of apples $\frac{P_{Apple}}{P_{Banana}}$},
+    xlabel={Relative quantity of apples $ \textcolor{blue}{\frac{Y_{Apple}}{Y_{Banana}} }$$},
+    ymin=0, ymax=6,
+    xmin=0, xmax=1,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}]
+
+
+% Relative Supply RS
+\addplot[thick, blue] coordinates {(0,3/2) (1/2,3/2)};
+\addplot[thick, blue] coordinates {(1/2,3/2) (1/2,5)};
+\addplot[thick, blue] coordinates {(1/2,5) (1,5)};
+%\node at (axis cs:1.65,2.7) {\small $RS$};
+
+% Dashed lines for autarky prices
+\addplot[dashed] coordinates {(0,5) (1/2,5)};
+\node at (axis cs:-.05,5) {$5$};
+
+\addplot[dashed] coordinates {(1/2,3/2) (1,3/2)};
+\node at (axis cs:-.05,3/2) {$3/2$};
+
+
+% Vertical dashed lines for quantities
+\addplot[dashed] coordinates {(1/2,0) (1/2,3/2)};
+\node at (axis cs:1/2,-0.3) {$\frac{400}{800} = 1/2$};
+
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+
 \end{parts}
-\question Now suppose world relative demand takes the following form: Demand for
-apples/demand for bananas = price of bananas/price of apples.
+
+\question Now suppose world relative demand takes the following form: Demand for apples/demand for bananas = price of bananas/price of apples.
 \begin{parts}
-\parts Graph the relative demand curve along with the relative supply curve.
-\parts What is the equilibrium relative price of apples?
-\parts Describe the pattern of trade.
-\parts Show that both Home and Foreign gain from trade.
+\part Graph the relative demand curve along with the relative supply curve.
+
+\textcolor{red}{
+Relative Demand (RD):
+\begin{align*}
+    \frac{Q_{Apple}}{Q_{Banana}} = \frac{P_{Banana}}{P_{Apple}} = \frac{1}{P_{Apple}/P_{Banana}}
+\end{align*}
+\red{
+This is a downward sloping curve, showing that as $P_{Apple}/P_{Banana}$ rises, $Q_{Apple}^D/Q_{Banana}^D$ falls.
+}
+\textcolor{red}{
+\begin{itemize}
+    \item On the same axes, plot RS (stepwise) and RD (downward sloping).
+    \item The intersection determines equilibrium.
+\end{itemize}
+}
+}
+
+    \begin{figure}[htpd!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ylabel={Relative price of apples $\frac{P_{Apple}}{P_{Banana}}$},
+    xlabel={Relative quantity of apples $ \textcolor{blue}{\frac{Y_{Apple}}{Y_{Banana}} }$ , $\red{\frac{Q_{Apple}}{Q_{Banana}}}$},
+    ymin=0, ymax=6,
+    xmin=0, xmax=1,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}]
+
+% Relative Demand RD
+\addplot[
+    red, thick,
+    domain=0.2:1,
+    samples=100
+] {1/(x)};
+\addplot[dashed, red] coordinates {(0,2) (1/2,2)};
+\node at (axis cs:-.05,2) {$2$};
+
+% Relative Supply RS
+\addplot[thick, blue] coordinates {(0,3/2) (1/2,3/2)};
+\addplot[thick, blue] coordinates {(1/2,3/2) (1/2,5)};
+\addplot[thick, blue] coordinates {(1/2,5) (1,5)};
+%\node at (axis cs:1.65,2.7) {\small $RS$};
+
+% Dashed lines for autarky prices
+\addplot[dashed] coordinates {(0,5) (1/2,5)};
+\node at (axis cs:-.05,5) {$5$};
+
+\addplot[dashed] coordinates {(1/2,3/2) (1,3/2)};
+\node at (axis cs:-.05,3/2) {$3/2$};
+
+
+% Vertical dashed lines for quantities
+\addplot[dashed] coordinates {(1/2,0) (1/2,3/2)};
+\node at (axis cs:1/2,-0.3) {$\frac{400}{800} = 1/2$};
+
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\part What is the equilibrium relative price of apples?
+
+\textcolor{red}{
+The equilibrium occurs where world relative supply equals world relative demand:
+\begin{align*}
+    RS = RD \implies \frac{Y_{Apple}^{World}}{Y_{Banana}^{World}} = \frac{P_{Banana}}{P_{Apple}}
+\end{align*}
+At the kink in RS (where Home specializes in apples, Foreign in bananas): 
+\begin{align*}
+    Y_{Apple}^{World} = 400 \quad Y_{Banana}^{World} = 800 \\
+    RS = 400/800 = 0.5 \\
+    RD = P_{Banana}/P_{Apple} = 0.5 \implies P_{Apple}/P_{Banana} = 2
+\end{align*}
+So equilibrium relative price: $P_{Apple}/P_{Banana} = 2$
+}
+
+\part Describe the pattern of trade.
+
+\textcolor{red}{
+\begin{itemize}
+    \item Home specializes in apples and exports apples to Foreign.
+    \item Foreign specializes in bananas and exports bananas to Home.
+    \item Each country imports the good for which it does not have a comparative advantage.
+\end{itemize}
+}
+
+\part Show that both Home and Foreign gain from trade.
+
+\textcolor{red}{
+Under autarky, each country consumes on its PPF, at its own opportunity cost. With trade:
+\begin{itemize}
+    \item Both can consume bundles outside their PPFs (along the international price line).
+    \item Both access more of both goods for the same labor input.
+    \item This is shown by indifference curves tangent to the trade line above the PPF (draw it).
+\end{itemize}
+}
+
+
+\begin{figure}[htbp]
+
+% California
+\begin{subfigure}{}
+\resizebox{0.48\linewidth}{!}{%
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{100}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
+\pgfmathsetmacro{\alpha}{0.5}    % preference for computers
+\pgfmathsetmacro{\Lendow}{10}    % labor endowment
+\pgfmathsetmacro{\p}{135}    % trade price
+
+% Compute equilibrium quantities
+\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
+\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
+\pgfmathsetmacro{\QcT}{(\alpha*\Lendow)/\aC}
+\pgfmathsetmacro{\QrT}{((1 - \alpha)*\p*\Lendow)/\aC}
+
+% Compute utility level
+\pgfmathsetmacro{\U}{(\Qc^(\alpha))*(\Qr^(1 - \alpha))}
+\pgfmathsetmacro{\UT}{(\QcT^(\alpha))*(\QrT^(1 - \alpha))}
+
+% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+\pgfmathsetmacro{\A}{\U^(1/\alpha)}
+\pgfmathsetmacro{\AT}{\UT^(1/\alpha)}
+
+\centering
+\begin{axis}[
+    ylabel={Quantity of apples, $\textcolor{red}{Q_{H,Apple}}, \textcolor{blue}{Y_{H,Apple}}$},
+    xlabel={Quantity of bananas, $\textcolor{red}{Q_{H,Banana}}, \textcolor{blue}{Y_{H,Banana}}$},
+    ymin=0, ymax=\Lendow/\aC * 1.1,
+    xmin=0, xmax=\Lendow/\aR * 1.1,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+\addplot[thick, blue, domain=0:10] {\Lendow/\aC - (\aR/\aC)*x};
+\addplot[thick, red, domain=0:9] {\Lendow/\aC  - (1/\p)*x};
+
+% Indifference curve through optimal bundle
+\addplot[brown, domain=3:9, samples=100] {\A * x^(-\expo)};
+\addplot[brown, domain=3:9, samples=100] {\AT * x^(-\expo)};
+
+% Labels
+
+%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{H}}{a_{H,Apple}}$};
+\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{H}}{a_{H,Banana}}$};
+
+% Equilibrium point
+\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr - 1.25,\Qc - 0.005) {\scriptsize $\textcolor{blue}{(Q_{H,Banana},Q_{H,Apple})}$};
+\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{H,Banana},Y_{H,Apple})}$};
+
+\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\QrT, \QcT)};
+\node at (axis cs:\QrT + 1.25,\QcT + 0.005) {\scriptsize $\textcolor{red}{(Q^T_{H,Banana},Q^T_{H,Apple})}$};
+
+\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(0, \Lendow/\aC)};
+\node at (axis cs:0 + 1.5,\Lendow/\aC + 0.0075) {\scriptsize $\textcolor{red}{(Y^T_{H,Banana},Y^T_{H,Apple})}$};
+
+% Arrows for exports (horizontal)
+\draw[-, dashed, thick, gray] 
+    (axis cs:\QrT,\Lendow/\aC) -- 
+    (axis cs:0,\Lendow/\aC);
+\node[gray] at (axis cs:\QrT*0.85,\Lendow/\aC*1.05) {\scriptsize Imports};
+
+% Arrows for imports (vertical)
+\draw[-, dashed, thick, gray] 
+    (axis cs:\QrT,\Lendow/\aC) -- 
+    (axis cs:\QrT, \QcT);
+\node[gray, rotate=90] at (axis cs:\QrT*1.05,\Lendow/\aC*0.85) {\scriptsize Exports};
+
+
+
+\end{axis}
+
+\end{tikzpicture}
+}
+\end{subfigure}
+%
+% Colombia
+\begin{subfigure}{}
+\resizebox{0.48\linewidth}{!}{%
+
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{900}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{1}         % unit labor requirement for roses
+\pgfmathsetmacro{\alpha}{0.75}    % preference for computers
+\pgfmathsetmacro{\Lendow}{9}    % labor endowment
+\pgfmathsetmacro{\p}{135}    % trade price
+
+
+% Compute equilibrium quantities
+\pgfmathsetmacro{\Qc}{(\alpha*\Lendow)/\aC}
+\pgfmathsetmacro{\Qr}{((1 - \alpha)*\Lendow)/\aR}
+\pgfmathsetmacro{\QcT}{(\alpha*\Lendow)/(\aR*\p)}
+\pgfmathsetmacro{\QrT}{((1 - \alpha)*\Lendow)/\aR}
+
+% Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+\pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+\pgfmathsetmacro{\A}{\Qc * \Qr^((1 - \alpha)/\alpha))}
+\pgfmathsetmacro{\AT}{\QcT * \QrT^((1 - \alpha)/\alpha))}
+
+\centering
+\begin{axis}[
+    ylabel={Quantity of apple, $\textcolor{red}{Q_{F,Apple}}, \textcolor{blue}{Y_{F,Apple}}$},
+    xlabel={Quantity of banana, $\textcolor{red}{Q_{F,Banana}}, \textcolor{blue}{Y_{F,Banana}}$},
+    ymin=0, ymax=0.11,
+    xmin=0, xmax=11,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=9cm, height=7cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+\addplot[thick, blue, domain=0:9] {\Lendow/\aC - (\aR/\aC)*x};
+\addplot[thick, red, domain=0:9] {\Lendow/\aR * 1/ \p - (1/\p)*x};
+
+
+% Indifference curve through optimal bundle
+\addplot[brown, domain=0.5:9, samples=100] {\A * x^(-\expo)};
+\addplot[brown, domain=0.5:9, samples=100] {\AT * x^(-\expo)};
+
+% Labels
+
+%\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{F}}{a_{F,Banana}}$};
+\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{F}}{a_{F,Apple}}$};
+
+
+% Equilibrium point
+\addplot[only marks, mark=*, color=blue, mark size=2pt] coordinates {(\Qr, \Qc)};
+\node at (axis cs:\Qr + 1.25,\Qc + 0.009) {\scriptsize $\textcolor{blue}{(Q_{F,Banana},Q_{F,Apple})}$};
+\node at (axis cs:\Qr + 2.25,\Qc + 0.001) {\scriptsize $\textcolor{blue}{(Y_{F,Banana},Y_{F,Apple})}$};
+
+
+\addplot[only marks, mark=*, color=red, mark size=2pt] coordinates {(\QrT, \QcT)};
+\node at (axis cs:\QrT + 1.25,\QcT + 0.005) {\scriptsize $\textcolor{red}{(Q^T_{F,Banana},Q^T_{F,Apple})}$};
+
+\addplot[only marks, mark=*, mark options={fill=white, draw=red}, mark size=2pt] coordinates {(\Lendow/\aR, 0)};
+\node at (axis cs:\Lendow/\aR + 1.25,0 + 0.005) {\scriptsize $\textcolor{red}{(Y^T_{F,Banana},Y^T_{F,Apple})}$};
+
+% Arrows for exports (horizontal)
+\draw[-, dashed, thick, gray] 
+    (axis cs:\QrT,\QcT) -- 
+    (axis cs:\Lendow/\aR,\QcT);
+\node[gray] at (axis cs:{ \Lendow/\aR *0.8}, \QcT*1.05) {\scriptsize Exports};
+
+% Arrows for imports (vertical)
+\draw[-, dashed, thick, gray] 
+    (axis cs:{\Lendow/\aR},0) -- 
+    (axis cs:{\Lendow/\aR}, \QcT);
+\node[gray, rotate=90] at (axis cs:{\Lendow/\aR + 0.4}, {\QcT/2}) {\scriptsize Imports};
+
+\end{axis}
+
+\end{tikzpicture}
+}
+
+\end{subfigure}
+
+\caption{Specialization + Trade Equilibrium}
+
+\end{figure}
+
 \end{parts}
-\question  Suppose in an hour, 10 kg of rice and 5 meter of cloth is produced in India, and 5 kg and 2 meter in Thailand. Using opportunity costs, explain which country should export cloth and which should export rice.
+
+\question Suppose in an hour, 10 kg of rice and 5 meter of cloth is produced in India, and 5 kg and 2 meter in Thailand. Using opportunity costs, explain which country should export cloth and which should export rice.
+
+\textcolor{red}{
+Opportunity cost:
+\begin{itemize}
+    \item India: 1 cloth = 2 rice ($10/5$), 1 rice = 0.5 cloth
+    \item Thailand: 1 cloth = 2.5 rice ($5/2$), 1 rice = 0.4 cloth
+\end{itemize}
+India has lower opportunity cost in rice, Thailand in cloth.
+\textbf{Thus:} India should export rice, Thailand should export cloth (each exports the good for which it has comparative advantage).
+}
+
 \question Suppose Mike and Johnson produce two products—hamburgers and T-shirts. Mike
 produces 10 hamburgers or 3 T-shirts a day and Johnson produces 7 hamburgers or
 4 T-shirts. Assuming they can devote time to making either hamburgers or T-shirts.
-
-
 \begin{parts}
 \part Draw the production possibility curve.
-\part  Who enjoys the absolute advantage of producing both?
+
+\textcolor{red}{
+\begin{itemize}
+    \item Mike: PPF from $(10,0)$ to $(0,3)$, slope $-10/3 \approx -3.33$
+    \item Johnson: PPF from $(7,0)$ to $(0,4)$, slope $-7/4 = -1.75$
+\end{itemize}
+Plot both as straight lines connecting the intercepts.
+}
+
+\part Who enjoys the absolute advantage of producing both?
+
+\textcolor{red}{
+Mike can produce more hamburgers (10 vs 7), but fewer T-shirts (3 vs 4). \\
+Johnson has absolute advantage in T-shirts, Mike in hamburgers.
+}
+
 \part  Who has a higher opportunity cost of making T-shirts?
-\part  Who has a comparative advantage in producing hamburgers?
-    
+
+\textcolor{red}{
+Opportunity cost of 1 T-shirt:
+\begin{itemize}
+    \item Mike: $10/3 \approx 3.33$ hamburgers per T-shirt.
+    \item Johnson: $7/4 = 1.75$ hamburgers per T-shirt.
+\end{itemize}
+Mike has higher opportunity cost of making T-shirts.
+}
+
+\part  \textcolor{red}{Who has a comparative advantage in producing hamburgers?}
+
+\textcolor{red}{
+Mike: Opportunity cost of 1 hamburger is $3/10 = 0.3$ T-shirt. \\
+Johnson: Opportunity cost of 1 hamburger is $4/7 \approx 0.57$ T-shirt. \\
+Mike has lower opportunity cost, so Mike has comparative advantage in hamburgers.
+}
 \end{parts}
 
+\question It has been \textbf{all downhill for the West since China entered the world market}; we just can’t compete with hundreds of millions of people willing to work for almost nothing. Discuss.
 
-\question “It has been all downhill for the West since China entered the world market; we just can’t compete with hundreds of millions of people willing to work for almost
-nothing.” Discuss.
+\textcolor{red}{
+This statement ignores the principle of comparative advantage. Even if China has a lower cost of production (absolute advantage) in many goods, trade allows all countries to specialize and benefit:
+\begin{itemize}
+    \item Consumers in the West gain access to cheaper goods.
+    \item Resources in the West shift to industries with greater comparative advantage.
+    \item Trade increases overall welfare and efficiency.
+    \item Short-run adjustment costs exist, but long-run gains from trade are widely supported by economic theory.
+\end{itemize}
+}
 
 \question In China, local governments are responsible for setting the minimum wages. In the United States, a network of federal laws, state laws, and local laws set the minimum wages. How can this be associated with productivity and transformed into a comparative advantage?
 
+\textcolor{red}{
+Minimum wage levels often reflect differences in productivity: higher productivity enables higher wages. Regions setting higher minimum wages may do so because their workers produce more per hour. Comparative advantage arises when countries specialize in goods where their wage-productivity ratio is lowest. Thus, wage-setting institutions interact with productivity and help determine patterns of trade and comparative advantage.
+}
+
 \question Why do governments set the living standards of the people by setting the minimum wage? (Hint: Refer to your answer above.)
 
+\textcolor{red}{
+Governments set minimum wages to ensure a basic standard of living, prevent exploitation, and reflect productivity in different sectors or regions. This promotes social welfare, reduces poverty, and ensures labor markets function fairly. By aligning minimum wages with productivity, governments can facilitate efficient allocation of resources and help shape comparative advantage.
+}
 
 \question International immobility of resources is compensated by the international flow of goods. Justify the statement.
 
+\textcolor{red}{
+When factors of production (like labor and capital) cannot move freely across borders, countries exchange goods produced using those factors. Trade in goods allows countries to access resources and products they lack, achieving similar benefits as if resources were mobile. This is the essence of the theory of comparative advantage: countries export goods that use their abundant factors and import goods that use scarce factors.
+}
+
 \question We have focused on the case of trade involving only two countries. Suppose that there are many countries capable of producing two goods, and that each country has only one factor of production, labor. What could we say about the pattern of production and trade in this case? (Hint: Try constructing the world relative supply curve.)
 
+\textcolor{red}{
+With many countries, each with different unit labor requirements, the world relative supply curve becomes a series of steps, with each step corresponding to a country's opportunity cost. As relative prices change, countries with the lowest opportunity cost for a good specialize first. The global pattern of trade reflects these differences; countries with the lowest opportunity cost export the good, and as prices change, more countries switch specialization. This produces richer and more nuanced patterns of trade flows and specialization. Importantly, in that world.
+}
 
-\end{comment}
+
 
 \end{questions}
 

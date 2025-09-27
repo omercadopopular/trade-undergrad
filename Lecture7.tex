@@ -360,20 +360,20 @@
 \begin{column}{.6\textwidth}
   \begin{wideitemize}
     \item Example: Gelato Factory
-    \item Inputs:
+    \item<2-> Inputs:
     \begin{itemize}
         \item Milk, Sugar, Salt
         \item Chocolate/Strawberry
         \item Cones/cups/containers
         \item Labor (scoopers + cashier)
     \end{itemize}
-    \item Capital:
+    \item<3-> Capital:
     \begin{itemize}
         \item Freezer, Machines 
         \item Refrigerated trucks
         \item Factory/building
     \end{itemize}
-    \item Intangibles:
+    \item<4-> Intangibles:
     \begin{itemize}
         \item License
         \item Recipe
@@ -390,18 +390,17 @@
 \begin{frame}{The Production Function}
 
 \begin{wideitemize}
-\item we are interested in modeling the production of value added
-t
-\item “factor‐based” representation of the production function:
+\item We are interested in modeling the production of some ``output'' good
+\item<2-> We will take a “factor‐based” representation of the production function:
 
 \begin{equation*}
-\underbrace{Y}_{\substack{\text{output}\\\text{value added}}} = F(\underbrace{A}_{\substack{\text{technology}\\\text{institutions}\\\text{ideas}}}, \underbrace{K}_{\text{capital}} , \underbrace{L}_{\text{labor}})
+\underbrace{Y}_{\substack{\text{output}}} = F(\underbrace{\bar{Z}}_{\substack{\text{technology}\\\text{institutions}\\\text{ideas}}}, \underbrace{K}_{\text{capital}} , \underbrace{L}_{\text{labor}})
 \end{equation*}
 
-\item $F(A, K, L)$ is your production function. If $F(\cdot, \cdot, \cdot)$ is Cobb-Douglas, then:
+\item<3-> $F(\bar{Z}, K, L)$ is your production function. If $F(\cdot, \cdot, \cdot)$ is Cobb-Douglas, then:
 
 \begin{equation*}
-    Y = A \cdot K^{\beta} L^{1-\beta}, \qquad 0 \le \beta \le 1  
+    Y = \bar{Z} \cdot K^{\beta} L^{1-\beta}, \qquad 0 \le \beta \le 1  
 \end{equation*}
 
 \end{wideitemize}
@@ -417,6 +416,7 @@ t
 \begin{frame}{Production Function}
   \Large{\textcolor{blue}{Diminishing Marginal Product}: Extra output produced by increasing one factor
 while keeping all the other fixed is decreasing in the one increasing factor.} \\
+\onslide<2->{
   \vspace{20pt}
   \normalsize With Cobb-Douglas Technology, the Marginal Product of Labor and Capital are:
   \vspace{20pt}
@@ -434,6 +434,7 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
 
 \end{column}%
 \end{columns}
+}
 \end{frame}
 
 
@@ -598,12 +599,12 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
 
 \begin{wideitemize}
     \item Suppose you own a company with \blue{50 employees} and \blue{10 computers}
-    \item An employee \blue{does not} always need a computer...
-    \item ...but \blue{there are too few computers at this moment}, so sometimes \blue{some employees stay idle}.
-    \item If you start \blue{buying computers, the first ones will be very productive} because they will be \blue{\blue{matched with idle employees}}.
-    \item But at a certain point, new computers will start going idle for some time...
-    \item And \blue{if you buy too many computers} (say if your company has more computers than employees) \blue{any additional computers will be useless} as they will be idle the whole time.
-    \item \blue{The production function of your firm exhibits diminishing returns in computers!}
+    \item<2-> An employee \blue{does not} always need a computer...
+    \item<3-> ...but \blue{there are too few computers at this moment}, so sometimes \blue{some employees stay idle}.
+    \item<4-> If you start \blue{buying computers, the first ones will be very productive} because they will be \blue{\blue{matched with idle employees}}.
+    \item<5-> But at a certain point, new computers will start going idle for some time...
+    \item<6-> And \blue{if you buy too many computers} (say if your company has more computers than employees) \blue{any additional computers will be useless} as they will be idle the whole time.
+    \item<7-> \blue{The production function of your firm exhibits diminishing returns in computers!}
 \end{wideitemize}
 
 \end{frame}
@@ -618,12 +619,14 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
 
 \begin{frame}{Returns to Scale}
   \huge{Returns to Scale (RS): change in output when all factors are changed by the same proportion.} \\
+  \onslide<2->{
   \vspace{20pt}
   a function $F(\textcolor{blue}{\lambda} K,\textcolor{blue}{\lambda} L) = \textcolor{blue}{\lambda}^{ \textcolor{red}{s}}  F( K, L)$ is
+    }
     \normalsize{\begin{wideitemize}
-        \item \blue{constant} returns to scale if $\textcolor{red}{s = 1}$ $\implies F(\lambda K,\lambda L) = \lambda F(K,L)$
-        \item \blue{increasing} returns to scale if $\textcolor{red}{s > 1}$ $\implies F(\lambda K,\lambda L) > \lambda F(K,L)$
-        \item \blue{decreasing} returns to scale if $\textcolor{red}{s < 1}$ $\implies F(\lambda K,\lambda L) < \lambda F(K,L)$
+        \item<3-> \blue{constant} returns to scale if $\textcolor{red}{s = 1}$ $\implies F(\lambda K,\lambda L) = \lambda F(K,L)$
+        \item<4-> \blue{increasing} returns to scale if $\textcolor{red}{s > 1}$ $\implies F(\lambda K,\lambda L) > \lambda F(K,L)$
+        \item<5-> \blue{decreasing} returns to scale if $\textcolor{red}{s < 1}$ $\implies F(\lambda K,\lambda L) < \lambda F(K,L)$
         \end{wideitemize} }
 
         for some $\lambda > 0$.
@@ -632,6 +635,7 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
 
 \begin{frame}{Returns to Scale}
   \Large Claim: Cobb-Douglas is Constant Returns to Scale in (K,L)  \vspace{20pt}
+  \onslide<2->{
   \begin{proof}
   \begin{eqnarray*}
     F(A,\lambda K,\lambda L) &=& \bar{Z} (\lambda K)^\beta (\lambda L)^{1-\beta}  \\
@@ -639,7 +643,7 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
     &=& \lambda F(A, K,L)
   \end{eqnarray*}
   \end{proof}
-
+}
 \end{frame}
 
 \begin{frame}{Example: Capital and Labor jointly}

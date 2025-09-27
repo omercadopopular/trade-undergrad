@@ -1,0 +1,340 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{times}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{natbib}\bibpunct{(}{)}{,}{}{}{,}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{comment}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[title,titletoc]{appendix}
+\usepackage{enumitem}
+\usepackage{subcaption}  % For subfigures
+\usepackage{lscape}      % For landscape orientation if needed
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+
+% commands
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\figpath}{fig/}
+\newcommand{\tablepath}{table/}
+\newcommand{\rmdi}{\mathrm{d}}
+
+% table and figure formatting
+%\input{formats}
+
+% page size
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.7in}
+\setlength{\oddsidemargin}{.85in}
+\addtolength{\oddsidemargin}{-.85in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-1.75in}
+\setlength{\topmargin}{1in}
+\addtolength{\topmargin}{-1in}
+
+\begin{document}
+
+\title{\textbf{Mathematical Review}}
+\author{\large%
+\setcounter{footnote}{0}%
+Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
+}
+\maketitle
+
+\section*{Functions and Notation}
+
+A function is a mapping from some set $X$ to some other set $Y$. You should think of a it some machine, which we call $f$, that transform some input element $x$ of the input set $X$ ($x \in X$) into some output element $y$ of the output set $Y$ ($y \in Y$):
+
+\begin{figure}[htp]
+    \centering
+\begin{tikzpicture}[
+    node distance=5.5cm,
+    >=Stealth,
+    every node/.style={draw, minimum width=2.5cm, minimum height=1.5cm, align=center}
+    ]
+
+% Nodes
+\node (input) {Input \\ $x$};
+\node (transform) [right of=input] {Transform \\ $f$};
+\node (output) [right of=transform] {Output \\ $y = f(x)$};
+
+% Arrows
+\draw[->, thick] (input) -- (transform);
+\draw[->, thick] (transform) -- (output);
+
+\end{tikzpicture}
+    \caption{What is a function?}
+    \label{fig:functions}
+\end{figure}
+
+Consider, for instance, the function that represents a line on a plane $f(x) = 2x + 3$. As you know from high school mathematics, $3$ is the \textit{intercept} of this function (whenever $x=0$, $y=3$) whereas $2$ is its \textit{slope} (for every unit increase of $x$, y increases  by $2$ units).
+
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=5cm, height=5cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-2, ymax=6,
+        samples=100,
+        domain=-2:2,
+        title={$f(x) = 2x + 3$}
+    ]
+    \addplot[blue, thick] {2*x + 3};
+    \addplot[gray, thick, dashed] coordinates {(0,3) -- (1,3) -- (3,3)};
+    \addnode
+    \end{axis}
+    \end{tikzpicture}
+
+\subsection*{Examples}
+\begin{itemize}
+    \item Linear: $f(x) = 2x + 3$
+    \item Quadratic: $f(x) = x^2$
+    \item Exponential: $f(x) = e^x$
+\end{itemize}
+
+\begin{tabular}{ccc}
+    % Linear
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=5cm, height=5cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-2, ymax=6,
+        samples=100,
+        domain=-2:2,
+        title={$f(x) = 2x + 3$}
+    ]
+    \addplot[blue, thick] {2*x + 3};
+    \end{axis}
+    \end{tikzpicture}
+    &
+    % Quadratic
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=5cm, height=5cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-1, ymax=4,
+        samples=100,
+        domain=-2:2,
+        title={$f(x) = x^2$}
+    ]
+    \addplot[red, thick] {x^2};
+    \end{axis}
+    \end{tikzpicture}
+    &
+    % Exponential
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=5cm, height=5cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-1, ymax=8,
+        samples=100,
+        domain=-2:2,
+        title={$f(x) = e^x$}
+    ]
+    \addplot[green!70!black, thick] {exp(x)};
+    \end{axis}
+    \end{tikzpicture}
+    \end{tabular}
+
+
+
+\section*{Derivatives}
+
+The derivative of $f$ at $x$ is defined as
+\[
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}.
+\]
+
+\subsection*{Basic Derivatives}
+\begin{align*}
+\frac{d}{dx} c &= 0, \quad \text{for constant } c, \\
+\frac{d}{dx} x &= 1, \\
+\frac{d}{dx} x^n &= n x^{n-1}, \\
+\frac{d}{dx} e^x &= e^x, \\
+\frac{d}{dx} \ln(x) &= \frac{1}{x}.
+\end{align*}
+
+\subsection*{Rules of Differentiation}
+\begin{align*}
+\frac{d}{dx}[f(x) + g(x)] &= f'(x) + g'(x), \\
+\frac{d}{dx}[c \cdot f(x)] &= c \cdot f'(x), \\
+\frac{d}{dx}[f(x)g(x)] &= f'(x) g(x) + f(x) g'(x), \\
+\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] &= \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}.
+\end{align*}
+
+\subsection*{Chain Rule}
+If $y = f(u)$ and $u = g(x)$, then
+\[
+\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}.
+\]
+
+\subsection*{Examples}
+\begin{align*}
+\frac{d}{dx}\,(3x^2 + 2x - 1) &= 6x + 2, \\
+\frac{d}{dx}\,(\ln x^2) &= \frac{1}{x^2}\cdot 2x = \frac{2}{x}, \\
+\frac{d}{dx}\,(e^{3x}) &= 3e^{3x}.
+\end{align*}
+
+\section*{Second Derivatives and Concavity}
+
+The second derivative measures curvature:
+\[
+f''(x) = \frac{d}{dx} \big(f'(x)\big).
+\]
+
+\begin{itemize}
+    \item If $f''(x) > 0$, $f$ is convex (curves upward).
+    \item If $f''(x) < 0$, $f$ is concave (curves downward).
+\end{itemize}
+
+\section*{Optimization}
+
+A \emph{critical point} $x^*$ satisfies $f'(x^*) = 0$.
+
+\begin{itemize}
+    \item If $f''(x^*) > 0$, then $x^*$ is a local minimum.
+    \item If $f''(x^*) < 0$, then $x^*$ is a local maximum.
+    \item If $f''(x^*) = 0$, the test is inconclusive.
+\end{itemize}
+
+\subsection*{Example}
+Consider $f(x) = x^2 - 4x + 3$.  
+\[
+f'(x) = 2x - 4, \quad f''(x) = 2.
+\]
+Setting $f'(x) = 0$ gives $x^* = 2$. Since $f''(2) = 2 > 0$, $x=2$ is a local minimum.  
+
+\section*{Integration}
+
+The indefinite integral is the reverse of differentiation:
+\[
+\int f(x)\, dx = F(x) + C, \quad \text{where } F'(x) = f(x).
+\]
+
+\subsection*{Basic Integrals}
+\begin{align*}
+\int c\, dx &= cx + C, \\
+\int x^n\, dx &= \frac{x^{n+1}}{n+1} + C \quad (n \neq -1), \\
+\int e^x\, dx &= e^x + C, \\
+\int \frac{1}{x}\, dx &= \ln|x| + C.
+\end{align*}
+
+\subsection*{Definite Integrals}
+The definite integral is the area under the curve:
+\[
+\int_a^b f(x)\, dx = \lim_{n \to \infty} \sum_{i=1}^n f(x_i^*) \Delta x.
+\]
+
+\subsection*{Fundamental Theorem of Calculus}
+If $F'(x) = f(x)$, then
+\[
+\int_a^b f(x)\, dx = F(b) - F(a).
+\]
+
+\subsection*{Examples}
+\begin{align*}
+\int_0^1 x^2 \, dx &= \left[ \frac{x^3}{3} \right]_0^1 = \tfrac{1}{3}, \\
+\int_1^e \frac{1}{x}\, dx &= [\ln x]_1^e = 1.
+\end{align*}
+
+\section*{Summary}
+\begin{itemize}
+    \item Derivatives measure slope.  
+    \item Second derivatives measure curvature.  
+    \item Optimization uses first- and second-order conditions.  
+    \item Integration reverses differentiation and measures area under a curve.  
+\end{itemize}
+
+
+
+\paragraph{Demand} 
+
+\paragraph{Utility Maximization Problem} Workers in each country $i$ inelastically supply their labor and earn labor income $w_i L_i$. They have preferences over goods $p \in \{ C, R\}$. They purchase quantities $Q_{i,C}, Q_{i,R}$ for prices $P_{i,C}, P_{i,R}$ and exhaust their labor income, maximizing:
+
+\begin{equation*}
+    \max_{\{Q_{i,C}, Q_{i,R}\}} U_i(Q_{i,C}, Q_{i,R}) \equiv Q_{i,C}^{\alpha_i} Q_{i,R}^{1-\alpha_i} \qquad s.t. \qquad P_{i,C} Q_{i,C} + P_{i,R} Q_{i,R} = w_i L_i
+\end{equation*}
+
+This is a simple constrained concave maximization problem, that you should know how to solve from your calculus classes. One way to solve it is to replace the constraint into the objective function. Note $Q_{i,R} = \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}$, so the maximization problem below is equivalent to the original one:
+
+\begin{equation*}
+    \max_{\{Q_{i,C}\}} U_i(Q_{i,C}, Q_{i,R}(Q_{i,C})) \equiv Q_{i,C}^{\alpha_i} \left( \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \right)^{1-\alpha_i}
+\end{equation*}
+
+\noindent for which we can take a derivative and set it equal to zero to find the optimal point:
+
+\scriptsize{
+\begin{eqnarray*}
+    & & \alpha_i Q_{i,C}^{\alpha_i-1} \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i} + Q_{i,C}^{\alpha_i} (1-\alpha_i) \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i-1} \left( - \frac{P_{i,C}}{P_{i,R}}\right) = 0 \\
+%    & & \alpha_i  \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{1-\alpha_i} - (1-\alpha_i) \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{-\alpha_i} \left( \frac{P_{i,C}}{P_{i,R}}\right) = 0 \\
+%    & & \alpha_i  \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{1-\alpha_i} = (1-\alpha_i) \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{-\alpha_i} \left( \frac{P_{i,C}}{P_{i,R}}\right) \\
+%    & & \frac{Q_{i,R}}{Q_{i,C}}  = \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) \\
+\iff    & & Q_{i,R}  = \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C}
+\end{eqnarray*}
+}
+
+\normalsize
+Replacing the last line into the budget constraint:
+
+\scriptsize{
+\begin{eqnarray*}
+    Q_{i,R}&=& \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \\
+    \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \\
+%    \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} + \frac{P_{i,C}}{P_{i,R} } Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}}  \\
+%    \frac{1-\alpha_i + \alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}}  \\
+    Q_{i,C} &=& \alpha_i  \frac{w_i L_i}{P_{i,C}}
+\end{eqnarray*}
+
+}
+
+\normalsize
+Finally:
+{\scriptsize
+\begin{eqnarray*}
+     Q_{i,R}  &=& \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C}  \\
+     Q_{i,R}  &=& \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) \alpha_i  \frac{w_i L_i}{P_{i,C}} \\
+      Q_{i,R}  &=& (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}
+\end{eqnarray*}
+}
+\normalsize
+Therefore, optimal demand functions satisfy:
+
+\begin{equation}\label{eq: demand}
+    Q_{i,C} = \alpha_i  \frac{w_i L_i}{P_{i,C}}, \qquad Q_{i,R} = (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}
+\end{equation}
+\normalsize
+
+Under Cobb-Douglas preferences, each consumer allocates a fixed share of their income—determined by their preference parameter $(\alpha_i, 1-\alpha_i)$ to each good, purchasing quantities inversely proportional to the price of that good. This holds regardless of whether consumers are in autarky or trade. 
+
+
+
+\end{document}
+
+
+
