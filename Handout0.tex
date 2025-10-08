@@ -9,7 +9,6 @@
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage{booktabs}
-\usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=black]{hyperref}
 \usepackage[title,titletoc]{appendix}
@@ -60,9 +59,9 @@ Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
 }
 \maketitle
 
-\section*{Functions and Notation}
+\section{Functions and Notation}
 
-A function is a mapping from some set $X$ to some other set $Y$. You should think of a it some machine, which we call $f$, that transform some input element $x$ of the input set $X$ ($x \in X$) into some output element $y$ of the output set $Y$ ($y \in Y$):
+\paragraph{Functions} A function is a mapping from some set $X$ to some other set $Y$. You should think of it as some machine, which we call $f$, that transforms some input element $x$ of the input set $X$ ($x \in X$) into some output element $y$ of the output set $Y$ ($y \in Y$):
 
 \begin{figure}[htp]
     \centering
@@ -74,7 +73,7 @@ A function is a mapping from some set $X$ to some other set $Y$. You should thin
 
 % Nodes
 \node (input) {Input \\ $x$};
-\node (transform) [right of=input] {Transform \\ $f$};
+\node (transform) [right of=input] {Transform \\ $f(x)$};
 \node (output) [right of=transform] {Output \\ $y = f(x)$};
 
 % Arrows
@@ -86,49 +85,56 @@ A function is a mapping from some set $X$ to some other set $Y$. You should thin
     \label{fig:functions}
 \end{figure}
 
-Consider, for instance, the function that represents a line on a plane $f(x) = 2x + 3$. As you know from high school mathematics, $3$ is the \textit{intercept} of this function (whenever $x=0$, $y=3$) whereas $2$ is its \textit{slope} (for every unit increase of $x$, y increases  by $2$ units).
+Consider, for instance, the function that represents a line on a plane $f(x) = 2x + 3$. As you know from high school mathematics, $3$ is the \textit{intercept} of this function (whenever $x=0$, $y=3$) whereas $2$ is its \textit{slope} (for every unit increase of $x$, y increases  by $2$ units). How do we think of this as a mapping? Consider the following numbers from the input set: \{ -2, -1, 0, 1, 2 \}. Think of how each of these input $x$'s are associated with output $y$'s:
 
-    \begin{tikzpicture}
+\begin{center}
+\begin{tabular}{cc}
+% --- Table ---
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Input: $x$ & Transform: $f(x)$ & Output: $y=f(x)$ \\
+\hline
+$-2$ & $2(-2)+3$ & $-1$ \\
+$-1$ & $2(-1)+3$ & $1$ \\
+$0$  & $2(0)+3$  & $3$ \\
+$1$  & $2(1)+3$  & $5$ \\
+$2$  & $2(2)+3$  & $7$ \\
+\hline
+\end{tabular}
+\end{minipage}
+&
+% --- TikZ Plot ---
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tikzpicture}
     \begin{axis}[
-        width=5cm, height=5cm,
+        width=6cm, height=6cm,
         axis lines=middle,
         xlabel={$x$}, ylabel={$y$},
-        xmin=-2, xmax=2,
-        ymin=-2, ymax=6,
+        xmin=-2.5, xmax=2.5,
+        ymin=-2, ymax=8,
         samples=100,
-        domain=-2:2,
-        title={$f(x) = 2x + 3$}
+        domain=-2:2
     ]
-    \addplot[blue, thick] {2*x + 3};
-    \addplot[gray, thick, dashed] coordinates {(0,3) -- (1,3) -- (3,3)};
-    \addnode
+    % Plot the function
+    \addplot[black, thick] {2*x + 3};
+    % Plot the sample points
+    \addplot[only marks, mark=*, mark size=2pt, red] 
+        coordinates {(-2,-1) (-1,1) (0,3) (1,5) (2,7)};
     \end{axis}
-    \end{tikzpicture}
+\end{tikzpicture}
+\end{minipage}
+\end{tabular}
+\end{center}
 
-\subsection*{Examples}
-\begin{itemize}
-    \item Linear: $f(x) = 2x + 3$
-    \item Quadratic: $f(x) = x^2$
-    \item Exponential: $f(x) = e^x$
-\end{itemize}
+This is what we mean when we say a function is a \textit{mapping}: every $x$ is associated with a $y$. The red dots on the Figure above represents how each $x$ (in the horizontal axis) is associated with our calculated $y$'s. Now imagine that we could calculate $f(x)$ for every real number between -2 and +2 -- or, in math notation $x \in (-2,2)$. As you probably remember from high school, there are infinitely many real numbers in the $(-2,2)$ interval, so it is very hard to compute by hand all of these numbers. However, a continuous linear function like $f(x) = 2x + 3$ can be represented as a line on a plane. The black line on the figure above represents exactly that: it starts where $x=-2$ and ends where $x=2$. And, for every one of those $x$'s, the line maps it to a $y$.
 
+Below there are two other examples of functions that you might have seen before. A quadratic function $f(x) = -x^2$; a cubic function $f(x) = x^3$ and an exponential function $f(x) = 2^x$. All of them are represented as curves taking values over the input set $X = (-2,2)$ and associating them with specific values in the $Y=(-4,4)$ range (our output set). If you wanted to, you could replicate a table like the one we did above to make the \textit{mapping} clear in your mind.
+
+\begin{center}
 \begin{tabular}{ccc}
-    % Linear
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=5cm, height=5cm,
-        axis lines=middle,
-        xlabel={$x$}, ylabel={$y$},
-        xmin=-2, xmax=2,
-        ymin=-2, ymax=6,
-        samples=100,
-        domain=-2:2,
-        title={$f(x) = 2x + 3$}
-    ]
-    \addplot[blue, thick] {2*x + 3};
-    \end{axis}
-    \end{tikzpicture}
-    &
     % Quadratic
     \begin{tikzpicture}
     \begin{axis}[
@@ -136,12 +142,28 @@ Consider, for instance, the function that represents a line on a plane $f(x) = 2
         axis lines=middle,
         xlabel={$x$}, ylabel={$y$},
         xmin=-2, xmax=2,
-        ymin=-1, ymax=4,
+        ymin=-4, ymax=4,
         samples=100,
         domain=-2:2,
-        title={$f(x) = x^2$}
+        title={$f(x) = -x^2$}
     ]
-    \addplot[red, thick] {x^2};
+    \addplot[red, thick] {-x^2};
+    \end{axis}
+    \end{tikzpicture}
+    &
+    % Cubic
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=5cm, height=5cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-4, ymax=4,
+        samples=100,
+        domain=-2:2,
+        title={$f(x) = x^3$}
+    ]
+    \addplot[blue, thick] {x^3};
     \end{axis}
     \end{tikzpicture}
     &
@@ -152,130 +174,566 @@ Consider, for instance, the function that represents a line on a plane $f(x) = 2
         axis lines=middle,
         xlabel={$x$}, ylabel={$y$},
         xmin=-2, xmax=2,
-        ymin=-1, ymax=8,
+        ymin=-4, ymax=4,
         samples=100,
         domain=-2:2,
-        title={$f(x) = e^x$}
+        title={$f(x) = 2^x$}
     ]
-    \addplot[green!70!black, thick] {exp(x)};
+    \addplot[brown!70!black, thick] {2^x};
     \end{axis}
     \end{tikzpicture}
     \end{tabular}
+\end{center}
 
 
 
-\section*{Derivatives}
+\section{Derivatives}
 
-The derivative of $f$ at $x$ is defined as
-\[
-f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}.
-\]
+\subsection{Intuition}
 
-\subsection*{Basic Derivatives}
+If you have never taken a calculus course, perhaps you have never seen or understood what a derivative is. However, as you will see below, you have already been working with them (by a different name) throughout your student life. Intuitively, a derivative represents \textit{how much the function $y=f(x)$ changes} whenever $x$ changes a very small amount or:
+
 \begin{align*}
-\frac{d}{dx} c &= 0, \quad \text{for constant } c, \\
-\frac{d}{dx} x &= 1, \\
-\frac{d}{dx} x^n &= n x^{n-1}, \\
-\frac{d}{dx} e^x &= e^x, \\
-\frac{d}{dx} \ln(x) &= \frac{1}{x}.
+     \substack{ \text{derivative of } f(x) \\ \text{ with respect to x} } = \frac{df(x)}{dx} = \frac{\text{change in } f(x)}{\text{change in } x} =  \substack{\text{how much } f(x) \text{ changes} \\ \text{whenever } x \text{ changes a very small amount}} 
 \end{align*}
 
-\subsection*{Rules of Differentiation}
+Let $\Delta x$ denote the \textit{change} in $x$. So we are asking how much the value of our function $f(x)$ changes whenever $x$ increases to $x +\Delta x$. The change in $x$ is $(x + \Delta x) - x = \Delta x$. The change in the value of our output is $f(x+ \Delta x) - f(x)$. The definition of a derivative is what this value converges to as the change in $x$ becomes smaller and smaller: $\Delta x\to0$. Formally:
+
 \begin{align*}
-\frac{d}{dx}[f(x) + g(x)] &= f'(x) + g'(x), \\
-\frac{d}{dx}[c \cdot f(x)] &= c \cdot f'(x), \\
-\frac{d}{dx}[f(x)g(x)] &= f'(x) g(x) + f(x) g'(x), \\
-\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] &= \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}.
+    \frac{df(x)}{dx} = \lim_{\Delta x \to 0} \frac{f(x+ \Delta x) - f(x)}{\Delta x}.    
 \end{align*}
 
-\subsection*{Chain Rule}
-If $y = f(u)$ and $u = g(x)$, then
+(As an aside, the operator $\lim_{\Delta x \to 0}$ just denotes that we are evaluating whatever is on its right-hand side as $\Delta x$ becomes closer and closer to zero (its \textit{limit}). You don't have to worry about that for this course. However, if you want to go deeper, you can take a look at some of the resources I posted online to understand derivatives a little bit better.)
+
+For simple linear functions such as $f(x) = 2x + 3$, we can easily calculate the derivative using the definition above:
+
+\begin{eqnarray*}
+    \frac{df(x)}{dx} &=& \lim_{\Delta x \to 0} \frac{f(x+ \Delta x) - f(x)}{\Delta x} \\
+    &=& \lim_{\Delta x \to 0} \frac{[2(x+ \Delta x) + 3 ] - [2(x) + 3 ]}{\Delta x} \\    
+    &=& \lim_{\Delta x \to 0} \frac{2\Delta x}{\Delta x} \\    
+    &=& \lim_{\Delta x \to 0} 2 \\    
+    &=& 2  \qquad (\text{since 2 is a constant that does not depend on $\Delta x$)}    
+\end{eqnarray*}
+
+For linear functions, then, the derivative of the function with respect to $x$ is simply the slope of the curve. This is a good moment to test your intuition. If you intuitively understand what derivatives are, this result is not surprising. In linear functions, such as $f(x) = 2x + 3$, $y$ increases at a \textit{constant rate} as $x$ changes. Regardless of what $x$ is, if you increase $x$ by one unit, $y$ will increase by two units. The slope of the function around $x$ denotes exactly this rate of change.
+
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2.5, xmax=2.5,
+        ymin=-2, ymax=8,
+        samples=100,
+        domain=-2:2
+    ]
+    % Plot the function
+    \addplot[black, thick] {2*x + 3};
+
+    % Dashed guide lines
+    \addplot[dashed, gray] coordinates {(0,3) (1,3) (1,5)};
+
+    % Label "1" below the horizontal segment
+    \node at (axis cs:0.5,2.2) {$1$};
+
+    % Label slope=2 next to the vertical segment
+    \node[anchor=west] at (axis cs:1.05,4) {$2$};
+
+    % Optionally: mark the key points
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(0,3) (1,5)};
+\end{axis}
+\end{tikzpicture}
+    
+\end{center}
+
+For nonlinear functions, the derivative will be geometrically represented by the tangent of the function (i.e., its slope) around $x$. Why is that? Recall that the definition of the derivative is how much the function $f(x)$ changes as $x$ changes a tiny amount.
+
+Let us try to illustrate what happens with these changes as $\Delta x$ becomes smaller and smaller. In the Figure below, we first plot two points. In red, \textcolor{red}{$(x,f(x))$} and in blue \textcolor{blue}{$(x + \Delta x,f(x + \Delta x))$}. The line connecting those two points represents the average change in $y$ between $f(x + \Delta x) - f(x)$ as per unit of change in $x$, $\Delta x$ (in high school, you might have learned this is a \textit{secant} line).
+
+\begin{center}
+\begin{tabular}{cc}
+% ---------------- Left Figure ----------------
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=7cm, height=6cm,
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    ylabel={$y$},
+    samples=200, domain=-0.5:3.5,
+    xtick=\empty, ytick=\empty
+]
+    % Curve
+    \addplot[black, thick] {0.3*(x-0.5)^3 - 0.4*(x-0.5) + 1.2};
+
+    % Base point
+    \addplot[only marks, mark=*, red] coordinates {(1, {0.3*(1-0.5)^3 -0.4*(1-0.5) + 1.2})}
+    node[below right] {\scriptsize $(x,f(x))$};
+
+    % Second point
+    \addplot[only marks, mark=*, blue] coordinates {(2.7, {0.3*(2.7-0.5)^3 -0.4*(2.7-0.5) + 1.2})}
+    node[left] {\scriptsize $(x+\Delta x,f(x+\Delta x))$};
+
+    % Secant line
+    \addplot[blue, thick] coordinates {(1, {0.3*(1-0.5)^3 -0.4*(1-0.5) + 1.2}) 
+                                      (2.7, {0.3*(2.7-0.5)^3 -0.4*(2.7-0.5) + 1.2})};
+
+    % Show Δx on x-axis
+    \draw[|-|, blue, thick] (axis cs:1,0) -- node[below] {$\Delta x$} (axis cs:2.7,0);
+    \node at (axis cs:1, -0.5) {$x$};
+    \node at (axis cs:2.7, -0.5) {$x+\Delta x$};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+&
+% ---------------- Right Figure ----------------
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=7cm, height=6cm,
+    axis lines=middle,
+    xmin=-1, xmax=4,
+    ymin=-1, ymax=4,
+    ylabel={$y$},
+    xlabel={$x$},
+    samples=200, domain=-0.5:3.5,
+    xtick=\empty, ytick=\empty
+]
+    % Curve
+    \addplot[black, thick] {0.3*(x-0.5)^3 - 0.4*(x-0.5) + 1.2};
+
+    \pgfmathsetmacro{\x}{1}
+    \pgfmathsetmacro{\fx}{0.3*(1-0.5)^3 -0.4*(1-0.5) + 1.2}
+
+    % Base point
+    \addplot[only marks, mark=*, red] coordinates {(\x, \fx)}
+    node[below left] {\scriptsize $(x,f(x))$};
+
+    % Points and secants
+    \addplot[only marks, mark=o, blue] coordinates {(2.7, {0.3*(2.7-0.5)^3 -0.4*(2.7-0.5) + 1.2})};
+    \addplot[blue, dashed] coordinates {(\x, \fx) 
+                                      (2.7, {0.3*(2.7-0.5)^3 -0.4*(2.7-0.5) + 1.2})};
+
+    \addplot[only marks, mark=o, blue] coordinates {(2.2, {0.3*(2.2-0.5)^3 -0.4*(2.2-0.5) + 1.2})};
+    \addplot[blue, dashed] coordinates {(\x, \fx) 
+                                      (2.2, {0.3*(2.2-0.5)^3 -0.4*(2.2-0.5) + 1.2})};
+    
+    \addplot[only marks, mark=o, blue] coordinates {(1.7, {0.3*(1.7-0.5)^3 -0.4*(1.7-0.5) + 1.2})};
+    \addplot[blue, dashed] coordinates {(\x, \fx) 
+                                      (1.7, {0.3*(1.7-0.5)^3 -0.4*(1.7-0.5) + 1.2})};
+
+    \addplot[only marks, mark=o, blue] coordinates {(1.4, {0.3*(1.4-0.5)^3 -0.4*(1.4-0.5) + 1.2})};
+    \addplot[blue, dashed] coordinates {(\x, \fx) 
+                                      (1.4, {0.3*(1.4-0.5)^3 -0.4*(1.4-0.5) + 1.2})};
+
+    \addplot[red, thick, domain=0.2:3.0] {1.0375 - 0.175*(x-1)};
+
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\end{tabular}
+\end{center}
+
+
+Now look at the chart on the right and see what happens as we make the change in $x$ smaller and smaller. First, you can see that the line segments connecting the points are becoming flatter. This shows that the average increase in $y$ per unit of increase in $x$ is becoming smaller. Geometrically, you can see that by observing that the slope of the function is changing and becoming flatter as we get closer to the red dot. So much so that, immediately around the red dot, our function is actually decreasing.
+
+Second, we can see that our blue dashed lines seem to be ``converging'' to the red line. The red line is the \textit{tangent} of the function around the point \textcolor{red}{$(x,f(x))$}. It represents how much our function increases $f(x + \Delta x) - f(x)$ as $\Delta x$ becomes closer and closer to zero. But wait... that is exactly our definition of a derivative. Geometrically, a derivative of a function at point $x$ is represented by the \textit{tangent} of that function around such a point.
+
+Intuitively, the red line shows what is the rate of change of the function around point $x$. It will slope down if the function is decreasing and slope up if the function is increasing at point $x$. If the red line were flat, that would mean that $y$ does not change with $x$. One example of this would be a function that is a horizontal line (with $y$ unchanged for multiple values of $x$).
+
+\subsection{Rules} We have now seen what a derivative is. We will now apply some rules for taking derivatives for specific functional forms. This handout will not cover where those rules come from. We would need about half a semester to do that -- that is what you do in Calc 1. We will just cover some of the rules and go over examples. We also introduce another notation, in which we express the derivative of single variable functions as:
+
+\begin{equation*}
+    f'(x) = \frac{df(x)}{dx}
+\end{equation*}
+
+\paragraph{Constant} The derivative of a constant $c$ with respect to some variable is zero:
+
+\begin{equation*}
+    \frac{dc}{dx}  = 0, \quad \text{for constant } c
+\end{equation*}
+
+\noindent which should be intuitive. A constant does not vary (otherwise it would not be a constant). Therefore, it cannot vary with some variable $x$. For instance, suppose that we express some function $y=3$. How would we plot this? As a horizontal line:
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-2, ymax=5,
+        samples=100,
+        domain=-2:2
+    ]
+    % Plot the function
+    \addplot[red, thick] {3};
+
+\end{axis}
+\end{tikzpicture}    
+\end{center}
+
+\noindent and how much does $y$ change as $x$ changes? Well, it doesn't. So $f'(x)=0$
+
+\paragraph{Variable with respect to itself} How much does $x$ change as $x$ changes? Obviously, it changes as a one-to-one proportion. This would be like defining a function $y=x$. Therefore: $f'(x) = dx/dx = 1$. The chart would simply be a 45-degree line:
+
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-2, ymax=2,
+        samples=100,
+        domain=-2:2
+    ]
+    % Plot the function
+    \addplot[red, thick] {x};
+
+\end{axis}
+\end{tikzpicture}    
+\end{center}
+
+
+
+
+
+\paragraph{Variable multiplying a constant} Whenever a variable is \textit{multiplying} some constant $c$, then its derivative is just the multiplying constant: 
+
+\begin{equation*}
+    \frac{d}{dx} (c\times x) = c\times \frac{dx}{dx}  = c
+\end{equation*}
+
+We showed this before, when we talked about the derivative of a linear function $f(x) = 2x + 3$ being its slope $2$ and, therefore, $f'(x) =2$.
+
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2.5, xmax=2.5,
+        ymin=-2, ymax=8,
+        samples=100,
+        domain=-2:2
+    ]
+    % Plot the function
+    \addplot[red, thick] {2*x + 3};
+
+    % Dashed guide lines
+    \addplot[dashed, gray] coordinates {(0,3) (1,3) (1,5)};
+
+    % Label "1" below the horizontal segment
+    \node at (axis cs:0.5,2.2) {$1$};
+
+    % Label slope=2 next to the vertical segment
+    \node[anchor=west] at (axis cs:1.05,4) {$2$};
+
+    % Optionally: mark the key points
+    \addplot[only marks, mark=*, mark size=2pt] coordinates {(0,3) (1,5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+
+\paragraph{Power Rule} 
+Perhaps the most common derivative you will encounter is that of powers of $x$. If you have a function $f(x) = x^n$, then its derivative is:
+
+\begin{equation*}
+    \frac{d}{dx} x^n = n x^{n-1}, \qquad \text{for integer or real } n.
+\end{equation*}
+
+\noindent Example: if $f(x) = x^3$, then $f'(x) = 3x^2$.  This tells us that the slope is not constant, but grows with $x$. 
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-2, ymax=8,
+        samples=100,
+        domain=-2:2
+    ]
+    % Plot x^3
+    \addplot[black, thick] {x^3};
+
+    % Tangent at x=1
+    \addplot[red, thick, domain=-1:2] {1 + 3*(x-1)};
+    \addplot[only marks, mark=*, red] coordinates {(1,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Notice: at $x=1$, slope is $3(1)^2 = 3$, which matches the tangent drawn above.  
+
+\paragraph{Exponential Rule}
+Exponential functions are special because they grow at a rate proportional to themselves:
+
+\begin{equation*}
+    \frac{d}{dx} e^x = e^x.
+\end{equation*}
+
+\noindent Example: at $x=0$, the slope equals the height of the function (both are 1).
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=-2, xmax=2,
+        ymin=-1, ymax=8,
+        samples=100,
+        domain=-2:2
+    ]
+    \addplot[black, thick] {exp(x)};
+    % Tangent at x=0
+    \addplot[red, thick, domain=-2:2] {1 + (x-0)};
+    \addplot[only marks, mark=*, red] coordinates {(0,1)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\paragraph{Logarithmic Rule}
+The natural log is the inverse of the exponential. Its derivative is:
+
+\begin{equation*}
+    \frac{d}{dx}\,\ln(x) = \frac{1}{x}, \qquad x > 0.
+\end{equation*}
+
+\noindent This means the slope becomes smaller as $x$ grows.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=6cm, height=6cm,
+        axis lines=middle,
+        xlabel={$x$}, ylabel={$y$},
+        xmin=0, xmax=5,
+        ymin=-1, ymax=2,
+        samples=100,
+        domain=0.1:5
+    ]
+    \addplot[black, thick] {ln(x)};
+    % Tangent at x=2
+    \addplot[red, thick, domain=0:5] {ln(2) + 0.5*(x-2)};
+    \addplot[only marks, mark=*, red] coordinates {(2,ln(2))};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\paragraph{Product Rule} 
+If we multiply two functions, the derivative distributes with a correction term:
+
+\begin{equation*}
+    \frac{d}{dx}[f(x) g(x)] = f'(x)g(x) + f(x)g'(x).
+\end{equation*}
+
+\noindent Example: $f(x) = x^2$, $g(x)=e^x$. Then
+
 \[
-\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}.
+\frac{d}{dx}[x^2 e^x] = 2x e^x + x^2 e^x.
 \]
 
-\subsection*{Examples}
+\paragraph{Quotient Rule} 
+If we divide two functions, we use:
+
+\begin{equation*}
+    \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}.
+\end{equation*}
+
+\noindent Example: $\dfrac{d}{dx}\left(\tfrac{x}{x+1}\right) = \dfrac{(1)(x+1) - x(1)}{(x+1)^2} = \dfrac{1}{(x+1)^2}$.
+
+\paragraph{Chain Rule} 
+Finally, if a function is nested inside another, we use:
+
+\[
+\frac{d}{dx} f(g(x)) = f'(g(x)) \cdot g'(x).
+\]
+
+\noindent Example: $y = \ln(x^2)$. Let $u=x^2$. Then:
+
+\[
+\frac{dy}{du} = \frac{1}{u}, \qquad \frac{du}{dx} = 2x, \quad \Rightarrow \quad \frac{dy}{dx} = \frac{1}{x^2}\cdot 2x = \frac{2}{x}.
+\]
+
+\subsection*{Summary Table}
+
 \begin{align*}
-\frac{d}{dx}\,(3x^2 + 2x - 1) &= 6x + 2, \\
-\frac{d}{dx}\,(\ln x^2) &= \frac{1}{x^2}\cdot 2x = \frac{2}{x}, \\
-\frac{d}{dx}\,(e^{3x}) &= 3e^{3x}.
+\frac{d}{dx} c &= 0, & \frac{d}{dx} x &= 1, \\
+\frac{d}{dx} x^n &= n x^{n-1}, & \frac{d}{dx} e^x &= e^x, \\
+\frac{d}{dx} \ln(x) &= \frac{1}{x}, & \frac{d}{dx}[f(x)+g(x)] &= f'(x) + g'(x), \\
+\frac{d}{dx}[cf(x)] &= c f'(x), & \frac{d}{dx}[fg] &= f'(x)g(x) + f(x)g'(x), \\
+\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] &= \frac{f(x)'g(x) - f(x)g'(x)}{g(x)^2}, & 
+\frac{d}{dx} f(g(x)) &= f'(g(x)) \cdot g'(x).
 \end{align*}
 
-\section*{Second Derivatives and Concavity}
+\subsection{Second Derivatives and Concavity}
 
-The second derivative measures curvature:
+\paragraph{Second derivatives} Up to this point, we have learned that the first derivative $f'(x)$ tells us the \emph{slope} of the function at a point — how fast it is going up or down. But sometimes we also want to know how the slope itself is changing. This is what the \emph{second derivative} measures:
+
 \[
-f''(x) = \frac{d}{dx} \big(f'(x)\big).
+f''(x) = \frac{d}{dx}\big(f'(x)\big).
 \]
+
+\noindent Suppose, for instance, that $f(t)$ denotes the position of a car at moment $t$ (how many miles it has traversed in $t$ minutes). Then, intuitively:
 
 \begin{itemize}
-    \item If $f''(x) > 0$, $f$ is convex (curves upward).
-    \item If $f''(x) < 0$, $f$ is concave (curves downward).
+    \item $f'(t)$ tells us the speed of the car -- how fast it is going in miles/minute or the rate of change of $f$ with respect to $t$.
+    \item $f''(t)$ tells us the acceleration of the car -- whether or not its speed is going up or down -- or what is the rate of change of the slope.
 \end{itemize}
 
-\section*{Optimization}
+Now, in particular, let us suppose that the car is moving at a constant rate of 120 miles per hour. In that case $f(t) = 2t$, because every minute we move 2 miles. What is the speed of the car. It is a constant rate of $f'(t) = 2$ miles per minute (or, equivalently, 120 miles per hour). What is its acceleration? Since the car speed is not going up or down (it is constant!) its acceleration is exactly $f''(t) =  \frac{d}{dt}[f'(t)] = 0$
 
-A \emph{critical point} $x^*$ satisfies $f'(x^*) = 0$.
+\begin{center}
+\begin{tabular}{ccc}
+% ----- Position -----
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=5cm, height=5cm,
+    axis lines=middle,
+    xlabel={$t$}, ylabel={$f(t)$},
+    xmin=0, xmax=4,
+    ymin=0, ymax=18,
+    samples=100,
+    domain=0:4
+]
+    \addplot[black, thick] {2*x};
+\end{axis}
+\end{tikzpicture}\\
+Position
+\end{minipage}
+&
+% ----- Speed -----
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=5cm, height=5cm,
+    axis lines=middle,
+    xlabel={$t$}, ylabel={$f'(t)$},
+    xmin=0, xmax=4,
+    ymin=0, ymax=9,
+    samples=100,
+    domain=0:4
+]
+    \addplot[blue, thick] {2};
+\end{axis}
+\end{tikzpicture}\\
+Speed
+\end{minipage}
+&
+% ----- Acceleration -----
+\begin{minipage}{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=5cm, height=5cm,
+    axis lines=middle,
+    xlabel={$t$}, ylabel={$f''(t)$},
+    xmin=0, xmax=4,
+    ymin=0, ymax=3,
+    samples=2,
+    domain=0:4
+]
+    \addplot[red, thick] {0};
+\end{axis}
+\end{tikzpicture}\\
+Acceleration
+\end{minipage}
+\end{tabular}
+\end{center}
+
+
+\paragraph{Concavity.}  
+The sign of the second derivative determines whether the curve is bending upwards or downwards:
 
 \begin{itemize}
-    \item If $f''(x^*) > 0$, then $x^*$ is a local minimum.
-    \item If $f''(x^*) < 0$, then $x^*$ is a local maximum.
-    \item If $f''(x^*) = 0$, the test is inconclusive.
+    \item If $f''(x) > 0$, then $f$ is \textbf{convex} (curves upward). The slope is increasing.
+    \item If $f''(x) < 0$, then $f$ is \textbf{concave} (curves downward). The slope is decreasing.
 \end{itemize}
 
-\subsection*{Example}
-Consider $f(x) = x^2 - 4x + 3$.  
-\[
-f'(x) = 2x - 4, \quad f''(x) = 2.
-\]
-Setting $f'(x) = 0$ gives $x^* = 2$. Since $f''(2) = 2 > 0$, $x=2$ is a local minimum.  
+\paragraph{Examples.}
 
-\section*{Integration}
+\begin{enumerate}
+    \item \textbf{Convex function:} $f(x) = x^2$.  
+    Here, $f'(x) = 2x$ and $f''(x) = 2 > 0$. The curve always bends upwards.
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=6cm, height=6cm,
+            axis lines=middle,
+            xlabel={$x$}, ylabel={$y$},
+            xmin=-2, xmax=2,
+            ymin=-1, ymax=5,
+            samples=100,
+            domain=-2:2
+        ]
+        % Plot x^2
+        \addplot[black, thick] {x^2};
 
-The indefinite integral is the reverse of differentiation:
-\[
-\int f(x)\, dx = F(x) + C, \quad \text{where } F'(x) = f(x).
-\]
+        % Tangents with increasing slope
+        \addplot[red, thick, domain=-2:2] {-2*x-1};
+        \addplot[blue, thick, domain=-2:2] {0*(x)};
+        \addplot[brown!70!black, thick, domain=-2:2] {2*(x)-1};
 
-\subsection*{Basic Integrals}
-\begin{align*}
-\int c\, dx &= cx + C, \\
-\int x^n\, dx &= \frac{x^{n+1}}{n+1} + C \quad (n \neq -1), \\
-\int e^x\, dx &= e^x + C, \\
-\int \frac{1}{x}\, dx &= \ln|x| + C.
-\end{align*}
+        % Points
+        \addplot[only marks, mark=*, red] coordinates {(-1,1)};
+        \addplot[only marks, mark=*, blue] coordinates {(0,0)};
+        \addplot[only marks, mark=*, brown!70!black] coordinates {(1,1)};
+        \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    Notice how the slope goes from negative (red tangent at $x=-1$), to flat (blue tangent at $x=0$), to positive (brown tangent at $x=1$). The slope is \emph{increasing}, so the function curves upward.
 
-\subsection*{Definite Integrals}
-The definite integral is the area under the curve:
-\[
-\int_a^b f(x)\, dx = \lim_{n \to \infty} \sum_{i=1}^n f(x_i^*) \Delta x.
-\]
+    \item \textbf{Concave function:} $f(x) = -x^2$.  
+    Here, $f'(x) = -2x$ and $f''(x) = -2 < 0$. The curve always bends downward.
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=6cm, height=6cm,
+            axis lines=middle,
+            xlabel={$x$}, ylabel={$y$},
+            xmin=-2, xmax=2,
+            ymin=-5, ymax=1,
+            samples=100,
+            domain=-2:2
+        ]
+        % Plot -x^2
+        \addplot[black, thick] {-x^2};
 
-\subsection*{Fundamental Theorem of Calculus}
-If $F'(x) = f(x)$, then
-\[
-\int_a^b f(x)\, dx = F(b) - F(a).
-\]
+        % Tangents with decreasing slope
+        \addplot[red, thick, domain=-2:2] {-1 + 2*(x+1)};
+        \addplot[blue, thick, domain=-2:2] {0 + 0*(x)};
+        \addplot[brown!70!black, thick, domain=-2:2] {-1 - 2*(x-1)};
 
-\subsection*{Examples}
-\begin{align*}
-\int_0^1 x^2 \, dx &= \left[ \frac{x^3}{3} \right]_0^1 = \tfrac{1}{3}, \\
-\int_1^e \frac{1}{x}\, dx &= [\ln x]_1^e = 1.
-\end{align*}
-
-\section*{Summary}
-\begin{itemize}
-    \item Derivatives measure slope.  
-    \item Second derivatives measure curvature.  
-    \item Optimization uses first- and second-order conditions.  
-    \item Integration reverses differentiation and measures area under a curve.  
-\end{itemize}
+        % Points
+        \addplot[only marks, mark=*, red] coordinates {(-1,-1)};
+        \addplot[only marks, mark=*, blue] coordinates {(0,0)};
+        \addplot[only marks, mark=*, brown!70!black] coordinates {(1,-1)};
+        \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    Here, the slope goes from positive (red tangent at $x=-1$), to flat (blue tangent at $x=0$), to negative (brown tangent at $x=1$). The slope is \emph{decreasing}, so the function curves downward.
+\end{enumerate}
 
 
+\section{Optimization}
 
-\paragraph{Demand} 
-
-\paragraph{Utility Maximization Problem} Workers in each country $i$ inelastically supply their labor and earn labor income $w_i L_i$. They have preferences over goods $p \in \{ C, R\}$. They purchase quantities $Q_{i,C}, Q_{i,R}$ for prices $P_{i,C}, P_{i,R}$ and exhaust their labor income, maximizing:
+\paragraph{Utility maximization} Consider the following utility maximization problem. Workers in each country $i$ inelastically supply their labor and earn labor income $w_i L_i$. They have preferences over goods $p \in \{ C, R\}$. They purchase quantities $Q_{i,C}, Q_{i,R}$ for prices $P_{i,C}, P_{i,R}$ and exhaust their labor income, maximizing:
 
 \begin{equation*}
     \max_{\{Q_{i,C}, Q_{i,R}\}} U_i(Q_{i,C}, Q_{i,R}) \equiv Q_{i,C}^{\alpha_i} Q_{i,R}^{1-\alpha_i} \qquad s.t. \qquad P_{i,C} Q_{i,C} + P_{i,R} Q_{i,R} = w_i L_i
@@ -287,50 +745,207 @@ This is a simple constrained concave maximization problem, that you should know 
     \max_{\{Q_{i,C}\}} U_i(Q_{i,C}, Q_{i,R}(Q_{i,C})) \equiv Q_{i,C}^{\alpha_i} \left( \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \right)^{1-\alpha_i}
 \end{equation*}
 
-\noindent for which we can take a derivative and set it equal to zero to find the optimal point:
+How does this function look like? To simplify our life, let us pick some values for prices, such that $w_iL_i=P_{i,R}=P_{i,C}=1$. (In practice, as we will see in class, we will solve for the prices but our goal here is simply to illustrate how a maximization problem looks like). This problem then becomes:
 
-\scriptsize{
+
+\begin{equation*}
+    \max_{\{Q_{i,C}\}} U_i(Q_{i,C}) \equiv Q_{i,C}^{\alpha_i} \left( 1 - Q_{i,C} \right)^{1-\alpha_i}
+\end{equation*}
+
+If we plot the function $U_i(Q_{i,C})$ for values of $Q_{i,C} \in (0,1)$, we see a concave (belly shaped, bends downward) function like the one below. From the picture, three things stand out. First, if $U'(Q_{i,C}) >0$ at the consumer choice of $Q_{i,C}$, they can increase their consumption of computers (decreasing their consumption of roses) to attain higher utility. This is represented by the blue point in the chart below. Second, if $U'(Q_{i,C}) < 0$ at the consumer choice of $Q_{i,C}$, they can decrease their consumption of computers (and increase their consumption of roses) to attain higher utility. This is represented by the brown point in the chart below. Finally, if $U'(Q_{i,C}) = 0$ at the consumer choice of $Q_{i,C}$, the consumer cannot improve its utility and has achieved the maximum point. This is represented by the dark red point in the chart below.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8cm, height=6cm,
+        axis lines=middle,
+        xlabel={$Q_{i,C}$}, ylabel={$U_i(Q_{i,C})$},
+        xlabel style={at={(axis description cs:1,0)},anchor=west},
+        ylabel style={at={(axis description cs:0,1)},anchor=south},
+        xmin=-0.1, xmax=1.1,
+        ymin=0, ymax=0.75,
+        ytick=\empty, xtick=\empty,
+        samples=200,
+        domain=0:1.1
+    ]
+    % Parameters
+    \pgfmathsetmacro{\I}{1}
+    \pgfmathsetmacro{\Pr}{1}
+    \pgfmathsetmacro{\Pc}{1}
+    \pgfmathsetmacro{\alpha}{0.5}
+    \pgfmathsetmacro{\alphaa}{0.25}
+    \pgfmathsetmacro{\alphab}{0.75}
+    
+    % Utility function
+    \addplot[black, very thick, smooth] 
+        {x^\alpha * (\I/\Pr - \Pc/\Pr * x)^(1-\alpha)};
+        
+    % Points
+    \pgfmathsetmacro{\x}{1/2}
+    \pgfmathsetmacro{\y}{(\x)^\alpha * (1-\x)^(1-\alpha)}
+    \addplot[only marks, mark=*, red] coordinates {(\x,\y)};
+    \node[anchor=south, red] at (axis cs:\x,\y) {\scriptsize $U'(Q_{i,C}) = 0$};
+    \pgfmathsetmacro{\slope}{\alpha * (\x)^(-(1-\alpha)) * (1-\x)^((1-\alpha)) - (1-\alpha) * \x^(\alpha) * (1-\x)^(-\alpha) }
+    \pgfmathsetmacro{\c}{\y - \slope * \x}
+    \addplot[red, thick, domain=.33:0.66] {\slope * x + \c};
+
+    \pgfmathsetmacro{\xx}{1/8}
+    \pgfmathsetmacro{\yy}{(\xx)^\alpha * (1-\xx)^(1-\alpha)}
+    \addplot[only marks, mark=*, blue] coordinates {(\xx,\yy)};
+    \node[anchor=west, blue] at (axis cs:\xx,\yy) {\scriptsize $U'(Q_{i,C}) >0$};
+    \pgfmathsetmacro{\slopexx}{\alpha * (\xx)^(-(1-\alpha)) * (1-\xx)^((1-\alpha)) - (1-\alpha) * \xx^(\alpha) * (1-\xx)^(-\alpha) }
+    \pgfmathsetmacro{\cc}{\yy - \slopexx * \xx}
+    \addplot[blue, thick, domain=0:0.3] {\slopexx * x + \cc};
+        
+    \pgfmathsetmacro{\xxx}{7/8}
+    \pgfmathsetmacro{\yyy}{(\xxx)^\alpha * (1-\xxx)^(1-\alpha)}
+    \addplot[only marks, mark=*, brown] coordinates {(\xxx,\yyy)};
+    \node[anchor=north east, dark brown] at (axis cs:\xxx,\yyy) {\scriptsize $U'(Q_{i,C}) < 0$};
+    \pgfmathsetmacro{\slopexxx}{\alpha * (\xxx)^(-(1-\alpha)) * (1-\xxx)^((1-\alpha)) - (1-\alpha) * \xxx^(\alpha) * (1-\xxx)^(-\alpha) }
+    \pgfmathsetmacro{\ccc}{\yyy - \slopexxx * \xxx}
+    \addplot[brown, thick, domain=0.7:1] {\slopexxx * x + \ccc};
+
+        % Utility function
+    %\addplot[red, very thick, dashed] 
+    %    {x^\alphaa * (\I/\Pr - \Pc/\Pr * x)^(1-\alphaa)};
+
+    % Utility function
+    %\addplot[brown, very thick, dashed] 
+    %    {x^\alphab * (\I/\Pr - \Pc/\Pr * x)^(1-\alphab)};
+
+    % Label curve
+    \node[blue, anchor=west] at (axis cs:1.2,0.65) {$U(Q_{i,C},Q_{i,R}(Q_{i,C}))$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Therefore, utility is maximized at the point where the derivative of the utility function with respect to the choice variables is zero}. How can we find the point. Well, we take the derivative of the utility function, set it equal to zero, and solve for $Q_{i,C}$. How would we do that? We need to apply first the product rule then the chain rule\footnote{To make that explicit, let us write use the following auxiliary functions: $f(x) = x^{\alpha_i}, g(x) = x^{1-\alpha_i}, h(x) = 1-x$. Then we can restate this function as:
+
+\begin{equation*}
+    \max_{\{Q_{i,C}\}} U_i(Q_{i,C}) \equiv f(Q_{i,C}) \times g(h(Q_{i,C}) )
+\end{equation*}
+
+Then:
+
+\begin{equation*}
+    U_i'(Q_{i,C}) = f'(Q_{i,C}) \times g(h(Q_{i,C}) ) + f(Q_{i,C}) \times g'(h(Q_{i,C}) ) \times h'(Q_{i,C})
+\end{equation*}
+}.
+\begin{equation*}
+    U_i'(Q_{i,C}) = \alpha_i \times Q_{i,C}^{\alpha_i-1} \left( 1 - Q_{i,C} \right)^{1-\alpha_i} + (1-\alpha_i) \times Q_{i,C}^{\alpha_i} \left( 1 - Q_{i,C} \right)^{-\alpha_i} \times (-1)
+\end{equation*}
+
+Setting this equal to zero, and solving for $Q_{i,C}$ you can show:
+
 \begin{eqnarray*}
-    & & \alpha_i Q_{i,C}^{\alpha_i-1} \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i} + Q_{i,C}^{\alpha_i} (1-\alpha_i) \left( \underbrace{\frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C}}_{=Q_{i,R}} \right)^{1-\alpha_i-1} \left( - \frac{P_{i,C}}{P_{i,R}}\right) = 0 \\
-%    & & \alpha_i  \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{1-\alpha_i} - (1-\alpha_i) \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{-\alpha_i} \left( \frac{P_{i,C}}{P_{i,R}}\right) = 0 \\
-%    & & \alpha_i  \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{1-\alpha_i} = (1-\alpha_i) \left( \frac{Q_{i,R}}{Q_{i,C}} \right)^{-\alpha_i} \left( \frac{P_{i,C}}{P_{i,R}}\right) \\
-%    & & \frac{Q_{i,R}}{Q_{i,C}}  = \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) \\
-\iff    & & Q_{i,R}  = \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C}
-\end{eqnarray*}
-}
-
-\normalsize
-Replacing the last line into the budget constraint:
-
-\scriptsize{
-\begin{eqnarray*}
-    Q_{i,R}&=& \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \\
-    \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} \\
-%    \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} + \frac{P_{i,C}}{P_{i,R} } Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}}  \\
-%    \frac{1-\alpha_i + \alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C} &=& \frac{w_i L_i}{P_{i,R}}  \\
-    Q_{i,C} &=& \alpha_i  \frac{w_i L_i}{P_{i,C}}
+    \alpha_i \times Q_{i,C}^{\alpha_i-1} \left( 1 - Q_{i,C} \right)^{1-\alpha_i} + (1-\alpha_i) \times Q_{i,C}^{\alpha_i} \left( 1 - Q_{i,C} \right)^{-\alpha_i} \times (-1) &=& 0 \\
+    \alpha_i \times Q_{i,C}^{\alpha_i-1} \left( 1 - Q_{i,C} \right)^{1-\alpha_i}  &=& (1-\alpha_i) \times Q_{i,C}^{\alpha_i} \left( 1 - Q_{i,C} \right)^{-\alpha_i}     \\
+    \alpha_i \left( 1 - Q_{i,C} \right)   &=& (1-\alpha_i) \times Q_{i,C} \\     
+    \alpha_i - \alpha_i Q_{i,C}   &=& (1-\alpha_i) \times Q_{i,C}      \\
+    \alpha_i    &=& Q_{i,C}
 \end{eqnarray*}
 
-}
+At prices $w_iL_i=P_{i,R}=P_{i,C}=1$, the optimal choice of computers is $Q_{i,C} = \alpha_i$. Using the budget constraints, we can derive the optimal choice of roses as:
 
-\normalsize
-Finally:
-{\scriptsize
-\begin{eqnarray*}
-     Q_{i,R}  &=& \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) Q_{i,C}  \\
-     Q_{i,R}  &=& \frac{1-\alpha_i}{\alpha_i } \left( \frac{P_{i,C}}{P_{i,R}}\right) \alpha_i  \frac{w_i L_i}{P_{i,C}} \\
-      Q_{i,R}  &=& (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}
-\end{eqnarray*}
-}
-\normalsize
-Therefore, optimal demand functions satisfy:
+\begin{equation*}
+ Q_{i,R} = \frac{w_i L_i}{P_{i,R}} - \frac{P_{i,C}}{P_{i,R} } Q_{i,C} = 1-Q_{i,C}    = 1-\alpha_i
+\end{equation*}
 
-\begin{equation}\label{eq: demand}
-    Q_{i,C} = \alpha_i  \frac{w_i L_i}{P_{i,C}}, \qquad Q_{i,R} = (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}
-\end{equation}
-\normalsize
+So, given prices $w_iL_i=P_{i,R}=P_{i,C}=1$, optimal choice of computers and roses, respectively, will be their preference shares ($\alpha_i,1-\alpha_i$). In Handout 1, I show you how to solve for this problem with generic prices (and, in fact, how to solve for equilibrium prices). This handout serves as an illustration for why we use derivatives to solve maximization problems.
 
-Under Cobb-Douglas preferences, each consumer allocates a fixed share of their income—determined by their preference parameter $(\alpha_i, 1-\alpha_i)$ to each good, purchasing quantities inversely proportional to the price of that good. This holds regardless of whether consumers are in autarky or trade. 
+\paragraph{Profit maximization} Consider the following profit maximization problem. A firm uses capital $k$ to produce an output good $y$ using production function $y=f(k)=k^{\beta}$, for $0<\beta <1$. They sell their product for price $p$ in competitive markets, taking prices as given. Each period, they rent their capital at rate $r$ per unit of $k$. They maximize profits according to:
+
+\begin{equation*}
+    \max_{k} \pi(k) = p\times k^{\beta} - r\times k
+\end{equation*}
+
+Again, to make our lives easier, let us suppose that $p=r=1$. How does this profit maximization function look like? We can actually plot each part of this profit function independently. On the left chart, we plot in red revenues \textcolor{red}{$p\times k^{\beta}$} and in blue costs \textcolor{blue}{$ r\times k$}. Total profits, which we plot on the right, are the differences between costs and revenues $ \pi(k) = \textcolor{red}{p\times k^{\beta}} - \textcolor{blue}{r\times k}$, which is the difference between the two curves on the left. You can see that the difference between the red and blue curves initially increases, reaches a maximum, then starts to decrease, and eventually turns negative -- when the blue line lies above the red curve.
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=\linewidth, height=6cm,
+        axis lines=middle,
+        xlabel={$k$}, ylabel={\textcolor{red}{$p\times k^{\beta}$}, \textcolor{blue}{$ r\times k$}},
+        xlabel style={at={(axis description cs:1,0)},anchor=west},
+        ylabel style={at={(axis description cs:0,1)},anchor=south},
+        xmin=-0.1, xmax=1.25,
+        ymin=0, ymax=1.25,
+        ytick=\empty, xtick=\empty,
+        samples=200,
+        domain=0:1.25
+    ]
+    % Parameters
+    \pgfmathsetmacro{\betaa}{0.5}
+    \pgfmathsetmacro{\r}{1}
+    \pgfmathsetmacro{\p}{1}
+
+    % revenue function
+    \addplot[red, thick, smooth] 
+        {x^(\betaa)};
+
+    % cost function
+    \addplot[blue, thick, smooth] 
+        {\r * x};
+
+\end{axis}
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\linewidth, height=6cm,
+        axis lines=middle,
+        xlabel={$k$}, ylabel={$\pi(k)$},
+        xlabel style={at={(axis description cs:1,0)},anchor=west},
+        ylabel style={at={(axis description cs:0,1)},anchor=south},
+        xmin=-0.1, xmax=1.25,
+        ymin=-0.15, ymax=0.35,
+        ytick=\empty, xtick=\empty,
+        samples=200,
+        domain=0:1.25
+    ]
+    % Parameters
+    \pgfmathsetmacro{\betaa}{0.5}
+    \pgfmathsetmacro{\r}{1}
+    \pgfmathsetmacro{\p}{1}
+
+    % profit function
+    \addplot[black, very thick, smooth] 
+        {x^(\betaa) - \r * x};
+
+    % Points
+    \pgfmathsetmacro{\x}{( (\betaa * \p) / \r)^(1/(1-\betaa))}
+    \pgfmathsetmacro{\y}{\x^(\betaa) - \r * \x}
+    \addplot[only marks, mark=*, red] coordinates {(\x,\y)};
+    \node[anchor=south, red] at (axis cs:\x,\y) {\scriptsize $\pi'(k) = 0$};
+    \pgfmathsetmacro{\slope}{\betaa * \x^(\betaa-1) - \r}
+    \pgfmathsetmacro{\c}{\y - \slope * \x}
+    \addplot[red, thick, domain=0.1:0.5] {\slope * x + \c};
+
+    \pgfmathsetmacro{\xx}{0.05}
+    \pgfmathsetmacro{\yy}{\xx^(\betaa) - \r * \xx}
+    \addplot[only marks, mark=*, blue] coordinates {(\xx,\yy)};
+    \node[anchor=north west, blue] at (axis cs:\xx,\yy) {\scriptsize $\pi'(k) > 0$};
+    \pgfmathsetmacro{\slopee}{\betaa * \xx^(\betaa-1) - \r}
+    \pgfmathsetmacro{\cc}{\yy - \slopee * \xx}
+    \addplot[blue, thick, domain=-0.05:0.1] {\slopee * x + \cc};
+
+    \pgfmathsetmacro{\xxx}{0.75}
+    \pgfmathsetmacro{\yyy}{\xxx^(\betaa) - \r * \xxx}
+    \addplot[only marks, mark=*, brown] coordinates {(\xxx,\yyy)};
+    \node[anchor=north east, brown] at (axis cs:\xxx,\yyy) {\scriptsize $\pi'(k) < 0$};
+    \pgfmathsetmacro{\slopeee}{\betaa * \xxx^(\betaa-1) - \r}
+    \pgfmathsetmacro{\ccc}{\yyy - \slopeee * \xxx}
+    \addplot[brown, thick, domain=0.55:0.95] {\slopeee * x + \ccc};
+    \end{axis}
+\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+We plot that difference on the right-hand side chart. We see that the profit function $\pi(k)$ is a concave (belly shaped, bends downward) function. From the picture, three things stand out. First, if $\pi'(k) >0$ at the firm's choice of $k$, they can increase their profits by contracting \textit{more} capital and \textit{increasing total production}. This is represented by the blue point in the chart above. Second, if $\pi'(k) <0$ at the firm's choice of $k$, they can increase their profits by contracting \textit{less} capital and \textit{decreasing total production}. This is represented by the brown point in the chart above. Finally, if $\pi'(k) =0$ at the firm's choice of $k$, they cannot increase their profits by changing their use of capital or production and have attained maximum profits. This is represented by the red point in the chart above.
 
 
 

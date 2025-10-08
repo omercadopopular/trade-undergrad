@@ -110,12 +110,10 @@ The left side of equation \eqref{eq: mpl-prices} is the slope of the production 
         axis lines=middle,
         xmin=-1.25, xmax=1.25,
         ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of manufactures / Labor in manufactures},
+    %    xlabel={\small Output of cloth / Labor in cloth},
     %    ylabel={\small Output of food / Labor in food},
         xtick=\empty,
         ytick=\empty,
-        width=12cm,
-        height=12cm,
         axis line style={<->},
         clip=false,
         enlargelimits=false,
@@ -129,18 +127,18 @@ The left side of equation \eqref{eq: mpl-prices} is the slope of the production 
     
     % NW: Production function for food (plot in 2nd quadrant)
     \addplot[black, thick] ({-x}, {x^(\a)});
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
     
     % SW: Labor allocation AA curve (line in 3rd quadrant)
     \addplot[brown, thick] ({-x}, {-1 + x});
     %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
     
-    % SE: Production function for manufactures (4th quadrant)
+    % SE: Production function for cloth (4th quadrant)
     \addplot[blue, thick] ({x^(\a)}, {-x});
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for manufactures};
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
     
     % NE: Production Possibility Frontier (PPF)
     \addplot[red, thick] ({x^(\a)}, {(1 - x)^(\a)});
@@ -149,7 +147,7 @@ The left side of equation \eqref{eq: mpl-prices} is the slope of the production 
     % point on AA
     \addplot+[mark=*,only marks,mark size=1.5pt,brown]
                   coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
     
     \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
 
@@ -173,23 +171,28 @@ The left side of equation \eqref{eq: mpl-prices} is the slope of the production 
                   coordinates { (0, {-(1-0.5)})}
                   node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
 
-        % Project to SE (manufactures PF)
+        % Project to SE (Cloth PF)
     \addplot[dashed, gray] coordinates {(0, {-0.5}) ({0.5^(\a)}, {-0.5})};
     \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
     \addplot+[mark=*, only marks, mark size=1.5pt, black]
             coordinates {({0.5^(\a)}, {-0.5})}
-            node[anchor=south west,font=\scriptsize] {$(L_{i,A}^*,Y_{i,A}^*)$};
+            node[anchor=south west,font=\scriptsize] {$(Y_{i,A}^*,L_{i,A}^*)$};
     
     \addplot+[mark=*,only marks,mark size=1.5pt,black]
                   coordinates { (0, {-(1-0.5)})}
                   node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({0.5^(\a)},0)}
+                  node[anchor=south west,font=\scriptsize] {$Y_{i,A}^*$};
+
 
     % Project to NE (PPF)
     \pgfmathsetmacro{\Qc}{0.5^(\a)}
     \pgfmathsetmacro{\Qf}{(1 - 0.5)^(\a)}
     \addplot+[mark=*, only marks, mark size=1.5pt]
             coordinates {(\Qc, \Qf)}
-            node[anchor=south west, font=\scriptsize, black]{$(Y_{i,M}^*,Y_{i,A}^*)$};     
+            node[anchor=south west, font=\scriptsize, black]{$Y_{i,A}^*,(Y_{i,M}^*)$};     
     \addplot[dashed, gray] coordinates {(\Qc, 0) (\Qc, \Qf)};
     \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
     \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
@@ -198,6 +201,7 @@ The left side of equation \eqref{eq: mpl-prices} is the slope of the production 
     \end{axis}
     
     \end{tikzpicture}
+    
     \caption{Allocation in this economy. \textcolor{brown}{Southwest: labor endowment constraint, the maximum allocation choices of labor $\bar{L}_i = L_{i,A} + L_{i,M}$}; \textcolor{blue}{Southeast: production function for agriculture as a function of labor input $Y_{i,A} = Z_{i,A} T_{i}^{\beta_i} L_{i,A}^{1-\beta_i}$}; \textcolor{black}{Northwest: production function for manufacturing as a function of labor input $Y_{i,M} = Z_{i,M} K_{i}^{\beta_i} L_{i,M}^{1-\beta_i}$}; \textcolor{red}{Northeast: production possibilities frontier $Y_{i} = Y_{i,A} + Y_{i,M}$.}}
     \label{fig:enter-label}
 \end{figure}

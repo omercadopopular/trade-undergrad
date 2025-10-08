@@ -229,8 +229,11 @@
 
 \begin{frame}{Last class}
 \begin{wideitemize}
-    \item Diminishing marginal returns to scale
-    \item 
+    \item When some of the factors are fixed, we have diminishing marginal returns to scale
+    \item<2-> Important, since over SR factors do not necessary adjust automatically
+    \item<3-> Saw that in GE, prices (wages, rents) adjust to marginal products 
+    \item<4-> So changes in policy $\imply$ changes in income
+    \item<5-> Corollary: changes induce distributional concerns
 \end{wideitemize}
 \end{frame}
 
@@ -242,10 +245,10 @@
             \item Industries differ in the factors of production they demand
         \end{itemize}
 
-    \item Labor is mobile across sectors, but other factors are immobile \\
+    \item<2-> Labor is mobile across sectors, but other factors are immobile \\
     Example: Land is highly utilized in agriculture and mining, and largely specific
 
-    \item Trade affects the income distribution within countries.\\
+    \item<3-> Trade affects the income distribution within countries.\\
     Gains from trade are unevenly distributed
     \end{wideitemize}    
 \end{frame}
@@ -255,18 +258,18 @@
     \begin{wideitemize}
         \item Number of factors of production: 3 (labor L, land T, capital K)
         
-    \item Mobility of factors of production: Labor is mobile across sectors \\
+    \item<2-> Mobility of factors of production: Labor is mobile across sectors \\
     capital and land are sector specific (immobile)
 
-    \item Number of sectors (goods): 2 
+    \item<3-> Number of sectors (goods): 2 
     \begin{itemize}
         \item Food output $Y_A$ uses $T$ and $L$
         \item Manufacturing output $Y_M$ uses $K$ and $L$
     \end{itemize}
 
-    \item Perfect competition; no trade costs
+    \item<4-> Perfect competition; no trade costs
 
-    \item Key force: Differences in sector specific endowments
+    \item<5-> Key force: Differences in sector specific endowments
     \end{wideitemize}    
 \end{frame}
 
@@ -351,6 +354,578 @@
         \end{eqnarray*}
 
 \end{wideitemize}    
+\end{frame}
+
+
+
+\begin{frame}{Marginal Products and Factor Prices}
+\begin{figure}
+    \centering
+        \begin{tikzpicture}
+        
+        \pgfmathsetmacro{\alpha}{0.5}    % preference for computers
+        \pgfmathsetmacro{\K}{1}    % labor endowment
+        \pgfmathsetmacro{\A}{1}    % labor endowment
+        
+        \centering
+        \begin{axis}[
+            ylabel={$\textcolor{red}{P \times MPL}$, $w$ },
+            xlabel={Used labor input: $L$},
+            ymin=0, ymax=1.5,
+            xmin=0, xmax=5,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+        \addplot[thick, red, domain=0:5] {(1-\alpha)*\A*\K^(\alpha)/x^(\alpha)};
+        
+        
+        \addplot[dashed, purple, ->] coordinates {(0.5  , {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)}) (0.5 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)} + 0.2)};
+        \addplot[mark=*, only marks, purple, mark size=1pt] coordinates {(0.5, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)})};
+        \node[anchor=south west, purple] at (axis cs:0.5 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)} + 0.25) {\scriptsize $P\times MPL > w^*$: hired too little};
+        
+        \pgfmathsetmacro{\Lb}{((1-\alpha)* \A / 0.5)^(1/\alpha) * \K}    % labor endowment
+        
+        \addplot[dashed, blue, ->] coordinates {(\Lb, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)}) (\Lb + 0.3, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)} + 0.2)};
+        \addplot[mark=*, only marks, blue, mark size=1pt] coordinates {(\Lb, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)})};
+        \node[anchor=south west, blue] at (axis cs:0.5 + 0.5, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)} + 0.2) {\scriptsize $P\times MPL = w^*$: hired just right};
+        
+        
+        \addplot[dashed, black, ->] coordinates {(4  , {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)}) (4 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)} + 0.1)};
+        \addplot[mark=*, only marks, black, mark size=1pt] coordinates {(4, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)})};
+        \node[black] at (axis cs:4 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)}+0.15) {\scriptsize $P\times MPL < w^*$: hired too much};
+        
+        
+        \addplot[thick, dashed, domain=0:5] {0.5};
+        
+        \end{axis}
+        
+        \end{tikzpicture}
+        \caption{Labor market equilibrium: intuition}
+    \label{fig: mpl}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Supply of Factors of Production}
+\begin{wideitemize}
+        \item Total labor can be distributed for the production of either good, such that:
+
+        \begin{equation*}
+            \underbrace{L_{i,A}}_{\substack{\text{labor used in} \\ \text{production of } A}} + \underbrace{L_{i,M}}_{\substack{\text{labor used in} \\ \text{production of } M}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
+        \end{equation*}
+
+        \item Supply of land $T$ and capital is inelastic, so in equilibrium each sectors uses all endowment of specific factor:
+
+        \begin{equation*}
+            \underbrace{T_i}_{\substack{\text{land} \\ \text{demand}}} = \underbrace{\bar{T}_i}_{\substack{\text{land} \\ \text{supply}}}, \qquad              \underbrace{K_i}_{\substack{\text{capital} \\ \text{demand}}} = \underbrace{\bar{K}_i}_{\substack{\text{capital} \\ \text{supply}}} 
+        \end{equation*}
+\end{wideitemize}
+\end{frame}
+
+\section{The economy in one diagram}
+
+
+\begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
+\centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=-1.25, xmax=1.25,
+        ymin=-1.25, ymax=1.25,
+    %    xlabel={\small Output of cloth / Labor in cloth},
+    %    ylabel={\small Output of food / Labor in food},
+        xtick=\empty,
+        ytick=\empty,
+        axis line style={<->},
+        clip=false,
+        enlargelimits=false,
+        domain=0.0:1,
+        width=0.55\textwidth,
+        height=0.55\textwidth,
+        samples=200
+    ]
+    
+    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
+    
+    % NW: Production function for food (plot in 2nd quadrant)
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
+    
+    % SW: Labor allocation AA curve (line in 3rd quadrant)
+    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
+    
+    % SE: Production function for cloth (4th quadrant)
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
+        
+
+
+
+    
+    \end{axis}
+    
+    \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
+\centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=-1.25, xmax=1.25,
+        ymin=-1.25, ymax=1.25,
+    %    xlabel={\small Output of cloth / Labor in cloth},
+    %    ylabel={\small Output of food / Labor in food},
+        xtick=\empty,
+        ytick=\empty,
+        axis line style={<->},
+        clip=false,
+        enlargelimits=false,
+        domain=0.0:1,
+        width=0.55\textwidth,
+        height=0.55\textwidth,
+        samples=200
+    ]
+    
+    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
+    
+    % NW: Production function for food (plot in 2nd quadrant)
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
+    
+    % SW: Labor allocation AA curve (line in 3rd quadrant)
+    \addplot[brown, thick] ({-x}, {-1 + x});
+    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
+    
+    % SE: Production function for cloth (4th quadrant)
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
+        
+    % point on AA
+    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
+                  coordinates {({-0.5},{-1+0.5})}
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
+    
+    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
+
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({-0.5}, 0)}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
+
+    % Project to NW (Food PF)
+
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+
+    
+    \end{axis}
+    
+    \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
+\centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=-1.25, xmax=1.25,
+        ymin=-1.25, ymax=1.25,
+    %    xlabel={\small Output of cloth / Labor in cloth},
+    %    ylabel={\small Output of food / Labor in food},
+        xtick=\empty,
+        ytick=\empty,
+        axis line style={<->},
+        clip=false,
+        enlargelimits=false,
+        domain=0.0:1,
+        width=0.55\textwidth,
+        height=0.55\textwidth,
+        samples=200
+    ]
+    
+    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
+    
+    % NW: Production function for food (plot in 2nd quadrant)
+    \addplot[black, thick] ({-x}, {x^(\a)});
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
+    
+    % SW: Labor allocation AA curve (line in 3rd quadrant)
+    \addplot[brown, thick] ({-x}, {-1 + x});
+    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
+    
+    % SE: Production function for cloth (4th quadrant)
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
+        
+    % point on AA
+    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
+                  coordinates {({-0.5},{-1+0.5})}
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
+    
+    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
+
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({-0.5}, 0)}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {(0, {0.5^(\a)})}
+                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
+
+    % Project to NW (Food PF)
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
+    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
+    \addplot+[mark=*, only marks, mark size=1.5pt, black]
+            coordinates {({-0.5}, {0.5^(\a)})}
+            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
+
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+
+    
+    \end{axis}
+    
+    \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
+\centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=-1.25, xmax=1.25,
+        ymin=-1.25, ymax=1.25,
+    %    xlabel={\small Output of cloth / Labor in cloth},
+    %    ylabel={\small Output of food / Labor in food},
+        xtick=\empty,
+        ytick=\empty,
+        axis line style={<->},
+        clip=false,
+        enlargelimits=false,
+        domain=0.0:1,
+        width=0.55\textwidth,
+        height=0.55\textwidth,
+        samples=200
+    ]
+    
+    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
+    
+    % NW: Production function for food (plot in 2nd quadrant)
+    \addplot[black, thick] ({-x}, {x^(\a)});
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
+    
+    % SW: Labor allocation AA curve (line in 3rd quadrant)
+    \addplot[brown, thick] ({-x}, {-1 + x});
+    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
+    
+    % SE: Production function for cloth (4th quadrant)
+    \addplot[blue, thick] ({x^(\a)}, {-x});
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
+        
+    % point on AA
+    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
+                  coordinates {({-0.5},{-1+0.5})}
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
+    
+    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
+
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({-0.5}, 0)}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {(0, {0.5^(\a)})}
+                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
+
+    % Project to NW (Food PF)
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
+    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
+    \addplot+[mark=*, only marks, mark size=1.5pt, black]
+            coordinates {({-0.5}, {0.5^(\a)})}
+            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
+
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+        % Project to SE (Cloth PF)
+    \addplot[dashed, gray] coordinates {(0, {-0.5}) ({0.5^(\a)}, {-0.5})};
+    \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
+    \addplot+[mark=*, only marks, mark size=1.5pt, black]
+            coordinates {({0.5^(\a)}, {-0.5})}
+            node[anchor=south west,font=\scriptsize] {$(Y_{i,A}^*,L_{i,A}^*)$};
+    
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({0.5^(\a)},0)}
+                  node[anchor=south west,font=\scriptsize] {$Y_{i,A}^*$};
+
+
+    
+    \end{axis}
+    
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
+\centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xmin=-1.25, xmax=1.25,
+        ymin=-1.25, ymax=1.25,
+    %    xlabel={\small Output of cloth / Labor in cloth},
+    %    ylabel={\small Output of food / Labor in food},
+        xtick=\empty,
+        ytick=\empty,
+        axis line style={<->},
+        clip=false,
+        enlargelimits=false,
+        domain=0.0:1,
+        width=0.55\textwidth,
+        height=0.55\textwidth,
+        samples=200
+    ]
+    
+    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
+    
+    % NW: Production function for food (plot in 2nd quadrant)
+    \addplot[black, thick] ({-x}, {x^(\a)});
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
+    
+    % SW: Labor allocation AA curve (line in 3rd quadrant)
+    \addplot[brown, thick] ({-x}, {-1 + x});
+    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
+    
+    % SE: Production function for cloth (4th quadrant)
+    \addplot[blue, thick] ({x^(\a)}, {-x});
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
+    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
+    
+    % NE: Production Possibility Frontier (PPF)
+    \addplot[red, thick] ({x^(\a)}, {(1 - x)^(\a)});
+    %\node[anchor=south east, blue] at (axis cs:0.6,0.65) {\scriptsize $PP$};
+    
+    % point on AA
+    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
+                  coordinates {({-0.5},{-1+0.5})}
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
+    
+    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
+
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({-0.5}, 0)}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {(0, {0.5^(\a)})}
+                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
+
+    % Project to NW (Food PF)
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
+    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
+    \addplot+[mark=*, only marks, mark size=1.5pt, black]
+            coordinates {({-0.5}, {0.5^(\a)})}
+            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
+
+    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+        % Project to SE (Cloth PF)
+    \addplot[dashed, gray] coordinates {(0, {-0.5}) ({0.5^(\a)}, {-0.5})};
+    \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
+    \addplot+[mark=*, only marks, mark size=1.5pt, black]
+            coordinates {({0.5^(\a)}, {-0.5})}
+            node[anchor=south west,font=\scriptsize] {$(Y_{i,A}^*,L_{i,A}^*)$};
+    
+    \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates { (0, {-(1-0.5)})}
+                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
+
+        \addplot+[mark=*,only marks,mark size=1.5pt,black]
+                  coordinates {({0.5^(\a)},0)}
+                  node[anchor=south west,font=\scriptsize] {$Y_{i,A}^*$};
+
+
+    % Project to NE (PPF)
+    \pgfmathsetmacro{\Qc}{0.5^(\a)}
+    \pgfmathsetmacro{\Qf}{(1 - 0.5)^(\a)}
+    \addplot+[mark=*, only marks, mark size=1.5pt]
+            coordinates {(\Qc, \Qf)}
+            node[anchor=south west, font=\scriptsize, black]{$Y_{i,A}^*,(Y_{i,M}^*)$};     
+    \addplot[dashed, gray] coordinates {(\Qc, 0) (\Qc, \Qf)};
+    \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
+    \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
+
+    
+    \end{axis}
+    
+    \end{tikzpicture}
+\end{frame}
+
+
+
+\section{Demand}
+
+\begin{frame}{Demand}
+\begin{wideitemize}
+    \item Sources of income:
+    \begin{itemize}
+        \item<2-> supply their time for wage $w_i$, earn labor income $w_i L_i$;
+        \item<3-> rent land to agricultural producers and earn income $r_{i,A} T_{i}$;
+        \item<4-> rent capital to manufacturing producers and earn income $r_{i,M} K_{i}$.
+    \end{itemize}
+    \onslide<5->{
+    \begin{equation*}
+         I_i = w_i \bar{L}_i + r_{i,A} T_{i} + r_{i,M} K_{i}
+    \end{equation*}
+    }
+    \item<6-> Preferences over goods $Q_{i,A}, Q_{i,M}$, given prices $P_{A}, P_{M}$, maximizing:
+    
+    \begin{equation*}
+        \max_{\{Q_{i,A}, Q_{i,M}\}} U_i(Q_{i,A}, Q_{i,M}) \equiv Q_{i,A}^{\alpha_i} Q_{i,M}^{1-\alpha_i} \qquad s.t. \quad P_{A} Q_{i,A} + P_{M} Q_{i,M} = I_i
+    \end{equation*}
+    
+\end{wideitemize}
+    
+\end{frame}
+
+
+\begin{frame}{Demand}
+\begin{wideitemize}
+    \item Whats the solution for this maximization problem?
+    
+    \item<2-> Cobb-Douglas: demand = constant share of income; decreasing in price:
+    \begin{equation*}\label{eq: demand}
+    Q_{i,A} = \alpha_i  \frac{I_i}{P_{A}}, \qquad Q_{i,M} = (1-\alpha_i) \frac{I_i}{P_{M}}
+    \end{equation*}
+
+    \item<3-> We can also show that, at optimal choices, prices equal the marginal rate of subsitution?
+
+    \begin{equation}
+        -MRS_{i,AM} = \textcolor{gray}{-\frac{\partial U_i / \partial Q_{i,A} }{ \partial U_i / \partial Q_{i,M} } = -\frac{\alpha_i}{1-\alpha_i} \frac{Q_{i,M}}{Q_{i,A}}} = -\frac{P_A}{P_M}
+    \end{equation}
+
+    \item<4-> What is intuition here?
+    
+\end{wideitemize}
+    
+\end{frame}
+
+\section{Equilibrium choices}
+
+\begin{frame}{Demand Choices in Autarky}
+    \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\alpha}{0.5}    % preference for computers
+    \pgfmathsetmacro{\beta}{0.5}    % preference for computers
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\L}{1}
+
+    \pgfmathsetmacro{\P}{ \Za / \Zm * ((1-\alpha)/\alpha * \T / \K )^(\beta)  }
+    
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}
+    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{i,M}}, \textcolor{blue}{Y_{i,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{i,A}}, \textcolor{blue}{Y_{i,A}}$},
+        ymin=0, ymax=\L+.5,
+        xmin=0, xmax=\L+.5,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=9cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    %\addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \Ym + \P * \Ya }
+    \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
+    
+    % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.3:1.2, samples=100] {\A * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \addplot[dashed] coordinates {(\Ym,\Ya) (\Ym,\Ya-.2)};
+    \addplot[dashed] coordinates {(\Ym,\Ya-.2) (\Ym+\P*.2,\Ya-.2)};
+    \node at (axis cs:\Ym + .15,\Ya + 0.1) {\scriptsize $(Q_{i,M},Q_{i,A})$};
+    \node at (axis cs:\Ym+ .1,\Ya-.25) {\scriptsize $1$};
+    \node at (axis cs:\Ym- .05,\Ya-.1) {\scriptsize $\frac{P_M}{P_A}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+    
 \end{frame}
 
 
@@ -452,485 +1027,6 @@
     }
     \end{column}
 \end{columns}
-\end{frame}
-
-
-\begin{frame}{Marginal Products and Factor Prices}
-\begin{figure}
-    \centering
-        \begin{tikzpicture}
-        
-        \pgfmathsetmacro{\alpha}{0.5}    % preference for computers
-        \pgfmathsetmacro{\K}{1}    % labor endowment
-        \pgfmathsetmacro{\A}{1}    % labor endowment
-        
-        \centering
-        \begin{axis}[
-            ylabel={$\textcolor{red}{P \times MPL}$, $w$ },
-            xlabel={Used labor input: $L$},
-            ymin=0, ymax=1.5,
-            xmin=0, xmax=5,
-            yticklabel=\empty,
-            xticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=9cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-        \addplot[thick, red, domain=0:5] {(1-\alpha)*\A*\K^(\alpha)/x^(\alpha)};
-        
-        
-        \addplot[dashed, purple, ->] coordinates {(0.5  , {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)}) (0.5 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)} + 0.2)};
-        \addplot[mark=*, only marks, purple, mark size=1pt] coordinates {(0.5, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)})};
-        \node[anchor=south west, purple] at (axis cs:0.5 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/0.5^(\alpha)} + 0.25) {\scriptsize $P\times MPL > w^*$: hired too little};
-        
-        \pgfmathsetmacro{\Lb}{((1-\alpha)* \A / 0.5)^(1/\alpha) * \K}    % labor endowment
-        
-        \addplot[dashed, blue, ->] coordinates {(\Lb, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)}) (\Lb + 0.3, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)} + 0.2)};
-        \addplot[mark=*, only marks, blue, mark size=1pt] coordinates {(\Lb, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)})};
-        \node[anchor=south west, blue] at (axis cs:0.5 + 0.5, {(1-\alpha)*\A*\K^(\alpha)/\Lb^(\alpha)} + 0.2) {\scriptsize $P\times MPL = w^*$: hired just right};
-        
-        
-        \addplot[dashed, black, ->] coordinates {(4  , {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)}) (4 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)} + 0.1)};
-        \addplot[mark=*, only marks, black, mark size=1pt] coordinates {(4, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)})};
-        \node[black] at (axis cs:4 + 0.3, {(1-\alpha)*\A*\K^(\alpha)/4^(\alpha)}+0.15) {\scriptsize $P\times MPL < w^*$: hired too much};
-        
-        
-        \addplot[thick, dashed, domain=0:5] {0.5};
-        
-        \end{axis}
-        
-        \end{tikzpicture}
-        \caption{Labor market equilibrium: intuition}
-    \label{fig: mpl}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Supply of Factors of Production}
-\begin{wideitemize}
-        \item Total labor can be distributed for the production of either good, such that:
-
-        \begin{equation*}
-            \underbrace{L_{i,A}}_{\substack{\text{labor used in} \\ \text{production of } A}} + \underbrace{L_{i,M}}_{\substack{\text{labor used in} \\ \text{production of } M}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
-        \end{equation*}
-
-        \item Supply of land $T$ and capital is inelastic, so in equilibrium each sectors uses all endowment of specific factor:
-
-        \begin{equation*}
-            \underbrace{T_i}_{\substack{\text{land} \\ \text{demand}}} = \underbrace{\bar{T}_i}_{\substack{\text{land} \\ \text{supply}}}, \qquad              \underbrace{K_i}_{\substack{\text{capital} \\ \text{demand}}} = \underbrace{\bar{K}_i}_{\substack{\text{capital} \\ \text{supply}}} 
-        \end{equation*}
-\end{wideitemize}
-\end{frame}
-
-\section{The economy in one diagram}
-
-
-\begin{frame}{The economy in one diagram}
-\centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xmin=-1.25, xmax=1.25,
-        ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of cloth / Labor in cloth},
-    %    ylabel={\small Output of food / Labor in food},
-        xtick=\empty,
-        ytick=\empty,
-        axis line style={<->},
-        clip=false,
-        enlargelimits=false,
-        domain=0.0:1,
-        width=0.55\textwidth,
-        height=0.55\textwidth,
-        samples=200
-    ]
-    
-    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
-    
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-
-    % NW: Production function for food (plot in 2nd quadrant)
-    
-    % SW: Labor allocation AA curve (line in 3rd quadrant)
-    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
-          
-
-    
-    \end{axis}
-    
-    \end{tikzpicture}
-\end{frame}
-
-
-\begin{frame}{The economy in one diagram}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xmin=-1.25, xmax=1.25,
-        ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of cloth / Labor in cloth},
-    %    ylabel={\small Output of food / Labor in food},
-        xtick=\empty,
-        ytick=\empty,
-        axis line style={<->},
-        clip=false,
-        enlargelimits=false,
-        domain=0.0:1,
-        width=0.55\textwidth,
-        height=0.55\textwidth,
-        samples=200
-    ]
-    
-    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
-    
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-
-    % NW: Production function for food (plot in 2nd quadrant)
-    
-    % SW: Labor allocation AA curve (line in 3rd quadrant)
-    \addplot[brown, thick] ({-x}, {-1 + x});
-    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
-          
-    % point on AA
-    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
-                  coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
-    
-    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
-
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {({-0.5}, 0)}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
-
-    % Project to NW (Food PF)
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-
-    
-    \end{axis}
-    
-    \end{tikzpicture}
-\end{frame}
-
-\begin{frame}{The economy in one diagram}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xmin=-1.25, xmax=1.25,
-        ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of cloth / Labor in cloth},
-    %    ylabel={\small Output of food / Labor in food},
-        xtick=\empty,
-        ytick=\empty,
-        axis line style={<->},
-        clip=false,
-        enlargelimits=false,
-        domain=0.0:1,
-        width=0.55\textwidth,
-        height=0.55\textwidth,
-        samples=200
-    ]
-    
-    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
-    
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-
-    % NW: Production function for food (plot in 2nd quadrant)
-    \addplot[black, thick] ({-x}, {x^(\a)});
-    
-    % SW: Labor allocation AA curve (line in 3rd quadrant)
-    \addplot[brown, thick] ({-x}, {-1 + x});
-    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
-          
-    % point on AA
-    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
-                  coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
-    
-    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
-
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {({-0.5}, 0)}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
-
-        \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {(0, {0.5^(\a)})}
-                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
-
-    % Project to NW (Food PF)
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
-    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
-    \addplot+[mark=*, only marks, mark size=1.5pt, black]
-            coordinates {({-0.5}, {0.5^(\a)})}
-            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
-
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-
-    
-    \end{axis}
-    
-    \end{tikzpicture}
-\end{frame}
-
-\begin{frame}{The economy in one diagram}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xmin=-1.25, xmax=1.25,
-        ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of cloth / Labor in cloth},
-    %    ylabel={\small Output of food / Labor in food},
-        xtick=\empty,
-        ytick=\empty,
-        axis line style={<->},
-        clip=false,
-        enlargelimits=false,
-        domain=0.0:1,
-        width=0.55\textwidth,
-        height=0.55\textwidth,
-        samples=200
-    ]
-    
-    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
-    
-    % NW: Production function for food (plot in 2nd quadrant)
-    \addplot[black, thick] ({-x}, {x^(\a)});
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
-    
-    % SW: Labor allocation AA curve (line in 3rd quadrant)
-    \addplot[brown, thick] ({-x}, {-1 + x});
-    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
-    
-    % SE: Production function for cloth (4th quadrant)
-    \addplot[blue, thick] ({x^(\a)}, {-x});
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
-       
-    % point on AA
-    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
-                  coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
-    
-    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
-
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {({-0.5}, 0)}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
-
-        \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {(0, {0.5^(\a)})}
-                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
-
-    % Project to NW (Food PF)
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
-    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
-    \addplot+[mark=*, only marks, mark size=1.5pt, black]
-            coordinates {({-0.5}, {0.5^(\a)})}
-            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
-
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-        % Project to SE (Cloth PF)
-    \addplot[dashed, gray] coordinates {(0, {-0.5}) ({0.5^(\a)}, {-0.5})};
-    \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
-    \addplot+[mark=*, only marks, mark size=1.5pt, black]
-            coordinates {({0.5^(\a)}, {-0.5})}
-            node[anchor=south west,font=\scriptsize] {$(L_{i,A}^*,Y_{i,A}^*)$};
-    
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-        coordinates {({0.5^(\a)},0)}
-        node[anchor=south west,font=\scriptsize] {$Y_{i,A}^*$};
-
-    
-    \end{axis}
-    
-    \end{tikzpicture}
-\end{frame}
-
-\begin{frame}{The economy in one diagram}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines=middle,
-        xmin=-1.25, xmax=1.25,
-        ymin=-1.25, ymax=1.25,
-    %    xlabel={\small Output of cloth / Labor in cloth},
-    %    ylabel={\small Output of food / Labor in food},
-        xtick=\empty,
-        ytick=\empty,
-        axis line style={<->},
-        clip=false,
-        enlargelimits=false,
-        domain=0.0:1,
-        width=0.55\textwidth,
-        height=0.55\textwidth,
-        samples=200
-    ]
-    
-    \pgfmathsetmacro{\a}{0.5}       % curvature parameter
-    
-    % NW: Production function for food (plot in 2nd quadrant)
-    \addplot[black, thick] ({-x}, {x^(\a)});
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
-    
-    % SW: Labor allocation AA curve (line in 3rd quadrant)
-    \addplot[brown, thick] ({-x}, {-1 + x});
-    %\node[anchor=north east] at (axis cs:-0.95,-0.05) {\scriptsize Economy's allocation of labor (AA)};
-    
-    % SE: Production function for cloth (4th quadrant)
-    \addplot[blue, thick] ({x^(\a)}, {-x});
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
-    %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
-    
-    % NE: Production Possibility Frontier (PPF)
-    \addplot[red, thick] ({x^(\a)}, {(1 - x)^(\a)});
-    %\node[anchor=south east, blue] at (axis cs:0.6,0.65) {\scriptsize $PP$};
-    
-    % point on AA
-    \addplot+[mark=*,only marks,mark size=1.5pt,brown]
-                  coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
-    
-    \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
-
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {({-0.5}, 0)}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,M}^*$};
-
-        \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {(0, {0.5^(\a)})}
-                  node[anchor=south east,font=\scriptsize] {$Y_{i,M}^*$};
-
-    % Project to NW (Food PF)
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {0.5^(\a)})};
-    \addplot[dashed, gray] coordinates {(0, {0.5^(\a)}) ({-0.5},{0.5^(\a)})};
-    \addplot+[mark=*, only marks, mark size=1.5pt, black]
-            coordinates {({-0.5}, {0.5^(\a)})}
-            node[anchor=north east, font=\scriptsize]{$(L_{i,M}^*,Y_{i,M}^*)$};     
-
-    \addplot[dashed, gray] coordinates {({-0.5}, 0) ({-0.5}, {-(1-0.5)})};
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-        % Project to SE (Cloth PF)
-    \addplot[dashed, gray] coordinates {(0, {-0.5}) ({0.5^(\a)}, {-0.5})};
-    \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
-    \addplot+[mark=*, only marks, mark size=1.5pt, black]
-            coordinates {({0.5^(\a)}, {-0.5})}
-            node[anchor=south west,font=\scriptsize] {$(L_{i,A}^*,Y_{i,A}^*)$};
-    
-    \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates { (0, {-(1-0.5)})}
-                  node[anchor=north east,font=\scriptsize] {$L_{i,A}^*$};
-
-        \addplot+[mark=*,only marks,mark size=1.5pt,black]
-                  coordinates {({0.5^(\a)},0)}
-                  node[anchor=south west,font=\scriptsize] {$Y_{i,A}^*$};
-
-
-    % Project to NE (PPF)
-    \pgfmathsetmacro{\Qc}{0.5^(\a)}
-    \pgfmathsetmacro{\Qf}{(1 - 0.5)^(\a)}
-    \addplot+[mark=*, only marks, mark size=1.5pt]
-            coordinates {(\Qc, \Qf)}
-            node[anchor=south west, font=\scriptsize, black]{$(Y_{i,M}^*,Y_{i,A}^*)$};     
-    \addplot[dashed, gray] coordinates {(\Qc, 0) (\Qc, \Qf)};
-    \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
-    \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
-
-    
-    \end{axis}
-    
-    \end{tikzpicture}
-\end{frame}
-
-
-
-\section{Demand}
-
-\begin{frame}{Demand}
-\begin{wideitemize}
-    \item Sources of income:
-    \begin{itemize}
-        \item<2-> supply their time for wage $w_i$, earn labor income $w_i L_i$;
-        \item<3-> rent land to agricultural producers and earn income $r_{i,A} T_{i}$;
-        \item<4-> rent capital to manufacturing producers and earn income $r_{i,M} K_{i}$.
-    \end{itemize}
-    \onslide<5->{
-    \begin{equation*}
-         I_i = w_i \bar{L}_i + r_{i,A} T_{i} + r_{i,M} K_{i}
-    \end{equation*}
-    }
-    \item<6-> Preferences over goods $Q_{i,A}, Q_{i,M}$, given prices $P_{A}, P_{M}$, maximizing:
-    
-    \begin{equation*}
-        \max_{\{Q_{i,A}, Q_{i,M}\}} U_i(Q_{i,A}, Q_{i,M}) \equiv Q_{i,A}^{\alpha_i} Q_{i,M}^{1-\alpha_i} \qquad s.t. \quad P_{A} Q_{i,A} + P_{M} Q_{i,M} = I_i
-    \end{equation*}
-    
-\end{wideitemize}
-    
-\end{frame}
-
-
-\begin{frame}{Demand}
-\begin{wideitemize}
-    \item Whats the solution for this maximization problem?
-    
-    \item<2-> Cobb-Douglas: demand = constant share of income; decreasing in price:
-    \begin{equation*}\label{eq: demand}
-    Q_{i,A} = \alpha_i  \frac{I_i}{P_{A}}, \qquad Q_{i,M} = (1-\alpha_i) \frac{I_i}{P_{M}}
-    \end{equation*}
-
-    \item<3-> We can also show that, at optimal choices, prices equal the marginal rate of subsitution?
-
-    \begin{equation}
-        -MRS_{i,AM} = -\frac{\partial U_i / \partial Q_{i,A} }{ \partial U_i / \partial Q_{i,M} } = -\frac{\alpha_i}{1-\alpha_i} \frac{Q_{i,M}}{Q_{i,A}} = -\frac{P_A}{P_M}
-    \end{equation}
-
-    \item<4-> What is intuition here?
-    
-\end{wideitemize}
-    
 \end{frame}
 
 
@@ -1041,6 +1137,9 @@
 \end{frame}
 
 
+
+
+
 \begin{frame}{Labor Market Equilibrium: Diagram}
 \addtocounter{framenumber}{-1}
 
@@ -1103,7 +1202,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     %\addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     %\addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
     %\node[black, P] at (axis cs:2.2+0.05,\ws) {\scriptsize $w_i^*$};
     
@@ -1180,7 +1279,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     %\addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     %\addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
     %\node[black, P] at (axis cs:2.2+0.05,\ws) {\scriptsize $w_i^*$};
     
@@ -1260,7 +1359,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     %\addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     %\addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    %\node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
     %\node[black, P] at (axis cs:2.2+0.05,\ws) {\scriptsize $w_i^*$};
     
@@ -1337,7 +1436,7 @@
     \addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     \node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
     \node[black, P] at (axis cs:2.2+0.05,\ws) {\scriptsize $w_i^*$};
     
@@ -1415,7 +1514,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
 
     % Fillings
@@ -1493,7 +1592,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
 
     % Fillings
@@ -1572,7 +1671,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
 
     % Fillings
@@ -1651,7 +1750,7 @@
     %\addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     %\node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
 
     % Fillings
@@ -1753,7 +1852,7 @@
     \addplot[dashed] coordinates {(0,\ws) (2.2,\ws)};
     \addplot[mark=*, black, mark size=1.5pt] coordinates {(\Ls,\ws)};
     \addplot[dashed] coordinates {(\Ls,0) (\Ls,\ws)};
-    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_F$};
+    \node[below] at (axis cs:\Ls,-0.02) {\small $L_M = \bar{L} - L_A$};
     \node[black, P] at (axis cs:-0.05,\ws) {\scriptsize $w_i^*$};
     \node[black, P] at (axis cs:2.2+0.05,\ws) {\scriptsize $w_i^*$};  
     \node[align=center, anchor=north, black!70] at (axis cs:1.1,0.35) {\small Workers' \text{      } income};
