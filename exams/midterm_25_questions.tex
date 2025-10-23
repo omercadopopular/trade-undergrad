@@ -1,0 +1,134 @@
+\documentclass[11pt,letterpaper]{exam}
+%\usepackage[Lhdr={},Rhdr={}]{plain}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[top=1.5in,
+  headsep=0pt, left=1.5in, right=1.5in% remove space between header and text body
+  ]{geometry}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\newcommand{\figpath}{figs/}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+% These are my colors -- there are many like them, but these ones are mine.
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\begin{document}
+
+\begin{center}
+{\large
+\textbf{Midterm Exam\\International Trade Theory and Policy\\Fall 2025}
+}
+\end{center}
+
+\section*{Part I: True or False (10 points)}
+
+\begin{questions}
+\question In the Ricardian model, countries can gain from trade even if one country is more productive in producing every good.
+
+\question When there are multiple active sectors that use labor in a country and labor is a freely mobile factor across sectors, each sector will pay a different wage.
+
+\question Let a production function be defined as $F(K) = K^{1/3}$. This production function has the property of constant returns to scale.
+
+\question In the Ricardian model, the opportunity cost of producing one good in terms of the other is constant.
+
+\question In the Specific Factors Model, the opportunity cost of producing one good in terms of the other is constant.
+
+%\question In the production model, the firm chooses prices to maximize profits.
+
+%\question The fact that scientific models have some unrealistic assumptions is necessarily a problem.
+
+\question In the Specific Factors Model, capital can be instantly moved between agriculture and manufacturing.
+
+\question Trade openness is associated with higher GDP per capita growth across countries.
+
+%\question Everybody gains from trade.
+
+\question In the Specific Factors Model, owners of the specific factor in the export sector gain from trade.
+
+\question Empirical evidence shows that most US workers benefited from trade integration with China.
+
+\question Empirical evidence shows that all US workers benefited from trade integration with China.
+\end{questions}
+
+\section*{Part II: Multi-Part Problems (90 points)}
+
+\begin{questions}
+
+\question[45]  Consider the Two-Country, Two-Good Ricardian model that we have studied in class. There are two countries $i \in \{ US,COL \}$ and two products $p \in \{R,C \}$ for roses and computers, respectively. 
+
+In each country, there is a representative household with preferences over the consumption of each good $Q_{i,p}$ denoted by a utility function $U_{i}(Q_{i,R} , Q_{i,C})$, taking goods prices $P_{p}$ as given. They supply labor $L_i$ inelastically for wage $w_i$. Suppose that consumer preferences are Cobb-Douglas with weight $0 < \alpha_i < 1$ on roses. 
+
+Markets for each product in each country are competitive and firms maximize profits by choosing optimal production $Y_{i,p}$ levels, taking goods $P_{p}$, unit labor requirements $a_{i,p}$ and factor prices $w_i$ as given.  
+
+Total labor allocation in this economy satisfies $L_i = a_{i,R} Y_{i,R} + a_{i,C} Y_{i,C}$.
+
+\begin{parts}
+\part[5]  Focus on the United States ($i= US$). State the demand functions for each good as a function of parameters $\{\alpha_{US}, 1-\alpha_{US}\}$, income $w_{US}L_{US}$ and prices $\{P_R,P_C\}$ (you do not have to solve for it, just state them); are these functions increasing or decreasing in prices? — explain the intuition. 
+
+\part[5] Write down the profit maximization problem for a firm in the US producing product $p$.
+
+\part[5] In competitive markets, there is no economic profit, so prices equal marginal cost. Derive this condition from the problem above.
+
+\part[5] Suppose $a_{i,C} = 2$ and $a_{i,R} = 4$. Calculate autarky relative prices in the US: $P_{R}/P_{C}$.
+
+\part[10] Suppose $L_{i} = 10$. Using the labor allocation constraint, draw the production possibilities frontier on the $(Y_{US,R}, Y_{US,C})$ space. (5 pts) Make sure to draw all the labels and edge points (where your PPF intersects with each of the axes) correctly; and (5 pts) explain the relation between the slope of the PPF and your result in the previous part.
+
+\part[5] Now imagine that, after opening up to trade, relative prices change to $P_R / P_C = 1$. Explain intuitively which good the U.S. exports and why.
+
+\part[10] Using the information above, draw a chart of US production and consumption after trade where you plot (i) the PPF; (ii) the world price line; (iii) a point $Y$ denoting production; (iv) and the indifference curve at some point along the world price line. 
+\end{parts}
+
+\question[45] Consider a world with 2 countries $i \in \{ H, F\}$ and two industries: agriculture $A$ and manufacturing $M$. In country $i$, there are $\bar{L}_i$ units of labor (worker-hours) available, which we call the labor endowment. There are also $\bar{T}_i$ hectares of land available as well as a fixed stock of capital denoted by $\bar{K}_i$. Think of ``Home'' as a relatively capital-rich economy and ``Foreign'' as more land-abundant.
+
+In country $i$, firms producing good $g \in \{ A,M\}$ have a Cobb-Douglas technology satisfying:
+\begin{equation*}
+ Y_{i,M} = Z_{i,M} \times K_{i}^{\beta_i} L_{i,M}^{1-\beta_i}, \qquad  Y_{i,A} = Z_{i,A} \times T_{i}^{\beta_i} L_{i,A}^{1-\beta_i}
+\end{equation*}
+
+\noindent where the parameters $\{ Z_{i,M}, Z_{i,A}\}$ denote the total factor productivity of each sector in country $i$. Land $T_i$ is a factor that is specific to the agricultural sector while capital $K_i$ is a factor that is specific to the manufacturing sector. Total labor used in each sector satisfies $\bar{L}_i = L_{i,M} + L_{i,A}$. Specific-factor market clearing satisfies $K_i = \bar{K}_i$ and $T_i = \bar{T}_i$.
+
+\begin{parts}
+    \part[10] The Marginal Product of Labor in each sector defined as $MPL_{i,g} \equiv \partial Y_{i,g}/\partial L_{i,g}$. Using the manufacturing sector as a reference above, show that $MPL$ is decreasing in labor.
+
+    \part[5] Draw the production possibilities frontier of this economy on the $(Y_{i,A},Y_{i,M})$ space. Is the opportunity cost of one good relative to the other constant? How does this relate to the question above? 
+
+    \part[10] In equilibrium  $P_M \times MPL_{i,M} = w_i = P_A \times MPL_{i,A}$. Assume that $Z_{i,M}=Z_{i,A}=1$, $\bar{K}_i = \bar{T}_i =1$, $P_{M}=P_{A}=1$, $L_i = 10$ and $\beta_i=1/2$. Calculate $L_{i,M}, L_{i,A}$ and $w_i$.
+
+    \part[10] Draw two overlapping charts relating $P_M \times MPL_{i,M}, w_i, P_A \times MPL_{i,A}$. Make sure to mark the labor market allocations for each sector and the equilibrium wage on the appropriate axes. Shade in the chart the areas that represent workers' income, capital owners' income, and landowners' income.
+
+    \part[10] Suppose agricultural prices rise after trade liberalization — perhaps due to booming global demand for food exports. Assume $P_M$ stays fixed. Draw a chart showing the change in the equilibrium. Do capital owners gain or lose? Do landowners gain or lose?
+\end{parts}
+
+\end{questions}
+
+
+\subsection*{Quick Reference: Derivative Rules You May Need} (Because who remembers the quotient rule perfectly under pressure?)
+
+\begin{align*}
+\frac{d}{dx} c &= 0, & \frac{d}{dx} x &= 1, \\
+\frac{d}{dx} x^n &= n x^{n-1}, & \frac{d}{dx} e^x &= e^x, \\
+\frac{d}{dx} \ln(x) &= \frac{1}{x}, & \frac{d}{dx}[f(x)+g(x)] &= f'(x) + g'(x), \\
+\frac{d}{dx}[cf(x)] &= c f'(x), & \frac{d}{dx}[fg] &= f'(x)g(x) + f(x)g'(x), \\
+\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}, & 
+\frac{d}{dx} f(g(x)) &= f'(g(x)) \cdot g'(x).
+\end{align*}
+
+
+\end{document}
