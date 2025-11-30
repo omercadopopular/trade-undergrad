@@ -1,0 +1,107 @@
+\documentclass[11pt,letterpaper]{exam}
+
+\newtheorem{proposition}{Proposition}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{subfigure}
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[top=0.5in, headsep=0pt]{geometry}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\newcommand{\figpath}{figs/}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+\begin{document}
+\begin{center}
+\Large{\textsc{International Trade Theory and Policy}}\\[4pt]
+\Large{ECON 2181 \;--\; Fall 2025}\\[6pt]
+\large Carlos Góes, Ph.D. \\
+\textit{Professorial Lecturer}\\
+\href{mailto:c.bezerradegoes@gwu.edu}{c.bezerradegoes@gwu.edu} \\
+\end{center}
+
+\bigskip
+
+\begin{center}
+\Large{\textsc{Problem Set 2}}
+\end{center}
+
+
+\begin{questions}
+
+\question Consider a world with 2 countries $i \in \{ H, F\}$ and multiple goods indexed by $g \in [0,1]$. In country $i$, there are $L_i$ units of labor (worker-hours) available, which we call the labor endowment. An inherent technological characteristic of country $i$ are \textbf{unit labor requirements}, i.e. to produce one unit of good $g$ firms in country $i$ use $a_{i,g}$ units of labor. In country $i$, firms producing good $g$ maximize profits under perfect competition. Assume there are no shipping costs across countries.
+
+\begin{parts}
+\part Write down the profit maximization function of a firm producing good $g$ in country $i$. Assume firms take prices $P_g$ as given. Give an economic interpretation to each term in the function the firm maximizes.
+
+\part Recall that in perfect competition profits for each good are equal to zero. Given that information, express the price of good $P_g$ as a function of cost of production. Give an economic interpretation for the result.
+
+\part If good $g$ is produced at home, its cost of production is $w_H a_{H,g}$. If good $g$ is produced in the foreign country, its cost of production is $w_F a_{F,g}$. Using the relationship between prices and cost of production you derived above, explain where goods will be produced by comparing the cost of production in each country.
+
+\part In the simple Ricardian model, we conclude that country $F$ has a comparative advantage if $\frac{a_{F,g}}{a_{H,g}} \le  \frac{a_{F,g'}}{a_{H,g'}}$. Rewrite the inequality you derive above in terms of $\frac{a_{F,g}}{a_{H,g}}$.
+
+\part Let $A_g \equiv \frac{a_{F,g}}{a_{H,g}}$. Suppose we order goods $[0,1]$ according to their comparative advantage, such that $0$ is the good in which home is the most productive (in relative terms); $1$ is the good in which home is the least productive (in relative terms); and each good in between changes accordingly. Is $A_g$ a decreasing or an increasing function? Explain your reasoning and draw $A_g$ on the $y$-axis as a function of $g$ on the $x$-axis.
+
+\part Home spends share $G$ of its income on goods produced at home and share $1-G$ on goods produced abroad. By perfect competition, both countries spend a share $G$ of their income on goods produced at $H$. Since labor is the only factor of production, then:
+\[
+w_H L_H = G \times w_H L_H + G \times w_F L_F.
+\]
+Solve for $w_H/w_F$ as a function of $G$ and parameters.
+
+\part Draw this function as an increasing function of $G$. Draw in the chart which share of goods is produced at home, which share of goods is produced abroad, and what is the equilibrium relative wage.
+
+\part What happens if the foreign population increases to $L_F'>L_F$?
+
+\end{parts}
+
+\question Let $F(K,L)$ be a Cobb–Douglas production function and $0 < \beta < 1$.
+
+\begin{parts}
+    \part Write down the Cobb–Douglas production function.
+
+    \part Prove mathematically that the Cobb–Douglas production function is constant returns to scale and explain in words what that means.
+
+    \part Write down the firm's profit maximization problem in the production model for a firm whose technology is Cobb–Douglas. Specify choice variables and discuss the intuition.
+
+    \part Define the marginal product of labor (MPL) and, using the production function above, show that MPL is decreasing in labor.
+
+    \part Draw the chart of $Y$ as a function of $L$, holding $K$ fixed. Explain the shape of the chart and state the economic concept it illustrates.
+
+    \part Derive the optimality conditions for choices $K$ and $L$ in the maximization problem of the firm. Interpret economically what they mean.
+
+    \part Suppose that labor supply is $L^S = \bar{L} = 1$ and capital supply is $K^S = \bar{K} = 1$. Using (i) the optimality conditions, (ii) the production function, (iii) $P=1$, (iv) $\bar{Z}=1$, $\beta=1/2$, and (v) market clearing, solve for equilibrium $(w,r,Y)$.
+\end{parts}
+\end{questions}
+
+\end{document}

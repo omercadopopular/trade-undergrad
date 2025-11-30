@@ -219,1081 +219,2322 @@
 \addtocounter{framenumber}{-1}
 %----------------------------------------------------------------------%
 
-\section{Intro and recap}
-
-\begin{frame}{So far...}
+\begin{frame}{Plan}
 \begin{wideitemize}
-    \item ``Standard trade model'' (or neoclassical trade model)
-        \begin{itemize}
-            \item constant returns to scale + perfect competition
-            \item trade happens because countries are different
-        \end{itemize}
-    \item Intraindustry trade model (Krugman model)
+    \item \blue{Countries}: \textbf{home} and \textbf{foreign} \\
+    \qquad \textcolor{gray}{(we denote the foreign country variables with a star$^*$)}
+    \item<2-> Will not specify production technologies or preferences
+    \item<2-> \blue{Requirement}: supply curves slope upwards, demand curves slope downwards
+    \item<3-> Most of the models you have seen in this course fit that requirement 
+    \item<4-> We will start by describing how tariffs affect trade...
+    \item<5-> ...if we have time, we will cover other trade policy instruments
+\end{wideitemize}
+    
+\end{frame}
+
+\section{Building blocks}
+
+\begin{frame}{Import demand}
+\begin{wideitemize}
+    \item At the \blue{home} country, we can define supply and demand curves as a function of prices:
+    \item<2-> \blue{Home supply function} of a given good at prices $p$: $S(p)$
+    \item<2-> \blue{Home demand function} of a given good at prices $p$: $D(p)$
+    \item<3-> Assumptions:
     \begin{itemize}
-        \item Trade happens because people have preferences over \blue{differentiated goods}
-        \item Monopolistic competition
-        \item Substitution across goods
+        \item Supply slopes up $S'(p) > 0$
+        \item Demand slopes down $D'(p) < 0$
+    \end{itemize}
+    \item<4-> Define the \textcolor{green}{import demand} function:
+    \begin{itemize}
+        \item Import demand = home demand - home supply: $MD(p) = D(p) - S(p)$ 
     \end{itemize}
 \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Today: Diverse Frames and Trade}
-
-\begin{wideitemize}
-    \item In practice, nontraded varieties arise even within industries
-    \item Non-exporters and exporters coexist
-    \item  What explains their different trading behavior?
-    \item  Firms differ in innate individual characteristics. \\
- \qquad (e.g: consumer appeal, quality, productivity)
-    \item  Revisit monopolistic competition, with diversity in marginal costs
-\end{wideitemize}
     
 \end{frame}
 
-\begin{frame}{Exporter Premia in U.S. Manufacturing 2002}
-\begin{table}[htbp]
+\begin{frame}{Import demand: graphical representation}
+\begin{figure}
 \centering
-\label{tab:exporter-premia}
-\begin{tabular}{lccc}
-\toprule
-& \multicolumn{3}{c}{\textbf{Comparison}} \\
-\cmidrule(lr){2-4}
-& any industry & same industry & same industry \\
-&              &               & and given firm size \\
-\midrule
-Employment                 & 229\% & 164\% & 8\% \\
-Sales                      & 339\% & 194\% & 8\% \\
-Capital per worker         & 38\%  & 13\%  & 4\% \\
-Share non-production workers & 21\%  & 12\%  & 21\% \\
-Average wage               & 19\%  & 6\%   & 6\% \\
-Value-added per worker     & 30\%  & 12\%  & 11\% \\
-Total factor productivity  & 2\%   & 3\%   & 5\% \\
-\bottomrule
-\multicolumn{4}{p{0.85\linewidth}}{\footnotesize \textit{Source:} \href{https://www.aeaweb.org/articles?id=10.1257/jep.21.3.105}{Bernard, Jensen, Redding \& Schott (2007)}.}\\
-\multicolumn{4}{p{0.85\linewidth}}{\footnotesize \textit{Note:} Results from OLS regressions of the log firm characteristic on an indicator variable for firm’s export status and controls (industry fixed effect and log employment).}
-\end{tabular}
-\end{table}
-    
+\begin{tikzpicture}[scale=0.5]
+
+%---------------------------------------
+% Home demand and supply & MD
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % D(P)
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % S(P)
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD(P)=D-S
+
+%---------------------------------------
+% Prices
+%---------------------------------------
+\def\Pmin{1}
+\def\Pmax{11}
+\def\PA{10}  % autarky price (Home)
+\def\Pone{4}
+\def\Ptwo{8}
+
+%---------------------------------------
+% Compute quantities at P^1 and P^2
+%---------------------------------------
+\pgfmathsetmacro{\QdOne}{10-0.6*\Pone}
+\pgfmathsetmacro{\QsOne}{0.4*\Pone}
+\pgfmathsetmacro{\MDOne}{\QdOne-\QsOne}
+
+\pgfmathsetmacro{\QdTwo}{10-0.6*\Ptwo}
+\pgfmathsetmacro{\QsTwo}{0.4*\Ptwo}
+\pgfmathsetmacro{\MDTwo}{\QdTwo-\QsTwo}
+
+% Autarky quantity
+\pgfmathsetmacro{\Qaut}{10-0.6*\PA} % = 4
+
+%---------------------------------------
+% LEFT PANEL: Domestic S and D
+%---------------------------------------
+\begin{scope}[xshift=0cm]
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+1) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Demand curve
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100] 
+        plot ({QdH(\x)},{\x});
+  \node[above left, blue] at ({QdH(\Pmax)},{\Pmax}) {$D$};
+
+  % Supply curve
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+  \node[above right, red] at ({QsH(\Pmax)},{\Pmax}) {$S$};
+
+  % Horizontal price lines
+  \foreach \p/\lab in {\PA/P_A,\Ptwo/P^2,\Pone/P^1}{
+    \draw[dashed] (0,\p) -- (12,\p);
+    \node[left] at (0,\p) {$\lab$};
+  }
+
+  % Autarky intersection
+  \fill (\Qaut,\PA) circle (2pt);
+
+  % ---- Points at P^1 ----
+  \draw[dashed] (\QdOne,\Pone) -- (\QdOne,0);
+  \draw[dashed] (\QsOne,\Pone) -- (\QsOne,0);
+  \node[below] at (\QdOne,0) {\footnotesize $D^1$};
+  \node[below] at (\QsOne,0) {\footnotesize $S^1$};
+
+  % ---- Points at P^2 ----
+  \draw[dashed] (\QdTwo,\Ptwo) -- (\QdTwo,0);
+  \draw[dashed] (\QsTwo,\Ptwo) -- (\QsTwo,0);
+  \node[below] at (\QdTwo,0) {\footnotesize $D^2$};
+  \node[below] at (\QsTwo,0) {\footnotesize $S^2$};
+
+\end{scope}
+
+%---------------------------------------
+% RIGHT PANEL: Import demand MD(P)
+%---------------------------------------
+\begin{scope}[xshift=14cm]
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+1) node[above] {$P$};
+  \draw[->] (0,0) -- (8,0) node[right] {$Q$};
+
+  % Import demand curve
+  \draw[thick, green!60!black, domain=\Pmin:\PA, samples=100]
+        plot ({MD(\x)},{\x});
+  \node[below right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+
+  % Autarky point A
+  \fill (0,\PA) circle (2pt) node[left] {$A$};
+
+  % Horizontal lines
+  \draw[dashed] (0,\Ptwo) -- (8,\Ptwo);
+  \draw[dashed] (0,\Pone) -- (8,\Pone);
+
+  % ---- Point at P^2 ----
+  \fill (\MDTwo,\Ptwo) circle (2pt) node[above right] {$2$};
+  \draw[dashed] (\MDTwo,\Ptwo) -- (\MDTwo,0);
+  \node[below] at (\MDTwo,0) {\footnotesize $D^2 - S^2$};
+
+  % ---- Point at P^1 ----
+  \fill (\MDOne,\Pone) circle (2pt) node[above right] {$1$};
+  \draw[dashed] (\MDOne,\Pone) -- (\MDOne,0);
+  \node[below] at (\MDOne,0) {\footnotesize $D^1 - S^1$};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Superior Exporter Performance}
 
+\begin{frame}{Export supply}
 \begin{wideitemize}
-    \item  Superior exporter performance: Is it learning from exporting?
-    \item Or is it the sorting of the highly competitive firms into export markets?
-    \item Evidence points to sorting of most competitive firms into exporting
-    \item Only highly competitive firms generate profits to cover fixed entry cost
-    \item Melitz (2003): Firm dynamics and trade openness
-    
+    \item At the \blue{foreign} country, we can define supply and demand curves as a function of prices:
+    \item<2-> \blue{Foreign supply function} of a given good at prices $p$: $S^*(p)$
+    \item<2-> \blue{Foreign demand function} of a given good at prices $p$: $D^*(p)$
+    \item<3-> Assumptions:
+    \begin{itemize}
+        \item Supply slopes up ${S^*}'(p) > 0$
+        \item Demand slopes down ${D^*}'(p) < 0$
+    \end{itemize}
+    \item<4-> Define the \textcolor{brown}{export supply} function:
+    \begin{itemize}
+        \item Export supply = foreign supply - foreign demand: $XS(p) = S^*(p) - D^*(p)$ 
+    \end{itemize}
 \end{wideitemize}
-
-\end{frame}
-
-
-\begin{frame}{Marc Melitz (1968–)}
-\begin{columns}
-    \begin{column}{0.65\textwidth}
-        \begin{wideitemize}
-            \item Born: 1968, United States
-            \item Professor at Harvard University; leading figure in modern trade theory
-            \item Introduced diverse firms into international trade
-            \item Research shows how only the most productive firms export and trade liberalization reallocates market shares
-            \item Fellow of the Econometric Society; influential in policy and academic debates on globalization
-            \item Future Nobel laureate
-            \item Nice and generous guy
-        \end{wideitemize}
-    \end{column}
-    
-    \begin{column}{0.35\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figs/melitz_marc030r.jpeg} 
-        \vspace{0.2cm}
-        \scriptsize\textit{Marc Melitz (source: Harvard University)}
-    \end{column}
-\end{columns}
-\end{frame}
-
-
-\section{The Melitz Model}
-
-\begin{frame}{The Melitz Model}
-\begin{wideitemize}
-            \item Builds on Krugman’s monopolistic competition framework
-            \item Adds \blue{diverse firms}
-            \item Firms will differ in their productivity and marginal cost
-            \item Key new mechanism:
-            \begin{itemize}
-                \item only productive enough firms enter the market
-                \item only most productive firms export
-            \end{itemize}
-            \item Trade liberalization leads to \blue{reallocation} of resources toward more productive firms
-\end{wideitemize}
-\end{frame}
-
-\begin{frame}{The Krugman Model}
-
-\begin{wideitemize}
-    \item Intra-industry Trade Model: trade in goods within the same industry
-    \item Trade because of \blue{differentiated goods}
-    \item Firms have a monopoly of the type of good $\varphi$ they produce
-    \item Upon entry, firms maximize operational profits (Stage 2).
-    \item  However, free entry erodes profits to zero in equilibrium (Stage 1)
-\end{wideitemize}
     
 \end{frame}
 
-\begin{frame}{The Melitz Model}
-    \begin{wideitemize}
-        \item \blue{Number} of factors of production: 1 (labor $\ell$, but can be generalized)\\
-        \qquad \textcolor{gray}{(no specific factors)}
-        
-    \item<2-> \blue{Mobility} of factors of production: yes
-    
-    \item<3-> Number of \blue{sectors}: one 
+\begin{frame}{Export supply: graphical representation}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.5]
 
-    \item<4-> Number of \blue{goods}: (countably) many   
+%---------------------------------------
+% Foreign demand and supply & XS
+%---------------------------------------
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % D^*(P)
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % S^*(P)
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{#1 - 2}}        % XS(P)=S*-D*
 
-    \item<5-> Number of countries: 2 ($H$ and $F$)
+%---------------------------------------
+% Prices
+%---------------------------------------
+\def\Pmin{2}
+\def\Pmax{10}
+\def\PA{2}   % foreign autarky price P_A^*
+\def\Pone{4}
+\def\Ptwo{8}
 
-    \item<6-> Imperfect competition, variable transport costs, fixed entry costs
+%---------------------------------------
+% Compute quantities
+%---------------------------------------
+\pgfmathsetmacro{\QdOne}{8-0.4*\Pone}
+\pgfmathsetmacro{\QsOne}{6+0.6*\Pone}
+\pgfmathsetmacro{\XSOne}{\QsOne-\QdOne}
 
-    \item<6-> \blue{Key force}: differences in technologies between firms
-    \end{wideitemize}    
+\pgfmathsetmacro{\QdTwo}{8-0.4*\Ptwo}
+\pgfmathsetmacro{\QsTwo}{6+0.6*\Ptwo}
+\pgfmathsetmacro{\XSTwo}{\QsTwo-\QdTwo}
+
+\pgfmathsetmacro{\Qaut}{8-0.4*\PA} % = 7.2
+
+%---------------------------------------
+% LEFT PANEL: Foreign S* and D*
+%---------------------------------------
+\begin{scope}[xshift=0cm]
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+1) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % D*
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdF(\x)},{\x});
+  \node[above left, blue] at ({QdF(\Pmax)},\Pmax) {$D^*$};
+
+  % S*
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsF(\x)},{\x});
+  \node[above right, red] at ({QsF(\Pmax)},\Pmax) {$S^*$};
+
+  % Horizontal price lines
+  \foreach \p/\lab in {\PA/P_A^*,\Pone/P^1,\Ptwo/P^2}{
+    \draw[dashed] (0,\p) -- (12,\p);
+    \node[left] at (0,\p) {$\lab$};
+  }
+
+  % Autarky
+  \fill (\Qaut,\PA) circle (2pt);
+
+  % P^1
+  \draw[dashed] (\QdOne,\Pone) -- (\QdOne,0);
+  \draw[dashed] (\QsOne,\Pone) -- (\QsOne,0);
+  \node[below] at (\QdOne,0) {\footnotesize $D^{*1}$};
+  \node[below] at (\QsOne,0) {\footnotesize $S^{*1}$};
+
+  % P^2
+  \draw[dashed] (\QdTwo,\Ptwo) -- (\QdTwo,0);
+  \draw[dashed] (\QsTwo,\Ptwo) -- (\QsTwo,0);
+  \node[below] at (\QdTwo,0) {\footnotesize $D^{*2}$};
+  \node[below] at (\QsTwo,0) {\footnotesize $S^{*2}$};
+
+\end{scope}
+
+%---------------------------------------
+% RIGHT PANEL: Export supply XS(P)
+%---------------------------------------
+\begin{scope}[xshift=14cm]
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+1) node[above] {$P$};
+  \draw[->] (0,0) -- (8,0) node[right] {$Q$};
+
+  % XS curve
+  \draw[very thick, red, domain=\PA:\Pmax, samples=100]
+        plot ({XS(\x)},{\x});
+  \node[above right, red] at ({XS(\Pmax)},\Pmax) {$XS$};
+
+  % Autarky point
+  \fill (0,\PA) circle (2pt) node[left] {$A$};
+
+  % Horizontals
+  \draw[dashed] (0,\Pone) -- (8,\Pone);
+  \draw[dashed] (0,\Ptwo) -- (8,\Ptwo);
+
+  % P^1
+  \fill (\XSOne,\Pone) circle (2pt) node[above] {$1$};
+  \draw[dashed] (\XSOne,\Pone) -- (\XSOne,0);
+  \node[below] at (\XSOne,0) {\footnotesize $S^{*1} - D^{*1}$};
+
+  % P^2
+  \fill (\XSTwo,\Ptwo) circle (2pt) node[above] {$2$};
+  \draw[dashed] (\XSTwo,\Ptwo) -- (\XSTwo,0);
+  \node[below] at (\XSTwo,0) {\footnotesize $S^{*2} - D^{*2}$};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+
 \end{frame}
 
-\section{Production}
-
-\begin{frame}{Production with firm heterogeneity}
-
+\begin{frame}{World equilibrium}
 \begin{wideitemize}
-    \item Producers of each good $\varphi$ have a monopoly over the production of their good
-    \item They also will have to pay a fixed cost $\bar{f}$ to set up shop (only if they enter the market)
-
-    \item To produce a given quantity $q_i(\varphi)$, labor used is:
-
+    \item To find the equilibrium point, we must use a market clearing condition \\
+    \qquad (which one?)
+    \item<2-> In \blue{equilibrium}:
+    \begin{eqnarray*}
+    \text{Home demand - Home supply} &=& \text{Foreign supply - Foreign demand} \\
+    \text{Home demand + Foreign demand} &=& \text{Home supply + Foreign supply} \\
+    \text{World demand} &=& \text{World supply} \\
+    \end{eqnarray*}
+    \item<3-> More formally, equilibrium prices $P_W$ are those that satisfy:
     \begin{equation*}
-         \ell = \bar{f} + a(\varphi)q_i(\varphi) \iff q_i(\varphi) = \frac{1}{a(\varphi)} (\ell - \bar{f})
+        XS(P_W) = MD(P_W)
     \end{equation*}
-
-    \item $a(\varphi)$: denotes how many workers are necessary to produce a single unit of good $\varphi$. \\
-    \qquad (\blue{unit labor requirements}, as we have seen in the Ricardian model) 
-
-    \item Assume that $a(\varphi)$ is \textbf{decreasing} in the order of the good $\varphi$. Specifically, we will assume:
-    \begin{equation*}
-        a(\varphi) = \frac{a^*}{\varphi}
-    \end{equation*}
-
-    \textcolor{gray}{(i.e., productivity of firm producing good $\varphi'>\varphi$ is higher)}
-
 \end{wideitemize}
     
 \end{frame}
 
 
-\begin{frame}{Cost functions}
+\begin{frame}{World equilibrium: graphical representation}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.5]
+
+% World MD and XS
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}  % MD(P)
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{#1 - 2}}   % XS(P)
+
+\def\PAH{10}  % Home autarky P_A
+\def\PAF{2}   % Foreign autarky P_A^*
+\def\Pmin{2}
+\def\Pmax{10}
+
+\pgfmathsetmacro{\Pw}{6}
+\pgfmathsetmacro{\Qw}{10-\Pw}  % =4
+
+% Axes
+\draw[->] (0,0) -- (0,\Pmax+1) node[above] {$P$};
+\draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+% MD curve
+\draw[very thick, green!60!black, domain=\PAF:\PAH, samples=100]
+    plot ({MD(\x)},{\x});
+\node[below right, green!60!black] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+
+% XS curve
+\draw[very thick, red, domain=\PAF:\PAH, samples=100]
+    plot ({XS(\x)},{\x});
+\node[above right, red] at ({XS(\Pmax)},{\Pmax}) {$XS$};
+
+% Autarky prices
+\fill (0,\PAH) circle (2pt) node[left] {$P_A$};
+\fill (0,\PAF) circle (2pt) node[left] {$P_A^*$};
+
+% Dashed lines
+\draw[dashed] (0,\Pw) -- (12,\Pw);
+\draw[dashed] (\Qw,0) -- (\Qw,\Pmax+1);
+
+\node[left]  at (0,\Pw) {$P_W$};
+\node[below] at (\Qw,0) {$Q_W$};
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{World Equilibrium: graphical representation (ii)}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.35]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{#1 - 2}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\Qt{3}
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+
+  \node[left] at (0,\Pw) {$P_W$};
+\end{scope}
+
+%====================================================
+% MIDDLE PANEL: World market (MD and XS)
+%====================================================
+\begin{scope}[xshift=14cm]
+  \node at (6,\Pmax+1) {\large World market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % MD and XS
+  \draw[very thick, green!60!black, domain=\Pmin:\Pmax, samples=100]
+      plot ({MD(\x)},{\x});
+  \node[right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+  \draw[very thick, orange, domain=\Pmin:\Pmax, samples=100]
+      plot ({XS(\x)},{\x});
+  \node[right, red] at ({XS(\Pmin)},{\Pmin}) {$XS$};
+
+  % Vertical line at Q_W
+  \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
+  \node[below right] at (\Qw,0) {$Q_W$};
+
+  % Horizontal lines for P_T, P_W, P_T^*
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+
+\end{scope}
+
+%====================================================
+% RIGHT PANEL: Foreign market
+%====================================================
+\begin{scope}[xshift=28cm]
+  \node at (6,\Pmax+1) {\large Foreign market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Foreign demand and supply
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdF(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsF(\x)},{\x});
+
+  \node[blue, left] at ({QdF(\Pmax)},\Pmax) {$D^*$};
+  \node[red, left]  at ({QsF(\Pmax)},\Pmax) {$S^*$};
+
+  % Prices P_W and P_T^*
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+
+  \node[left] at (0,\Pw) {$P_W$};
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Tariffs}
+\begin{wideitemize}
+    \item Tariffs are import taxes
+    \item<2-> Tariffs are wedges (gaps) between the source country and the destination country prices:
+    \begin{itemize}
+        \item \blue{Simple tariffs}: $P = P^* + t$, where $t$ is some dollar amount \\
+        \qquad (used, e.g., for imports of alcohol and tobacco; more common back in the day)
+        \item \blue{Ad valorem tariffs}: $P = P^*(1+\tau)$, where $\tau$ is some percentage \\
+        \qquad (used for most goods currently)
+    \end{itemize}
+    \item<3-> Who pays for the tariffs?
+    \begin{itemize}
+        \item<4-> In an \blue{accounting} sense, importing firms
+        \item<5-> In an \blue{economic} sense, it depends on supply and demand elasticity
+    \end{itemize}
+\end{wideitemize}
+    
+\end{frame}
+
+
+\begin{frame}{Effects of a Tariff in a small country}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{MDt}{1}{\pgfmathparse{8 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+%====================================================
+% MIDDLE PANEL: World market (MD and XS)
+%====================================================
+\begin{scope}[xshift=14cm]
+  \node at (6,\Pmax+1) {\large World market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % MD and XS
+  \draw[very thick, green!60, domain=\Pmin:\Pmax, samples=100]
+      plot ({MD(\x)},{\x});
+  \node[right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+  \draw[very thick, green!60!black, domain=\Pmin:\Pmax-2, samples=100]
+      plot ({MDt(\x)},{\x});
+  \node[below right, green!60!black] at ({MDt(\Pmin)},{\Pmin}) {$MD$ (tariff)};
+  \draw[very thick, orange] (0,\Pw) -- ({XS(\Pmax)},\Pw);
+  \node[right, red] at ({XS(\Pmax)},\Pw) {$XS$};
+
+  % New quantity with tariff Q_T
+  \draw[dashed] (\Qt,0) -- (\Qt,\Pmax+0.5);
+  \node[below] at (\Qt,0) {$Q_T$};
+
+
+
+  % Vertical line at Q_W
+  \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
+  \node[below] at (\Qw,0) {$Q_W$};
+
+  % Horizontal lines for P_T, P_W, P_T^*
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  % Tariff wedge t = P_T - P_T^*
+  \draw[<->] (-1,\PT) -- (-1,\Pw)
+      node[midway,left] {$t$};
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Effects of a Tariff in a small country: discussion}
+\begin{wideitemize}
+    \item In a small country, \blue{domestic import demand does not impact global markets}
+
+    \item<2-> World price $P_W$ not only taken as given, but \blue{unaffected by import demand}
+
+    \item<3-> \textcolor{brown}{Export supply curve (XS)} is infinitely elastic, meaning foreign producers :
+    \begin{itemize}
+        \item supply \textbf{any} volume of exports at the world price $P_W$, but...
+        \item ...supply \textbf{zero} exports at a price below $P_W$
+        \item ...supply \textbf{infinite} exports at a price above $P_W$ 
+    \end{itemize}
+    \item<4-> \blue{Intuition}: flexible production, constant costs, tiny price change $\rightarrow$ massive change in quantity supplied.
+    \item<5-> In that case, tariffs are fully passed through to domestic market: $P = P_W + t$
+    \item<6-> Reduces imports to $Q_T < Q_W$
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}             % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {\small PS};
+
+  % World price line P_W
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \node[left] at (0,\Pw) {$P_W$};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label TR
+  \node[black!70] at (4,6.5) {\small TR};
+
+  % ---- Tax Revenue ----
+  \fill[black!20, opacity=0.5]
+    ({QsH(\PT)},\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QsH(\PT)},\Pw)
+    -- cycle;
+
+    
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label TR
+  \node[black!70] at (4,6.5) {\small TR};
+
+  % ---- Tax Revenue ----
+  \fill[black!20, opacity=0.5]
+    ({QsH(\PT)},\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QsH(\PT)},\Pw)
+    -- cycle;
+
+  % Label DL
+  \node[green!70] at (7,6.5) {\small DL};
+
+  % ---- Tax Deadweight Loss ----
+  \fill[green!60, opacity=1]
+    ({QsH(\PT)},\PT)
+    -- ({QsH(\PT)},\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- cycle;
+
+   \fill[green!60, opacity=1]
+    ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- cycle;
+    
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Effects of a Tariff in a small country: conclusion}
+\begin{wideitemize}
+    \item In a small country, a tariff will:
+
+    \begin{enumerate}
+        \item decrease consumer surplus
+        \item increase producer surplus
+        \item raise tariffs revenues
+        \item create a deadweight loss
+    \end{enumerate}
+
+    \item<2-> decrease total welfare (1+2+3+4)
+
+\end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Unpacking the deadweigth loss: production}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+
+  % ---- Tax Deadweight Loss ----
+  \fill[green!60, opacity=1]
+    ({QsH(\PT)},\PT)
+    -- ({QsH(\PT)},\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- cycle;
+
+    
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
 
 \begin{itemize}
-    \item \blue{Total cost} for producing output up to level $q$ is:
-
-    \begin{equation*}
-        C(q,\varphi) = \underbrace{\bar{f}w_i}
-        _{\text{fixed cost}} + \underbrace{\frac{a^*w_i}{\varphi} \times q}_{\text{variable cost}}
-    \end{equation*}
-
-    \item<2-> \blue{Marginal costs} are still independent of level $q$ but depend on the good $\varphi$:
-
-    \begin{equation*}
-        MC(\varphi) = C'(q,\varphi) = \frac{a^* w_i}{\varphi}
-    \end{equation*}
-
-    \item<3-> \blue{Average costs} are decreasing in $q$:
-
-    \begin{equation*}
-        AC(q,\varphi) = \frac{C(q,\varphi)}{q} = \frac{\bar{f}w_i}{q} + \frac{a^*w_i}{\varphi}
-    \end{equation*}    
-
-    \item<4-> $\implies$ increasing returns to scale, potential profits, monopoly power
-
-    \item<5-> \blue{Intuition}: $\bar{f}$: ``cost of entering the market''
-    
-    \item<6-> New firm must pay the same up-front cost for product design, setting up a factory, etc.
-    
-    \item<7-> After that, producing an extra unit only costs labor at a constant marginal cost.
-
-    
+    \item The deadweight loss under the supply curve represents the domestic production distortion from the tariff
+    \item Each additional unit of output is produced at a marginal cost above its opportunity cost (the world price $P_W$)
 \end{itemize}
-    
+
 \end{frame}
 
-\begin{frame}{Average and marginal cost}
+\begin{frame}{Unpacking the deadweigth loss: consumption}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
 
-    \begin{figure}[htp]
-        \centering
-        \begin{tikzpicture}
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
 
-        \pgfmathsetmacro{\fbar}{1.5}
-        \pgfmathsetmacro{\a}{1}
-        \pgfmathsetmacro{\w}{1}
-        
-        \centering
-        \begin{axis}[
-            ylabel={\textcolor{red}{Average Cost}; Marginal Cost},
-            xlabel={Quantity produced: $q_i(\varphi)$},
-            ymin=0, ymax=5,
-            xmin=0, xmax=15,
-            yticklabel=\empty,
-            xticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=9cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        
-          \addplot[thick,red,  domain=0.5:15]
-            {\fbar/x + \a * \w};
-          \addplot[thick,black,  domain=0:15]
-            {\a * \w};
+\def\Pmin{2}
+\def\Pmax{10}
 
-            \node[anchor=east] at (axis cs: 0, \a * \w) {$\frac{a^* w_i}{\varphi}$};
-            
-        \end{axis}
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  
+
+  % ---- Tax Deadweight Loss ----
+
+   \fill[green!60, opacity=1]
+    ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- cycle;
     
-    \end{tikzpicture}
-            \caption{Average cost as a function of output}
-        \label{fig: ac}
-    \end{figure}    
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+\begin{itemize}
+    \item The deadweight loss under the demand curve represents the domestic consumption distortion from the tariff
+    \item The marginal benefit of the foregone units consumption are above their opportunity cost (the world price $P_W$)
+\end{itemize}
 \end{frame}
 
 
 
-\begin{frame}{Monopolist's maximization problem}
+\begin{frame}{Effects of a Tariff (in a large country)}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.35]
 
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{MDt}{1}{\pgfmathparse{8 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{#1 - 2}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\Qt{3}
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+%====================================================
+% MIDDLE PANEL: World market (MD and XS)
+%====================================================
+\begin{scope}[xshift=14cm]
+  \node at (6,\Pmax+1) {\large World market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % MD and XS
+  \draw[very thick, green!60, domain=\Pmin:\Pmax, samples=100]
+      plot ({MD(\x)},{\x});
+  \node[right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+  \draw[very thick, green!60!black, domain=\Pmin:\Pmax-2, samples=100]
+      plot ({MDt(\x)},{\x});
+  \node[below right, green!60!black] at ({MDt(\Pmin)},{\Pmin}) {$MD$ (tariff)};
+   \draw[very thick, orange, domain=\Pmin:\Pmax, samples=100]
+      plot ({XS(\x)},{\x});
+  \node[right, red] at ({XS(\Pmin)},{\Pmin}) {$XS$};
+
+  % New quantity with tariff Q_T
+  \draw[dashed] (\Qt,0) -- (\Qt,\Pmax+0.5);
+  \node[below left] at (\Qt,0) {$Q_T$};
+
+
+
+  % Vertical line at Q_W
+  \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
+  \node[below right] at (\Qw,0) {$Q_W$};
+
+  % Horizontal lines for P_T, P_W, P_T^*
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  % Tariff wedge t = P_T - P_T^*
+  \draw[<->] (-1,\PT) -- (-1,\PTstar)
+      node[midway,left] {$t$};
+\end{scope}
+
+%====================================================
+% RIGHT PANEL: Foreign market
+%====================================================
+\begin{scope}[xshift=28cm]
+  \node at (6,\Pmax+1) {\large Foreign market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Foreign demand and supply
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdF(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsF(\x)},{\x});
+
+  \node[right, blue] at ({QdF(\Pmax)},\Pmax) {$D^*$};
+  \node[left, red]  at ({QsF(\Pmax)},\Pmax) {$S^*$};
+
+  % Prices P_W and P_T^*
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Effects of a Tariff in a large country: discussion}
 \begin{wideitemize}
-    \item In competitive markets, producers take prices as given 
-    \item Monopolists incorporate into their problem the fact that their choice of prices changes demand
-    \item They take demand functions as given and pick price to maximize profits, maximizing:
+    \item In a large country, \blue{domestic import demand impacts global markets}
 
-    \begin{equation*}
-        \max_{p(\varphi)} \pi_i(\varphi) = (p(\varphi)-MC(\varphi))q(p(\varphi)) - w_i \bar{f}
-    \end{equation*}
+    \item<2-> World price $P_W$ not only typically taken as given (relax later), but \blue{affected by import demand}
 
-    \blue{Solution} (using chain rule):
+    \item<3-> \textcolor{brown}{Export supply curve (XS)} is upward sloping
 
-    \begin{equation*}
-        MR(\varphi) = p(\varphi) + \frac{q(p(\varphi))}{q'(p(\varphi))} = MC(\varphi)
-    \end{equation*}
+    \item<4-> Tariff decreases import prices to $P_T^*$ from the free trade equilibrium $P_W$ 
+    \begin{itemize}
+        \item we call this the terms of trade effect
+        \item potentially, the tariff increase could be larger than the deadweight loss
+        \item but consumers still lose (without redistribution)
+        \item and only holds if country is large for given product market
+    \end{itemize}
+    \item<5-> In that case, prices increase less than the value of the tariff: $P = P_T^* + t < P_W + t $
 
+    \item<6-> It will reduce imports to $Q_T< Q_W$
 \end{wideitemize}
-    
 \end{frame}
 
 
-\section{Demand}
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
 
-\begin{frame}{Demand}
-    \begin{wideitemize}
-        \item Consumers in country $i$ earn $w_iL_i$ and have preferences over many goods $\varphi \in \Phi_i$ 
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}             % XS
 
-        \begin{equation*}
-            \max_{\{q_i(\
-        \varphi)\}_{\
-        \varphi \in \Phi_i}} Q_i \equiv \left[ \sum_{\varphi \in \Phi_i } q_i(
-        \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } \qquad s.t. \qquad  P_i Q_i =\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \le I_i
-        \end{equation*}
+\def\Pmin{2}
+\def\Pmax{10}
 
-        \item Is this identical as the Krugman model?
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
 
-        \item Almost... Set of goods: $\varphi \in \Phi_i:=\{\varphi_{\min}, \varphi_{\min}+1, \varphi_{\min}+2, \cdots, \varphi_{\max}\}$.
-        
-        \item Numbering of the goods to not necessarily start at one.
-        
-        \item First good offered $\varphi_{\min}$, will be one of the outcomes of the equilibrium. 
-        
-        \item $\varphi_{\max}$ is exogenous -- the maximum possible number of goods in this economy.
-        
-        \item Total of $N^*=\varphi_{\max}-\varphi_{\min}+1$ goods in this economy. 
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
 
-    \end{wideitemize}    
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {\small PS};
+
+  % World price line P_W
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \node[left] at (0,\Pw) {$P_W$};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+
 \end{frame}
 
-\begin{frame}{Demand functions}
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-       After some algebra, we can solve for demand functions:            
-        \begin{equation*}
-            q_i(\varphi) = \underbrace{\left( \frac{p_i(\varphi)}{P_i} \right)^{-\sigma}}_{\text{relative price}} \times \underbrace{\frac{I_i}{P_i}}_{\text{real income}}
-            \end{equation*}
-        {\scriptsize \qquad \textcolor{gray}{(check handout for step by step derivation)}}
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
 
-       \begin{wideitemize}
-        \item<2-> \blue{Intuition}: demand is...
-        \begin{itemize}
-            \item ...decreasing in the relative price
-            \item ...increasing in real aggregate income
-        \end{itemize}        
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
 
-        \item<3-> What about $\sigma$?
-        \begin{itemize}
-            \item<4-> $\sigma$ small: large change in price, small drop in demand
-            \item<5-> $\sigma$ large: small change in price, large drop in demand
-        \end{itemize}
-        \end{wideitemize}
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
 
 
-    \end{column}
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1,4) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label TR
+
+  % ---- Tax Revenue ----
+  \fill[black!20, opacity=0.5]
+    ({QsH(\PT)},\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \fill[black!30, opacity=.75]
+    ({QsH(\PT)},\Pw)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \node[black!70] at (4.25,6.225) {\small old TR};
+  \node[black] at (4.25,5.225) {\small new TR};
     
-    \begin{column}{0.5\textwidth}
-    \onslide<6->{
-    \begin{figure}[htp]
+  % Label PS
+  \node[red!70!black] at (1,4) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {\small CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label TR
+
+  % ---- Tax Revenue ----
+  \fill[black!20, opacity=0.5]
+    ({QsH(\PT)},\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \fill[black!30, opacity=.75]
+    ({QsH(\PT)},\Pw)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \node[black!70] at (4.25,6.225) {\small old TR};
+  \node[black] at (4.25,5.225) {\small new TR};
+
+
+  % Label DL
+  \node[green!70] at (7,6.225) {\small DL};
+
+  % ---- Tax Deadweight Loss ----
+  \fill[green!60, opacity=1]
+    ({QsH(\PT)},\PT)
+    -- ({QsH(\PT)},\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- cycle;
+
+   \fill[green!60, opacity=1]
+    ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- cycle;
+    
+  % Label PS
+  \node[red!70!black] at (1,4) {\small PS};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+\end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Welfare effects of a Tariff in a large country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.575]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{7}
+\def\PTstar{5}
+\def\twedge{2}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\PT)
+    -- ({QsH(\PT)},\PT)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label TR
+
+  % ---- Tax Revenue ----
+  \fill[black!20, opacity=0.5]
+    ({QsH(\PT)},\PT)
+    -- ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \fill[black!30, opacity=.75]
+    ({QsH(\PT)},\Pw)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\PT)},\PTstar)
+    -- ({QsH(\PT)},\PTstar)
+    -- cycle;
+
+  \node[black!70] at (4.25,6.225) {\small 3};
+  \node[black] at (4.25,5.225) {\small 5};
+
+
+
+
+  % ---- Tax Deadweight Loss ----
+  \fill[green!60, opacity=1]
+    ({QsH(\PT)},\PT)
+    -- ({QsH(\PT)},\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- cycle;
+
+   \fill[green!60, opacity=1]
+    ({QdH(\PT)},\PT)
+    -- ({QdH(\PT)},\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- cycle;
+    
+  % Label PS
+  \node[red!70!black] at (1,6.225) {\small 1};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+  \node[left] at (0,\PTstar) {$P_T^*$};
+
+  % Label DL
+  \node[black!70] at (2.55,6.225) {\small 2};
+  \node[black!70] at (6,6.225) {\small 4};
+  
+  \end{scope}
+
+
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{New tariff revenue vs deadweight loss}
+\begin{wideitemize}
+
+    \item Tariff decreases import prices to $P_T^*$ from the free trade equilibrium $P_W$ 
+    \item<2-> This means that deadweight loss is smaller, since $P = P_T^* + t < P_W + t $
+    \item<3-> Whether the country is better off or worse off, it depends
+    \item<4-> ``Old'' tariff revenue used to be CS, so it is a wash
+    \item<5-> Tariff induces deadweight loss...
+    \item<5-> ...but it also has an additional tariff revenue due to terms of trade effect
+    \item<6-> So relevant question: is ``new'' tariff revenue larger/smaller than deadeweight loss?
+
+    \end{wideitemize}
+\end{frame}
+
+
+\begin{frame}{Optimal tariffs}
+\begin{itemize}
+
+    \item For a large country, what are the net changes in welfare induced by a tariff? 
+    \item Relative importance of the gain from the terms of trade improvement and the production/consumption distortions
+
+    \begin{figure}
         \centering
-        \begin{tikzpicture}
-        \pgfmathsetmacro{\sigmaa}{1.5}
-        \pgfmathsetmacro{\sigmab}{3}
-        \pgfmathsetmacro{\sigmac}{10000000}
-        \pgfmathsetmacro{\P}{0.25}
-        \pgfmathsetmacro{\I}{1}
-        
-        \centering
-        \begin{axis}[
-            ylabel={Price of good $\varphi$: $p_i(\varphi)$},
-            xlabel={Quantity demanded of good $\varphi$: $q_i(\varphi)$},
-            ymin=0, ymax=2,
-            xmin=0, xmax=2,
-            yticklabel=\empty,
-            xticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=7cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    
-        
-          \addplot[thick,red,  domain=0.2:2]
-            {\P * ((x*\P)/\I)^(-1/\sigmaa)};
-          \addplot[thick,blue, domain=0.1:2]
-            {\P * ((x*\P)/\I)^(-1/\sigmab)};
-          \addplot[thick,brown,domain=0.1:2]
-            {\P};  % σ → ∞  ⇒  horizontal line at p = P
-            
-        \end{axis}
-    
-    \end{tikzpicture}
-            \caption{Demand curve with different elasticities: \textcolor{red}{$\sigma=1.5$, \textcolor{blue}{$\sigma=3$}, \textcolor{brown}{$\sigma=\infty$}}}
-        \label{fig: ces-demand}
+        \includegraphics[width=0.45\linewidth]{figs/optimal-tariff.jpg}
     \end{figure}
-    
-        }
 
-            \end{column}
-\end{columns}
+    \item For small tariffs, the gain from the terms of trade improvement dominates, but not for larger tariffs $\implies$ there is an ‘optimal’ tariff level $t^*$
+    \item  The more the foreign export supply to a country is inelastic, the higher the optimal tariff $t^*$
+    \end{itemize}
 \end{frame}
-
-\section{Firm heterogeneity}
-
-\begin{frame}{Optimal prices}
-
-    \begin{wideitemize}
-            \item From above, we know:
-
-    \begin{equation*}
-        q(p) = \left( \frac{p}{P_i} \right)^{-\sigma} \times \frac{I_i}{P_i}, \qquad q'(p) = -\sigma \times \frac{1}{p} \times \left( \frac{p}{P_i} \right)^{-\sigma} \times \frac{I_i}{P_i}  = -\sigma \times \frac{1}{p} \times q(p) 
-    \end{equation*}
-
-    \item<2-> Hence: 
-
-    \begin{eqnarray*}
-        p(\varphi) + \frac{q(p(\varphi))}{q'(p(\varphi))} &=& MC(\varphi) \\
-        p(\varphi) - \frac{p(\varphi)}{\sigma} &=& MC(\varphi) \\
-p(\varphi) &=& \frac{\sigma}{\sigma -1}\times MC(\varphi) = \frac{\sigma}{\sigma -1}\times \frac{a^* w_i}{\varphi}
-    \end{eqnarray*}
-
-    \item<3-> \blue{Optimal price still = mark-up $\times$ marginal cost.}
-
-    \item<4-> But now marginal cost is firm-specific!
-
-    \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Firm size and productivity}
-
-    \begin{wideitemize}
-        \item When productivity and marginal costs are different across firms, they will be diverse
-
-        \item First, more productive firms will charge lower prices: \\
-        \qquad if $\varphi_{\min}>\varphi$, $p(\varphi_{\min})<p(\varphi)$
-
-        \begin{equation*}
-            p(\varphi) = \frac{\sigma}{\sigma -1}\times \frac{a^* w_i}{\varphi} \iff \frac{p(\varphi_{\min})}{p(\varphi)} = \frac{\varphi}{\varphi_{\min})} < 1
-        \end{equation*}
-
-    \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Prices}
-
-        \begin{figure}[htp]
-        \centering
-        \begin{tikzpicture}
-
-        
-        \centering
-        \begin{axis}[
-            ylabel={Price of good $\varphi$, $p_i(\varphi)$},
-            xlabel={Good type, $\varphi$},
-            ymin=0, ymax=10,
-            xmin=0, xmax=10,
-            xticklabel=\empty,
-            yticklabel=\empty,
-            axis lines=left,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            scaled x ticks=false,
-            width=9cm, height=7cm,
-            title style={font=\bfseries}
-        ]
-        
-        \pgfmathsetmacro{\sigmaa}{1.5}
-        \pgfmathsetmacro{\sigmab}{3}
-        \pgfmathsetmacro{\a}{1}
-        \pgfmathsetmacro{\w}{1}
-        
-          \addplot[thick,blue,  domain=0.5:6]
-            {\sigmaa/(\sigmaa-1)*(\a*\w/ x ) 
-            };            
-
-          \addplot[thick,red,  domain=0.25:10]
-            {\sigmab/(\sigmab-1)*(\a*\w/ x ) 
-            };            
-        \end{axis}
-    
-    \end{tikzpicture}
-            \caption{Prices as a function of the good type $\varphi$ and the elasticity of substitution \textcolor{blue}{$\sigma=1.5$}, \textcolor{red}{$\sigma=3$}}
-        \label{fig: ces-markup}
-    \end{figure}
-    
-\end{frame}
-
-\begin{frame}{Firm size and productivity}
-
-    \begin{wideitemize}
-        \item When productivity and marginal costs are different across firms, they will be diverse
-
-        \item Second, more productive firms will earn larger revenues: \\
-        \qquad if $\varphi_{\min}>\varphi$, $r_i(\varphi_{\min})>r_i(\varphi)$
-
-        \item In particular, since $\sigma > 1$:
-            \begin{eqnarray*}
-    \frac{r_i(\varphi_{\min})}{r_i(\varphi)} = \left( \frac{\varphi'}{\varphi} \right)^{\sigma-1} > 1 
-\end{eqnarray*}
-
-    \qquad \textcolor{gray}{(check handout to understand how we go to this result)}
-
-
-    \end{wideitemize}
-\end{frame}
-
-
-
-
-\begin{frame}{Revenues}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        xlabel={Output $q_i(\varphi)$, ln},
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        \addplot[fill=purple!30, draw=none] coordinates
-            {(0,0) (0,\ps) (\qs,\ps) (\qs,0)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m * \s};
-        
-
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        
-        \addplot[gray, dashed] coordinates {(\qs,0) (\qs,\ps) (0,\ps)};
-        \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\qs,\ps)};
-        \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\qs,1/\m * \s)};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-        \node[anchor = south west] at (axis cs: -.1,{1/(\m)-.2}) {\scriptsize \textcolor{purple}{Total}};
-        \node[anchor = north west] at (axis cs: -.1,{1/(\m)+.2}) {\scriptsize \textcolor{purple}{Revenue}};
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m * \s) {$\ln  MC(\varphi)$};
-        \node[anchor=east] at (axis cs: 0,\ps) {$\ln  p_i(\varphi)$};
-
-        \node[anchor=north] at (axis cs: \qs,0) {$\ln q(\varphi)$};
-
-    \end{axis}
-
-    \end{tikzpicture}
- \end{frame}
-
-
-\begin{frame}{Revenues}
-
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        xlabel={Output $q_i(\varphi_{\min})$, ln},
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue!30, draw=none] coordinates
-            {(0,0) (0,\p) (\q,\p) (\q,0)} -- cycle;
-        
-            
-        \addplot[black, thick, domain=0:5] {1/\m};
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        
-        \addplot[gray, dashed] coordinates {(\q,0) (\q,\p) (0,\p)};
-        \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,\p)};
-        \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m)};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-        \node[anchor = south west] at (axis cs: 0,{1/(\m)-.2}) {\scriptsize \textcolor{blue}{Total}};
-        \node[anchor = north west] at (axis cs: 0,{1/(\m)+.2}) {\scriptsize \textcolor{blue}{Revenue}};
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-        \node[anchor=east] at (axis cs: 0,\p) {$\ln  p_i(\varphi_{\min})$};
-
-        \node[anchor=north] at (axis cs: \q,0) {$\ln q(\varphi_{\min})$};
-
-    \end{axis}
-
-    \end{tikzpicture}
-
- \end{frame}
-
-\begin{frame}{Revenues}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        \addplot[fill=purple, draw=none, opacity=.25] coordinates
-            {(0,0) (0,\ps) (\qs,\ps) (\qs,0)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m * \s};
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,0) (0,\p) (\q,\p) (\q,0)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-
-        \node[anchor = south east] at (axis cs: \q,0) {\textcolor{blue}{$r_i(\varphi_{\min})$}};
-    
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)}) {\textcolor{purple}{$r_i(\varphi)$}};
-
-
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-        \node[anchor=north] at (axis cs: \q,0) {$\ln q(\varphi_{\min})$};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {$\ln  MC(\varphi)$};
-        \node[anchor=north] at (axis cs: \qs,0) {$\ln q(\varphi)$};
-    \end{axis}
-
-    \end{tikzpicture}
-
- \end{frame}
-
-\begin{frame}{Firm size and productivity}
-
-    \begin{wideitemize}
-        \item When productivity and marginal costs are different across firms, they will be diverse
-
-        \item Third, more productive firms will have higher profits: \\
-        \qquad if $\varphi_{\min}>\varphi$, $\pi_i(\varphi_{\min})>\pi_i(\varphi)$
-
-        \begin{eqnarray*}
-            \pi_i(\varphi) &=& \left(p(\varphi) - MC(\varphi) \right) q(\varphi) - w_i \bar{f}  \\
-            &=& p(\varphi)q(\varphi) - \frac{\sigma-1}{\sigma} p(\varphi) q(\varphi) - w_i \bar{f}  \\
-            &=& \frac{1}{\sigma} p(\varphi)q(\varphi) - w_i \bar{f}  \\
-            &=& \frac{1}{\sigma} r_i(\varphi) - w_i \bar{f} 
-        \end{eqnarray*}
-
-        \item So:        
-            \begin{equation*}
-                \pi_i(\varphi_{\min}) - \pi_i(\varphi) =  \frac{1}{\sigma} \left( r_i(\varphi_{\min}) - r_i(\varphi) \right) > 0
-            \end{equation*}
-    \end{wideitemize}
-\end{frame}
-
-\begin{frame}{Many potential firms}
-    
-\end{frame}
-
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        \addplot[fill=purple, draw=none, opacity=.25] coordinates
-            {(0,1/\m*\s) (0,\ps) (\qs,\ps) (\qs,1/\m*\s)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m * \s};
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-        \node[anchor = south west] at (axis cs: 0,{1/(\m)}) {\textcolor{blue}{$\pi_i(\varphi_{\min})$}};
-    
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)}) {\textcolor{purple}{$\pi_i(\varphi)$}};
-
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=west] at (axis cs: 3,\p) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=west] at (axis cs: 3,\p-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {$\ln  MC(\varphi)$};
-
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        \addplot[fill=purple, draw=none, opacity=.25] coordinates
-            {(0,1/\m*\s) (0,\ps) (\qs,\ps) (\qs,1/\m*\s)} -- cycle;
-        \addplot[black, think, domain=0:5] {1/\m * \s};
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, think, domain=0:5] {1/\m};
-
-        \node[anchor = south west] at (axis cs: 0,{1/(\m)}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-    
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)*1.05}) {\textcolor{purple}{$\pi_i(\varphi)$}};
-        \node[anchor = south west] at (axis cs: 0,{\s/(\m)*.95}) {\textcolor{purple}{$<\bar{f}w_i$}};
-
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m*\s) {$\ln  MC(\varphi)$};
-
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        
-        \addplot[gray, domain=0:5] {1/\m -.3};
-        \addplot[gray, domain=0:5] {1/\m -.6};
-        \addplot[gray, domain=0:5] {1/\m -.9};
-        \addplot[gray, domain=0:5] {1/\m -1.2};
-
-        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
-            (axis cs:5,1/\m) -- (axis cs:5,1/\m -1.2)
-            node[midway,right=6pt]{$MC < MC(\varphi_{\min})$};
-
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-        \node[anchor = north west] at (axis cs: 0,{\p}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-
-\begin{frame}{Monopolistic competition}
-\addtocounter{framenumber}{-1}
-\centering
-    \begin{tikzpicture}
-    \pgfmathsetmacro{\K}{7}
-    \pgfmathsetmacro{\sigmaa}{1.5}
-
-    \pgfmathsetmacro{\A}{7}
-    \pgfmathsetmacro{\b}{0.75}
-    \pgfmathsetmacro{\m}{0.35}
-    \pgfmathsetmacro{\s}{2.25}
-    \pgfmathsetmacro{\pmax}{\A/\b}          % choke price  (demand intercept)
-    \pgfmathsetmacro{\qc}{\A - \b/\m}       % competitive quantity (P = MC)
-        
-    
-    
-    \begin{axis}[
-        ymin=0, ymax=10,
-        xmin=0, xmax=5,
-        yticklabel=\empty,
-        xticklabel=\empty,
-        axis lines=left,
-        enlargelimits=false,
-        clip=false,
-        axis on top,
-        scaled x ticks=false,
-        width=7cm, height=7cm,
-        title style={font=\bfseries}
-    ]
-
-        
-        \pgfmathsetmacro{\qs}{((\A / \b - (1/ \m  * \s) ) / ( 2/\b))}
-        \pgfmathsetmacro{\ps}{ (\A / \b) - 1/\b * \qs }
-        % revenue
-        
-        \addplot[gray, domain=0:5] {1/\m +.3};
-        \addplot[gray, domain=0:5] {1/\m +.6};
-        \addplot[gray, domain=0:5] {1/\m +.9};
-        \addplot[gray, domain=0:5] {1/\m +1.2};
-
-        \draw[decorate,decoration={brace,amplitude=4pt},xshift=4pt,red!75]
-            (axis cs:5,1/\m +1.2) -- (axis cs:5,1/\m)
-            node[midway,right=6pt]{$MC > MC(\varphi_{\min})$};
-
-        
-        
-        \pgfmathsetmacro{\q}{((\A / \b - 1/ \m ) / ( 2/\b))}
-        \pgfmathsetmacro{\p}{ (\A / \b) - 1/\b * \q }
-        % revenue
-        \addplot[fill=blue, draw=none, opacity=.25] coordinates
-            {(0,1/\m) (0,\p) (\q,\p) (\q,1/\m)} -- cycle;
-        \addplot[black, thick, domain=0:5] {1/\m};
-
-        \node[anchor = north west] at (axis cs: 0,{\p}) {\textcolor{blue}{$\pi_i(\varphi_{\min})=\bar{f}w_i$}};
-
-            %demand, rev
-        \addplot[purple, thick, domain=0:5] {(\A / \b) - 1/\b * x};
-        \addplot[green, thick, domain=0:3] {(\A / \b) - 2/\b * x};
-            
-
-        %\pgfmathsetmacro{\f}{\p * \q - \q / \m}
-        %\addplot[blue, thick, domain=1:5] {1/\m + \f / x};
-
-        %\addplot[gray, dashed] coordinates {(\q,1/\m + \f / \q) (0,1/\m + \f / \q)};
-        %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\q,1/\m + \f / \q)};
-
-
-        %\node[anchor=south west] at (axis cs: 5,{1/\m+.43}) {\textcolor{blue}{Average Cost}};
-        \node[anchor=south west] at (axis cs: \qs,\ps) {\scriptsize \textcolor{purple}{Demand}};
-        \node[anchor=south west] at (axis cs: \qs,\ps-.5) {\scriptsize \textcolor{purple}{(slope $= - 1/\sigma$)}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)}) {\textcolor{green}{\scriptsize Marginal Revenue}};
-        \node[anchor=west] at (axis cs: 3,{1/(2*\m)-.5}) {\textcolor{green}{\scriptsize slope $= - 1/(1+\sigma)$}};
-
-        \node[anchor=east] at (axis cs: 0,1/ \m) {$\ln  MC(\varphi_{\min})$};
-
-    \end{axis}
-
-
-    \end{tikzpicture}
-
- \end{frame}
-
-
-
-%----------------------------------------------------------------------%
-%----------------------------------------------------------------------%
-
 
 \end{document}

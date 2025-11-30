@@ -164,7 +164,7 @@
   \end{frame}
 }
 
-\title[]{International Trade: Lecture XX}
+\title[]{International Trade: Lecture 15}
 \subtitle[]{Firms and Trade: The Krugman Model}
 \author[Góes]
 {Carlos Góes\inst{1}}
@@ -301,12 +301,12 @@
 \begin{frame}{Demand}
     \begin{wideitemize}
         \item Consumers in country $i$ earn $w_iL_i$ and have preferences over many goods $\varphi \in \Phi_i$ 
-        \item $\Phi_i := \{1,2,\cdots, N\}$ is the set of all goods available in the domestic economy
-        \item They want to consume all goods available, but want low prices
+        \item<2-> $\Phi_i := \{1,2,\cdots, N\}$ is the set of all goods available in the domestic economy
+        \item<3-> They want to consume all goods available, but want low prices
 
-        \item How do they decide how to substitute across goods depending on the price?
+        \item<4-> How do they decide how to substitute across goods depending on the price?
 
-        \item Elasticity of substitution:
+        \item<5-> Elasticity of substitution:
 
         \begin{equation*}
             \sigma_{ij} \equiv \frac{d \ln (q_i/q_j)}{d \ln (p_i/p_j)} = \frac{\text{\% change in relative quantity demanded}}{\text{\% change in relative price}}
@@ -315,17 +315,46 @@
     \end{wideitemize}    
 \end{frame}
 
+
+\begin{frame}{Demand}
+    \begin{wideitemize}
+        \item Before, we worked we Cobb-Douglas preferences:
+        \begin{equation*}
+            U_i(Q_C,Q_R) = Q_C^{\alpha} Q_R^{1-\alpha}, \qquad 0 < \alpha < 1
+        \end{equation*}
+
+        \item<2-> Cobb-Douglas is a special case in which the elasticity of substitution $\sigma_{CR} = 1$
+
+        \item<3-> What does that mean?
+        \begin{itemize}
+            \item Suppose relative price of computers increases $\uparrow$ by 1\% 
+            \item Then consumers shift relative quantities of computers purchased down $\downarrow$ by 1\% 
+            \item Quantities adjust inversely to prices at a one to one ratio 
+            \item Implication: expenditure shares are constant at $\frac{P_C Q_{i,C}}{I_i} = \alpha$ 
+        \end{itemize}
+
+        \item<4-> Is this realistic in many cases?
+
+        \item<5-> Can you substitute away from gasoline?
+        (yes, but difficult on the short run)
+
+        \item<6-> Much easier to substitute Lay's for Ruffles.
+
+    \end{wideitemize}    
+\end{frame}
+
+
 \begin{frame}{Demand under constant elasticity of substitution}
 
 \begin{wideitemize}
             \item Constant elasticity-of-substitution (CES) utility capture preferences in a flexible way.
 
-            \item Key parameter:  $\sigma > 1$ is the elasticity of substitution (same for every good)
+            \item<2-> Key parameter:  $\sigma > 1$ is the elasticity of substitution (same for every good)
             
-            \item Larger $\sigma$ is:
+            \item<3-> Larger $\sigma$ is:
             \begin{itemize}
                 \item high $\sigma$: more responsive to changes in prices (think different brands of bottled water) 
-                \item low $\sigma$: less responsive to changes in prices (think steak vs pork)
+                \item low $\sigma$: less responsive to changes in prices (think steak vs tofu)
             \end{itemize}
 
 
@@ -337,207 +366,26 @@
 
 \begin{wideitemize}
         \item Consumers maximize:
-        \begin{equation*}
-            \max_{\{q_i(\varphi)\}_{\
-        \varphi \in \Phi}} Q_i \equiv \left[ \sum_{\varphi \in \Phi } q_i(
-        \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } \qquad s.t. \qquad  P_i Q_i =\sum_{\varphi \in \Phi } p_i(\varphi) q_i(\varphi) \le I_i = w_i L_i 
-        \end{equation*}
-
+        \begin{eqnarray*}
+            &\max_{\{q_i(\varphi)\}_{\
+        \varphi \in \Phi}}& Q_i \equiv \left[ q_i(1)^{\tfrac{\sigma-1}{\sigma}} + \cdots +q_i(
+        N)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } \\
+        &s.t.& \qquad  P_i Q_i = p_i(1) q_i(1) + \cdots + p_i(N) q_i(N)\le I_i = w_i L_i 
+        \end{eqnarray*}
+        \textcolor{gray}{\scriptsize (don't get scared with the math, I want to you get the intuition)} \\
 \blue{Notation}:
         \begin{wideitemize}
             \item<2-> $q_i(\varphi)$: quantity demanded of good $\varphi$
-            \item $p_i(\varphi)$: price of good $\varphi$
-            \item<3-> Summation iterates over the elements of set $\Phi_i:=\{1, 2, \cdots, N\}$ \\
+            \item<2-> $p_i(\varphi)$: price of good $\varphi$
+            \item<3-> Sum over the elements of set $\Phi_i:=\{1, 2, \cdots, N\}$ \\
             \qquad e.g. $\sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) = p_i(1) q_i(1) + p_i(2) q_i(2) + \cdots + p_i(N) q_i(N)$
             \item<4-> $Q_i$: \textit{composite consumption basked} defined as an aggregate of all goods
             \item<5-> $P_i$: ``price'' of the composite consumption basket (implicitly defined)
-            \item<5-> Total expenditure across all goods = cost of the consumption basket \\
-            \qquad $P_i Q_i =\sum_{\varphi \in \Phi } p_i(\varphi) q_i(\varphi)$
+            \item<5-> Total expenditure across all goods = cost of the consumption basket  $P_i Q_i$
         \end{wideitemize}
         
 \end{wideitemize}
     
-\end{frame}
-
-
-\begin{frame}{Calculus crash course}
-
-\begin{wideitemize}
-    \item How do we solve this problem? 
-    \item<2-> Set up a Lagrangian and take first order conditions:
-
-    \begin{equation*}
-    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
-    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
-\end{equation*}
-
-    \item<3-> What is $\lambda$?
-
-    \item<4-> $\lambda$'s job is to keep track of how valuable the last dollar in the consumer’s pocket is.
-    
-    \item<5-> If you slip one more \$ into the consumer’s wallet, utility rises by $\lambda$:
-
-    \begin{equation*}
-        \frac{\partial \mathcal{L}}{\partial I_i} = \lambda
-    \end{equation*}
-
-    \qquad (we also call $\lambda$ the \blue{shadow price}) 
-    
-\end{wideitemize}
-    
-\end{frame}
-
-\begin{frame}{Calculus crash course}
-    \begin{equation*}
-    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
-    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
-    \end{equation*}
-
-\begin{wideitemize}
-    \item $N$ first order conditions, one for each $q_{i}(\varphi)$, satisfying:
-
-\begin{equation*}
-    \frac{\partial Q_i}{\partial q_{i}(\varphi)} - \lambda p_i(\varphi) =0 \iff \underbrace{\frac{\partial Q_i}{\partial q_{i}(\varphi)}}_{\substack{\text{marginal benefit} \\ \text{in utils}}} = \underbrace{\lambda p_i(\varphi)}_{\substack{\text{marginal cost} \\ \text{in utils}}} \qquad \text{for each } \varphi \in \Phi_i
-\end{equation*}
-
-    \item<2-> Maximizing utility makes clear the ``utils per extra dollar'' interpretation of $\lambda$.
-    
-    \item<3-> LHS: marginal utility from one more unit of good $\varphi$
-    
-    \item<4-> RHS: utility cost of the dollars needed to buy it ($\lambda$ utils per dollar $\times$ price). 
-    
-    \item<5-> Setting them equal forces every good to deliver the same utility per dollar spent.
-
-\end{wideitemize}
-    
-\end{frame}
-
-\begin{frame}{Tying it together with what you know...}
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{wideitemize}
-            \item Note:
-\begin{equation*}
-    \frac{\partial Q_i}{\partial q_{i}(\varphi)}  =  \lambda p_i(\varphi) \qquad \blue{\text{for each } \varphi \in \Phi_i}
-\end{equation*}
-
-\item<2-> Valid for each good in $\{1,2,\cdots,N\}$!
-
-\item<3-> Let's pick goods 1 and 2 \& take the ratio:
-
-\begin{equation*}
-    MRS = \frac{\partial Q_i / \partial q_{i}(1)}{\partial Q_i / \partial q_{i}(2)} =  \frac{p_i(1)}{p_i(2)}
-\end{equation*}
-
-which is just what we have been doing all along...
-
-        \end{wideitemize}
-
-
-    \end{column}
-    
-    \begin{column}{0.5\textwidth}
-    \onslide<4->{
-        \centering
-            \begin{tikzpicture}
-            \pgfmathsetmacro{\beta}{1/3}
-            \pgfmathsetmacro{\alpha}{0.5}
-        
-            \pgfmathsetmacro{\Zm}{1}
-            \pgfmathsetmacro{\K}{1}
-            
-            \pgfmathsetmacro{\Za}{1}
-            \pgfmathsetmacro{\T}{1}
-        
-            \pgfmathsetmacro{\Kf}{1}
-            \pgfmathsetmacro{\Tf}{15}
-        
-        
-            \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
-        
-        
-            \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
-            \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
-        
-            \pgfmathsetmacro{\L}{1}
-            \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
-            \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
-            \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
-            \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
-        
-            \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
-            \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
-            \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
-            \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
-            \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
-            \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
-            \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
-        
-        %    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
-            % Compute utility level
-            \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
-            \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
-            
-            % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
-            \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
-            \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-            \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
-            
-            \centering
-            \begin{axis}[
-                xlabel={Consumption of good $1$, $q_{i}(1)$},
-                ylabel={Consumption of good $2$, $q_{i}(2)$},
-                ymin=0, ymax=\L+.5,
-                xmin=0, xmax=\L+.5,
-                yticklabel=\empty,
-                xticklabel=\empty,
-                axis lines=left,
-                enlargelimits=false,
-                clip=false,
-                axis on top,
-                scaled x ticks=false,
-                width=7cm, height=7cm,
-                title style={font=\bfseries}
-            ]
-            
-            % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-            \pgfmathsetmacro{\c}{ \Ym + \P * \Ya }
-            \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
-        
-            \addplot[thick, red, domain=0.3:1.2, samples=100] {\A * x^(-\expo)};
-
-            
-            
-            % Labels
-            %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
-            %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
-            %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
-            
-            
-            % Equilibrium point
-            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
-
-            %\addplot[gray, dashed] coordinates {(0,\Ym) (\Ym,\Ya) (\Ya,0)};
-
-            \pgfmathsetmacro{\sx}{\Ym+.4}
-            \pgfmathsetmacro{\sy}{\c - \P*\sx};
-            \pgfmathsetmacro{\ssx}{\sx-.25};
-            \pgfmathsetmacro{\ssy}{\c - \P*\ssx};
-            
-            %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\sx,\sy)};
-            \addplot[gray, dashed] coordinates {(\sx,\sy) (\ssx,\sy) (\ssx,\ssy)};
-            \node[anchor=north] at (axis cs: {\ssx + (\sx-\ssx)/2},\sy) {$1$};
-            \node[anchor=east] at (axis cs: {\ssx},{\ssy - (\ssy - \sy)/2}) {$\frac{p_i(1)}{p_i(2)}$};
-            
-           
-            
-            \end{axis}
-            \end{tikzpicture}
-
-        }
-
-            \end{column}
-\end{columns}
 \end{frame}
 
 
@@ -624,9 +472,9 @@ which is just what we have been doing all along...
 
 \begin{wideitemize}
     \item Producers of each good $\varphi$ have a monopoly over the production of their good
-    \item They also will have to pay a fixed cost $\bar{f}$ to set up shop (only if they enter the market)
+    \item<@-> They also will have to pay a fixed cost $\bar{f}$ to set up shop (only if they enter the market)
 
-    \item To produce a given quantity $q_i(\varphi)$, labor used is:
+    \item<3-> To produce a given quantity $q_i(\varphi)$, labor used is:
 
     \begin{equation*}
          \ell = \bar{f} + a^*q_i(\varphi) \iff q_i(\varphi) = \frac{1}{a^*} (\ell - \bar{f})
@@ -635,7 +483,7 @@ which is just what we have been doing all along...
     \item $a^*$: denotes how many workers are necessary to produce a single unit of good $\varphi$. \\
     \qquad (\blue{unit labor requirements}, as we have seen in the Ricardian model) 
 
-    \item Only labor $\ell > \bar{f}$ contributes to extra production
+    \item<4-> Only labor $\ell > \bar{f}$ contributes to extra production
     \item \blue{What does this mean for economies of scale?}
 \end{wideitemize}
     
@@ -754,17 +602,20 @@ which is just what we have been doing all along...
 \begin{frame}{Monopolist's maximization problem}
 
 \begin{wideitemize}
-    \item In competitive markets, producers take prices as given 
-    \item Monopolists incorporate into their problem the fact that their choice of prices changes demand
-    \item They take demand functions as given and pick price to maximize profits, maximizing:
-
+    \item Monopolists incorporate into their problem the fact that their choice of prices changes demand (or equivalently, that their choice of production changes prices).
+    \item<2-> They take demand functions as given and pick price to maximize profits, maximizing:
     \begin{equation*}
         \max_{p} \pi_i = (p-MC)q(p) - w_i \bar{f}
     \end{equation*}
 
-    \blue{Solution} (using chain rule):
-
-    \begin{equation*}
+    \item<3-> \blue{Solution} (using product rule):
+    \begin{eqnarray*}
+        p \times q'(p) +  q(p) - MC \times q'(p) &=& 0 \\
+        p \times q'(p) +  q(p) &=& MC \times q'(p) \\
+        p  +  \frac{q(p)}{q'(p)} &=& MC
+    \end{eqnarray*}
+    
+    \item<4-> Therefore: \begin{equation*}
         MR = p + \frac{q(p)}{q'(p)} = MC
     \end{equation*}
 
@@ -1001,7 +852,6 @@ p^* &=& \frac{\sigma}{\sigma -1}\times MC
 \begin{wideitemize}
     \item Demand for differentiated goods
     \item Elasticity of substitution ($\sigma$)
-    \item For all good, optimal choice implies MRS = relative prices
     \item Production under monopolistic competition, fixed costs, and IRS = profit opportunities
     \item Monopoly power implies $p^* > MC$
     \item In our framework, prices = mark up over MC.
@@ -1020,6 +870,194 @@ p^* &=& \frac{\sigma}{\sigma -1}\times MC
 
 %----------------------------------------------------------------------%
 %----------------------------------------------------------------------%
+
+\section{Appendix}
+
+\begin{frame}
+    \Huge Appendix
+\end{frame}
+
+
+\begin{frame}{Calculus crash course}
+
+\begin{wideitemize}
+    \item How do we solve this problem? 
+    \item<2-> Set up a Lagrangian and take first order conditions:
+
+    \begin{equation*}
+    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
+\end{equation*}
+
+    \item<3-> What is $\lambda$?
+
+    \item<4-> $\lambda$'s job is to keep track of how valuable the last dollar in the consumer’s pocket is.
+    
+    \item<5-> If you slip one more \$ into the consumer’s wallet, utility rises by $\lambda$:
+
+    \begin{equation*}
+        \frac{\partial \mathcal{L}}{\partial I_i} = \lambda
+    \end{equation*}
+
+    \qquad (we also call $\lambda$ the \blue{shadow price}) 
+    
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Calculus crash course}
+    \begin{equation*}
+    \mathcal{L} = \left[ \sum_{\varphi \in \Phi_i } q_i(
+    \varphi)^{\tfrac{\sigma-1}{\sigma}} \right]^{\tfrac{\sigma}{\sigma-1} } + \lambda \left[ I_i - \sum_{\varphi \in \Phi_i } p_i(\varphi) q_i(\varphi) \right]
+    \end{equation*}
+
+\begin{wideitemize}
+    \item $N$ first order conditions, one for each $q_{i}(\varphi)$, satisfying:
+
+\begin{equation*}
+    \frac{\partial Q_i}{\partial q_{i}(\varphi)} - \lambda p_i(\varphi) =0 \iff \underbrace{\frac{\partial Q_i}{\partial q_{i}(\varphi)}}_{\substack{\text{marginal benefit} \\ \text{in utils}}} = \underbrace{\lambda p_i(\varphi)}_{\substack{\text{marginal cost} \\ \text{in utils}}} \qquad \text{for each } \varphi \in \Phi_i
+\end{equation*}
+
+    \item<2-> Maximizing utility makes clear the ``utils per extra dollar'' interpretation of $\lambda$.
+    
+    \item<3-> LHS: marginal utility from one more unit of good $\varphi$
+    
+    \item<4-> RHS: utility cost of the dollars needed to buy it ($\lambda$ utils per dollar $\times$ price). 
+    
+    \item<5-> Setting them equal forces every good to deliver the same utility per dollar spent.
+
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Tying it together with what you know...}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{wideitemize}
+            \item Note:
+\begin{equation*}
+    \frac{\partial Q_i}{\partial q_{i}(\varphi)}  =  \lambda p_i(\varphi) \qquad \blue{\text{for each } \varphi \in \Phi_i}
+\end{equation*}
+
+\item<2-> Valid for each good in $\{1,2,\cdots,N\}$!
+
+\item<3-> Let's pick goods 1 and 2 \& take the ratio:
+
+\begin{equation*}
+    MRS = \frac{\partial Q_i / \partial q_{i}(1)}{\partial Q_i / \partial q_{i}(2)} =  \frac{p_i(1)}{p_i(2)}
+\end{equation*}
+
+which is just what we have been doing all along...
+
+        \end{wideitemize}
+
+
+    \end{column}
+    
+    \begin{column}{0.5\textwidth}
+    \onslide<4->{
+        \centering
+            \begin{tikzpicture}
+            \pgfmathsetmacro{\beta}{1/3}
+            \pgfmathsetmacro{\alpha}{0.5}
+        
+            \pgfmathsetmacro{\Zm}{1}
+            \pgfmathsetmacro{\K}{1}
+            
+            \pgfmathsetmacro{\Za}{1}
+            \pgfmathsetmacro{\T}{1}
+        
+            \pgfmathsetmacro{\Kf}{1}
+            \pgfmathsetmacro{\Tf}{15}
+        
+        
+            \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+        
+        
+            \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+            \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+        
+            \pgfmathsetmacro{\L}{1}
+            \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+            \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+            \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+            \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+        
+            \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+            \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+            \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+            \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+            \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+            \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+            \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+        
+        %    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+            % Compute utility level
+            \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+            \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+            
+            % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+            \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+            \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+            \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+            
+            \centering
+            \begin{axis}[
+                xlabel={Consumption of good $1$, $q_{i}(1)$},
+                ylabel={Consumption of good $2$, $q_{i}(2)$},
+                ymin=0, ymax=\L+.5,
+                xmin=0, xmax=\L+.5,
+                yticklabel=\empty,
+                xticklabel=\empty,
+                axis lines=left,
+                enlargelimits=false,
+                clip=false,
+                axis on top,
+                scaled x ticks=false,
+                width=7cm, height=7cm,
+                title style={font=\bfseries}
+            ]
+            
+            % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+            \pgfmathsetmacro{\c}{ \Ym + \P * \Ya }
+            \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
+        
+            \addplot[thick, red, domain=0.3:1.2, samples=100] {\A * x^(-\expo)};
+
+            
+            
+            % Labels
+            %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+            %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+            %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+            
+            
+            % Equilibrium point
+            \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+
+            %\addplot[gray, dashed] coordinates {(0,\Ym) (\Ym,\Ya) (\Ya,0)};
+
+            \pgfmathsetmacro{\sx}{\Ym+.4}
+            \pgfmathsetmacro{\sy}{\c - \P*\sx};
+            \pgfmathsetmacro{\ssx}{\sx-.25};
+            \pgfmathsetmacro{\ssy}{\c - \P*\ssx};
+            
+            %\addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\sx,\sy)};
+            \addplot[gray, dashed] coordinates {(\sx,\sy) (\ssx,\sy) (\ssx,\ssy)};
+            \node[anchor=north] at (axis cs: {\ssx + (\sx-\ssx)/2},\sy) {$1$};
+            \node[anchor=east] at (axis cs: {\ssx},{\ssy - (\ssy - \sy)/2}) {$\frac{p_i(1)}{p_i(2)}$};
+            
+           
+            
+            \end{axis}
+            \end{tikzpicture}
+
+        }
+
+            \end{column}
+\end{columns}
+\end{frame}
+
 
 
 \end{document}

@@ -236,7 +236,9 @@
 \end{wideitemize}
 \end{frame}
 
+
 \begin{frame}{The economy in one diagram}
+\addtocounter{framenumber}{-1}
 \centering
     \begin{tikzpicture}
     \begin{axis}[
@@ -260,8 +262,8 @@
     
     % NW: Production function for food (plot in 2nd quadrant)
     \addplot[black, thick] ({-x}, {x^(\a)});
-    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,A}$};
-    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,A}$};
+    \node[anchor=east] at (axis cs:-1.25,0) {\scriptsize $L_{i,M}$};
+    \node[anchor=south] at (axis cs:0,1.25) {\scriptsize $Y_{i,M}$};
     
     % SW: Labor allocation AA curve (line in 3rd quadrant)
     \addplot[brown, thick] ({-x}, {-1 + x});
@@ -269,8 +271,8 @@
     
     % SE: Production function for cloth (4th quadrant)
     \addplot[blue, thick] ({x^(\a)}, {-x});
-    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,M}$};
-    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,M}$};
+    \node[anchor=west] at (axis cs:1.25,0) {\scriptsize $Y_{i,A}$};
+    \node[anchor=north] at (axis cs:0,-1.25) {\scriptsize $L_{i,A}$};
     %\node[anchor=north west] at (axis cs:0.6,-0.6) {\scriptsize Production function for cloth};
     
     % NE: Production Possibility Frontier (PPF)
@@ -280,7 +282,7 @@
     % point on AA
     \addplot+[mark=*,only marks,mark size=1.5pt,brown]
                   coordinates {({-0.5},{-1+0.5})}
-                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,A}^*,L_{i,M}^*)$};
+                  node[anchor=north east,font=\scriptsize, brown] {$(L_{i,M}^*,L_{i,A}^*)$};
     
     \addplot[dashed, gray] coordinates {({-0.5}, {-1 + 0.5}) (0, {-1 + 0.5})};
 
@@ -309,7 +311,7 @@
     \addplot[dashed, gray] coordinates {({0.5^(\a)}, 0) ({0.5^(\a)}, {-0.5})};
     \addplot+[mark=*, only marks, mark size=1.5pt, black]
             coordinates {({0.5^(\a)}, {-0.5})}
-            node[anchor=south west,font=\scriptsize] {$(L_{i,A}^*,Y_{i,A}^*)$};
+            node[anchor=south west,font=\scriptsize] {$(Y_{i,A}^*,L_{i,A}^*)$};
     
     \addplot+[mark=*,only marks,mark size=1.5pt,black]
                   coordinates { (0, {-(1-0.5)})}
@@ -325,7 +327,7 @@
     \pgfmathsetmacro{\Qf}{(1 - 0.5)^(\a)}
     \addplot+[mark=*, only marks, mark size=1.5pt]
             coordinates {(\Qc, \Qf)}
-            node[anchor=south west, font=\scriptsize, black]{$(Y_{i,M}^*,Y_{i,A}^*)$};     
+            node[anchor=south west, font=\scriptsize, black]{$Y_{i,A}^*,(Y_{i,M}^*)$};     
     \addplot[dashed, gray] coordinates {(\Qc, 0) (\Qc, \Qf)};
     \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
     \addplot[dashed, gray] coordinates {(0, \Qf) (\Qc, \Qf)};
@@ -335,6 +337,7 @@
     
     \end{tikzpicture}
 \end{frame}
+
 
 \begin{frame}{Labor Market Equilibrium: Diagram}
 
@@ -506,14 +509,14 @@
         \item Suppose $Z_{i,A} = 1$, $T_i = 4$, $Z_{i,M} = 4$, $K_i = 1$, $P_M=1$, $P_A=2$, $\beta_i=1/2$, $\bar{L}_i=1$. Solve for $\{L_M,L_A,w_{i}^*\}$
     { \scriptsize
     \begin{eqnarray*}
-        P_{M} \times  Z_{i,M} \times (1-\beta_i) \times \left( \frac{K_{i}}{L_{i,M}} \right)^{\beta_i} &=& 1 \times  4 \times \frac{1}{2} \times \left( \frac{1}{L_{i,M}} \right)^{1/2} =  \frac{2}{\sqrt{ L_{i,M}}} \\
-        P_{A} \times  Z_{i,A} \times (1-\beta_i) \times \left( \frac{T_{i}}{\bar{L}_i - L_{i,M}} \right)^{\beta_i} &=& 2 \times  1 \times \frac{1}{2} \times \left( \frac{4}{1 - L_{i,M}} \right)^{1/2} =  \frac{\sqrt{4}}{\sqrt{1 - L_{i,M}}} =  \frac{2}{\sqrt{1 - L_{i,M}}} 
+        P_{M} \times  MPL_{i,M} = P_{M} \times  Z_{i,M} \times (1-\beta_i) \times \left( \frac{K_{i}}{L_{i,M}} \right)^{\beta_i} &=& 1 \times  4 \times \frac{1}{2} \times \left( \frac{1}{L_{i,M}} \right)^{1/2} =  \frac{2}{\sqrt{ L_{i,M}}} \\
+        P_{A} \times  MPL_{i,A} = P_{A} \times  Z_{i,A} \times (1-\beta_i) \times \left( \frac{T_{i}}{\bar{L}_i - L_{i,M}} \right)^{\beta_i} &=& 2 \times  1 \times \frac{1}{2} \times \left( \frac{4}{1 - L_{i,M}} \right)^{1/2} =  \frac{\sqrt{4}}{\sqrt{1 - L_{i,M}}} =  \frac{2}{\sqrt{1 - L_{i,M}}} 
     \end{eqnarray*}
     }
     \item<2-> Then:
 
     \begin{equation*}
-        \frac{2}{\sqrt{ L_{i,M}}} = \frac{2}{\sqrt{1 - L_{i,M}}} \iff L_{i,M} = 1 - L_{i,M} \iff L_{i,M} = \frac{1}{2}   
+        P_{M} \times  MPL_{i,M} = \frac{2}{\sqrt{ L_{i,M}}} = \frac{2}{\sqrt{1 - L_{i,M}}} = P_{A} \times  MPL_{i,A} \iff L_{i,M} = 1 - L_{i,M} \iff L_{i,M} = \frac{1}{2}   
     \end{equation*}
 
     \item<3-> To find wage:

@@ -1,0 +1,359 @@
+\documentclass[11pt,letterpaper]{exam}
+%\usepackage[Lhdr={},Rhdr={}]{plain}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{multicol}
+
+\usepackage[top=0.5in, left=0.75in, right=0.75in,
+  headsep=0pt% remove space between header and text body
+  ]{geometry}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\newcommand{\figpath}{../fig/}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+\begin{document}
+
+\noindent\fbox{%
+    \parbox{0.47\textwidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\textwidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+\begin{center}
+
+{\large
+
+\textbf{Answer Sheet for Midterm Exam\\International Trade Theory and Policy\\Fall 2025}
+
+}
+\end{center}
+
+\begin{center}
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+    \centering
+        Please write all answers in the designated boxes. Do not manually reassign answer boxes. \\
+        If needed, ask for a new answer sheet. Only this answer sheet will be collected for grading.        It is printed on \textbf{both sides}.
+    }%
+}
+\end{center}
+
+\section*{Part I: True or False (10 points)}
+Write one \textbf{uppercase letter} (\textbf{T} or \textbf{F}) in each of the boxes below as your answer.
+
+\begin{multicols}{5}
+\begin{questions}
+\question \noindent\fbox{%
+    \parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+    \parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+    \parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\question \noindent\fbox{%
+\parbox{0.125\textwidth}{%
+\vspace*{1cm} \hspace*{1cm}}}
+
+\end{questions}
+\end{multicols}
+
+\section*{Part II: Multi-Part Problems (90 points)}
+
+\begin{questions}
+
+\question
+\begin{parts}
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{4cm} \hfill}}
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{4cm} \hfill}}
+
+\newpage
+
+\noindent\fbox{%
+    \parbox{0.47\linewidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\linewidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{4cm} \hfill}}
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{4cm} \hfill}}
+
+\part \noindent\fbox{%
+\parbox[t][12.5cm][b]{\linewidth}{%
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{2}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{4}         % unit labor requirement for roses
+\pgfmathsetmacro{\Lendow}{10}    % labor endowment
+
+
+\begin{center}
+\begin{axis}[
+    ylabel={Quantity of computers, $ \textcolor{blue}{Y_{US,C}}$},
+    xlabel={Quantity of roses, $\textcolor{blue}{Y_{US,R}}$},
+    ymin=0, ymax=6,
+    xmin=0, xmax=6,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=10cm, height=10cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+% Indifference curve through optimal bundle
+%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
+
+% Labels
+
+
+
+\end{axis}
+    
+\end{center}
+
+\end{tikzpicture}
+}}
+
+
+
+\noindent\fbox{%
+    \parbox{0.47\linewidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\linewidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{6cm} \hfill}}
+
+\part \noindent\fbox{%
+\parbox[t][14.5cm][b]{\linewidth}{%
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{2}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{4}         % unit labor requirement for roses
+\pgfmathsetmacro{\Lendow}{10}    % labor endowment
+
+
+\begin{center}
+\begin{axis}[
+    ylabel={Quantity of computers, $ \textcolor{blue}{Y_{US,C}}$},
+    xlabel={Quantity of roses, $\textcolor{blue}{Y_{US,R}}$},
+    ymin=0, ymax=6,
+    xmin=0, xmax=6,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=10cm, height=10cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+% Indifference curve through optimal bundle
+%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
+
+% Labels
+
+
+
+\end{axis}
+    
+\end{center}
+
+\end{tikzpicture}
+ }}
+
+\noindent\fbox{%
+    \parbox{0.47\linewidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\linewidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+\end{parts}
+
+\question
+\begin{parts}
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{8cm} \hfill}}
+
+
+
+\part \noindent\fbox{%
+\parbox[t][12.5cm][b]{\linewidth}{%
+\begin{tikzpicture}
+\pgfmathsetmacro{\aC}{2}       % unit labor requirement for computers
+\pgfmathsetmacro{\aR}{4}         % unit labor requirement for roses
+\pgfmathsetmacro{\Lendow}{10}    % labor endowment
+
+
+\begin{center}
+\begin{axis}[
+    ylabel={Quantity of agriculture, $ \textcolor{blue}{Y_{i,A}}$},
+    xlabel={Quantity of manufacturing, $\textcolor{blue}{Y_{i,M}}$},
+    ymin=0, ymax=6,
+    xmin=0, xmax=6,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    axis lines=left,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    scaled x ticks=false,
+    width=10cm, height=10cm,
+    title style={font=\bfseries}
+]
+
+% PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+% Indifference curve through optimal bundle
+%\addplot[red, domain=0.1:9, samples=100] {\A * x^(-\expo)};
+
+% Labels
+
+
+
+\end{axis}
+    
+\end{center}
+
+\end{tikzpicture}
+ }}
+
+
+
+\noindent\fbox{%
+    \parbox{0.47\linewidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\linewidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{21cm} \hfill}}
+
+
+
+\noindent\fbox{%
+    \parbox{0.47\linewidth}{%
+        Name:\\
+        \\
+    }%
+}\hfill
+\fbox{%
+    \parbox{0.47\linewidth}{%
+        Student ID:\\
+        \\
+    }%
+}
+
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{10.5cm} \hfill}}
+
+\part \noindent\fbox{%
+\parbox[t]{\linewidth}{%
+\vspace*{10.5cm} \hfill}}
+
+
+
+\end{parts}
+
+
+
+\end{questions}
+
+
+
+
+\end{document}

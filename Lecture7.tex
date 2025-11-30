@@ -638,9 +638,9 @@ while keeping all the other fixed is decreasing in the one increasing factor.} \
   \onslide<2->{
   \begin{proof}
   \begin{eqnarray*}
-    F(A,\lambda K,\lambda L) &=& \bar{Z} (\lambda K)^\beta (\lambda L)^{1-\beta}  \\
+    F( \lambda K,\lambda L) &=& \bar{Z} (\lambda K)^\beta (\lambda L)^{1-\beta}  \\
     &=& \lambda \bar{Z}  (K)^\beta (L)^{1-\beta} \\
-    &=& \lambda F(A, K,L)
+    &=& \lambda F( K,L)
   \end{eqnarray*}
   \end{proof}
 }
@@ -771,8 +771,8 @@ Cobb-Douglas is Constant Returns to Scale in Capital and Labor jointly... but di
   Note that we can derive a labor demand and capital demand schedule from each of those, which are decreasing in factor prices:
 
   \begin{eqnarray*}
-    L^d &=& \left( \frac{(1-\beta) \cdot A \cdot P}{w} \right)^{\frac{1}{\beta}} \cdot K^d \\
-    K^d &=& \left( \frac{\beta \cdot A \cdot P}{r} \right)^{\frac{1}{1-\beta}} \cdot L^d
+    L^d &=& \left( \frac{(1-\beta) \cdot  \bar{Z} \cdot P}{w} \right)^{\frac{1}{\beta}} \cdot K^d \\
+    K^d &=& \left( \frac{\beta \cdot \bar{Z} \cdot P}{r} \right)^{\frac{1}{1-\beta}} \cdot L^d
   \end{eqnarray*}
 
 \end{frame}
@@ -785,7 +785,7 @@ Cobb-Douglas is Constant Returns to Scale in Capital and Labor jointly... but di
         \begin{tikzpicture}
         \pgfmathsetmacro{\alpha}{2/3}
         \pgfmathsetmacro{\K}{1}
-        \pgfmathsetmacro{\A}{1}
+        \pgfmathsetmacro{\Z}{1}
         
         \begin{axis}[
             ylabel={$\textcolor{red}{L^d(w)}$, $w$ },
@@ -802,7 +802,7 @@ Cobb-Douglas is Constant Returns to Scale in Capital and Labor jointly... but di
             width=9cm, height=7cm,
             title={Labor demand curve}
         ]
-        \addplot[thick, red, domain=0:5] {(1-\alpha)*\A*\K^(\alpha)/x^(\alpha)};
+        \addplot[thick, red, domain=0:5] {(1-\alpha)*\Z*\K^(\alpha)/x^(\alpha)};
         \addplot[thick, dashed, domain=0:5] {0.5};
         %\addplot[dashed, gray] coordinates {({((1-\alpha)*\A/0.5)^(1/\alpha)*\K}, 0.5) ({((1-\alpha)*\A/0.5)^(1/\alpha)*\K},0)};
 
@@ -971,9 +971,9 @@ Cobb-Douglas is Constant Returns to Scale in Capital and Labor jointly... but di
 Replacing the market clearing condition in and normalizing $P=1$ to be the num\'eraire of this economy:
 
   \begin{eqnarray}
-    Y^* &=& \bar{Z} (\bar{K})^{\alpha} (\bar{L})^{1-\alpha} \\
-    w^* &=& (1-\alpha) \bar{Z} \left( \frac{\bar{K}}{\bar{L}} \right)^\alpha  \\
-     r^* &=&  \alpha \bar{Z} \left( \frac{\bar{L}}{\bar{K}} \right)^{1-\alpha}  \\
+    Y^* &=& \bar{Z} (\bar{K})^{\beta} (\bar{L})^{1-\beta} \\
+    w^* &=& (1-\beta) \bar{Z} \left( \frac{\bar{K}}{\bar{L}} \right)^\beta  \\
+     r^* &=&  \beta \bar{Z} \left( \frac{\bar{L}}{\bar{K}} \right)^{1-\beta}  \\
      L^* &=& \bar{L}  \\
      K^* &=& \bar{K}
   \end{eqnarray}
@@ -983,7 +983,7 @@ Note that everything on the right-hand side of the equations is a parameter, so 
 
 \begin{frame}{Numerical Example}
 
-Suppose $\bar{K} = 20, \bar{L} = 160, \bar{Z}=1, \alpha=\frac{1}{3}$. What is the solution to the Production Model? Replacing in the set of equations before:
+Suppose $\bar{K} = 20, \bar{L} = 160, \bar{Z}=1, \beta=\frac{1}{3}$. What is the solution to the Production Model? Replacing in the set of equations before:
 
   \begin{eqnarray*}
     Y^* &=&  (20)^{\frac{1}{3}}  (160)^{\frac{2}{3}} = 80 \\

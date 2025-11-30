@@ -232,13 +232,16 @@
   \item<2-> \blue{Specific-Factors:} specific factors $\rightarrow$ decreasing returns $\rightarrow$ distributional effects
   \item<3-> \blue{Heckscher–Ohlin:} same tech, different endowments $\rightarrow$ patterns of specialization
   \item<4-> \blue{Standard Trade Model:} trade happens due to differences $\rightarrow$ changes in terms of trade 
+  \item<5-> \blue{In common}: we trade because we are different (in technologies, endowments, factors) \\
+  \textcolor{gray}{(Florida is good at producing oranges, Georgia is good at producing peaches)}
+  \item<6-> \blue{Next}: interindustry trade -- Krugman (time permitting) Melitz models\\
+  \textcolor{gray}{(American cars are \textit{differentiated} from Euro cars; demand for both)}
 \end{wideitemize}
 \end{frame}
 
 \begin{frame}{This class}
 \begin{wideitemize}
-    \item Welfare gains from trade across models
-    \item Changes in Terms of Trade (ToT) + growth bias 
+    \item Shared patterns of all of these models: ``standard trade model''
     \item The Gravity Equation
     \item Empirical estimates of welfare gains
     \item Data Lab will go hands-on later.
@@ -254,53 +257,57 @@
 \begin{column}{.4\textwidth}
             \centering
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
     \pgfmathsetmacro{\L}{1}
-    \pgfmathsetmacro{\K}{2.25}
-    \pgfmathsetmacro{\Kk}{1.5}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
 
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
 
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
     
-
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
-
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -312,69 +319,77 @@
         title style={font=\bfseries}
     ]
     
-    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
+
+
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
     
 
-        
-
+    
     
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
                 
     \end{column}
     \begin{column}{.45\textwidth}
 
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
-    
-    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\Zm}{1}
     \pgfmathsetmacro{\K}{1}
-    \pgfmathsetmacro{\Kk}{1.5}
-
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
-
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
 
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
 
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
+    
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -386,75 +401,79 @@
         title style={font=\bfseries}
     ]
     
-    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    
-
-
 
     
+
+        
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
     \end{column}
 \end{columns}
 \end{frame}
 
 
-\begin{frame}{Graphical representation}
+
+
+\begin{frame}{Graphical representation: PPF}
 \addtocounter{framenumber}{-1}
 
 \begin{columns}[T] % align columns
 \begin{column}{.4\textwidth}
             \centering
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
     \pgfmathsetmacro{\L}{1}
-    \pgfmathsetmacro{\K}{3}
-    \pgfmathsetmacro{\Kk}{2}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
 
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
 
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-    \pgfmathsetmacro{\Pa}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wra)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
-    \pgfmathsetmacro{\Lca}{ (\K - \aT*\wra*\L)/(\d * \wra) }
-    \pgfmathsetmacro{\Kca}{\aC * \wra * \Lca}
-    \pgfmathsetmacro{\Lta}{\L - \Lca}
-    \pgfmathsetmacro{\Kta}{\K - \Kca}
-   
-    \pgfmathsetmacro{\Yca}{ \Kca^(\betac) * \Lca^(1-\betac) }
-    \pgfmathsetmacro{\Yta}{ \Kta^(\betat) * \Lta^(1-\betat) }
-
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
     
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -467,82 +486,78 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:1] ({ \K^(\betac) * (\L-x)^(1-\betac)}, { \K^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
-
-    %\pgfmathsetmacro{\ck}{ \Ytk + \Pk * \Yck }
-    %\addplot[thick, brown, domain=0.2:1] { \ck - \Pk*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
 
 
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    %\node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    %\node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
-
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yca, \Yta)};
-%    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-%    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
-
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
 
     
+    
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
                 
     \end{column}
     \begin{column}{.45\textwidth}
 
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
-    
-    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\Zm}{1}
     \pgfmathsetmacro{\K}{1}
-    \pgfmathsetmacro{\Kk}{1.5}
-
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
-
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wra)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
 
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
 
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
+    
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -555,21 +570,14 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+
+
     
 
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
         
-
-    
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
     \end{column}
 \end{columns}
@@ -578,60 +586,65 @@
 
 
 
-\begin{frame}{Graphical representation}
+\begin{frame}{Graphical representation: autarky prices}
 \addtocounter{framenumber}{-1}
 
 \begin{columns}[T] % align columns
 \begin{column}{.4\textwidth}
             \centering
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
     \pgfmathsetmacro{\L}{1}
-    \pgfmathsetmacro{\K}{2.25}
-    \pgfmathsetmacro{\Kk}{1.5}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
 
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
 
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
     
-
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
-
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -644,74 +657,80 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.7] { \c - \P*x};
+
+
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
     
 
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
-        
-
+    
     
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
                 
     \end{column}
     \begin{column}{.45\textwidth}
 
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
-    
-    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\Zm}{1}
     \pgfmathsetmacro{\K}{1}
-    \pgfmathsetmacro{\Kk}{1.5}
-
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
-
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
 
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
 
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
+    
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -724,81 +743,81 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
+
+
     
 
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
         
-
-    
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
     \end{column}
 \end{columns}
 \end{frame}
 
 
-\begin{frame}{Graphical representation}
+\begin{frame}{Graphical representation: autarky production}
 \addtocounter{framenumber}{-1}
 
 \begin{columns}[T] % align columns
 \begin{column}{.4\textwidth}
             \centering
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
     \pgfmathsetmacro{\L}{1}
-    \pgfmathsetmacro{\K}{2.25}
-    \pgfmathsetmacro{\Kk}{1.5}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
 
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
 
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
     
-
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
-
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -811,78 +830,85 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.7] { \c - \P*x};
+
+
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
     
-    \addplot[thick, red, domain=0.4:1.2, samples=100] {\A * x^(-\expo)};
-
+    
     % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
-        
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
-    \node[anchor = north east] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
-    \node[anchor = east] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{H,C},Q_{H,T})$};
-
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya+0.1) {\scriptsize Production};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya-0.1) {\scriptsize $(Y_{i,A},Y_{i,M})$};
+    
+    
+    
     
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
                 
     \end{column}
     \begin{column}{.45\textwidth}
 
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
-    
-    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\Zm}{1}
     \pgfmathsetmacro{\K}{1}
-    \pgfmathsetmacro{\Kk}{1.5}
-
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
-
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
 
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
 
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
+    
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -895,84 +921,84 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
-    
-    \addplot[thick, red, domain=0.5:1.4, samples=100] {\A * x^(-\expo)};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
 
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya+0.1) {\scriptsize Production};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya-0.1) {\scriptsize $(Y_{i,A},Y_{i,M})$};
+    
         
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
-    \node[anchor = south west] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
-    \node[anchor = west] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{F,C},Q_{F,T})$};
-
-    
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
     \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Graphical representation}
+
+\begin{frame}{Graphical representation: autarky equilibrium (consumption + production)}
 \addtocounter{framenumber}{-1}
 
 \begin{columns}[T] % align columns
 \begin{column}{.4\textwidth}
             \centering
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
     \pgfmathsetmacro{\L}{1}
-    \pgfmathsetmacro{\K}{2.25}
-    \pgfmathsetmacro{\Kk}{1.5}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
 
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
 
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
     
-
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
-
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{H,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{H,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -985,81 +1011,90 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:1] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.7] { \c - \P*x};
+
+    % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.5:2, samples=100] {\A * x^(-\expo)};
     
-    \addplot[thick, red, domain=0.4:1.2, samples=100] {\A * x^(-\expo)};
-
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
     % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = north east] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = east] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{H,C},Y_{H,T})$};
-        
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
-    \node[anchor = north east] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
-    \node[anchor = east] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{H,C},Q_{H,T})$};
-
-    \addplot[dashed, gray] coordinates {(\Yc, \Yt) (\Qc, \Yt)  (\Qc, \Qt)};
-    \node[anchor = south] at (axis cs:{\Yc + (\Qc-\Yc)/2}, \Yt) {\scriptsize Imports};
-    \node[anchor = west] at (axis cs:\Qc, {\Yt + (\Qt-\Yt)/2}) {\scriptsize Exports};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qm, \Qa)};
+    \node[anchor = north east] at (axis cs:\Qm,\Qa) {\scriptsize Consumption};
+    \node[anchor = north east] at (axis cs:\Qm+0.1,\Qa-0.15) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya+0.1) {\scriptsize Production};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya-0.1) {\scriptsize $(Y_{i,A},Y_{i,M})$};
+    
+    
+    
     
     \end{axis}
-
-\end{tikzpicture}
+    \end{tikzpicture}
 
                 
     \end{column}
     \begin{column}{.45\textwidth}
 
     \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
     \pgfmathsetmacro{\alpha}{0.5}
-    \pgfmathsetmacro{\betat}{2/3}
-    \pgfmathsetmacro{\betac}{1/3}
 
-    \pgfmathsetmacro{\Phi}{((1-\betat)^(1-\betat))*((\betat)^\betat)/
-             ((1-\betac)^(1-\betac))*((\betac)^\betac)}
-    \pgfmathsetmacro{\aC}{\betac/(1-\betac)}
-    \pgfmathsetmacro{\aT}{\betat/(1-\betat)}
-    \pgfmathsetmacro{\d}{\aC-\aT}
-
-    
-    \pgfmathsetmacro{\L}{2}
+    \pgfmathsetmacro{\Zm}{1}
     \pgfmathsetmacro{\K}{1}
-    \pgfmathsetmacro{\Kk}{1.5}
-
-   \pgfmathsetmacro{\wra}{ \K / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat)  }
-    \pgfmathsetmacro{\wr}{  \Kk / \L * (\alpha*(1-\betac) + (1-\alpha)*(1-\betat))/(\alpha * \betac + (1-\alpha)*\betat) }
-
-    \pgfmathsetmacro{\P}{ ( ((1-\betat)^(1-\betat) * \betat^(\betat)) / ((1-\betac)^(1-\betac) * \betac^(\betac)) ) * (\wr)^(\betat-\betac)  }
-
-       
-    \pgfmathsetmacro{\Lc}{ (\K - \aT*\wr*\L)/(\d * \wr) }
-    \pgfmathsetmacro{\Kc}{\aC * \wr * \Lc}
-    \pgfmathsetmacro{\Lt}{\L - \Lc}
-    \pgfmathsetmacro{\Kt}{\K - \Kc}
-   
-    \pgfmathsetmacro{\Yc}{ \Kc^(\betac) * \Lc^(1-\betac) }
-    \pgfmathsetmacro{\Yt}{ \Kt^(\betat) * \Lt^(1-\betat) }
-
     
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
 
-    \pgfmathsetmacro{\I}{ \P * \Yc + \Yt }
-    \pgfmathsetmacro{\Qc}{(1-\alpha)/\P * \I}
-    \pgfmathsetmacro{\Qt}{(\alpha) * \I}
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
 
-    \pgfmathsetmacro{\U}{(\Qt^(\alpha))*(\Qc^(1 - \alpha))}
-    \pgfmathsetmacro{\expo}{(1 - \alpha)/\alpha}
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+    \pgfmathsetmacro{\I}{ \P * \Ym + \Ya }
+    \pgfmathsetmacro{\Qa}{(1-\alpha) * \I}
+    \pgfmathsetmacro{\Qm}{(\alpha)/\P * \I}
+    
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
     \pgfmathsetmacro{\A}{\U^(1/\alpha)}
-
-    
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
     
     \centering
     \begin{axis}[
-        ylabel={Quantity of tech, $\textcolor{blue}{Y_{F,T}}$},
-        xlabel={Quantity of cloth, $\textcolor{blue}{Y_{F,C}}$},
-        ymin=0, ymax=2,
-        xmin=0, xmax=2,
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
         yticklabel=\empty,
         xticklabel=\empty,
         axis lines=left,
@@ -1072,144 +1107,1932 @@
     ]
     
     % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
-    \addplot[blue, thick, domain=0:2] ({ \Kc^(\betac) * (\L-x)^(1-\betac)}, { \Kt^(\betat) * (x)^(1-\betat)});
-    \pgfmathsetmacro{\c}{ \Yt + \P * \Yc }
-    \addplot[thick, brown, domain=0.2:1.6] { \c - \P*x};
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.2] { \c - \P*x};
+
+
+    % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.3:2, samples=100] {\A * x^(-\expo)};
     
-    \addplot[thick, red, domain=0.5:1.4, samples=100] {\A * x^(-\expo)};
-
-    % Equilibrium point
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Yc, \Yt)};
-    \node[anchor = south west] at (axis cs:\Yc,\Yt) {\scriptsize Production};
-    \node[anchor = west] at (axis cs:\Yc,\Yt) {\scriptsize $(Y_{F,C},Y_{F,T})$};
+    
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qm, \Qa)};
+    \node[anchor = north west] at (axis cs:\Qm,\Qa) {\scriptsize Consumption};
+    \node[anchor = north west] at (axis cs:\Qm+0.1,\Qa-0.15) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya+0.1) {\scriptsize Production};
+    \node[anchor = south west] at (axis cs:\Ym,\Ya-0.1) {\scriptsize $(Y_{i,A},Y_{i,M})$};
+    
         
-    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qc, \Qt)};
-    \node[anchor = south west] at (axis cs:\Qc,\Qt) {\scriptsize Consumption};
-    \node[anchor = west] at (axis cs:\Qc,\Qt) {\scriptsize $(Q_{F,C},Q_{F,T})$};
+    \end{axis}
+    \end{tikzpicture}
 
-    \addplot[dashed, gray] coordinates {(\Yc, \Yt) (\Qc, \Yt)  (\Qc, \Qt)};
-    \node[anchor = north] at (axis cs:{\Yc + (\Qc-\Yc)/2}, \Yt) {\scriptsize Exports};
-    \node[anchor = east] at (axis cs:\Qc, {\Yt + (\Qt-\Yt)/2}) {\scriptsize Imports};
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Graphical representation: autarky equilibrium (consumption + production)}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.7] { \c - \P*x};
+
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.5:2, samples=100] {\A * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    
     
     \end{axis}
+    \end{tikzpicture}
 
-\end{tikzpicture}
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.2] { \c - \P*x};
+
+
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    
+    
+    \end{axis}
+    \end{tikzpicture}
 
     \end{column}
 \end{columns}
 \end{frame}
 
 
-\section{STM: Different Preferences}
+
+\begin{frame}{Graphical representation: free trade prices}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.7] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.5:2, samples=100] {\A * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.2] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Graphical representation: trade equilibrium}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.7] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.5:2, samples=100] {\A * x^(-\expo)};
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+    \node[anchor = west] at (axis cs:\Qmw,\Qaw) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qmw+0.2,\Qaw-0.15) {\scriptsize $(Q_{H,A},Q_{H,M})^{Trade}$};
+    \node[anchor = east] at (axis cs:\Ymw,\Yaw+.1) {\scriptsize Production};
+    \node[anchor = east] at (axis cs:\Ymw+0.025,\Yaw-0.1) {\scriptsize $(Y_{H,A},Y_{H,M})^{Trade}$};
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.2] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+    \node[anchor = west] at (axis cs:\Qmw,\Qaw) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qmw+0.1,\Qaw-0.15) {\scriptsize $(Q_{F,A},Q_{F,M})^{Trade}$};
+    \node[anchor = west] at (axis cs:\Ymw,\Yaw+.1) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Ymw+0.025,\Yaw-0.05) {\scriptsize $(Y_{F,A},Y_{F,M})^{Trade}$};
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Graphical representation: specialization patterns}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+
+    % Arrows for trade
+\draw[-, dashed, thick, gray] 
+    (axis cs: \Qmw, \Qaw) -- 
+    (axis cs: \Qmw, \Yaw) -- 
+    (axis cs: \Ymw, \Yaw);
+\node[gray] at (axis cs:\Ymw -0.4, \Yaw-0.1) {\scriptsize Exports};
+\node[gray, rotate=90] at (axis cs:\Qmw-.1, \Qaw-.5) {\scriptsize Imports};
+
+
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+    
+
+    % Arrows for trade
+\draw[-, dashed, thick, gray] 
+    (axis cs: \Qmw, \Qaw) -- 
+    (axis cs: \Qmw, \Yaw) -- 
+    (axis cs: \Ymw, \Yaw);
+\node[gray] at (axis cs:\Ymw +0.3, \Yaw+0.1) {\scriptsize Imports};
+\node[gray, rotate=90] at (axis cs:\Qmw+.2, \Qaw+.5) {\scriptsize Exports};
+
+
+    \end{axis}
+    \end{tikzpicture}
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Graphical representation: gains from trade}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+
+        % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    \pgfmathsetmacro{\cw}{\Pw * \Yaw + \Ymw}
+    \addplot[name path=WorldLine, thick, brown, domain=0.2:2] {\cw - \Pw*x};
+
+    % Indifference curve before trade
+    \addplot[name path=Uaut, thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+
+    % Shade the area below the world price line and above the original indifference curve
+    \addplot[
+        red!40, 
+        fill opacity=0.3, 
+        forget plot
+    ] fill between[of=WorldLine and Uaut, soft clip={domain=0.45:1.65}];
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+
+    \node at (axis cs:\Qmw-.5, \Qaw-.5) {\scriptsize Gains from trade};
+
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+\begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+    % Prices before and after trade
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^\beta}   
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ((\T+\Tf)/(\K+\Kf))^\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    % Home allocations and outputs before trade
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{\Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{\Zm * \K^\beta * \Ls^(1-\beta)}
+    \pgfmathsetmacro{\Ya}{\Za * \T^\beta * (1-\Ls)^(1-\beta)}
+
+    % Home allocations and outputs after trade
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{\Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{\Zm * \K^\beta * \Lsw^(1-\beta)}
+    \pgfmathsetmacro{\Yaw}{\Za * \T^\beta * (1-\Lsw)^(1-\beta)}
+
+    % Consumption bundles after trade
+    \pgfmathsetmacro{\Iw}{\Pw * \Ymw + \Yaw}
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+    % Utility levels and indifference-curve constants
+    \pgfmathsetmacro{\U}{(\Ya^\alpha)*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^\alpha)*(\Qmw^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+    % PPF
+    \addplot[blue, thick, domain=0:1] ({\Zm * \K^\beta * (\L-x)^(1-\beta)}, {\Za * \T^\beta * (x)^(1-\beta)});
+
+
+    \pgfmathsetmacro{\cw}{\Pw * \Yaw + \Ymw}
+    \addplot[name path=WorldLine, thick, brown, domain=0.2:2] {\cw - \Pw*x};
+
+    % Indifference curve before trade
+    \addplot[name path=Uaut, thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+
+    % Shade the area below the world price line and above the original indifference curve
+    \addplot[
+        red!40, 
+        fill opacity=0.3, 
+        forget plot
+    ] fill between[of=WorldLine and Uaut, soft clip={domain=0.45:1.65}];
+
+    % Indifference curve after trade
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+
+    % Points: before trade (gray), production and consumption after trade (black)
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+
+    % Label for shaded area
+    \node at (axis cs:\Qmw-.5, \Qaw-.5) {\scriptsize Gains from trade};
+
+    \end{axis}
+\end{tikzpicture}
+
+
+    \end{column}
+\end{columns}
+\end{frame}
+
+
 
 \section{STM: Different Technologies}
 
 
 \begin{frame}{Key STM objects and notation}
 \begin{wideitemize}
-  \item Two goods: $C$ (cloth) and $T$ (tech/food). Relative price: $p \equiv P_C/P_T$
-  \item Domestic \textbf{relative supply:} $RS(p) \equiv \frac{Q_C(p)}{Q_T(p)}$
-  \item Domestic \textbf{relative demand:} $RD(p) \equiv \frac{D_C(p,Y)}{D_T(p,Y)}$
+  \item Two goods: $M$ (manufacturing) and $A$ (agriculture/food). Relative price: $p \equiv P_M/P_A$
+  \item Domestic \blue{relative supply:} $RS(p) \equiv \frac{Y_M(p)}{Y_A(p)}$
+  \item Domestic \blue{relative demand:} $RD(p) \equiv \frac{Q_M(p,Y)}{Q_A(p,Y)}$
   \item World equilibrium: $p^{w}$ s.t. $RS^{\text{world}}(p^{w})=RD^{\text{world}}(p^{w})$
-  \item Terms of Trade (Home): $\text{ToT}_H = \frac{P_{\text{exports}}}{P_{\text{imports}}}$
+  \item Terms of Trade: $\text{ToT} = \frac{P_{\text{exports}}}{P_{\text{imports}}}$
+  \begin{itemize}
+      \item Do ToT of either country increase or decrease after they open up to trade in the STM?
+  \end{itemize}
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{From PPF to RS}
-\begin{columns}[T]
-\begin{column}{0.58\textwidth}
-\begin{wideitemize}
-  \item Producer chooses $(Q_C,Q_T)$ to maximize $P_C Q_C + P_T Q_T$ over the PPF
-  \item Slope at optimum: $MRT_{C,T} = \frac{dQ_T}{dQ_C} = -\frac{P_C}{P_T}=-p$
-  \item As $p$ rises, production tilts to $C$ $\Rightarrow$ \textbf{RS is upward sloping}
-  \item With kinks (specialization), RS has flat segments/jumps
-\end{wideitemize}
-\end{column}
-\begin{column}{0.38\textwidth}
-\centering
-%\includegraphics[width=\linewidth]{figs/ppf_tangency_to_isorevenue.pdf}\\[2mm]
-%\includegraphics[width=\linewidth]{figs/domestic_RS_from_ppf.pdf}
-\end{column}
+
+\begin{frame}{Graphical representation: trade equilibrium}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.7] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.5:2, samples=100] {\A * x^(-\expo)};
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+    \node[anchor = west] at (axis cs:\Qmw,\Qaw) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qmw+0.2,\Qaw-0.15) {\scriptsize $(Q_{H,A},Q_{H,M})^{Trade}$};
+    \node[anchor = east] at (axis cs:\Ymw,\Yaw+.1) {\scriptsize Production};
+    \node[anchor = east] at (axis cs:\Ymw+0.025,\Yaw-0.1) {\scriptsize $(Y_{H,A},Y_{H,M})^{Trade}$};
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown!25, domain=0.2:1.2] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Yaw + \Ymw }
+    \addplot[thick, brown, domain=0.2:2] { \cw - \Pw*x};
+    % Indifference curve through optimal bundle
+    \addplot[thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+    \node[anchor = west] at (axis cs:\Qmw,\Qaw) {\scriptsize Consumption};
+    \node[anchor = west] at (axis cs:\Qmw+0.1,\Qaw-0.15) {\scriptsize $(Q_{F,A},Q_{F,M})^{Trade}$};
+    \node[anchor = west] at (axis cs:\Ymw,\Yaw+.1) {\scriptsize Production};
+    \node[anchor = west] at (axis cs:\Ymw+0.025,\Yaw-0.05) {\scriptsize $(Y_{F,A},Y_{F,M})^{Trade}$};
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+    \end{column}
 \end{columns}
 \end{frame}
 
+
+\begin{frame}{From PPF to RS}
+\begin{wideitemize}
+  \item Relative prices and other underlying forces (factor mobility, diminishing product) characterize production
+  \item At optimum: $MRT_{A,,} = \frac{dY_A}{dY_M} = -\frac{P_M}{P_A}=-p$
+  \item As $p$ rises, production tilts to $M$:
+  \begin{itemize}
+      \item RS is upward sloping
+  \end{itemize}
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Relative Supply}
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+   % Prices before and after trade
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^\beta}   
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ((\T+\Tf)/(\K+\Kf))^\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    % Home allocations and outputs before trade
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{\Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{\Zm * \K^\beta * \Ls^(1-\beta)}
+    \pgfmathsetmacro{\Ya}{\Za * \T^\beta * (1-\Ls)^(1-\beta)}
+
+    % Home allocations and outputs after trade
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{\Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{\Zm * \K^\beta * \Lsw^(1-\beta)}
+    \pgfmathsetmacro{\Yaw}{\Za * \T^\beta * (1-\Lsw)^(1-\beta)}
+
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+    \pgfmathsetmacro{\c}{ \P * \Ym +  \Ya }
+    \addplot[thick, brown, domain=0.2:1.7] { \c - \P*x};
+
+    \pgfmathsetmacro{\cw}{ \Pw * \Ymw +  \Yaw }
+    \addplot[thick, brown, domain=0.5:2.2] { \cw - \Pw*x};
+
+
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \node[anchor = south east] at (axis cs:\Ym,\Ya-0.1) {\scriptsize $(Y_{H,A},Y_{H,M})$};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \node[anchor = south west] at (axis cs:\Ymw,\Yaw-0.1) {\scriptsize $(Y_{H,A},Y_{H,M})'$};
+    
+    
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+        \begin{tikzpicture}
+        
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\Ps}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+    \pgfmathsetmacro{\Psw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}   
+    \pgfmathsetmacro{\Qs}{ (\Zm/\Za)^(1/\beta) * ( \K / \T ) * \Ps^((1-\beta)/\beta) }
+    \pgfmathsetmacro{\Qsw}{ (\Zm/\Za)^(1/\beta) * ( \K / \T ) * \Psw^((1-\beta)/\beta) }
+    
+
+    
+    
+
+        \centering
+        \begin{axis}[
+            xlabel={Relative Quantity: \textcolor{blue}{$\frac{Y_{H,M}}{Y_{H,A}}$}},
+            ymin=0, ymax=1.5,
+            xmin=0, xmax=15,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=7cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % supply home
+        \addplot[domain=0.1:1.1, thick, blue] ({(\Zm/\Za)^(1/\beta) * ( \K / \T ) * x^((1-\beta)/\beta)}, x);
+        
+        \addplot[dashed, thick] coordinates {(0,\Ps) (\Qs,\Ps)};
+        \node[black, anchor=east] at (axis cs:0,\Ps) {\scriptsize $(P_{M}/P_{A})$};
+        \addplot[dashed, thick] coordinates {(\Qs,\Ps) (\Qs,0)};
+
+
+        \addplot[dashed, thick] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        \node[black, anchor=east] at (axis cs:0,\Psw) {\scriptsize $(P_{M}/P_{A})'$};
+        \addplot[dashed, thick] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+
+        %\addplot[dashed] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        %\node[black] at (axis cs:-0.1,\Psw) {\small $(P_{M}^*/P_{A}^*)^{Trade}$};
+        %\addplot[dashed] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+        % \node[black] at (axis cs:\Qs,-0.15) {\small $\textcolor{red}{RD_i} = \textcolor{blue}{RS_i}$};
+
+        
+        %\addplot[thick, dashed, domain=0:5] {0.5};
+        
+        \end{axis}
+        
+        \end{tikzpicture}
+
+    \end{column}
+\end{columns}    
+\end{frame}
+
+
+
+
+
 \begin{frame}{From preferences to RD}
 \begin{columns}[T]
-\begin{column}{0.58\textwidth}
+\begin{column}{0.5\textwidth}
 \begin{wideitemize}
-  \item Consumer chooses $(D_C,D_T)$ to maximize $U(C,T)$ s.t. $P_C D_C + P_T D_T = Y$
-  \item As $p$ rises, $C$ becomes relatively expensive $\Rightarrow$ \textbf{RD falls} in $p$
-  \item With homothetic preferences, $RD(p)$ does not shift with $Y$ (only with tastes)
-  \item Example (CES with elasticity $\sigma$):
-  \[
-    RD(p)=\frac{D_C}{D_T}
-      =\frac{\alpha}{1-\alpha}\,p^{-\sigma}
-  \]
+  \item Consumer maximize $Q_{M}^{\alpha_i}Q_{A}^{1-\alpha_i}$ s.t. $P_M Q_M + P_A Q_M  = I_i$
+  \item<2-> As $p = P_M/P_A$ rises, $A$ becomes relatively expensive $\Rightarrow$ \blue{RD falls} in $p$
+  \item<3-> Recall optimal demand functions are:
+  \begin{equation*}
+      Q_{M} = \alpha_H \frac{I_H}{P_M}, \qquad       Q_{A} = (1-\alpha_H) \frac{I_H}{P_A} 
+  \end{equation*}
+  \item<4-> Therefore:
+  \begin{eqnarray*}
+      \frac{Q_{M}}{Q_{A}}(p) &=& \frac{\alpha_H}{1-\alpha_H} \frac{I_H/P_M}{I_H/P_A} = \frac{\alpha_H}{1-\alpha_H} \frac{1}{P_M/P_A} \\
+      &=&   \frac{\alpha_H}{1-\alpha_H} \frac{1}{p}
+  \end{eqnarray*}
+  
 \end{wideitemize}
 \end{column}
-\begin{column}{0.38\textwidth}
+\begin{column}{0.5\textwidth}
 \centering
-%\includegraphics[width=\linewidth]{figs/domestic_RD_curve.pdf}
+        \begin{tikzpicture}
+        
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\Ps}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+    \pgfmathsetmacro{\Psw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}   
+    \pgfmathsetmacro{\Qs}{ \alpha/(1-\alpha) / \Ps }
+    \pgfmathsetmacro{\Qsw}{ \alpha/(1-\alpha) / \Psw }
+    
+
+    
+    
+
+        \centering
+        \begin{axis}[
+            xlabel={Relative Quantity: \textcolor{red}{$\frac{Q_{H,M}}{Q_{H,A}}$}},
+            ymin=0, ymax=1.5,
+            xmin=0, xmax=15,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=7cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % supply home
+        \addplot[domain=0.1:1.1, thick, red] (\alpha/(1-\alpha) /x, x);
+        
+        \addplot[dashed, thick] coordinates {(0,\Ps) (\Qs,\Ps)};
+        \node[black, anchor=east] at (axis cs:0,\Ps) {\scriptsize $(P_{M}/P_{A})$};
+        \addplot[dashed, thick] coordinates {(\Qs,\Ps) (\Qs,0)};
+
+
+        \addplot[dashed, thick] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        \node[black, anchor=east] at (axis cs:0,\Psw) {\scriptsize $(P_{M}/P_{A})'$};
+        \addplot[dashed, thick] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+
+        %\addplot[dashed] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        %\node[black] at (axis cs:-0.1,\Psw) {\small $(P_{M}^*/P_{A}^*)^{Trade}$};
+        %\addplot[dashed] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+        % \node[black] at (axis cs:\Qs,-0.15) {\small $\textcolor{red}{RD_i} = \textcolor{blue}{RS_i}$};
+
+        
+        %\addplot[thick, dashed, domain=0:5] {0.5};
+        
+        \end{axis}
+        
+        \end{tikzpicture}
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Domestic equilibrium and gains from trade}
-\begin{columns}[T]
-\begin{column}{0.58\textwidth}
 \begin{wideitemize}
-  \item \textbf{Autarky:} $p^A$ at $RS(p)=RD(p)$
-  \item \textbf{With trade:} price $p^w$ pins production at RS and consumption on budget line with slope $-p^w$
-  \item \textbf{Gains:} trade moves consumption to higher indifference curve if $p^w \neq p^A$
+  \item \blue{Autarky:} $p^A$ at $RS(p^A)=RD(p^A)$
+  \begin{equation*}
+      RS(p) = \frac{Y_{H,M}}{Y_{H,A}}, \qquad RD(p) = \frac{Q_{H,M}}{Q_{H,A}}
+  \end{equation*}
+  \item<2-> \blue{With trade:} $p^w$ at $RS(p^w)=RD(p^w)$
+  \begin{equation*}
+      RS(p) = \frac{Y_{H,M}+ Y_{F,M}}{Y_{H,A} + Y_{F,A}}, \qquad RD(p) = \frac{Q_{H,M} + Q_{F,M}}{Q_{H,A} + Q_{F,A}}
+  \end{equation*}
+  \item<3-> \blue{Production after trade:} price $p^w$ pins production with slope $-p^w$
+  \item<4-> \blue{Gains from trade:} higher affordable indifference curve if $p^w \neq p^A$
 \end{wideitemize}
-\end{column}
-\begin{column}{0.38\textwidth}
-\centering
-%\includegraphics[width=\linewidth]{figs/autarky_RS_RD.pdf}\\[2mm]
-%\includegraphics[width=\linewidth]{figs/trade_budget_and_IC.pdf}
-\end{column}
+\end{frame}
+
+
+\begin{frame}{Graphical representation: gains from trade}
+\addtocounter{framenumber}{-1}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+            \centering
+    \begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{10}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{10}
+
+
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+
+
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{ \Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{ \Zm * \K^(\beta) * \Ls^(1-\beta) }
+    \pgfmathsetmacro{\Ya}{ \Za * \T^(\beta) * (1-\Ls)^(1-\beta) }
+
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{ \Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{ \Zm * \K^(\beta) * \Lsw^(1-\beta) }
+    \pgfmathsetmacro{\Yaw}{ \Za * \T^(\beta) * (1-\Lsw)^(1-\beta) }
+    \pgfmathsetmacro{\Iw}{ \Pw * \Ymw + \Yaw }
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+%    \pgfmathsetmacro{\ws}{ \Pm * \Zm * (1-\beta) * (\K / \Ls )^(\beta) }   
+    % Compute utility level
+    \pgfmathsetmacro{\U}{(\Ya^(\alpha))*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^(\alpha))*(\Qmw^(1 - \alpha))}
+    
+    % Compute prefactor for indifference curve: Qc = A * Qr^(- (1 - alpha)/alpha)
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+    
+    \centering
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{H,M}}, \textcolor{blue}{Y_{H,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{H,A}}, \textcolor{blue}{Y_{H,A}}$},        ymin=0, ymax=3,
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+    
+    % PPF: Q_C = (L/a_C) - (a_R/a_C) * Q_R
+    \addplot[blue, thick, domain=0:1] ({ \Zm * \K^(\beta) * (\L-x)^(1-\beta)}, {\Za * \T^(\beta) * (x)^(1-\beta)});
+
+        % Indifference curve through optimal bundle
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+    
+    \pgfmathsetmacro{\cw}{\Pw * \Yaw + \Ymw}
+    \addplot[name path=WorldLine, thick, brown, domain=0.2:2] {\cw - \Pw*x};
+
+    % Indifference curve before trade
+    \addplot[name path=Uaut, thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+
+    % Shade the area below the world price line and above the original indifference curve
+    \addplot[
+        red!40, 
+        fill opacity=0.3, 
+        forget plot
+    ] fill between[of=WorldLine and Uaut, soft clip={domain=0.45:1.65}];
+    % Labels
+    %\node at (axis cs:3.5,0.03) {\Large $\mathcal{Y}_{US}$};
+    %\node at (axis cs:\Lendow/\aR,-.01) {\scriptsize $\frac{L_{US}}{a_{US,R}}$};
+    %\node at (axis cs:-.75,\Lendow/\aC) {\scriptsize $\frac{L_{US}}{a_{US,C}}$};
+    
+    
+    % Equilibrium point
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym) (\Ya,\Ym-.2)};
+    %\addplot[dashed] coordinates {(\Ya,\Ym-.2) (\Ya+\P*.2,\Ym-.2)};
+    %\node at (axis cs:\Ya + .15,\Ym + 0.1) {\scriptsize $(Q_{i,A},Q_{i,M})$};
+    %\node at (axis cs:\Ya+ .1,\Ym-.25) {\scriptsize $1$};
+    %\node at (axis cs:\Ya- .05,\Ym-.1) {\scriptsize $\frac{P_A}{P_M}$};
+    %\node at (axis cs:\Qr - 2,\Qc + 0.0025) {\scriptsize $\textcolor{blue}{(Y_{US,R},Y_{US,C})}$};
+    
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+
+    \node at (axis cs:\Qmw-.5, \Qaw-.5) {\scriptsize Gains from trade};
+
+    
+    
+    \end{axis}
+    \end{tikzpicture}
+
+                
+    \end{column}
+    \begin{column}{.45\textwidth}
+
+\begin{tikzpicture}
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{1}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{10}
+
+    \pgfmathsetmacro{\Kf}{10}
+    \pgfmathsetmacro{\Tf}{1}
+
+    % Prices before and after trade
+    \pgfmathsetmacro{\P}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^\beta}   
+    \pgfmathsetmacro{\Pw}{\Za/\Zm * ((1-\alpha)/\alpha * ((\T+\Tf)/(\K+\Kf))^\beta)}  
+    \pgfmathsetmacro{\Qw}{(1-\alpha)/\alpha / \Pw}
+
+    % Home allocations and outputs before trade
+    \pgfmathsetmacro{\L}{1}
+    \pgfmathsetmacro{\Omega}{(\P *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Ls}{\Omega / (1+\Omega) * \L}    
+    \pgfmathsetmacro{\Ym}{\Zm * \K^\beta * \Ls^(1-\beta)}
+    \pgfmathsetmacro{\Ya}{\Za * \T^\beta * (1-\Ls)^(1-\beta)}
+
+    % Home allocations and outputs after trade
+    \pgfmathsetmacro{\Omegaw}{(\Pw *\Zm / \Za)^(1/\beta) * \K / \T}      
+    \pgfmathsetmacro{\Lsw}{\Omegaw / (1+\Omegaw) * \L}    
+    \pgfmathsetmacro{\Ymw}{\Zm * \K^\beta * \Lsw^(1-\beta)}
+    \pgfmathsetmacro{\Yaw}{\Za * \T^\beta * (1-\Lsw)^(1-\beta)}
+
+    % Consumption bundles after trade
+    \pgfmathsetmacro{\Iw}{\Pw * \Ymw + \Yaw}
+    \pgfmathsetmacro{\Qaw}{(1-\alpha) * \Iw}
+    \pgfmathsetmacro{\Qmw}{(\alpha)/\Pw * \Iw}
+
+    % Utility levels and indifference-curve constants
+    \pgfmathsetmacro{\U}{(\Ya^\alpha)*(\Ym^(1 - \alpha))}
+    \pgfmathsetmacro{\Uw}{(\Qaw^\alpha)*(\Qmw^(1 - \alpha))}
+    \pgfmathsetmacro{\expo}{\alpha/(1 - \alpha)}
+    \pgfmathsetmacro{\A}{\U^(1/\alpha)}
+    \pgfmathsetmacro{\Aw}{\Uw^(1/\alpha)}
+
+    \begin{axis}[
+        xlabel={Quantity of manufacturing, $\textcolor{red}{Q_{F,M}}, \textcolor{blue}{Y_{F,M}}$},
+        ylabel={Quantity of food, $\textcolor{red}{Q_{F,A}}, \textcolor{blue}{Y_{F,A}}$},
+        ymin=0, ymax=3,
+        xmin=0, xmax=3,
+        yticklabel=\empty,
+        xticklabel=\empty,
+        axis lines=left,
+        enlargelimits=false,
+        clip=false,
+        axis on top,
+        scaled x ticks=false,
+        width=7cm, height=7cm,
+        title style={font=\bfseries}
+    ]
+
+    % PPF
+    \addplot[blue, thick, domain=0:1] ({\Zm * \K^\beta * (\L-x)^(1-\beta)}, {\Za * \T^\beta * (x)^(1-\beta)});
+
+
+    \pgfmathsetmacro{\cw}{\Pw * \Yaw + \Ymw}
+    \addplot[name path=WorldLine, thick, brown, domain=0.2:2] {\cw - \Pw*x};
+
+    % Indifference curve before trade
+    \addplot[name path=Uaut, thick, red!25, domain=0.3:2, samples=100] {\A * x^(-\expo)};
+
+    % Shade the area below the world price line and above the original indifference curve
+    \addplot[
+        red!40, 
+        fill opacity=0.3, 
+        forget plot
+    ] fill between[of=WorldLine and Uaut, soft clip={domain=0.45:1.65}];
+
+    % Indifference curve after trade
+    \addplot[thick, red, domain=0.5:2, samples=100] {\Aw * x^(-\expo)};
+
+    % Points: before trade (gray), production and consumption after trade (black)
+    \addplot[only marks, mark=*, color=gray, mark size=2pt] coordinates {(\Ym, \Ya)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Ymw, \Yaw)};
+    \addplot[only marks, mark=*, color=black, mark size=2pt] coordinates {(\Qmw, \Qaw)};
+
+    % Label for shaded area
+    \node at (axis cs:\Qmw-.5, \Qaw-.5) {\scriptsize Gains from trade};
+
+    \end{axis}
+\end{tikzpicture}
+
+
+    \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{World RS and RD}
-\begin{wideitemize}
-  \item \textbf{World RS:} (roughly) horizontal aggregation of country supplies $\Rightarrow RS^{W}(p)$ is upward sloping with plateaus at specialization ranges
-  \item \textbf{World RD:} aggregation of demands; with homothetic preferences, same shape as domestic RD
-  \item \textbf{World price $p^w$:} intersection $RS^{W}(p)$ and $RD^{W}(p)$
-\end{wideitemize}
-\vspace{2mm}
-\centering
-%\includegraphics[width=0.7\textwidth]{figs/world_RS_RD_equilibrium.pdf}
-\end{frame}
 
-\begin{frame}{Shocks in the STM: what moves what?}
-\begin{wideitemize}
-  \item \textbf{Biased growth in Home}
-    \begin{itemize}
-      \item Export-biased (toward $C$) $\Rightarrow$ shifts $RS_H$ out in $C$ direction $\Rightarrow$ tends to \emph{lower} $p^w$ (worsen Home ToT)
-      \item Import-biased $\Rightarrow$ tends to \emph{raise} $p^w$ (improve Home ToT)
-    \end{itemize}
-  \item \textbf{Foreign shocks} (growth, policy, preference) shift $RS^W$/$RD^W$ and thus $p^w$
-  \item \textbf{Rare case:} Immiserizing growth if ToT deterioration outweighs production gains (needs very steep RD and big growth)
-\end{wideitemize}
-\end{frame}
+\begin{frame}{STM: World Equilibrium}
 
-\begin{frame}{Trade policies in the STM (large country intuition)}
-\begin{wideitemize}
-  \item \textbf{Tariff on imports:} raises domestic relative price of import good $\Rightarrow$ moves along RS/RD; for a \emph{large} country, can improve ToT but creates deadweight loss
-  \item \textbf{Export subsidy:} reduces ToT (foreign price falls for our export good); always welfare-reducing under standard assumptions
-  \item \textbf{Quantifying effects} needs elasticities $\Rightarrow$ gravity (next)
-\end{wideitemize}
+
+\begin{figure}
+    \centering
+        \begin{tikzpicture}
+        
+    \pgfmathsetmacro{\beta}{1/3}
+    \pgfmathsetmacro{\alpha}{0.5}
+
+    \pgfmathsetmacro{\Zm}{1}
+    \pgfmathsetmacro{\K}{4}
+    
+    \pgfmathsetmacro{\Za}{1}
+    \pgfmathsetmacro{\T}{1}
+
+    \pgfmathsetmacro{\Kf}{1}
+    \pgfmathsetmacro{\Tf}{1}
+
+
+    \pgfmathsetmacro{\Ps}{\Za/\Zm * ((1-\alpha)/\alpha * \T / \K)^(\beta)}   
+    \pgfmathsetmacro{\Qs}{(1-\alpha)/\alpha / \Ps}
+
+    \pgfmathsetmacro{\Psf}{\Za/\Zm * ((1-\alpha)/\alpha * \Tf / \Kf)^(\beta)}   
+    \pgfmathsetmacro{\Qsf}{(1-\alpha)/\alpha / \Psf}
+
+    \pgfmathsetmacro{\Psw}{\Za/\Zm * ((1-\alpha)/\alpha * ( ( \T + \Tf) / (\K+\Kf ) )^(\beta)}   
+    \pgfmathsetmacro{\Qsw}{(1-\alpha)/\alpha / \Psw}
+
+    
+    
+
+        \centering
+        \begin{axis}[
+            xlabel={Relative Quantity: \textcolor{red}{$\frac{Q_{H,M} + Q_{F,M}}{Q_{H,A} + Q_{F,A}}$}, \textcolor{blue}{$\frac{Y_{H,M} + Y_{F,M}}{Y_{H,A} + Y_{F,A}}$}},
+            ymin=0, ymax=3,
+            xmin=0, xmax=2,
+            yticklabel=\empty,
+            xticklabel=\empty,
+            axis lines=left,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            scaled x ticks=false,
+            width=9cm, height=7cm,
+            title style={font=\bfseries}
+        ]
+        
+        % demand
+        \addplot[domain=0.4:1.7, thick, red] (x, {(1-\alpha)/\alpha / x});
+        % supply home
+        \addplot[domain=0.2:0.7, blue!50] ({(\Zm/\Za)^(1/\beta) * ( \K / \T ) * x^((1-\beta)/\beta)}, x);
+        % supply foreign
+        \addplot[domain=0.2:1.2, blue!50] ({(\Zm/\Za)^(1/\beta) * ( \Kf / \Tf ) * x^((1-\beta)/\beta)}, x);
+        % supply world
+        \addplot[domain=0.2:0.9, thick, blue] ({(\Zm/\Za)^(1/\beta) * ( (\K+\Kf) / (\T+\Tf) ) * x^((1-\beta)/\beta)}, x);
+        %\addplot[domain=0.2:1.3, thick, blue] (x, {(\Zm/\Za)^(- 1/\beta) * x^((1-\beta)/\beta) * ( (\Kf + \K) / ( \Tf + \T ) ) });
+        
+        \addplot[dashed, gray] coordinates {(0,\Ps) (\Qs,\Ps)};
+        \node[black, anchor=north east] at (axis cs:0,\Ps) {\scriptsize $(P_{M}^*/P_{A}^*)^H$};
+        \addplot[dashed, gray] coordinates {(\Qs,\Ps) (\Qs,0)};
+
+        \addplot[dashed, gray] coordinates {(0,\Psf) (\Qsf,\Psf)};
+        \node[black, anchor=south east] at (axis cs:0,\Psf) {\scriptsize $(P_{M}^*/P_{A}^*)^F$};
+        \addplot[dashed, gray] coordinates {(\Qsf,\Psf) (\Qsf,0)};
+
+        \addplot[dashed, thick] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        \node[black, anchor=east] at (axis cs:0,\Psw) {\scriptsize $(P_{M}^*/P_{A}^*)^{Trade}$};
+        \addplot[dashed, thick] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+
+        %\addplot[dashed] coordinates {(0,\Psw) (\Qsw,\Psw)};
+        %\node[black] at (axis cs:-0.1,\Psw) {\small $(P_{M}^*/P_{A}^*)^{Trade}$};
+        %\addplot[dashed] coordinates {(\Qsw,\Psw) (\Qsw,0)};
+        % \node[black] at (axis cs:\Qs,-0.15) {\small $\textcolor{red}{RD_i} = \textcolor{blue}{RS_i}$};
+
+        
+        %\addplot[thick, dashed, domain=0:5] {0.5};
+        
+        \end{axis}
+        
+        \end{tikzpicture}
+        \caption{World Trade Equilibrium}
+    \label{fig: trade-eqm}
+\end{figure}
+
 \end{frame}
 
 % ---------------------------
 % Gravity — Concepts
 % ---------------------------
 
+
+
+\begin{frame}{From the Standard Trade Model to Trade Flows}
+\small
+\begin{itemize}
+    \item \blue{Production side:} suppose each good $p$ in country $i$ requires $a_{i,p}$ units of labor per unit output \\
+    \textcolor{gray}{(as in the Ricardian model)}
+
+    \item<2-> Goods produced and sold in the domestic market are priced to their MC:
+          \[
+          P_{p,i} = a_{i,p} w_i \quad \text{(zero profits)}
+          \]
+    \item<3-> \blue{Demand side:} Cobb--Douglas preferences, as usual:
+          \[
+          U_i = Q_{i,M}^{\alpha_i} Q_{i,A}^{1-\alpha_i}, 
+          \quad Q_{i,M} = \alpha_i \frac{w_iL_i}{P_{i,A}}.
+          \]
+          Each country spends a fixed share $\alpha_i$ of income on computers and $1-\alpha_i$ on roses.
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Iceberg Trade Costs}
+\small
+\begin{itemize}
+    \item<1-> \blue{Iceberg trade cost}:
+          to deliver one unit abroad, exporters must ship $\tau_{s\to d}\ge 1$ units.
+    \item<2-> Delivered price in the destination:
+          \[
+          \underbrace{P_{sd,M}}_{\text{price at destination}} = \underbrace{\tau_{s\to d}}_{\text{trade cost} \ge1} \times \underbrace{P_{s,M}}_{\text{price at source}} = \tau_{s\to d} \times \, a_{M,s}\, w_s
+          \]
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{From Quantities to the Gravity Equation}
+\small
+
+\begin{wideitemize}
+    \item Resulting import demand (quantities)
+\[
+Q_{M,s\to d} = 
+\alpha_d \frac{w_d L_d}{\tau_{s\to d}\, a_{C,s}\, w_s} =  \underbrace{\frac{1}{ a_{M,s}\, w_s}}_{\text{source factors}} \times \underbrace{\alpha_d w_d L_d}_{\text{destination factors}} \times \underbrace{\frac{1}{\tau_{s\to d}}}_{\text{bilateral trade costs}}
+\]
+\textcolor{gray}{(Imports rise with importer income, and fall with trade and production costs.)}
+
+\onslide<2->{
+\begin{itemize}
+    \item increasing in the importing country’s income ($w_d L_d$),
+    \item decreasing in bilateral trade costs ($\tau_{s \to d}$),
+    \item decreasing in the exporter’s unit labor requirement ($a_{p,s}$), and
+    \item decreasing in the exporter’s wage ($w_s$), which represent production costs.
+\end{itemize}
+}
+
+\item<3-> In general, exports from the $s$ to $d$ will satisfy:  
+
+\[
+\underbrace{X_{sd}}_{\substack{\text{trade flows}\\ \text{from s to d} }} \propto \frac{\underbrace{\omega_{s}}_{\text{source factors}} \times \underbrace{\gamma_{d}}_{\text{destination factors}}}{\underbrace{\tau_{sd}^{\theta}}_{\text{bilateral trade costs}}} 
+\]
+
+\end{wideitemize}
+
+
+\end{frame}
+
+\section{Gravity equation}
+
 \begin{frame}{Gravity: Physics vs. Economics}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\textbf{Newton's Law of Gravitation}
+\blue{Newton's Law of Gravitation}
 \[
 F_{ij} \;=\; G\,\frac{m_i\,m_j}{r_{ij}^{\,2}}
 \]
@@ -1220,7 +3043,8 @@ F_{ij} \;=\; G\,\frac{m_i\,m_j}{r_{ij}^{\,2}}
 \end{wideitemize}
 \end{column}
 \begin{column}{0.48\textwidth}
-\textbf{Trade Gravity (reduced form)}
+\onslide<2->{
+\blue{Trade Gravity (reduced form)}
 \[
 X_{ij} \;=\; K \,\frac{Y_i\,Y_j}{d_{ij}^{\,\theta}}
 \]
@@ -1230,156 +3054,168 @@ X_{ij} \;=\; K \,\frac{Y_i\,Y_j}{d_{ij}^{\,\theta}}
   \item $\theta>0$: trade‐cost elasticity (empirical)
   \item $K$: scaling constant / fixed effects
 \end{wideitemize}
+}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{From DFS with trade costs to a gravity equation (setup)}
-\small
-\textbf{Environment (DFS):}
-\begin{wideitemize}
-  \item Two countries $i,j$; unit interval of goods $g\in[0,1]$ ordered by comparative advantage. Technology summarized by $A_g \equiv a_{j,g}/a_{i,g}$, strictly decreasing in $g$. {\footnotesize (sorting \& unit costs) } \,\,\textit{Pg = min\{$w_i a_{i,g},\, w_j a_{j,g}$\}}.  \,\,{\scriptsize \textcolor{gray}}
-  \item Iceberg trade costs $\tau_{ij}>1$: one unit delivered requires $\tau_{ij}$ shipped. {\scriptsize  }
-  \item Identical, homothetic (equal-weight) preferences $\Rightarrow$ constant spending density over the unit interval of goods. {\scriptsize \textcolor{gray}}
-\end{wideitemize}
-
-\textbf{Export condition:} $i$ is the cheapest \emph{at destination $j$} iff
-\[
-\tau_{ij}\,w_i a_{i,g} \;\le\; w_j a_{j,g}
-\quad\Longleftrightarrow\quad
-A_g \;\equiv\; \frac{a_{j,g}}{a_{i,g}} \;\ge\; \tau_{ij}\,\frac{w_i}{w_j}.
-\]
-Thus $i$ sells to $j$ all goods with $A_g$ above a cutoff; equivalently, $j$ buys from $i$ a share of goods
-\[
-s_{ij} \;=\; \Pr\!\left[A_g \ge \tau_{ij}\frac{w_i}{w_j}\right].
-\]
-{\scriptsize \textcolor{gray}{(Trade-cost inequalities and export cutoffs) }}
-
-\textbf{Value of imports by $j$ from $i$:}
-\[
-X_{ij} \;=\; s_{ij}\,E_j,\qquad \text{with }E_j=w_j L_j \text{ (national expenditure/income).}
-\]
-{\scriptsize \textcolor{gray}{(balanced spending across goods; income/expenditure identity)}}
+\begin{frame}{Gravity in international trade}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/gravity.png}
+    \caption{Estimated as $\ln X_{sd,t} = 16.37 - 1.05 \ln {distance}_{sd} + e_{sd,t}$; $N=840,165$.}
+\end{figure}
 
 \end{frame}
 
-\begin{frame}{A one-line gravity from DFS (Pareto trick)}
+\begin{frame}{Gravity Regression Results}
+\centering
 \small
-\textbf{Assumption on technology dispersion (for tractability):}
-Let the relative productivity $A_g$ have a Pareto tail with shape $\theta>0$:
-\[
-\Pr[A_g \ge a] = a^{-\theta}\quad \text{for } a\ge 1.
-\]
-Then the export \emph{share} of goods that $i$ sells to $j$ is
-\[
-s_{ij}=\Pr\!\left[A_g \ge \tau_{ij}\frac{w_i}{w_j}\right]
-= \big(\tau_{ij}\tfrac{w_i}{w_j}\big)^{-\theta}.
-\]
-\textbf{Trade flow:}
-\[
-\boxed{\,X_{ij} \;=\; E_j\;\tau_{ij}^{-\theta}\;\Big(\frac{w_i}{w_j}\Big)^{-\theta}\,}
-\quad\text{with } E_j=w_j L_j.
-\]
+\begin{tabular}{lccccc}
+\toprule
+ Dep variable: $\ln(\text{trade})$.
+& \textbf{Coef.} & \textbf{Std. Err.} & \textbf{$t$} & \textbf{$P> $\mid| t \mid|$ } & \textbf{[95\% Conf. Int.]} \\
+\midrule
+Intercept & 16.3673 & 0.046 & 354.512 & 0.000 & [16.277,\; 16.458] \\
+$\ln(\text{distance})$ & -1.0480 & 0.005 & -197.465 & 0.000 & [-1.058,\; -1.038] \\
+\midrule
+\textbf{Observations} & \multicolumn{5}{c}{840{,}167} \\
+\textbf{R-squared} & \multicolumn{5}{c}{0.044} \\
+\textbf{Adj. R-squared} & \multicolumn{5}{c}{0.044} \\
+\textbf{F-statistic} & \multicolumn{5}{c}{38{,}990 (p = 0.000)} \\
+\textbf{Log-Likelihood} & \multicolumn{5}{c}{-2{,}350{,}900} \\
+\textbf{AIC / BIC} & \multicolumn{5}{c}{4{,}702{,}000 / 4{,}702{,}000} \\
+\bottomrule
+\end{tabular}
 
-\textbf{From structure to empirical gravity:}
-\begin{wideitemize}
-  \item Set $\tau_{ij}=d_{ij}^{\kappa}\times\text{(other frictions)} \;\Rightarrow\; X_{ij}\propto d_{ij}^{-\kappa\theta}$. 
-  \item Relative wages $w_i/w_j$ (which in DFS adjust to clear trade and depend on global cutoffs) are absorbed by exporter/importer fixed effects; with many partners this is the “multilateral resistance” idea. So in practice:
-  \[
-  X_{ij} \;=\; \underbrace{\phi_i}_{\text{exp.\ FE}} \;\underbrace{\psi_j}_{\text{imp.\ FE}}\; d_{ij}^{-\kappa\theta}\;\times\;(\text{observable cost shifters}) .
-  \]
-  \item Normalizing $\phi_i\propto Y_i$ and $\psi_j\propto Y_j$ yields the classroom gravity form 
-  $X_{ij}=K\,\dfrac{Y_i Y_j}{d_{ij}^{\,\theta^\prime}}$ with $\theta^\prime=\kappa\theta$.
-\end{wideitemize}
-
+\vspace{0.3cm}
+\footnotesize
+\textit{Notes:} Standard errors assume correctly specified covariance matrix.\\
 \end{frame}
+
+
 
 \begin{frame}{Why gravity?}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
 \begin{wideitemize}
   \item Connects trade flows to economic size and trade costs
-  \item \textbf{Workhorse} for counterfactuals (tariffs, borders, infrastructure) and for mapping STM shocks to data
-\end{wideitemize}
-\end{frame}
+  \item \blue{Workhorse} for counterfactuals (tariffs, borders, infrastructure) and for mapping STM shocks to data
+  \item<2-> It works!
+  \end{wideitemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\onslide<3->{
+  \begin{figure}
+      \centering
+      \includegraphics[width=\linewidth]{figs/yoto-gravity.png}
+      \caption{(\href{https://www.lebow.drexel.edu/sites/default/files/2025-04/202519-cgpa-gravity-undergrads.pdf}{Yotov, 2025})}
+      \label{fig:gravity-yotov}
+  \end{figure}
+}
+\end{column}
+\end{columns}
 
-\begin{frame}{Structural gravity (Anderson–van Wincoop)}
 \begin{wideitemize}
-  \item \textbf{Theory-consistent form:}
-  \[
-   X_{ij}=\frac{Y_i\,E_j}{Y_W}\left(\frac{\tau_{ij}}{\Pi_i P_j}\right)^{1-\sigma}
-  \]
-  where $Y_i$ is production, $E_j$ expenditure, $\tau_{ij}$ bilateral costs, $\sigma$ elasticity of substitution,
-  $\Pi_i$ outward MR, $P_j$ inward MR.
-  \item \textbf{Empirical implementation (PPML):}
-  \[
-   X_{ij}=\exp\!\left[\beta_1\ln \text{dist}_{ij}+\beta_2\text{border}_{ij}+\cdots
-   + \delta^{S}_{i} + \delta^{D}_{j}\right]+\varepsilon_{ij}
-  \]
-  with exporter and importer (often exporter-year/importer-year) fixed effects absorbing $Y_i, E_j$ and MR terms.
+
+
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Gravity: estimation notes (for Data Lab)}
+\begin{frame}{Trade Gravity: Generalizing}
+
 \begin{wideitemize}
-  \item \textbf{Use PPML}, not OLS on $\ln X_{ij}$: handles zeros and heteroskedasticity
-  \item Include \textbf{high-dimensional FEs}: exporter-year and importer-year (or 3-way when panel)
-  \item Standard cost proxies: $\ln$ distance, contiguity, common language, colonial ties, RTA, WTO, tariffs, NTMs
-  \item \textbf{Elasticity of trade costs:} $1-\sigma$ scales coefficients; to back out $\sigma$ use separate price/markups or literature priors
+    \item Note that: 
+    \[ X_{ij} \;=\; K \,\frac{Y_i\,Y_j}{d_{ij}^{\,\theta}} \]
+
+    is a special case of:
+
+    \[ X_{ij} \propto \frac{\underbrace{\omega_{i}}_{\text{source factors}} \times \underbrace{\gamma_{j}}_{\text{destination factors}}}{\underbrace{\tau_{ij}^{\theta}}_{\text{bilateral trade costs}}}  \]
+
+    \item So the Standard Trade Models (and most trade models we use) satisfy the gravity equation
 \end{wideitemize}
+
 \end{frame}
 
-% ---------------------------
-% Applications (intuition)
-% ---------------------------
-\begin{frame}{Putting STM $\rightarrow$ gravity together}
+
+\begin{frame}{What are bilateral trade costs?}
+
 \begin{wideitemize}
-  \item A \textbf{Home export-biased productivity shock} shifts $RS_H$ right
-  \item World $p^w$ falls for export good (ToT $\downarrow$ for Home)
-  \item In gravity, $\tau_{ij}$ proxies (infrastructure, RTAs, tariffs) shift bilateral $X_{ij}$
-  \item Combine: use gravity to \textbf{measure elasticities}, then map STM shocks to quantitative changes in $X_{ij}$ and welfare
+    \item We have been using $\tau_{sd}$ to denote ``bilateral trade costs''
+    \item<2-> Conceptually, if producers want one unit of a good to arrive at the destination, they prduce $\tau_{sd}\ge1$. 
+    \item<3-> But what could influence?
+    \begin{itemize}
+        \item Distance
+        \item Common/different language
+        \item Shared colonial history
+        \item Shared border
+        \item Geographical features 
+        \item Transportation methods
+        \item Pirates/bandits, etc
+        \item Tariffs
+    \end{itemize}
+    \item<4-> We will explore these more during one of the data labs. For now, will give you some flavor on why trade costs matter.
+
 \end{wideitemize}
+
+
 \end{frame}
 
-\begin{frame}{In-class exercise (short)}
-\begin{wideitemize}
-  \item Sketch $RS$/$RD$ for a country with:
-  \begin{itemize}
-    \item (i) HO endowments that favor $C$; (ii) preferences CES with $\sigma>1$
-  \end{itemize}
-  \item Identify autarky $p^A$. Suppose world $p^w>p^A$. Mark production, consumption, and trade bundle.
-  \item Now apply a small import tariff on $T$. Show production and consumption wedges and discuss ToT vs. DWL.
-\end{wideitemize}
+\begin{frame}{Measuring Trade Costs: \textit{Railroads of the Raj}}
+\begin{itemize}
+    \item \blue{Goal:} Quantify how India's 19th–20th century railroad expansion reduced trade costs (and raised welfare).
+    \item<2-> \blue{Idea:} When trade is costly, identical goods sell for different prices across regions:
+    \[
+    p_i = p_j \times \tau_{ij}
+    \quad \implies \quad 
+    \ln(p_i/p_j) = \ln(\tau_{ij})
+    \]
+    \item<3-> \blue{Natural experiment}: expansion of India's railway system during colonial times.
+    \item<4-> \blue{Salt as a reference good}: tradeable and homogeneous; limited local production.
+    \item<5-> \blue{Intuition}: expansion of railroads reduce trade costs $\to$ prices of salt should converge.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{What to remember}
-\begin{wideitemize}
-  \item STM unifies technology/endowments + preferences via $RS$–$RD$
-  \item ToT is the critical link from world prices to welfare
-  \item Gravity is the empirical bridge: it maps frictions to flows (and elasticities) for policy counterfactuals
-\end{wideitemize}
+\begin{frame}{Expansion of India's railroad system}
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\linewidth]{figs/donaldson-raj.png}
+    \caption{Source: \href{https://dave-donaldson.com/wp-content/uploads/2018/03/Donaldson_RRRaj_AER.pdf}{(Donaldson, 2018)}}
+    \label{fig:raj}
+\end{figure}
+    
 \end{frame}
 
-% ---------------------------
-% (Optional) Appendix slides
-% ---------------------------
-\begin{frame}{Appendix: quick algebra (CES demand)}
-\small
-With CES utility $U=\left[\alpha C^{\frac{\sigma-1}{\sigma}}+(1-\alpha)T^{\frac{\sigma-1}{\sigma}}\right]^{\frac{\sigma}{\sigma-1}}$ and income $Y$:
-\[
-  D_C=\alpha \left(\frac{P_C}{P}\right)^{-\sigma}\frac{Y}{P_C},\quad
-  D_T=(1-\alpha)\left(\frac{P_T}{P}\right)^{-\sigma}\frac{Y}{P_T}
-\]
-\[
-  RD(p)=\frac{D_C}{D_T}=\frac{\alpha}{1-\alpha}\,p^{-\sigma}
-\]
+
+\begin{frame}{Measuring Trade Costs: \textit{Railroads of the Raj}}
+\begin{itemize}
+    \item Donaldson (2018) uses \blue{price differences} between district pairs as a \textit{revealed measure} of trade frictions.
+     \item Empirical specification:
+    \[
+    \ln\!\left(\frac{p_{it}}{p_{jt}}\right)
+    = \alpha + \beta\,\text{Effective Distance}_{ijt} + \gamma X_{ijt} + \varepsilon_{ijt}
+    \]
+    
+    \item Effective distance:
+    \begin{itemize}
+        \item shortest available travel distance, given the transport network available in a given year — taking into account which transport modes exist (rail, river, road) and their relative cost-efficiency.
+    \end{itemize}
+    \item $\beta>0$  $\Rightarrow$  rail connection $\Rightarrow$ smaller effective distance $\Rightarrow$ smaller price gaps $\Rightarrow$ lower trade costs.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Appendix: welfare and ToT (Home)}
-\small
-\begin{wideitemize}
-  \item Welfare increases if a shock raises the budget line at the chosen consumption (higher $p^w$ for export good, holding PPF)
-  \item Large-country tariff: first-order ToT gain vs. second-order efficiency loss $\Rightarrow$ optimal tariff $\propto 1/\varepsilon^{*}$ (foreign export supply elasticity)
-\end{wideitemize}
+
+\begin{frame}{Results}
+\begin{figure}
+    \centering
+    \includegraphics[width=.55\linewidth]{figs/donaldson-regressions.png}
+    \caption{Source: \href{https://dave-donaldson.com/wp-content/uploads/2018/03/Donaldson_RRRaj_AER.pdf}{Donaldson, 2018}}
+    \label{fig:raj}
+\end{figure}
+    
 \end{frame}
+
+
 
 
 \end{document}
