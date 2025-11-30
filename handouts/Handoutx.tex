@@ -1,0 +1,186 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{times}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{natbib}\bibpunct{(}{)}{,}{}{}{,}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{comment}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[colorlinks,linkcolor=blue,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[title,titletoc]{appendix}
+\usepackage{enumitem}
+\usepackage{subcaption}  % For subfigures
+\usepackage{lscape}      % For landscape orientation if needed
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+
+% commands
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\figpath}{fig/}
+\newcommand{\tablepath}{table/}
+\newcommand{\rmdi}{\mathrm{d}}
+
+% table and figure formatting
+%\input{formats}
+
+% page size
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-1.7in}
+\setlength{\oddsidemargin}{.85in}
+\addtolength{\oddsidemargin}{-.85in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-\headheight}
+\addtolength{\textheight}{-\headsep}
+\addtolength{\textheight}{-\footskip}
+\addtolength{\textheight}{-1.75in}
+\setlength{\topmargin}{1in}
+\addtolength{\topmargin}{-1in}
+
+\begin{document}
+
+\title{\textbf{Hecksher-Ohlin Model and the Three Big Theorems of International Trade}}
+\author{\large%
+\setcounter{footnote}{0}%
+Carlos G\'{o}es \\[-3pt] \textit{\small IFC, World Bank Group}
+}
+\maketitle
+
+\paragraph{Intro: gravity in trade and physics.} 
+The name of the \textit{gravity equation} in international trade comes from its striking resemblance to Newton’s law of universal gravitation in physics.  In physics, the gravitational force between two objects is proportional to the product of their masses and inversely proportional to the square of the distance between them.  Similarly, in economics, the value of trade between two countries is proportional to the product of their economic sizes and inversely proportional to the trade frictions separating them. In both cases, larger and closer entities exert a stronger “pull” on each other: massive planets attract each other more, just as large and nearby economies tend to trade more intensively.  Table \ref{tab:gravity-comparison} summarizes this parallel.
+
+\begin{table}[htbp!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{0.45\textwidth} p{0.45\textwidth}}
+\multicolumn{1}{c}{\textbf{Gravity in Physics}} & 
+\multicolumn{1}{c}{\textbf{Gravity in Trade}} \\[4pt]
+\hline
+\[
+F_{ij} = G \frac{M_i M_j}{D_{ij}^{2}}
+\] &
+\[
+X_{ij} = \tilde{G} \frac{Y_i Y_j}{T_{ij}^{\theta}}
+\] \\[4pt]
+where: &
+where: \\[2pt]
+$F_{ij}$ is the gravitational force between objects $i$ and $j$; &
+$X_{ij}$ is the value of trade flows between countries $i$ and $j$; \\[2pt]
+$G$ is the gravitational constant in physics; &
+$\tilde{G}$ is the gravitational constant in trade; \\[2pt]
+$M_i, M_j$ are the masses of objects $i$ and $j$; &
+$Y_i, Y_j$ are the economic sizes (GDPs) of countries $i$ and $j$; \\[2pt]
+$D_{ij}$ is the distance between objects $i$ and $j$; &
+$T_{ij}$ denotes the trade costs or frictions between countries $i$ and $j$; \\[2pt]
+$2$ is the elasticity of gravitational force w.r.t.\ distance; &
+$\theta > 0$ is the elasticity of trade flows w.r.t.\ trade costs. \\[4pt]
+\hline
+\end{tabular}
+\caption{Gravity in Physics vs.\ Gravity in Trade}
+\label{tab:gravity-comparison}
+\end{table}
+
+
+
+\paragraph{Production} Consider a world with 2 countries $i \in \{ US, COL\}$ and two products $p \in \{ C, R\}$. In country $i$, there are $L_i$ units of labor (worker-hours) available, which we call the labor endowment. An inherent technological characteristic of country $i$ are \textbf{unit labor requirements}, i.e. to produce one unit of good $p$ firms in country $i$ use $a_{i,p}$ units of labor. In country $i$, firms producing good $p$ maximize profits under perfect competition:
+        \begin{equation}\label{eq: production}
+            \max_{Y_{i,p}} \pi_{i,p} = \max_{Y_{i,p}} P_{i,p}Y_{i,p} - w_i a_{i,p} Y_{i,p} 
+        \end{equation}
+
+Labor is mobile. This means that labor can be distributed for the production of either good, such that and the same pool of workers can be allocated to either good. For that reason, total labor endowment must respect the following constraint:
+
+\begin{equation}\label{eq: ppf-inequality}
+    \underbrace{a_{i,C} \times Y_{i,C}}_{\substack{\text{labor used in} \\ \text{production of } C}} + \underbrace{a_{i,R} \times Y_{i,R}}_{\substack{\text{labor used in} \\ \text{production of } R}} \le \underbrace{L_i}_{\substack{\text{total labor} \\ \text{available in } i}}
+\end{equation}
+
+
+\paragraph{Demand} Workers in each country $i$ inelastically supply their labor and earn labor income $w_i L_i$. They have preferences over goods $p \in \{ C, R\}$. They purchase quantities $Q_{i,C}, Q_{i,R}$ for prices $P_{i,C}, P_{i,R}$ and exhaust their labor income, maximizing:
+
+\begin{equation*}
+    \max_{\{Q_{i,C}, Q_{i,R}\}} U_i(Q_{i,C}, Q_{i,R}) \equiv Q_{i,C}^{\alpha_i} Q_{i,R}^{1-\alpha_i} \qquad s.t. \qquad P_{i,C} Q_{i,C} + P_{i,R} Q_{i,R} = w_i L_i
+\end{equation*}
+As we have seen before, optimal demand functions satisfy:
+
+\begin{equation}\label{eq: demand}
+    Q_{i,C} = \alpha_i  \frac{w_i L_i}{P_{i,C}}, \qquad Q_{i,R} = (1-\alpha_i) \frac{w_i L_i}{P_{i,R}}
+\end{equation}
+\normalsize
+
+Under Cobb-Douglas preferences, each consumer allocates a fixed share of their income—determined by their preference parameter $(\alpha_i, 1-\alpha_i)$ to each good, purchasing quantities inversely proportional to the price of that good. This holds regardless of whether consumers are in autarky or trade. 
+
+\paragraph{Production prices and trade costs} If goods $g$ is produced at country $i$, given perfect competition (zero profit) they will equal the marginal cost of producing one extra unit of a good: 
+
+\begin{equation}\label{eq: autarky-prices}
+            P_{i,g} = a_{i,g} w_i
+\end{equation}
+
+So far, we assumed that trade between countries was frictionless. Let us now introduce a simple \textbf{iceberg trade cost} $\tau_{s \to d}\ge1$, where $s$ and $d$ denote the \emph{source} and \emph{destination} countries, respectively. This means that to deliver one unit of a good from $s$ to $d$, exporters must ship $\tau_{sd}$ units. Hence, only $1/\tau_{sd}$ of the shipped quantity actually arrives.
+
+\medskip
+\noindent
+Suppose, as before, that the United States (\textit{US}) specializes in computers ($C$) and
+Colombia (\textit{COL}) in roses ($R$).  
+Then the \textbf{delivered price} in Colombia for an imported computer produced in the US is
+\[ P_{C,COL} = \tau_{US\to COL}\, P_{C,US} = \tau_{US\to COL}\, a_{C,US}\, w_{US}. \]
+Similarly, the delivered price in the US for an imported rose produced in Colombia is
+\[ P_{R,US} = \tau_{COL\to US}\, P_{R,COL} = \tau_{COL\to US}\, a_{R,COL}\, w_{COL}. \]
+
+
+\paragraph{Gravity structure} 
+Consider Colombia’s imports of computers from the United States.  From \eqref{eq: demand}, total demand for computers in Colombia is
+\[
+Q_{COL,C} = \alpha_{COL} \frac{w_{COL} L_{COL}}{P_{C,COL}}.
+\]
+Under specialization and iceberg trade costs, the price of computers delivered in Colombia is given by
+\[
+P_{C,COL} = \tau_{US\to COL}\, a_{C,US}\, w_{US}.
+\]
+Replacing this into the demand equation yields
+\begin{equation}\label{eq: gravity-quantities}
+    Q_{US \to COL} 
+    = \alpha_{COL}\, 
+      \frac{w_{COL} L_{COL}}
+           {\tau_{US\to COL}\, a_{C,US}\, w_{US}}.
+\end{equation}
+
+Expression \eqref{eq: gravity-quantities} has the canonical \textbf{gravity form in quantities}.  Imports from source $s$ to destination $d$ depend positively on the \textbf{economic size} of the destination (its income $w_d L_d$),  and negatively on both the \textbf{bilateral trade cost} $\tau_{sd}$  and the \textbf{production cost} in the exporter $(a_{s,p} w_s)$. Each bilateral trade flow is:
+\begin{itemize}[noitemsep]
+    \item increasing in the importing country’s income ($w_d L_d$),
+    \item decreasing in bilateral trade costs ($\tau_{sd}$),
+    \item decreasing in the exporter’s unit labor requirement ($a_{p,s}$), and
+    \item decreasing in the exporter’s wage ($w_s$), which represent trade costs.
+\end{itemize}
+
+
+
+In general, exports from the $s$ to $d$ will satisfy:  
+
+\[
+X_{sd} \propto \frac{\underbrace{\omega_{s}}_{\text{source factors}} \times \underbrace{\gamma_{d}}_{\text{destination factors}}}{\underbrace{\tau_{sd}^{\theta}}_{\text{bilateral trade costs}}} 
+\]
+
+
+\paragraph{Gravity Equation (log form).}
+Taking logs of the computer flow from the US to Colombia,
+\[
+\ln X_{sd}
+   = \ln \omega_s + \ln \gamma_d - \theta\log  \tau_{sd}
+\]
+
+\end{document}
+
+
+
+

@@ -1,0 +1,147 @@
+\documentclass[11pt,letterpaper]{exam}
+
+\newtheorem{proposition}{Proposition}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns, pgfplots.fillbetween}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{subfigure}
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[top=0.5in, headsep=0pt]{geometry}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\newcommand{\figpath}{figs/}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+\begin{document}
+\begin{center}
+\Large{\textsc{International Trade Theory and Policy}}\\[4pt]
+\Large{ECON 2181 \;--\; Fall 2025}\\[6pt]
+\large Carlos Góes, Ph.D. \\
+\textit{Professorial Lecturer}\\
+\href{mailto:c.bezerradegoes@gwu.edu}{c.bezerradegoes@gwu.edu} \\
+\end{center}
+
+\bigskip
+
+\begin{center}
+\Large{\textsc{Problem Set 4: The Heckscher–Ohlin Model}}
+\end{center}
+
+\begin{questions}
+
+\question \textbf{Factor Intensities Across Countries}
+
+In the United States, where Internet services are cheap, the ratio of capital to labor used is higher than that of capital used in accounting services. But in other countries, where Internet services are expensive and labor is cheap, it is common to use less capital and more labor than in the United States. 
+
+\begin{parts}
+    \part Through the lens of the HO model, can we still say that Internet services are \emph{capital intensive} compared to accounting services? Why or why not?
+    \part Relate your answer to the definition of factor intensity in the Heckscher–Ohlin model.
+\end{parts}
+
+\question \textbf{Resource Abundance and Trade Patterns}
+
+\begin{quote}
+``The world’s poorest countries cannot find anything to export. There is no resource that is abundant—certainly not capital or land, and in small poor nations not even labor is abundant.’’
+\end{quote}
+
+Discuss this statement in light of the Heckscher–Ohlin model. How would differences in relative factor endowments still predict patterns of trade among poor countries?
+
+\question \textbf{Immigration and Factor Returns}
+
+Most U.S. immigrants are represented by Mexican blue-collar workers who are more likely to work in risky jobs than U.S.-born workers, with a positive effect on productivity.
+
+\begin{parts}
+    \part According to the Heckscher–Ohlin model, how does an inflow of labor affect wages and returns to capital?
+    \part From the perspective of U.S. union members, is limiting immigration a shortsighted or rational policy? 
+    \part How would your answer differ under the Specific Factors model?
+\end{parts}
+
+\question \textbf{Outsourcing and the Export of White-Collar Jobs}
+
+Outsourcing accounting services, especially to India, has become increasingly attractive for many U.S. companies. This shift involves large startup and communication costs, while U.S. firms experience both downsizing and rising productivity.
+
+\begin{parts}
+    \part Use the Heckscher–Ohlin model to explain why outsourcing white-collar jobs may arise as part of international specialization.
+    \part Is the export of white-collar jobs to India necessarily a loss for the United States? Discuss in terms of changes in factor prices and welfare.
+\end{parts}
+
+\question \textbf{Analytical Exercise: Stolper–Samuelson Theorem}
+
+Consider two sectors---cloth ($C$) and tech ($T$)---with Cobb–Douglas technologies:
+\[
+Y_g = K_g^{\beta_g} L_g^{1-\beta_g}, \quad g \in \{C,T\}, \quad \beta_T > \beta_C.
+\]
+
+\begin{parts}
+    \part Derive the relationship between the goods price ratio $\tfrac{P_C}{P_T}$ and the factor price ratio $\tfrac{w}{r}$.
+    \part Show that $\tfrac{P_C}{P_T}$ is increasing in $\tfrac{w}{r}$.
+    \part Using a diagram similar to Figure~1 in the handout, explain how an increase in $\tfrac{P_C}{P_T}$ affects $(w/r)$ and capital–labor ratios across sectors.
+\end{parts}
+
+\question \textbf{Rybczynski Theorem and Sectoral Output}
+
+Given the capital constraint:
+\[
+\frac{\bar{K}}{\bar{L}} = \frac{K_C}{L_C}\ell_C + \frac{K_T}{L_T}(1-\ell_C),
+\]
+assume goods prices are fixed and that tech ($T$) is the capital-intensive sector.
+
+\begin{parts}
+    \part Interpret the result in terms of how an increase in the capital endowment affects the allocation of labor and output across sectors.
+    \part Illustrate the change using a PPF diagram.
+\end{parts}
+
+\question \textbf{Heckscher–Ohlin Theorem: Trade Patterns}
+
+Assume two countries, Home ($H$) and Foreign ($F$), share identical technologies and preferences, but $K_H/L_H > K_F/L_F$.
+
+\begin{parts}
+    \part Which country exports which good? Explain using the H–O theorem.
+    \part Use a diagram like Figure~4 from the handout to illustrate the production, consumption, exports, and imports of both countries.
+\end{parts}
+
+\question \textbf{Factor Price Equalization}
+
+\begin{parts}
+    \part Using the expression derived in class,
+    \[
+    \frac{P_C}{P_T} = \text{constant} \times \left(\frac{w}{r}\right)^{\beta_T-\beta_C},
+    \]
+    explain why, under free trade, relative factor prices equalize across countries.
+    \part Discuss at least two reasons why complete factor price equalization may fail in the real world.
+\end{parts}
+
+
+\end{questions}
+
+\end{document}
