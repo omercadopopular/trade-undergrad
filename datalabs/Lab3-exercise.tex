@@ -1,0 +1,48 @@
+\documentclass[11pt,letterpaper]{exam}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage{xcolor,hyperref,enumitem,booktabs}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+\textbf{\Large ECON 2181 – International Trade Theory \\[4pt]
+Data Lab Project: Comparative Statics in the Specific Factors Model}
+\end{center}
+
+\bigskip
+
+\noindent
+The world economy has two countries $i\in\{H,F\}$ and two goods $g\in\{M,A\}$.  
+Notation follows the notebook exactly:
+\[
+\begin{aligned}
+Y_{i,M} &= Z_{i,M}\,K_i^{\beta_i}\,L_{i,M}^{\,1-\beta_i}, &
+Y_{i,A} &= Z_{i,A}\,T_i^{\beta_i}\,L_{i,A}^{\,1-\beta_i}, \\
+L_{i,M}+L_{i,A}&=\bar L_i, &
+p &\equiv P_M/P_A.
+\end{aligned}
+\]
+The world‐equilibrium relative price $p^*$ solves $RS(p)=RD(p)$.
+
+\bigskip\hrule\bigskip
+
+\begin{questions}
+\question Run the notebook with baseline parameters. Record in specific variables:
+\[
+p^*,\quad w_H,w_F,\quad Y_{i,M},Y_{i,A},\quad L_{i,M},L_{i,A}, 
+\]
+
+\question Increase manufacturing productivity by 20\% in both countries:
+\[
+Z'_{i,M}=1.2\,Z_{i,M}.
+\]
+\begin{parts}
+\part Recompute $p^*$, the wage rates, labor allocations, and outputs. Record them in new variables that will allow you to compare the baseline and new equilibria.
+\part Compare $L_{i,M}, L_{i,A}$ before and after the shock. You do not need to plot charts. Is this consistent with what we saw in class?
+\part Plot relative world production $( Y_{H,M} +  Y_{F,M} ) / ( Y_{H,A} +  Y_{F,A} )$ and $p^*$ before and after the change. What happens with relative output $Y_M/Y_A$ and relative prices $P_M/P_A$? Explain intuitively what happens in terms of supply and demand. 
+\part Compute real wages $w_i/P_M$ and $w_i/P_A$ and compare to baseline. Is there a change in real wages? Is the consumer better off or worse off?
+\end{parts}
+\end{questions}
+\end{document}
