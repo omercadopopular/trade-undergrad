@@ -29,13 +29,12 @@ By the end of the semester, students should be able to:
 ### Lecture Materials
 - **Lecture0.tex - Lecture19.tex**: Complete lecture slides (LaTeX Beamer format) covering the full course curriculum
 - **ReviewMidterm.tex**: Comprehensive midterm review materials
-- **name.tex**: Supporting LaTeX diagrams and visualizations
+- **ReviewFinal.tex**: Comprehensive final review materials
 
 ### Course Assignments
 - **psets/**: Problem sets and answer keys
-  - PS1, PS2, PS3 with detailed solutions
-- **datalabs/**: Data analysis labs (Lab1-Lab4)
-- **exams/**: Midterm exam materials including questions, answer sheets, and grading rubrics
+- **datalabs/**: Data analysis labs 
+- **exams/**: Exam materials including questions, answer sheets, and grading rubrics
 
 ### Supporting Materials
 - **handouts/**: Course handouts (Handout0-Handout6) providing supplementary materials

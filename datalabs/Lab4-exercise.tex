@@ -1,0 +1,57 @@
+\documentclass[11pt,letterpaper]{exam}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage{xcolor,hyperref,enumitem,booktabs}
+\usepackage{minted}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\begin{center}
+\textbf{\Large ECON 2181 – International Trade Theory \\[4pt]
+Data Lab Project: Comparative Statics in the Specific Factors Model}
+\end{center}
+
+\bigskip
+
+\noindent
+
+
+\begin{questions}
+
+\question Reproduce the following regression results, that I have run for you in the Jupyter Notebook:
+
+\begin{equation}
+    \ln X_{od,t} = \alpha + \beta \times \ln dist_{od} + e_{od,t}  
+\end{equation}
+
+as well as the figure
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/gravity.png}
+\end{figure}
+
+Interpret economically the coefficient on the regression. What does it tell us about trade flows and geographical barriers? How is the coefficient related to the figure above?
+
+\question The following variables represent the following relationships:
+
+\begin{itemize}
+    \item \mintinline{python}{df["comlang_off"]}: do $o,d$ share common language? true/false
+    \item \mintinline{python}{df["comrelig"]}: do $o,d$ share common religion? true/false
+    \item \mintinline{python}{df["col_dep_ever"]}: do $o,d$ share common colonial metropolis? true/false
+    \item \mintinline{python}{df["contig"]}: do $o,d$ share a border? true/false
+\end{itemize}
+
+Run a regression of the form
+
+\begin{eqnarray*}
+    \ln X_{od,t} &=& \alpha + +\beta_1 \times \ln dist_{od} + \beta_2 \times language_{od}+\\
+    &+& \beta_3 \times religion_{od} + \beta_4\times colonial_{od} + \beta_5 \times border_{od} + \tilde{e}_{od,t}  
+\end{eqnarray*}
+
+report the results and interpret each of the coefficients. Do they make sense? What have you learned from this exercise?
+
+
+\end{questions}
+\end{document}
