@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, geometry}
+\geometry{margin=1in}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Deriving the Optimal Tariff Formula}} \\[0.3cm]
+\end{center}
+
+\section*{1. Setup}
+
+Consider a large importing country. Let
+\[
+D(p) \quad \text{be domestic demand}, \qquad 
+S(p) \quad \text{be domestic supply},
+\]
+and
+\[
+m(p)=D(p)-S(p)
+\]
+be imports. Domestic consumers pay the price $p$, while foreign exporters receive
+\[
+p_W = p_W(m),
+\]
+where $p_W'(m)>0$, reflecting an upward-sloping foreign export supply.
+
+The government imposes an ad-valorem tariff such that
+\[
+t=\frac{p-p_W}{p_W}.
+\]
+
+\section*{2. Consumer Surplus, Producer Surplus, and Tariff Revenue}
+
+Consumer surplus is the area under demand and above the price:
+\[
+CS(p)
+= \int_0^{D(p)} P_D(q)\, dq - pD(p),
+\]
+where $P_D(D(p))=p$ is inverse demand.
+
+Producer surplus is the area above supply and below the price:
+\[
+PS(p)
+= pS(p) - \int_0^{S(p)} P_S(q)\, dq,
+\]
+where $P_S(S(p))=p$ is inverse supply.
+
+Tariff revenue is
+\[
+R(p)
+= (p-p_W)\,m(p)
+= (p-p_W)\,[D(p)-S(p)].
+\]
+
+Total national welfare is
+\[
+W(p)=CS(p)+PS(p)+R(p).
+\]
+
+\section*{3. Combine CS, PS, and R}
+
+Add the three expressions:
+\begin{align*}
+W(p) &= \left[\int_0^{D} P_D(q)\,dq - pD\right]
+     + \left[pS - \int_0^{S} P_S(q)\,dq\right]
+     + (p-p_W)(D-S).
+\end{align*}
+
+Group terms:
+\[
+W(p)
+= \int_0^{D}P_D(q)\,dq 
+- \int_0^{S}P_S(q)\,dq
++ [-pD + pS + (p-p_W)(D-S)].
+\]
+
+Expand the price bracket:
+\begin{align*}
+-pD + pS + (p-p_W)(D-S)
+&= -pD + pS + pD - pS - p_W(D-S) \\
+&= -p_W(D-S).
+\end{align*}
+
+Thus:
+\[
+\boxed{
+W(p)
+= \int_{0}^{D(p)} P_D(q)\,dq
+- \int_{0}^{S(p)} P_S(q)\,dq
+- p_W(m(p))\, m(p).
+}
+\]
+
+\section*{4. Differentiating Welfare}
+
+Apply Leibniz's Rule.
+
+\subsection*{4.1 Derivative of the consumer surplus integral}
+\[
+\frac{d}{dp}\int_{0}^{D(p)}P_D(q)\,dq
+= P_D(D(p))D'(p) = pD'(p).
+\]
+
+\subsection*{4.2 Derivative of the producer surplus integral}
+\[
+\frac{d}{dp}\left[-\int_{0}^{S(p)}P_S(q)\,dq\right]
+= -P_S(S(p))S'(p)= -pS'(p).
+\]
+
+\subsection*{4.3 Derivative of the import-cost term}
+
+Let $m(p)=D(p)-S(p)$ and $m'(p)=D'(p)-S'(p)$. Then
+\[
+\frac{d}{dp}[p_W(m)m]
+= \frac{dp_W}{dm}m'(p)m(p) + p_W(m)m'(p).
+\]
+
+Thus,
+\[
+\frac{d}{dp}[-p_W(m)m]
+= -\frac{dp_W}{dm}m'(p)m(p) - p_W(m)m'(p).
+\]
+
+\section*{5. Total derivative}
+
+Add the three components:
+\begin{align*}
+\frac{dW}{dp}
+&= pD'(p) - pS'(p)
+   - m'(p)\frac{dp_W}{dm}m(p)
+   - p_W(m)m'(p) \\
+&= p m'(p) - p_W(m)m'(p)
+ - m(p)\frac{dp_W}{dm}m'(p).
+\end{align*}
+
+Factor out $m'(p)$:
+\[
+\boxed{
+\frac{dW}{dp}
+= m'(p)\left[p - p_W(m) - m(p)\frac{dp_W}{dm}\right].
+}
+\]
+
+The first-order condition (for $m'(p)\neq 0$) is:
+\[
+p - p_W(m) - m\frac{dp_W}{dm} = 0.
+\]
+
+Thus the optimal tariff condition is:
+\[
+\boxed{
+p = p_W(m) + m\,\frac{dp_W}{dm}.
+}
+\]
+
+\section*{6. Elasticity Form}
+
+Let the foreign export supply elasticity be
+\[
+\eta
+= \frac{d\ln m}{d\ln p_W}
+= \frac{p_W}{m}\left(\frac{dp_W}{dm}\right)^{-1}.
+\]
+
+Rearrange the optimality condition:
+\[
+p - p_W = m\frac{dp_W}{dm}
+= \frac{p_W}{\eta}.
+\]
+
+Therefore:
+\[
+\boxed{
+\frac{p-p_W}{p_W} = \frac{1}{\eta}.
+}
+\]
+
+This is the \textbf{optimal tariff formula}.
+
+\end{document}

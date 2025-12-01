@@ -1,13 +1,7 @@
 \documentclass[notes,11pt, aspectratio=169, xcolor=table]{beamer}
 
 \usepackage{pgfpages}
-% These slides also contain speaker notes. You can print just the slides,
-% just the notes, or both, depending on the setting below. Comment out the want
-% you want.
-\setbeameroption{hide notes} % Only slide
-%\setbeameroption{show only notes} % Only notes
-%\setbeameroption{show notes on second screen=right} % Both
-
+\setbeameroption{hide notes}
 \usepackage{helvet}
 \usepackage[default]{lato}
 \usepackage{array}
@@ -56,7 +50,6 @@
     \dp\mytempbox\mytemplen
     \colorbox{myblue}{\hspace{1em}\usebox{\mytempbox}\hspace{1em}}}
 
-
 \usepackage{changepage}
 \usepackage{appendixnumberbeamer}
 \newcommand{\beginbackup}{
@@ -66,7 +59,7 @@
    {
      \leavevmode%
      \hline
-     box{%
+     box{% 
        \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{footlinecolor}%
 %         \insertframenumber  \hspace*{2ex} 
        \end{beamercolorbox}}%
@@ -77,7 +70,6 @@
    \addtocounter{framenumbervorappendix}{-\value{framenumber}}
    \addtocounter{framenumber}{\value{framenumbervorappendix}} 
 }
-
 
 \usepackage{graphicx}
 \usepackage[space]{grffile}
@@ -95,7 +87,6 @@
   linkcolor = {blue}
 }
 
-
 %% I use a beige off white for my background
 \definecolor{MyBackground}{RGB}{255,253,218}
 
@@ -109,6 +100,7 @@
     \end{frame}
 }
 
+\setbeamertemplate{frametitle}{\color{blue}\insertframetitle}
 \setbeamercolor{frametitle}{fg=blue}
 \setbeamercolor{title}{fg=blue}
 \setbeamertemplate{footline}[frame number]
@@ -119,8 +111,6 @@
 \setbeamercolor{enumerate item}{fg=blue}
 \setbeamercolor{enumerate subitem}{fg=blue}
 \setbeamercolor{button}{bg=MyBackground,fg=blue,}
-
-
 
 % If you like road maps, rather than having clutter at the top, have a roadmap show up at the end of each section 
 % (and after your introduction)
@@ -164,14 +154,12 @@
   \end{frame}
 }
 
-\title[]{International Trade: Lecture XX}
-\subtitle[]{Diverse Firms and Trade: The Melitz Model}
+\title[]{Trade Policy (ii)}
+\subtitle[]{Optimal tariffs, retaliation, FTAs, and the multilateral system}
 \author[Góes]
 {Carlos Góes\inst{1}}
-\date{Fall 2025}
+\date{Lecture 18}
 \institute[GWU]{\inst{1} George Washington University }
-
-
 
 \begin{document}
 
@@ -181,512 +169,58 @@
         every node/.style={anchor=base,align=center,outer sep=1.5pt},
         every path/.style={thick},
         }
-\newcommand\marktopleft[1]{%
+\newcommand\marktopleft[1]{% 
     \tikz[overlay,remember picture] 
         \node (marker-#1-a) at (-.3em,.3em) {};%
-}
-\newcommand\markbottomright[2]{%
+}\newcommand\markbottomright[2]{% 
     \tikz[overlay,remember picture] 
         \node (marker-#1-b) at (0em,0em) {};%
 }
 \tikzstyle{every picture}+=[remember picture] 
 \tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
 \tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
-%%%% END TIKZ STUFF
-
-
+%%%%% END TIKZ STUFF
 
 %----------------------------------------------------------------------%
 %-------------------       TITLE PAGE       ---------------------------%
 %----------------------------------------------------------------------%
 
-
-
-
-
-%----------------------------------------------------------------------%
-
-
-
-
-
-
-%----------------------------------------------------------------------%
-%----------------------------------------------------------------------%
-
-%----------------------------------------------------------------------%
 \frame{\titlepage}
 \addtocounter{framenumber}{-1}
-%----------------------------------------------------------------------%
 
-
-\begin{frame}{Welfare effects of a Tariff in a small country}
-\addtocounter{framenumber}{-1}
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.525]
-
-%---------------------------------------
-% Shared functions
-%---------------------------------------
-\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
-\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
-\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
-\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
-\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
-\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
-
-\def\Pmin{2}
-\def\Pmax{10}
-
-% World equilibrium & tariff
-\def\Pw{6}
-\def\Qw{4}
-
-\def\PT{8}
-\def\Qt{{MD(\PT)}}
-\def\twedge{2}
-
-%====================================================
-% LEFT PANEL: Home market
-%====================================================
-\begin{scope}[xshift=0cm]
-  \node at (6,\Pmax+1) {\large Home market};
-
-  % Axes
-  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
-  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
-
-  % Home demand and supply (true functional forms)
-  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
-        plot ({QdH(\x)},{\x});
-  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
-        plot ({QsH(\x)},{\x});
-
-  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
-  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
-
-  % ---- Consumer surplus (under D, above P_W) ----
-  \fill[blue!20, opacity=0.5]
-    (0,\PT)
-    -- ({QdH(\PT)},\PT)
-    -- ({QdH(\Pmax)},\Pmax)
-    -- (0,\Pmax)
-    -- cycle;
-
-  % Label CS
-  \node[blue!70!black] at (2.5,8.5) {\small CS};
-
-  % ---- Producer surplus (above S, below P_W) ----
-  \fill[red!20, opacity=0.5]
-    (0,\Pmin)
-    -- (0,\PT)
-    -- ({QsH(\PT)},\PT)
-    -- ({QsH(\Pmin)},\Pmin)
-    -- (0,\Pmin)
-    -- cycle;
-
-  % Label TR
-  \node[black!70] at (4,6.5) {\small TR};
-
-  % ---- Tax Revenue ----
-  \fill[black!20, opacity=0.5]
-    ({QsH(\PT)},\PT)
-    -- ({QdH(\PT)},\PT)
-    -- ({QdH(\PT)},\Pw)
-    -- ({QsH(\PT)},\Pw)
-    -- cycle;
-
-  % Label DL
-  \node[green!70] at (7,6.5) {\small DL};
-
-  % ---- Tax Deadweight Loss ----
-  \fill[green!60, opacity=1]
-    ({QsH(\PT)},\PT)
-    -- ({QsH(\PT)},\Pw)
-    -- ({QsH(\Pw)},\Pw)
-    -- cycle;
-
-   \fill[green!60, opacity=1]
-    ({QdH(\PT)},\PT)
-    -- ({QdH(\PT)},\Pw)
-    -- ({QdH(\Pw)},\Pw)
-    -- cycle;
-    
-  % Label PS
-  \node[red!70!black] at (1.2,4.5) {\small PS};
-
-  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
-  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
-  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
-      node[midway,below] {$Q_T$};
-  % Prices PW and PT
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
-
-  \node[left] at (0,\Pw) {$P_W$};
-  \node[left] at (0,\PT) {$P_T$};
-\end{scope}
-
-
-
-\end{tikzpicture}
-\end{figure}
-
-\end{frame}
-
-
-\begin{frame}{Unpacking the deadweigth loss: production}
-\addtocounter{framenumber}{-1}
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.4]
-
-%---------------------------------------
-% Shared functions
-%---------------------------------------
-\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
-\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
-\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
-\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
-\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
-\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
-
-\def\Pmin{2}
-\def\Pmax{10}
-
-% World equilibrium & tariff
-\def\Pw{6}
-\def\Qw{4}
-
-\def\PT{8}
-\def\Qt{{MD(\PT)}}
-\def\twedge{2}
-
-%====================================================
-% LEFT PANEL: Home market
-%====================================================
-\begin{scope}[xshift=0cm]
-  \node at (6,\Pmax+1) {\large Home market};
-
-  % Axes
-  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
-  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
-
-  % Home demand and supply (true functional forms)
-
-  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
-        plot ({QsH(\x)},{\x});
-
-  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
-
-
-  % ---- Tax Deadweight Loss ----
-  \fill[green!60, opacity=1]
-    ({QsH(\PT)},\PT)
-    -- ({QsH(\PT)},\Pw)
-    -- ({QsH(\Pw)},\Pw)
-    -- cycle;
-
-    
-  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
-  % Prices PW and PT
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
-
-  \node[left] at (0,\Pw) {$P_W$};
-  \node[left] at (0,\PT) {$P_T$};
-\end{scope}
-
-
-
-\end{tikzpicture}
-\end{figure}
-
-\begin{itemize}
-    \item The deadweight loss under the supply curve represents the domestic production distortion from the tariff
-    \item Each additional unit of output is produced at a marginal cost above its opportunity cost (the world price $P_W$)
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Unpacking the deadweigth loss: consumption}
-\addtocounter{framenumber}{-1}
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.4]
-
-%---------------------------------------
-% Shared functions
-%---------------------------------------
-\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
-\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
-\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
-\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
-\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
-\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
-
-\def\Pmin{2}
-\def\Pmax{10}
-
-% World equilibrium & tariff
-\def\Pw{6}
-\def\Qw{4}
-
-\def\PT{8}
-\def\Qt{{MD(\PT)}}
-\def\twedge{2}
-
-%====================================================
-% LEFT PANEL: Home market
-%====================================================
-\begin{scope}[xshift=0cm]
-  \node at (6,\Pmax+1) {\large Home market};
-
-  % Axes
-  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
-  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
-
-  % Home demand and supply (true functional forms)
-  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
-        plot ({QdH(\x)},{\x});
-
-  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
-  
-
-  % ---- Tax Deadweight Loss ----
-
-   \fill[green!60, opacity=1]
-    ({QdH(\PT)},\PT)
-    -- ({QdH(\PT)},\Pw)
-    -- ({QdH(\Pw)},\Pw)
-    -- cycle;
-    
-  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
-
-  % Prices PW and PT
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
-
-  \node[left] at (0,\Pw) {$P_W$};
-  \node[left] at (0,\PT) {$P_T$};
-\end{scope}
-
-
-
-\end{tikzpicture}
-\end{figure}
-\begin{itemize}
-    \item The deadweight loss under the demand curve represents the domestic consumption distortion from the tariff
-    \item The marginal benefit of the foregone units consumption are above their opportunity cost (the world price $P_W$)
-\end{itemize}
-\end{frame}
-
-
-
-
-\begin{frame}{Welfare effects of a Tariff in a large country}
-\addtocounter{framenumber}{-1}
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.575]
-
-%---------------------------------------
-% Shared functions
-%---------------------------------------
-\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
-\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
-\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
-\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
-\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
-\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
-
-\def\Pmin{2}
-\def\Pmax{10}
-
-% World equilibrium & tariff
-\def\Pw{6}
-\def\Qw{4}
-
-\def\PT{7}
-\def\PTstar{5}
-\def\twedge{2}
-\def\Qt{{MD(\PT)}}
-\def\twedge{2}
-
-%====================================================
-% LEFT PANEL: Home market
-%====================================================
-\begin{scope}[xshift=0cm]
-  \node at (6,\Pmax+1) {\large Home market};
-
-  % Axes
-  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
-  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
-
-  % Home demand and supply (true functional forms)
-  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
-        plot ({QdH(\x)},{\x});
-  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
-        plot ({QsH(\x)},{\x});
-
-  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
-  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
-
-  % ---- Consumer surplus (under D, above P_W) ----
-  \fill[blue!20, opacity=0.5]
-    (0,\PT)
-    -- ({QdH(\PT)},\PT)
-    -- ({QdH(\Pmax)},\Pmax)
-    -- (0,\Pmax)
-    -- cycle;
-
-  % Label CS
-
-  % ---- Producer surplus (above S, below P_W) ----
-  \fill[red!20, opacity=0.5]
-    (0,\Pmin)
-    -- (0,\PT)
-    -- ({QsH(\PT)},\PT)
-    -- ({QsH(\Pmin)},\Pmin)
-    -- (0,\Pmin)
-    -- cycle;
-
-  % Label TR
-
-  % ---- Tax Revenue ----
-  \fill[black!20, opacity=0.5]
-    ({QsH(\PT)},\PT)
-    -- ({QdH(\PT)},\PT)
-    -- ({QdH(\PT)},\PTstar)
-    -- ({QsH(\PT)},\PTstar)
-    -- cycle;
-
-  \fill[black!30, opacity=.75]
-    ({QsH(\PT)},\Pw)
-    -- ({QdH(\PT)},\Pw)
-    -- ({QdH(\PT)},\PTstar)
-    -- ({QsH(\PT)},\PTstar)
-    -- cycle;
-
-  \node[black!70] at (4.25,6.225) {\small 3};
-  \node[black] at (4.25,5.225) {\small 5};
-
-
-
-
-  % ---- Tax Deadweight Loss ----
-  \fill[green!60, opacity=1]
-    ({QsH(\PT)},\PT)
-    -- ({QsH(\PT)},\Pw)
-    -- ({QsH(\Pw)},\Pw)
-    -- cycle;
-
-   \fill[green!60, opacity=1]
-    ({QdH(\PT)},\PT)
-    -- ({QdH(\PT)},\Pw)
-    -- ({QdH(\Pw)},\Pw)
-    -- cycle;
-    
-  % Label PS
-  \node[red!70!black] at (1,6.225) {\small 1};
-
-  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
-  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
-  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
-      node[midway,below] {$Q_T$};
-  % Prices PW and PT
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
-  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
-
-  \node[left] at (0,\Pw) {$P_W$};
-  \node[left] at (0,\PT) {$P_T$};
-  \node[left] at (0,\PTstar) {$P_T^*$};
-
-  % Label DL
-  \node[black!70] at (2.55,6.225) {\small 2};
-  \node[black!70] at (6,6.225) {\small 4};
-  
-  \end{scope}
-
-
-
-\end{tikzpicture}
-\end{figure}
-
-\end{frame}
-
-
-\begin{frame}{New tariff revenue vs deadweight loss}
+\begin{frame}{Plan}
 \begin{wideitemize}
-
-    \item Tariff decreases import prices to $P_T^*$ from the free trade equilibrium $P_W$ 
-    \item<2-> This means that deadweight loss is smaller, since $P = P_T^* + t < P_W + t $
-    \item<3-> Whether the country is better off or worse off, it depends
-    \item<4-> ``Old'' tariff revenue used to be CS, so it is a wash
-    \item<5-> Tariff induces deadweight loss...
-    \item<5-> ...but it also has an additional tariff revenue due to terms of trade effect
-    \item<6-> So relevant question: is ``new'' tariff revenue larger/smaller than deadeweight loss?
-
-    \end{wideitemize}
-\end{frame}
-
-
-\begin{frame}{Optimal tariffs}
-\begin{itemize}
-
-    \item For a large country, what are the net changes in welfare induced by a tariff? 
-    \item Relative importance of the gain from the terms of trade improvement and the production/consumption distortions
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.45\linewidth]{figs/optimal-tariff.jpg}
-    \end{figure}
-
-    \item For small tariffs, the gain from the terms of trade improvement dominates, but not for larger tariffs $\implies$ there is an ‘optimal’ tariff level $t^*$
-    \item  The more the foreign export supply to a country is inelastic, the higher the optimal tariff $t^*$
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Optimal tariffs (ii)}
-\begin{wideitemize}
-    \item So in theory there can be a reason for positive tariffs
-    \item In that case, are tariffs desirable?
-    \item In principle, yes... But:
-    \begin{enumerate}
-        \item This calculation includes consumer surplus, producer surplus and tariff revenue
-        \item Consumers always lose, producers always gain
-        \item It can be an aggregate gain if tariff revenue changes outpace consumer losses
-    \end{enumerate}
-    \item Even if there is an optimal $t^*$, politicians might have an incentive to set tariffs $t > t^*$ to:
-    \begin{itemize}
-        \item maximize tariff revenue (regardless of its impact on consumer surplus)
-        \item acquiesce to producers, who lobby for protection
-    \end{itemize}
-    
+    \item Recap: tariffs and welfare (some slides repeated verbatim from Lecture17)
+    \item Optimal tariff (intuition and simple formula)
+    \item Strategic interaction, retaliation and global losses
+    \item Political economy: Krugman, Bastiat
+    \item Complex interdependence
+    \item Free Trade Agreements: motives, typology, US FTAs, EU
+    \item History: GATT to WTO
 \end{wideitemize}
 \end{frame}
 
-\begin{frame}{Optimal tariff (large country) --- intuition}
-  \begin{itemize}
-    \item A large country can affect the world price it pays for imports.
-    \item By imposing a tariff, the large country improves its terms of trade (ToT): world export price falls.
-    \item The ToT gain can, up to a point, offset the domestic efficiency losses (deadweight losses).
-    \item There is a tariff level that maximizes domestic welfare: the "optimal tariff".
-  \end{itemize}
-\end{frame}
+% -------------------------------------------------------------------
+% The following block pulls in the Tariff-related slides verbatim from Lecture17.tex.
+% (These frames are copied to keep formatting and diagrams identical to Lecture17.)
 
-\begin{frame}{Optimal ad valorem tariff: a simple condition}
-  Consider a large importer facing an upward-sloping foreign export supply (or downward-sloping world demand). A common approximation:
-  \[\tau^{*} \approx \frac{1}{\eta}\]
-  where $\eta$ is the elasticity of foreign export supply ($d XS/dP^*_T$). Intuition:
-  \begin{itemize}
-    \item If foreign supply is very elastic, export supply curve is flat \\
-    \qquad ($\eta\to\infty$) then $\tau^{*}\to 0$.
-    \item If foreign supply is inelastic, the importing country can extract large ToT gains.
-  \end{itemize}
+\begin{frame}{Tariffs}
+\begin{wideitemize}
+    \item Tariffs are import taxes
+    \item<2-> Tariffs are wedges (gaps) between the source country and the destination country prices:
+    \begin{itemize}
+        \item \blue{Simple tariffs}: $P = P^* + t$, where $t$ is some dollar amount \
+        \qquad (used, e.g., for imports of alcohol and tobacco; more common back in the day)
+        \item \blue{Ad valorem tariffs}: $P = P^*(1+\tau)$, where $\tau$ is some percentage \
+        \qquad (used for most goods currently)
+    \end{itemize}
+    \item<3-> Who pays for the tariffs?
+    \begin{itemize}
+        \item<4-> In an \blue{accounting} sense, importing firms
+        \item<5-> In an \blue{economic} sense, it depends on supply and demand elasticity
+    \end{itemize}
+\end{wideitemize}
+    
 \end{frame}
 
 \begin{frame}{Effects of a Tariff in a small country}
@@ -772,7 +306,6 @@
   \node[below] at (\Qt,0) {$Q_T$};
 
 
-
   % Vertical line at Q_W
   \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
   \node[below] at (\Qw,0) {$Q_W$};
@@ -789,11 +322,29 @@
 \end{figure}
 \end{frame}
 
+\begin{frame}{Effects of a Tariff in a small country: discussion}
+\begin{wideitemize}
+    \item In a small country, \blue{domestic import demand does not impact global markets}
 
-\begin{frame}{Effects of a Tariff in a large country}
+    \item<2-> World price $P_W$ not only taken as given, but \blue{unaffected by import demand}
+
+    \item<3-> \textcolor{brown}{Export supply curve (XS)} is infinitely elastic, meaning foreign producers :
+    \begin{itemize}
+        \item supply \textbf{any} volume of exports at the world price $P_W$, but...
+        \item ...supply \textbf{zero} exports at a price below $P_W$
+        \item ...supply \textbf{infinite} exports at a price above $P_W$ 
+    \end{itemize}
+    \item<4-> \blue{Intuition}: flexible production, constant costs, tiny price change $\rightarrow$ massive change in quantity supplied.
+    \item<5-> In that case, tariffs are fully passed through to domestic market: $P = P_W + t$
+    \item<6-> Reduces imports to $Q_T < Q_W$
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
 \begin{figure}
 \centering
-\begin{tikzpicture}[scale=0.35]
+\begin{tikzpicture}[scale=0.4]
 
 %---------------------------------------
 % Shared functions
@@ -803,8 +354,7 @@
 \pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
 \pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
 \pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
-\pgfmathdeclarefunction{MDt}{1}{\pgfmathparse{8 - #1}}       % MD
-\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{#1 - 2}}        % XS
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}             % XS
 
 \def\Pmin{2}
 \def\Pmax{10}
@@ -813,9 +363,8 @@
 \def\Pw{6}
 \def\Qw{4}
 
-\def\Qt{3}
-\def\PT{7}
-\def\PTstar{5}
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
 \def\twedge{2}
 
 %====================================================
@@ -837,53 +386,33 @@
   \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
   \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
 
-  % Prices PW and PT
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
 
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {	iny CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {	iny PS};
+
+  % World price line P_W
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
   \node[left] at (0,\Pw) {$P_W$};
-  \node[left] at (0,\PT) {$P_T$};
-\end{scope}
 
-%====================================================
-% MIDDLE PANEL: World market (MD and XS)
-%====================================================
-\begin{scope}[xshift=14cm]
-  \node at (6,\Pmax+1) {\large World market};
-
-  % Axes
-  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
-  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
-
-  % MD and XS
-  \draw[very thick, green!60, domain=\Pmin:\Pmax, samples=100]
-      plot ({MD(\x)},{\x});
-  \node[right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
-  \draw[very thick, green!60!black, domain=\Pmin:\Pmax-2, samples=100]
-      plot ({MDt(\x)},{\x});
-  \node[below right, green!60!black] at ({MDt(\Pmin)},{\Pmin}) {$MD$ (tariff)};
-   \draw[very thick, orange, domain=\Pmin:\Pmax, samples=100]
-      plot ({XS(\x)},{\x});
-  \node[right, red] at ({XS(\Pmin)},{\Pmin}) {$XS$};
-
-  % New quantity with tariff Q_T
-  \draw[dashed] (\Qt,0) -- (\Qt,\Pmax+0.5);
-  \node[below left] at (\Qt,0) {$Q_T$};
-
-
-
-  % Vertical line at Q_W
-  \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
-  \node[below right] at (\Qw,0) {$Q_W$};
-
-  % Horizontal lines for P_T, P_W, P_T^*
-  \draw[dashed] (0,\Pw) -- (12,\Pw);
-  \draw[dashed] (0,\PT) -- (12,\PT);
-  \draw[dashed] (0,\PTstar) -- (12,\PTstar);
-
-  % Tariff wedge t = P_T - P_T^*
-  \draw[<->] (-1,\PT) -- (-1,\PTstar)
-      node[midway,left] {$t$};
 \end{scope}
 
 \end{tikzpicture}
@@ -891,6 +420,40 @@
 
 \end{frame}
 
+% -------------------------------------------------------------------
+% End of verbatim-copied block from Lecture17.tex.
+% Now continue with Lecture18-specific slides: optimal tariff, global losses, Krugman, Bastiat, complex interdependence, FTAs, US FTAs, typology, EU, GATT->WTO history.
+
+\begin{frame}{Recap: Welfare decomposition with a tariff}
+  For an importing country that imposes an ad valorem tariff $\tau$:
+  \begin{itemize}
+    \item Domestic price rises: quantity imported falls
+    \item Winners: some domestic producers, government (tariff revenue)
+    \item Losers: domestic consumers; foreign exporters (lower world price)
+  \end{itemize}
+  Welfare change = $\Delta CS + \Delta PS + \Delta TR$.
+  Typical small-country result: world price unchanged $\Rightarrow$ tariff is pure loss (deadweight loss).
+\end{frame}
+
+\begin{frame}{Optimal tariff (large country) --- intuition}
+  \begin{itemize}
+    \item A large country can affect the world price it pays for imports.
+    \item By imposing a tariff, the large country improves its terms of trade (ToT): world export price falls.
+    \item The ToT gain can, up to a point, offset the domestic efficiency losses (deadweight losses).
+    \item There is a tariff level that maximizes domestic welfare: the "optimal tariff".
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Optimal ad valorem tariff: a simple condition}
+  Consider a large importer facing an upward-sloping foreign export supply (or downward-sloping world demand). A common approximation:
+  \[\tau^{*} \approx \frac{1}{\varepsilon^{x}}\]
+  where $\varepsilon^{x}$ is the (absolute value of) elasticity of foreign export supply (or the price responsiveness of world exports). Intuition:
+  \begin{itemize}
+    \item If foreign supply is very elastic ($\varepsilon^{x}\to\infty$) then $\tau^{*}\to 0$.
+    \item If foreign supply is inelastic, the importing country can extract large ToT gains.
+  \end{itemize}
+  (Formal derivations use welfare derivatives and the effect of a tariff on the world price.)
+\end{frame}
 
 \begin{frame}{Why "optimal tariff" is a problem for global welfare}
   \begin{itemize}
@@ -1057,6 +620,5 @@
     \item WTO website for history and current status of negotiations.
   \end{itemize}
 \end{frame}
-
 
 \end{document}
