@@ -1,0 +1,633 @@
+% Lecture18.tex
+% Trade-undergrad: Lecture 18 - Trade Policy (ii)
+% Based closely on Lecture17.tex: maintains preamble, style and many slides verbatim where indicated.
+\documentclass[notes,11pt, aspectratio=169, xcolor=table]{beamer}
+
+\usepackage{pgfpages}
+% These slides also contain speaker notes. You can print just the slides,
+% just the notes, or both, depending on the setting below. Comment out the want
+% you want.
+\setbeameroption{hide notes} % Only slide
+%\setbeameroption{show only notes} % Only notes
+%\setbeameroption{show notes on second screen=right} % Both
+
+\usepackage{helvet}
+\usepackage[default]{lato}
+\usepackage{array}
+\usepackage[utf8]{inputenc} 
+
+\newtheorem{proposition}{Proposition}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}
+\usetikzlibrary{positioning}
+\usetikzlibrary{snakes}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{matrix,shapes,arrows,fit,tikzmark}
+\usepackage{amsmath}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{multimedia}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage[style=authoryear,sorting=nyt,uniquename=false]{biblatex}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\white}[1]{\textcolor{white}{#1}}
+
+\addbibresource{references.bib} 
+
+\newcolumntype{d}[0]{D{.}{.}{5}}
+
+\def\@@mybluebox[#1][#2]#3{
+    \sbox\mytempbox{#3}%
+    \mytemplen\ht\mytempbox
+    \advance\mytemplen #1\relax
+    \ht\mytempbox\mytemplen
+    \mytemplen\dp\mytempbox
+    \advance\mytemplen #2\relax
+    \dp\mytempbox\mytemplen
+    \colorbox{myblue}{\hspace{1em}\usebox{\mytempbox}\hspace{1em}}}
+
+\usepackage{changepage}
+\usepackage{appendixnumberbeamer}
+\newcommand{\beginbackup}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+   \setbeamertemplate{footline}
+   {
+     \leavevmode%
+     \hline
+     box{% 
+       \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{footlinecolor}%
+%         \insertframenumber  \hspace*{2ex} 
+       \end{beamercolorbox}}%
+     \vskip0pt%
+   }
+ }
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}} 
+}
+
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{booktabs}
+
+% These are my colors -- there are many like them, but these ones are mine.
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+
+\hypersetup{
+  colorlinks=false,
+  linkbordercolor = {white},
+  linkcolor = {blue}
+}
+
+%% I use a beige off white for my background
+\definecolor{MyBackground}{RGB}{255,253,218}
+
+%% Uncomment this if you want to change the background color to something else
+%\setbeamercolor{background canvas}{bg=MyBackground}
+
+%% Change the bg color to adjust your transition slide background color!
+\newenvironment{transitionframe}{
+  \setbeamercolor{background canvas}{bg=yellow}
+  \begin{frame}}{
+    \end{frame}
+}
+
+\setbeamertemplate{frametitle}{\color{blue}\insertframetitle}
+\setbeamercolor{frametitle}{fg=blue}
+\setbeamercolor{title}{fg=blue}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{itemize items}{-}
+\setbeamercolor{itemize item}{fg=blue}
+\setbeamercolor{itemize subitem}{fg=blue}
+\setbeamercolor{enumerate item}{fg=blue}
+\setbeamercolor{enumerate subitem}{fg=blue}
+\setbeamercolor{button}{bg=MyBackground,fg=blue,}
+
+% If you like road maps, rather than having clutter at the top, have a roadmap show up at the end of each section 
+% (and after your introduction)
+% Uncomment this is if you want the roadmap!
+% \AtBeginSection[]
+% {
+%    \begin{frame}
+%        \frametitle{Roadmap of Talk}
+%        \tableofcontents[currentsection]
+%    \end{frame}
+% }
+\setbeamercolor{section in toc}{fg=blue}
+\setbeamercolor{subsection in toc}{fg=red}
+\setbeamersize{text margin left=1em,text margin right=1em} 
+
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+
+\usepackage{environ}
+\NewEnviron{videoframe}[1]{
+  \begin{frame}
+    \vspace{-8pt}
+    \begin{columns}[onlytextwidth, T] % align columns
+      \begin{column}{.58\textwidth}
+        \begin{minipage}[t][\textheight][t]
+          {\dimexpr\textwidth}
+          \vspace{8pt}
+          \hspace{4pt} {\Large \sc \textcolor{blue}{#1}}
+          \vspace{8pt}
+          
+          \BODY
+        \end{minipage}
+      \end{column}%
+      \hfill%
+      \begin{column}{.42\textwidth}
+        \colorbox{green!20}{\begin{minipage}[t][1.2\textheight][t]
+            {\dimexpr\textwidth}
+            Face goes here
+          \end{minipage}}
+      \end{column}%
+    \end{columns}
+  \end{frame}
+}
+
+\title[]{Trade Policy (ii)}
+\subtitle[]{Optimal tariffs, retaliation, FTAs, and the multilateral system}
+\author[Góes]
+{Carlos Góes\inst{1}}
+\date{Lecture 18}
+\institute[GWU]{\inst{1} George Washington University }
+
+\begin{document}
+
+%%% TIKZ STUFF
+\tikzset{   
+        every picture/.style={remember picture,baseline},
+        every node/.style={anchor=base,align=center,outer sep=1.5pt},
+        every path/.style={thick},
+        }
+\newcommand\marktopleft[1]{% 
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-a) at (-.3em,.3em) {};%
+}\newcommand\markbottomright[2]{% 
+    \tikz[overlay,remember picture] 
+        \node (marker-#1-b) at (0em,0em) {};%
+}
+\tikzstyle{every picture}+=[remember picture] 
+\tikzstyle{mybox} =[draw=black, very thick, rectangle, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[draw=black,fill=red, text=white]
+%%%%% END TIKZ STUFF
+
+%----------------------------------------------------------------------%
+%-------------------       TITLE PAGE       ---------------------------%
+%----------------------------------------------------------------------%
+
+\frame{\titlepage}
+\addtocounter{framenumber}{-1}
+
+\begin{frame}{Plan}
+\begin{wideitemize}
+    \item Recap: tariffs and welfare (some slides repeated verbatim from Lecture17)
+    \item Optimal tariff (intuition and simple formula)
+    \item Strategic interaction, retaliation and global losses
+    \item Political economy: Krugman, Bastiat
+    \item Complex interdependence
+    \item Free Trade Agreements: motives, typology, US FTAs, EU
+    \item History: GATT to WTO
+\end{wideitemize}
+\end{frame}
+
+% -------------------------------------------------------------------
+% The following block pulls in the Tariff-related slides verbatim from Lecture17.tex.
+% (These frames are copied to keep formatting and diagrams identical to Lecture17.)
+
+\begin{frame}{Tariffs}
+\begin{wideitemize}
+    \item Tariffs are import taxes
+    \item<2-> Tariffs are wedges (gaps) between the source country and the destination country prices:
+    \begin{itemize}
+        \item \blue{Simple tariffs}: $P = P^* + t$, where $t$ is some dollar amount \
+        \qquad (used, e.g., for imports of alcohol and tobacco; more common back in the day)
+        \item \blue{Ad valorem tariffs}: $P = P^*(1+\tau)$, where $\tau$ is some percentage \
+        \qquad (used for most goods currently)
+    \end{itemize}
+    \item<3-> Who pays for the tariffs?
+    \begin{itemize}
+        \item<4-> In an \blue{accounting} sense, importing firms
+        \item<5-> In an \blue{economic} sense, it depends on supply and demand elasticity
+    \end{itemize}
+\end{wideitemize}
+    
+\end{frame}
+
+\begin{frame}{Effects of a Tariff in a small country}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{MDt}{1}{\pgfmathparse{8 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}        % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  \draw[dashed] ({QsH(\PT)},0) -- ({QsH(\PT)},\PT);
+  \draw[dashed] ({QdH(\PT)},0) -- ({QdH(\PT)},\PT);
+  \draw[<->] ({QsH(\PT)},-1) -- ({QdH(\PT)},-1)
+      node[midway,below] {$Q_T$};
+  % Prices PW and PT
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  \node[left] at (0,\Pw) {$P_W$};
+  \node[left] at (0,\PT) {$P_T$};
+\end{scope}
+
+%====================================================
+% MIDDLE PANEL: World market (MD and XS)
+%====================================================
+\begin{scope}[xshift=14cm]
+  \node at (6,\Pmax+1) {\large World market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % MD and XS
+  \draw[very thick, green!60, domain=\Pmin:\Pmax, samples=100]
+      plot ({MD(\x)},{\x});
+  \node[right, green] at ({MD(\Pmin)},{\Pmin}) {$MD$};
+  \draw[very thick, green!60!black, domain=\Pmin:\Pmax-2, samples=100]
+      plot ({MDt(\x)},{\x});
+  \node[below right, green!60!black] at ({MDt(\Pmin)},{\Pmin}) {$MD$ (tariff)};
+  \draw[very thick, orange] (0,\Pw) -- ({XS(\Pmax)},\Pw);
+  \node[right, red] at ({XS(\Pmax)},\Pw) {$XS$};
+
+  % New quantity with tariff Q_T
+  \draw[dashed] (\Qt,0) -- (\Qt,\Pmax+0.5);
+  \node[below] at (\Qt,0) {$Q_T$};
+
+
+  % Vertical line at Q_W
+  \draw[dashed] (\Qw,0) -- (\Qw,\Pmax+0.5);
+  \node[below] at (\Qw,0) {$Q_W$};
+
+  % Horizontal lines for P_T, P_W, P_T^*
+  \draw[dashed] (0,\PT) -- (12,\PT);
+
+  % Tariff wedge t = P_T - P_T^*
+  \draw[<->] (-1,\PT) -- (-1,\Pw)
+      node[midway,left] {$t$};
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Effects of a Tariff in a small country: discussion}
+\begin{wideitemize}
+    \item In a small country, \blue{domestic import demand does not impact global markets}
+
+    \item<2-> World price $P_W$ not only taken as given, but \blue{unaffected by import demand}
+
+    \item<3-> \textcolor{brown}{Export supply curve (XS)} is infinitely elastic, meaning foreign producers :
+    \begin{itemize}
+        \item supply \textbf{any} volume of exports at the world price $P_W$, but...
+        \item ...supply \textbf{zero} exports at a price below $P_W$
+        \item ...supply \textbf{infinite} exports at a price above $P_W$ 
+    \end{itemize}
+    \item<4-> \blue{Intuition}: flexible production, constant costs, tiny price change $\rightarrow$ massive change in quantity supplied.
+    \item<5-> In that case, tariffs are fully passed through to domestic market: $P = P_W + t$
+    \item<6-> Reduces imports to $Q_T < Q_W$
+\end{wideitemize}
+\end{frame}
+
+\begin{frame}{Welfare effects of a Tariff in a small country}
+\addtocounter{framenumber}{-1}
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+%---------------------------------------
+% Shared functions
+%---------------------------------------
+\pgfmathdeclarefunction{QdH}{1}{\pgfmathparse{10 - 0.6*#1}}  % Home D
+\pgfmathdeclarefunction{QsH}{1}{\pgfmathparse{0.4*#1}}       % Home S
+\pgfmathdeclarefunction{QdF}{1}{\pgfmathparse{8 - 0.4*#1}}   % Foreign D*
+\pgfmathdeclarefunction{QsF}{1}{\pgfmathparse{6 + 0.6*#1}}   % Foreign S*
+\pgfmathdeclarefunction{MD}{1}{\pgfmathparse{10 - #1}}       % MD
+\pgfmathdeclarefunction{XS}{1}{\pgfmathparse{6}}             % XS
+
+\def\Pmin{2}
+\def\Pmax{10}
+
+% World equilibrium & tariff
+\def\Pw{6}
+\def\Qw{4}
+
+\def\PT{8}
+\def\Qt{{MD(\PT)}}
+\def\twedge{2}
+
+%====================================================
+% LEFT PANEL: Home market
+%====================================================
+\begin{scope}[xshift=0cm]
+  \node at (6,\Pmax+1) {\large Home market};
+
+  % Axes
+  \draw[->] (0,0) -- (0,\Pmax+0.5) node[above] {$P$};
+  \draw[->] (0,0) -- (12,0) node[right] {$Q$};
+
+  % Home demand and supply (true functional forms)
+  \draw[very thick, blue, domain=\Pmin:\Pmax, samples=100]
+        plot ({QdH(\x)},{\x});
+  \draw[very thick, red, domain=\Pmin:\Pmax, samples=100]
+        plot ({QsH(\x)},{\x});
+
+  \node[below, blue] at ({QdH(\Pmin)},\Pmin) {$D$};
+  \node[below, red]  at ({QsH(\Pmin)},\Pmin) {$S$};
+
+  % ---- Consumer surplus (under D, above P_W) ----
+  \fill[blue!20, opacity=0.5]
+    (0,\Pw)
+    -- ({QdH(\Pw)},\Pw)
+    -- ({QdH(\Pmax)},\Pmax)
+    -- (0,\Pmax)
+    -- cycle;
+
+  % Label CS
+  \node[blue!70!black] at (2.5,8.5) {	iny CS};
+
+  % ---- Producer surplus (above S, below P_W) ----
+  \fill[red!20, opacity=0.5]
+    (0,\Pmin)
+    -- (0,\Pw)
+    -- ({QsH(\Pw)},\Pw)
+    -- ({QsH(\Pmin)},\Pmin)
+    -- (0,\Pmin)
+    -- cycle;
+
+  % Label PS
+  \node[red!70!black] at (1.2,4.5) {	iny PS};
+
+  % World price line P_W
+  \draw[dashed] (0,\Pw) -- (12,\Pw);
+  \node[left] at (0,\Pw) {$P_W$};
+
+\end{scope}
+
+\end{tikzpicture}
+\end{figure}
+
+\end{frame}
+
+% -------------------------------------------------------------------
+% End of verbatim-copied block from Lecture17.tex.
+% Now continue with Lecture18-specific slides: optimal tariff, global losses, Krugman, Bastiat, complex interdependence, FTAs, US FTAs, typology, EU, GATT->WTO history.
+
+\begin{frame}{Recap: Welfare decomposition with a tariff}
+  For an importing country that imposes an ad valorem tariff $\tau$:
+  \begin{itemize}
+    \item Domestic price rises: quantity imported falls
+    \item Winners: some domestic producers, government (tariff revenue)
+    \item Losers: domestic consumers; foreign exporters (lower world price)
+  \end{itemize}
+  Welfare change = $\Delta CS + \Delta PS + \Delta TR$.
+  Typical small-country result: world price unchanged $\Rightarrow$ tariff is pure loss (deadweight loss).
+\end{frame}
+
+\begin{frame}{Optimal tariff (large country) --- intuition}
+  \begin{itemize}
+    \item A large country can affect the world price it pays for imports.
+    \item By imposing a tariff, the large country improves its terms of trade (ToT): world export price falls.
+    \item The ToT gain can, up to a point, offset the domestic efficiency losses (deadweight losses).
+    \item There is a tariff level that maximizes domestic welfare: the "optimal tariff".
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Optimal ad valorem tariff: a simple condition}
+  Consider a large importer facing an upward-sloping foreign export supply (or downward-sloping world demand). A common approximation:
+  \[\tau^{*} \approx \frac{1}{\varepsilon^{x}}\]
+  where $\varepsilon^{x}$ is the (absolute value of) elasticity of foreign export supply (or the price responsiveness of world exports). Intuition:
+  \begin{itemize}
+    \item If foreign supply is very elastic ($\varepsilon^{x}\to\infty$) then $\tau^{*}\to 0$.
+    \item If foreign supply is inelastic, the importing country can extract large ToT gains.
+  \end{itemize}
+  (Formal derivations use welfare derivatives and the effect of a tariff on the world price.)
+\end{frame}
+
+\begin{frame}{Why "optimal tariff" is a problem for global welfare}
+  \begin{itemize}
+    \item Terms-of-trade manipulation: gains to the imposing country are losses to foreign exporters and their consumers.
+    \item Aggregate world welfare typically falls: efficiency losses are not completely redistributed in a way that benefits the world.
+    \item If many large countries try to set optimal tariffs simultaneously, the result can be mutually damaging.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tariffs and strategic interaction: the tariff war dilemma}
+  \begin{itemize}
+    \item Two large countries: each would like to improve its own welfare by imposing tariffs (terms-of-trade gains).
+    \item If both impose tariffs, retaliatory effects reduce the initial ToT gains and increase efficiency losses.
+    \item The interaction resembles a prisoner's dilemma: individually tempting to tariff, collectively worse outcome.
+    \item Under retaliation, everybody can lose: ToT gains evaporate, deadweight losses cumulate.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Global losses due to tariffs}
+  Key points:
+  \begin{itemize}
+    \item Gains from tariffs for a large country are redistributional: they come from other countries (ToT manipulation).
+    \item When others retaliate, the original gains evaporate and deadweight losses accumulate.
+    \item Multilateral welfare typically decreases when many countries use tariffs strategically.
+  \end{itemize}
+  Policy implication: Without cooperative institutions or binding agreements, tariff competition can lead to inefficient global outcomes.
+\end{frame}
+
+\begin{frame}{Krugman on "Pop Internationalism" and "Enlightened Mercantilism"}
+  Paul Krugman (essay: "Pop Internationalism") critiques simplistic mercantilist views:
+  \begin{itemize}
+    \item Pop internationalism: the popular belief that trade is zero-sum; exports are good, imports are bad.
+    \item "Enlightened mercantilism": the idea that governments can reliably use trade policy to improve national welfare (by subsidizing exports, taxing imports).
+  \end{itemize}
+  Krugman's point: terms-of-trade arguments can look appealing, but political economy, retaliation, and the costs of protection often make mercantilist policies costly in practice.
+  (Use this slide to prompt class discussion and contrast theory vs political practice.)
+\end{frame}
+
+\begin{frame}{Bastiat: "If goods do not cross borders, soldiers will"}
+  Frédéric Bastiat's famous aphorism:
+  \begin{quote}
+  ``If goods do not cross borders, soldiers will.''
+  \end{quote}
+  Interpretation:
+  \begin{itemize}
+    \item Economic interdependence reduces incentives for conflict: trade creates mutual stakes in peaceful relations.
+    \item Protectionism and autarky can increase geopolitical tensions.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Complex interdependence (Keohane \& Nye)}
+  Three defining characteristics:
+  \begin{enumerate}
+    \item Multiple channels of interaction (state and non-state actors; economic, social, transnational).
+    \item Absence of a hierarchy among issues (no single dominant issue like security).
+    \item Declining use of military force as a policy tool among advanced economies.
+  \end{enumerate}
+  Implication for trade policy:
+  \begin{itemize}
+    \item Economic linkages and institutions matter; cooperation can be sustained through repeated interactions and institutions.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How to avoid the tariff-war dilemma?}
+  Countries use two broad strategies:
+  \begin{itemize}
+    \item Multilateral rules and institutions (GATT/WTO) to lock in reciprocal liberalization and provide dispute settlement.
+    \item Preferential or regional arrangements (Free Trade Agreements) to lock in liberalization among subsets of countries and provide cooperation structures.
+  \end{itemize}
+  FTAs can reduce the unilateral temptation to tariff by guaranteeing market access among partners and by creating enforcement/dispute mechanisms.
+\end{frame}
+
+\begin{frame}{Free Trade Agreements: motives}
+  Principal motives for FTAs:
+  \begin{itemize}
+    \item Secure preferential access to partner markets.
+    \item Reduce tariff barriers and regulatory friction between partners.
+    \item Deepen integration (investment, services, standards).
+    \item Create a political commitment device against protectionism (lock-in).
+    \item Geopolitical / strategic considerations.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{US Free Trade Agreements (examples)}
+  A non-exhaustive list of notable US FTAs:
+  \begin{itemize}
+    \item USMCA (United States–Mexico–Canada Agreement; replaced NAFTA)
+    \item CAFTA-DR (Central America-Dominican Republic FTA)
+    \item KORUS (United States–Korea FTA)
+    \item Bilateral FTAs: Chile, Israel, Jordan, Singapore, Australia, Bahrain, Oman, Morocco, Peru, Colombia, Panama
+    \item Many of these combine tariff liberalization with rules on services, IP, investment, labor and environment provisions.
+    \item Note: FTAs vary widely in depth and scope.
+  \end{itemize}
+  Note: FTAs vary widely in depth and scope.
+\end{frame}
+
+\begin{frame}{Typology of trade agreements}
+  Simple typology (increasing depth of integration):
+  \begin{enumerate}
+    \item Preferential Trade Agreement (PTA): tariff preferences for selected partners
+    \item Free Trade Area (FTA): remove tariffs among members; members keep own external tariffs (e.g., NAFTA/USMCA)
+    \item Customs Union: FTA + common external tariff
+    \item Common Market: customs union + free movement of factors (labor, capital)
+    \item Economic Union: common market + harmonized economic policies, possibly fiscal transfers
+    \item Monetary Union: common currency (e.g., eurozone)
+  \end{enumerate}
+  Additional dimensions: coverage (goods, services, investment), rules of origin, dispute settlement, regulatory cooperation.
+\end{frame}
+
+\begin{frame}{The European Union: salient features}
+  The EU as a deep integration example:
+  \begin{itemize}
+    \item Began as a customs union and evolved to a single market (four freedoms: goods, services, people, capital).
+    \item Common external tariff; supranational institutions (Commission, Parliament, Court of Justice).
+    \item Deeper regulatory harmonization and, for many members, a monetary union (euro).
+    \item Strong internal dispute and enforcement mechanisms; significant policy coordination.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{GATT $\rightarrow$ WTO: brief history}
+  Timeline and milestones:
+  \begin{itemize}
+    \item 1947: General Agreement on Tariffs and Trade (GATT) established as provisional multilateral framework after WWII.
+    \item Successive negotiation rounds: Kennedy Round (tariff cuts), Tokyo Round (1970s, non-tariff measures), Uruguay Round (1986–1994).
+    \item 1995: World Trade Organization (WTO) created as successor to GATT; formalized rules, expanded coverage (services, TRIPS), stronger dispute settlement.
+    \item 2001: Doha Round launched — focus on development; progress has been limited.
+    \item Recent outcomes: Bali (2013) Trade Facilitation Agreement; Nairobi (2015) agricultural decisions; rise of regional mega-deals (CPTPP, RCEP).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Core WTO principles and tools}
+  Core principles:
+  \begin{itemize}
+    \item Most-Favoured-Nation (MFN): equal treatment across trading partners (with some exceptions).
+    \item National Treatment: treat foreign and domestic goods equally after entry.
+    \item Reciprocity and binding of tariffs through negotiated concessions.
+    \item Multilateral dispute settlement: formal process, panel rulings, possible authorized retaliation.
+  \end{itemize}
+  Purpose: reduce incentives for unilateral ToT-seeking tariffs, provide a forum to resolve conflicts, and stabilize expectations.
+\end{frame}
+
+\begin{frame}{Why institutions matter}
+  \begin{itemize}
+    \item Institutions reduce uncertainty and the incentive to unilaterally deviate (repeat-game effects).
+    \item Dispute settlement reduces destructive retaliation cycles by providing legal/binding remedies.
+    \item Multilateral rule-making makes cooperation among many players feasible (solves coordination problems).
+  \end{itemize}
+  However: political constraints, distributional conflicts, and rising protectionist pressures pose ongoing challenges.
+\end{frame}
+
+\begin{frame}{Concluding remarks}
+  \begin{itemize}
+    \item Optimal tariffs highlight a strategic motive for protection, but ToT gains are often offset by retaliation and global efficiency losses.
+    \item FTAs and the WTO are institutional responses to the tariff-war dilemma: they lock in reciprocal liberalization and provide enforcement mechanisms.
+    \item Political economy and history matter: the pattern of agreements (bilateral, regional, multilateral) reflects strategic, economic, and political trade-offs.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Further reading}
+  \begin{itemize}
+    \item P. Krugman, "Pop Internationalism" (essay — critique of naive mercantilism).
+    \item R. Keohane and J. Nye, "Power and Interdependence" (on complex interdependence).
+    \item W. J. Ethier and P. Krugman (chapters on trade policy and terms-of-trade)
+    \item WTO website for history and current status of negotiations.
+  \end{itemize}
+\end{frame}
+
+\end{document}
